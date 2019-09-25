@@ -1,0 +1,5 @@
+fix rain
+
+ambience:
+ rain in Stormy Mesa, Alto Pillar
+ crackling fire in Burning Woods

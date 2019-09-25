@@ -1,0 +1,283 @@
+<html>
+    <head>
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+		<title>Illustrator</title>
+		<style>
+			canvas {
+				image-rendering: optimizeSpeed;
+				image-rendering: -moz-crisp-edges;
+				image-rendering: -webkit-optimize-contrast;
+				image-rendering: -o-crisp-edges;
+				image-rendering: pixelated;
+				-ms-interpolation-mode: nearest-neighbor; 
+			}
+		</style>
+		<!-- <script src='https://cdn1.kongregate.com/javascripts/kongregate_api.js'></script> -->
+        <script>
+			var player = {};
+			const LS_X_SPACING = 10;
+			const LS_Y_SPACING = 10;
+		</script>
+        <!-- <script type="text/javascript" src="src/Stage.js"></script> -->
+		<script>
+			var Stages = {};
+			function doNothing(){};
+			var GameObjectBase = {};
+			var Aapew, Bolizos, CardPip, ChansykShuffler, FireDrawer, Fwegos, Hoverie, Mkair, MovingPlatform, Parashoop, SinusoidalPlatform, Walkie;
+		</script>
+		
+        <script type="text/javascript" src="src/Stages/TutorialMovement/TutorialMovement.js"></script>
+        <script type="text/javascript" src="src/Stages/TutorialCombat/TutorialCombat.js"></script>
+        <script type="text/javascript" src="src/Stages/BeginningClimb/BeginningClimb.js"></script>
+        <script type="text/javascript" src="src/Stages/YellowWood/YellowWood.js"></script>
+        <script type="text/javascript" src="src/Stages/RedValley/RedValley.js"></script>
+        <script type="text/javascript" src="src/Stages/BlackMountain/BlackMountain.js"></script>
+        <script type="text/javascript" src="src/Stages/BlackCaves/BlackCaves.js"></script>
+        <script type="text/javascript" src="src/Stages/BlackPrison/BlackPrison.js"></script>
+        <script type="text/javascript" src="src/Stages/ClearCanyon/ClearCanyon.js"></script>
+        <script type="text/javascript" src="src/Stages/ClubGardens/ClubGardens.js"></script>
+        <script type="text/javascript" src="src/Stages/DiamondHighway/DiamondHighway.js"></script>
+        <script type="text/javascript" src="src/Stages/SkyClimb/SkyClimb.js"></script>
+        <script type="text/javascript" src="src/Stages/SkyHighClimb/SkyHighClimb.js"></script>
+        <script type="text/javascript" src="src/Stages/SkyFleet/SkyFleet.js"></script>
+        <script type="text/javascript" src="src/Stages/HeartFarms/HeartFarms.js"></script>
+        <script type="text/javascript" src="src/Stages/SpadeCity/SpadeCity.js"></script>
+        <script type="text/javascript" src="src/Stages/SpadeDowntown/SpadeDowntown.js"></script>
+        <script type="text/javascript" src="src/Stages/ChanosLobby/ChanosLobby.js"></script>
+        <script type="text/javascript" src="src/Stages/Versus52/Versus52.js"></script>
+        <script type="text/javascript" src="src/Stages/SPDAirport/SPDAirport.js"></script>
+        <script type="text/javascript" src="src/Stages/FlightToAnymis/FlightToAnymis.js"></script>
+        <script type="text/javascript" src="src/Stages/GreenMaze/GreenMaze.js"></script>
+        <script type="text/javascript" src="src/Stages/CyanRainforest/CyanRainforest.js"></script>
+        <script type="text/javascript" src="src/Stages/BlueLake/BlueLake.js"></script>
+        <script type="text/javascript" src="src/Stages/BlueLakebed/BlueLakebed.js"></script>
+        <script type="text/javascript" src="src/Stages/AqrosAntechamber/AqrosAntechamber.js"></script>
+        <script type="text/javascript" src="src/Stages/AqrosAtrium/AqrosAtrium.js"></script>
+        <script type="text/javascript" src="src/Stages/AqrosCorridor/AqrosCorridor.js"></script>
+        <script type="text/javascript" src="src/Stages/VisibleStair/VisibleStair.js"></script>
+        <script type="text/javascript" src="src/Stages/AqrosSanctum/AqrosSanctum.js"></script>
+        <script type="text/javascript" src="src/Stages/MagentaTown/MagentaTown.js"></script>
+        <script type="text/javascript" src="src/Stages/MagentaDefense/MagentaDefense.js"></script>
+        <script type="text/javascript" src="src/Stages/MagentaDuel/MagentaDuel.js"></script>
+        <script type="text/javascript" src="src/Stages/WhitePlains/WhitePlains.js"></script>
+        <script type="text/javascript" src="src/Stages/GreyHarbor/GreyHarbor.js"></script>
+        <script type="text/javascript" src="src/Stages/ZagadCrossing/ZagadCrossing.js"></script>
+        <script type="text/javascript" src="src/Stages/IgmaBeach/IgmaBeach.js"></script>
+        <script type="text/javascript" src="src/Stages/InfinityLighthouse/InfinityLighthouse.js"></script>
+        <script type="text/javascript" src="src/Stages/YstryJungle/YstryJungle.js"></script>
+		
+        <script type="text/javascript" src="src/Stages/TutorialPrelude/TutorialPrelude.js"></script>
+		<script type="text/javascript" src="src/Stages/PeacefulField/PeacefulField.js"></script>
+		<script type="text/javascript" src="src/Stages/BurningForest/BurningForest.js"></script>
+		<script type="text/javascript" src="src/Stages/ScorchedClearing/ScorchedClearing.js"></script>
+		<script type="text/javascript" src="src/Stages/ThornyOutback/ThornyOutback.js"></script>
+		<script type="text/javascript" src="src/Stages/MesaCliff/MesaCliff.js"></script>
+		<script type="text/javascript" src="src/Stages/StormyMesa/StormyMesa.js"></script>
+		<script type="text/javascript" src="src/Stages/AltoPillar/AltoPillar.js"></script>
+		
+		</head>
+    <body>
+        <div id="BackBackgroundBox" style="overflow:hidden; left: 0px; top: 0px; width: 1200px; height: 900px; background-color: #000000; border-color: #BBBBBB; border-style: solid; border-width: 0px;">
+            <canvas id="BackGraphicsBox" width="1200px" height="900px" style="overflow:hidden; width: 100%; height: 100%; left: 0px; top: 0px;">Your browser requires Canvas support to play this game.</canvas>
+            <!-- <div id="EventCatcher" style="overflow:scroll; position: absolute; left: -100px; top: -100px; width: 1000px; height: 800px;">
+                <div style="height: 4000px; width: 10px;"></div>
+            </div> -->
+        </div>
+		<div id="ForeBackgroundBox" style="overflow:hidden; left: 0px; top: 0px; width: 1200px; height: 900px; background-color: #FFFFFF; border-color: #BBBBBB; border-style: solid; border-width: 0px;">
+            <canvas id="ForeGraphicsBox" width="1200px" height="900px" style="overflow:hidden; width: 100%; height: 100%; left: 0px; top: 0px;">Your browser requires Canvas support to play this game.</canvas>
+            <!-- <div id="EventCatcher" style="overflow:scroll; position: absolute; left: -100px; top: -100px; width: 1000px; height: 800px;">
+                <div style="height: 4000px; width: 10px;"></div>
+            </div> -->
+        </div>
+		
+        <script>
+            //var player = {};
+			var staticColl;
+			const PIXELS_PER_BLOCK = 20;
+			var backcanvas = document.getElementById("BackGraphicsBox");
+			var bbg = document.getElementById("BackBackgroundBox");
+			var bctx = backcanvas.getContext("2d");
+			var forecanvas = document.getElementById("ForeGraphicsBox");
+			var fbg = document.getElementById("ForeBackgroundBox");
+			var fctx = forecanvas.getContext("2d");
+			var dialog = {begin : function(){}};
+			var gameObjects = [];
+			var gravity;
+			var SYKLOS_COLOR;
+			var bg_color;
+			function doNothing() {};
+			function playMusic() {}; var songName = "";
+			/*function BeamTurret() {};
+			function Bouncie() {};
+			function CardPip() {};
+			function DialogLine() {};
+			function Door() {};
+			function Drrk() {};
+			function FlashPickup() {};
+			function Flipwip() {};
+			function Fricchee() {};
+			function Goalpost() {};
+			function Hoverie() {};
+			function Mirror() {};
+			function MonologueSpot() {};
+			function MovingPlatformSpawner() {};
+			function NPC() {};
+			function ObscurerRect() {};
+			function RainGenerator() {};
+			function Rumble() {};
+			function SnakeEyes() {};
+			function Switch() {};
+			function Vessel() {};
+			function Walkie() {};*/
+			function drawStage(nom) {
+				localStorage.setItem("ToDraw", nom);
+				if (!Stages[nom])
+					throw "Stage \""+nom+"\" does not exist.";
+				try {
+					Stages[nom].load();
+				} catch (e) {
+					console.log(e)
+				}
+				console.log(nom, staticColl);
+				backcanvas.width = staticColl[0].length * PIXELS_PER_BLOCK;
+				backcanvas.height = staticColl.length * PIXELS_PER_BLOCK;
+				bbg.style.width = staticColl[0].length * PIXELS_PER_BLOCK + "px"
+				bbg.style.height = staticColl.length * PIXELS_PER_BLOCK + "px"
+				forecanvas.width = staticColl[0].length * PIXELS_PER_BLOCK;
+				forecanvas.height = staticColl.length * PIXELS_PER_BLOCK;
+				fbg.style.width = staticColl[0].length * PIXELS_PER_BLOCK + "px"
+				fbg.style.height = staticColl.length * PIXELS_PER_BLOCK + "px"
+				fctx.clearRect(0, 0, forecanvas.width, forecanvas.height);
+				for (var i = 0; i < staticColl[0].length; i++) {
+					for (var j = 0; j < staticColl.length; j++) {
+						if (staticColl[j][i].thorns) {
+							fctx.fillStyle = staticColl[j][i].thorns;
+							if (j > 0 && !staticColl[j-1][i].solid) {
+								var o = j*PIXELS_PER_BLOCK;
+								for (var n = Math.floor((i+1/8)*PIXELS_PER_BLOCK); n < (i+1)*PIXELS_PER_BLOCK; n += Math.ceil(PIXELS_PER_BLOCK/4)) {
+									fctx.fillRect(n-1, o-1, 1, 2);
+									fctx.fillRect(n, o-3, 1, 4);
+									fctx.fillRect(n+1, o-1, 1, 2);
+								}
+							}
+							if (j < staticColl.length-1 && !staticColl[j+1][i].solid) {
+								var o = (j+1)*PIXELS_PER_BLOCK-1;
+								for (var n = Math.floor((i+1/8)*PIXELS_PER_BLOCK); n < (i+1)*PIXELS_PER_BLOCK; n += Math.ceil(PIXELS_PER_BLOCK/4)) {
+									fctx.fillRect(n-1, o, 1, 2);
+									fctx.fillRect(n, o, 1, 4);
+									fctx.fillRect(n+1, o, 1, 2);
+								}
+							}
+							if (i > 0 && !staticColl[j][i-1].solid) {
+								var n = i*PIXELS_PER_BLOCK;
+								for (var o = Math.floor((j+1/8)*PIXELS_PER_BLOCK); o < (j+1)*PIXELS_PER_BLOCK;  o+= Math.ceil(PIXELS_PER_BLOCK/4)) {
+									fctx.fillRect(n-1, o-1, 2, 1);
+									fctx.fillRect(n-3, o, 4, 1);
+									fctx.fillRect(n-1, o+1, 2, 1);
+								}
+							}
+							if (i < staticColl[0].length-1 && !staticColl[j][i+1].solid) {
+								var n = (i+1)*PIXELS_PER_BLOCK-1;
+								for (var o = Math.floor((j+1/8)*PIXELS_PER_BLOCK); o < (j+1)*PIXELS_PER_BLOCK;  o+= Math.ceil(PIXELS_PER_BLOCK/4)) {
+									fctx.fillRect(n, o-1, 2, 1);
+									fctx.fillRect(n, o, 4, 1);
+									fctx.fillRect(n, o+1, 2, 1);
+								}
+							}
+						}
+						if (staticColl[j][i].leafy) {
+							var leafTop = j > 0 && !staticColl[j-1][i].solid && !staticColl[j-1][i].leafy;
+							var leafBottom = j < staticColl.length-1 && !staticColl[j+1][i].solid && !staticColl[j+1][i].leafy;
+							var leafLeft = i > 0 && !staticColl[j][i-1].solid && !staticColl[j][i-1].leafy;
+							var leafRight = i < staticColl[j].length-1 && !staticColl[j][i+1].solid && !staticColl[j][i+1].leafy;
+							fctx.fillStyle = staticColl[j][i].color || (staticColl[j][i].solid && !staticColl[j][i].leafy ? "#7F7F7F" : (staticColl[j][i].hazard ? "#BF7F7F" : "#00A2E8"));
+							fctx.fillRect(i*PIXELS_PER_BLOCK+leafLeft,j*PIXELS_PER_BLOCK,PIXELS_PER_BLOCK-leafLeft-leafRight,PIXELS_PER_BLOCK-leafBottom);
+							if (leafTop) {
+								var o = j * PIXELS_PER_BLOCK-1;
+								for (var n = i * PIXELS_PER_BLOCK; n < (i+1) * PIXELS_PER_BLOCK; n++) {
+									if (Math.random() < .5)
+										fctx.fillRect(n, o, 1, 1);
+								}
+							}
+							if (leafBottom) {
+								var o = j * PIXELS_PER_BLOCK+19;
+								for (var n = i * PIXELS_PER_BLOCK; n < (i+1) * PIXELS_PER_BLOCK; n++) {
+										fctx.fillRect(n, o, 1, Math.floor(Math.random()*3));
+								}
+								bctx.fillStyle = staticColl[j+1][i].color;
+								bctx.fillRect(i*PIXELS_PER_BLOCK, (j+1)*PIXELS_PER_BLOCK-1, 20, 1);
+							}
+							if (leafLeft) {
+								var n = i * PIXELS_PER_BLOCK+1;
+								for (var o = j * PIXELS_PER_BLOCK; o < (j+1) * PIXELS_PER_BLOCK; o++) {
+									var randdist = Math.floor(Math.random()*3)
+										fctx.fillRect(n-randdist, o, randdist, 1);
+								}
+							}
+							if (leafRight) {
+								var n = i * PIXELS_PER_BLOCK+19;
+								for (var o = j * PIXELS_PER_BLOCK; o < (j+1) * PIXELS_PER_BLOCK; o++) {
+									fctx.fillRect(n, o, Math.floor(Math.random()*3), 1);
+								}
+							}
+						} else if (staticColl[j][i].fore) {
+							fctx.fillStyle = staticColl[j][i].color || (staticColl[j][i].solid && !staticColl[j][i].leafy ? "#7F7F7F" : (staticColl[j][i].hazard ? "#BF7F7F" : "#00A2E8"));
+							fctx.fillRect(i*PIXELS_PER_BLOCK,j*PIXELS_PER_BLOCK,PIXELS_PER_BLOCK,PIXELS_PER_BLOCK);
+						} else {
+							bctx.fillStyle = staticColl[j][i].color || (staticColl[j][i].solid && !staticColl[j][i].leafy ? "#7F7F7F" : (staticColl[j][i].hazard ? "#BF7F7F" : "#00A2E8"));
+							bctx.fillRect(i*PIXELS_PER_BLOCK,j*PIXELS_PER_BLOCK,PIXELS_PER_BLOCK,PIXELS_PER_BLOCK);
+						}
+						if (staticColl[j][i].edge) {
+							bctx.fillStyle = staticColl[j][i].edge;
+							var thissolid = staticColl[j][i].solid
+							var goBottom = j < staticColl.length-1;
+							var goRight = i < staticColl[0].length-1;
+							//var edgeTop = j > 0 && thissolid != staticColl[j-1][i].solid;
+							//var edgeBottom = goBottom && thissolid != staticColl[j+1][i].solid;
+							//var edgeLeft = i > 0 && thissolid != staticColl[j][i-1].solid;
+							//var edgeRight = goRight && thissolid != staticColl[j][i+1].solid;
+							if (j > 0 && thissolid != staticColl[j-1][i].solid)
+								bctx.fillRect(i*PIXELS_PER_BLOCK, j*PIXELS_PER_BLOCK, 20, 1);
+							if (goBottom && thissolid != staticColl[j+1][i].solid)
+								bctx.fillRect(i*PIXELS_PER_BLOCK, (j+1)*PIXELS_PER_BLOCK-1, 20, 1);
+							if (i > 0 && thissolid != staticColl[j][i-1].solid)
+								bctx.fillRect(i*PIXELS_PER_BLOCK, j*PIXELS_PER_BLOCK, 1, 20);
+							if (goRight && thissolid != staticColl[j][i+1].solid)
+								bctx.fillRect((i+1)*PIXELS_PER_BLOCK-1, j*PIXELS_PER_BLOCK, 1, 20);
+							var cornerUpperLeft = j > 0 && i > 0 && thissolid != staticColl[j-1][i-1].solid;
+							var cornerLowerLeft = goBottom && i > 0 && thissolid != staticColl[j+1][i-1].solid;
+							var cornerUpperRight = j > 0 && goRight && thissolid != staticColl[j-1][i+1].solid;
+							var cornerLowerRight = goBottom && goRight && thissolid != staticColl[j+1][i+1].solid;
+							if (cornerUpperLeft)
+								bctx.fillRect(i*PIXELS_PER_BLOCK, j*PIXELS_PER_BLOCK, 1, 1);
+							if (cornerLowerLeft)
+								bctx.fillRect(i*PIXELS_PER_BLOCK, (j+1)*PIXELS_PER_BLOCK-1, 1, 1);
+							if (cornerUpperRight)
+								bctx.fillRect((i+1)*PIXELS_PER_BLOCK-1, j*PIXELS_PER_BLOCK, 1, 1);
+							if (cornerLowerRight)
+								bctx.fillRect((i+1)*PIXELS_PER_BLOCK-1, (j+1)*PIXELS_PER_BLOCK-1, 1, 1);
+						}
+						if (staticColl[j][i].stripe) {
+							fctx.fillStyle = staticColl[j][i].stripe;
+							for (var n = 0; n < PIXELS_PER_BLOCK; n++) {
+								fctx.fillRect((i+1)*PIXELS_PER_BLOCK-n-1, j*PIXELS_PER_BLOCK+n, 1, 1);
+							}
+						}
+						if (staticColl[j][i].grassyTop && j>0 && !staticColl[j-1][i].solid) {
+							fctx.fillStyle = staticColl[j][i].grassyTop;
+							var o = j * PIXELS_PER_BLOCK-1;
+							for (var n = i * PIXELS_PER_BLOCK; n < (i+1) * PIXELS_PER_BLOCK; n++) {
+								if (Math.random() < .5)
+									fctx.fillRect(n, o, 1, 1);
+							}
+							fctx.fillRect(i*PIXELS_PER_BLOCK, j*PIXELS_PER_BLOCK, 20, 2);
+						}
+					}
+				}
+			}
+			bg_color = localStorage.getItem("ToDrawBG");
+			drawStage(localStorage.getItem("ToDraw"));
+        </script>
+    </body>
+</html>

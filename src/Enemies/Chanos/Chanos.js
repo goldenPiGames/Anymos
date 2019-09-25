@@ -1,0 +1,1 @@
+const CHANOS_COLOR = "#FFD700";
