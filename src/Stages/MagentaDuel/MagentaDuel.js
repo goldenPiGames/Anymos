@@ -80,7 +80,7 @@ Stages.MagentaDuel = {
 	nextDown : "EndMagentaDefender",
 	enemies : [Fadour, Walkie, Hoverie, Bouncie, Spinnie, Teion],
 	reuseBack : "MagentaTown",
-	reuseFore+ : "MagentaTown",
+	reuseFore : "MagentaTown",
 }
 Stages.EndMagentaDefender = {
 	displayName : "End: Magenta Defender",
