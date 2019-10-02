@@ -36,7 +36,7 @@ Stages.IgmaBeach = {
 		player.x = 440;
 		player.y = 280;
 		player.facingRight = true;
-		gameObjects = [new Flipwip(161), new Flipwip(271), new Flipwip(314), new Goalpost("YstryJungle", 2006, 300, 100), new Goalpost("InfinityLighthouse", 1500, 80, 80), new Vessel("IgmaBeachFarLeft", 80, 158), new Vessel("IgmaBeachOverTower", 1670, 98), new Vessel("IgmaBeachUnderGoalpost", 2030, 198)];
+		gameObjects = [new Flipwip(161), new Flipwip(271), new Flipwip(314), new Goalpost("YstryJungle", 2006, 300, 100), new Goalpost("InfinityLighthouse", 1500, 80, 70), new Vessel("IgmaBeachFarLeft", 80, 158), new Vessel("IgmaBeachOverTower", 1670, 98), new Vessel("IgmaBeachUnderGoalpost", 2030, 198)];
 		dialog.begin(
 			new DialogLine("Caps", "Here we are: Igma Beach on the island of Longuis. Good luck.", "#BFBFBF"));
 		return {
@@ -51,5 +51,5 @@ Stages.IgmaBeach = {
 	previous : "ZagadCrossing",
 	nextDown : "YstryJungle",
 	nextRight : "InfinityLighthouse",
-	enemies : ["Flipwip", "Teion"]
+	enemies : [Flipwip, Teion]
 }

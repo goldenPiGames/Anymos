@@ -7,7 +7,7 @@ death = {
 	update : function() {
 		this.timer++;
 		if (this.timer > 7) {
-			if (settings.onDeath == "Restart" && !firstRun) {
+			if (settings.onDeath && !firstRun) {
 				reEvalAnym();
 				loadStage(currentStageName, false);
 			} else

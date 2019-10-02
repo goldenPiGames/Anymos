@@ -28,12 +28,12 @@ Stages.ZagadCrossing = {
 		player.y = 200;
 		player.facingRight = true;
 		var rumble1; var rumble2; var rumble3;
-		caps = new NPC("ZagadCrossingCaps", makeImage("src/Enemies/Teion/Caps.png"), 180, 160, true,
+		caps = new NPC("ZagadCrossingCaps", Teion.prototype.sprites.Caps, 180, 160, true,
 			new DialogLine("Caps", "We're almost to Longuis. Take it easy.", "#7F7F7F"));
 		caps.dead = true;
-		rumble1 = new Rumble(300, 300, 600, 300, true, function(){rumble2.enterTrigger = true}, new Flipwip(60));
-		rumble2 = new Rumble(300, 300, 600, 300, false, function(){rumble3.enterTrigger = true}, new Fricchee("ZagadCrossingFricchee", 120, 220, true));
-		rumble3 = new Rumble(300, 300, 600, 300, false, function(){player.drained = false; caps.dead = false; gameObjects.push(caps, new Goalpost("IgmaBeach", 430, 160, 80))}, new Flipwip(30), new Flipwip(35));
+		rumble1 = new Rumble(0, 600, 0, 300, true, ()=>rumble2.enterTrigger = true, new Flipwip(60));
+		rumble2 = new Rumble(0, 600, 0, 300, false, ()=>rumble3.enterTrigger = true, new Fricchee("ZagadCrossingFricchee", 120, 220, true));
+		rumble3 = new Rumble(0, 600, 0, 300, false, ()=>{player.drained = false; caps.dead = false; gameObjects.push(caps, new Goalpost("IgmaBeach", 430, 160, 80))}, new Flipwip(30), new Flipwip(35));
 		rumble1.enemies[0].cycle = FLIPWIP_APPEAR_TIME+10;
 		rumble3.enemies[0].cycle = FLIPWIP_APPEAR_TIME+15;
 		rumble3.enemies[1].cycle = FLIPWIP_APPEAR_TIME+30;
@@ -57,16 +57,13 @@ Stages.ZagadCrossing = {
 		};
 	},
 	vessels : ["ZagadCrossingBowsprit", "ZagadCrossingFricchee"],
-	selectX : Stages.GreyHarbor.selectX,
-	selectY : Stages.GreyHarbor.selectY + LS_Y_SPACING,
 	par : 510,
-	davbest : 363,
 	previous : "GreyHarbor",
 	nextDown : "IgmaBeach",
-	enemies : ["Fricchee", "Flipwip", "Teion", "OceanWaves"]
+	enemies : [Fricchee, Flipwip, Teion/*, OceanWaves*/]
 }
 
-var OceanWavesSpriteNames = []//"Segment1", "Segment2", "Segment3"];
+//TODO
 function OceanWaves(depth, dx) {
 	this.depth = depth;
 	this.dx = dx;

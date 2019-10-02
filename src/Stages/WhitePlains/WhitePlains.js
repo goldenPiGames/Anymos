@@ -25,7 +25,7 @@ Stages.WhitePlains = {
 		zoom = 2;
 		player.x = 10;
 		player.y = 280;
-		player.facingRight = true;
+		player.facingRight = true; //TODO make it deterministic somehow
 		gameObjects = [new DarkBallSpawner(.5), new Walkie("WhitePlainsBen", 1000, 260, true), new Vessel("WhitePlainsLeftJumpRight", 320, 160), new Vessel("WhitePlainsMiddleJumpLeft", 820, 140), new Vessel("WhitePlainsMidRightJumpRight", 1700, 160), new Goalpost("GreyHarbor", 2130, 280, 120)];
 		return {
 			mainBack : "src/Stages/WhitePlains/MainBack.png",
@@ -33,12 +33,10 @@ Stages.WhitePlains = {
 		};
 	},
 	vessels : ["WhitePlainsLeftJumpRight", "WhitePlainsMiddleJumpLeft", "WhitePlainsBen", "WhitePlainsMidRightJumpRight"],
-	selectX : Stages.MagentaTown.selectX,
-	selectY : Stages.MagentaTown.selectY + LS_Y_SPACING,
 	par : 420,
 	previous : "MagentaTown",
 	nextDown : "GreyHarbor",
-	enemies : ["Walkie"]
+	enemies : [Walkie]
 }
 
 DarkBallSpawner = function(frequency) {

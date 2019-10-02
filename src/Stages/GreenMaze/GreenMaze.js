@@ -38,7 +38,7 @@ Stages.GreenMaze = {
 		 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B,_,_,_,B],
 		 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B,_,_,_,B],
 		 [B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B],];
-		gravity = .5;
+		//gravity = .5;
 		zoom = 3;
 		minZoom = 3;
 		player.x = 10;
@@ -57,5 +57,5 @@ Stages.GreenMaze = {
 	par : 225,
 	previous : "YellowWood",
 	nextDown : "CyanRainforest",
-	enemies : ["Walkie", "Hoverie"]
+	enemies : [Walkie, Hoverie]
 }

@@ -50,18 +50,14 @@ var anymos = {
 				this.shooting = true;
 		}
 		if (this.flashing) this.flashing = Math.max(this.flashing - FLASH_REDUCE_RATE, 0);
-		if (this.special == "Syklos' Double Jump" && this.grounded) this.doubleJump = true;
-		if (controller.specialClicked) {
-			if (this.special == "Aqros' Reflector")
-				resolveReflector();
-			if (this.special == "Naluxos' Flash")
-				resolveFlash();
+		if (this.special) {
+			this.special.update(this);
 		}
 		if (!this.grounded) {
 			this.height = PLAYER_NORMAL_HEIGHT;
 			this.crouching = isPixelSolid(this.x - this.width/2 + 1, this.y - this.height) || isPixelSolid(this.x + this.width/2 - 1, this.y - this.height);
-			if (this.special == "Syklos' Double Jump" && (controller.jumpClicked || controller.specialClicked))
-				resolveDoubleJump();
+			//if (this.special == "Syklos' Double Jump" && (controller.jumpClicked || controller.specialClicked))
+				//resolveDoubleJump();
 		} else {
 			this.crouching = (controller.down || isPixelSolid(this.x - this.width/2, this.y - PIXELS_PER_BLOCK - 1) || isPixelSolid(this.x + this.width/2, this.y - PIXELS_PER_BLOCK - 1) || controller.down || isPixelSolid(this.x - this.width/2 + 4, this.y - 37) || isPixelSolid(this.x + this.width/2 - 4, this.y - 37)) /*&& (isPixelSolid(this.x-this.width/2, this.y + 1) || isPixelSolid(this.x+this.width/2, this.y + 1)) /*&& !controller.jump*/ && !this.attacking;
 		}

@@ -42,31 +42,29 @@ Stages.MagentaDefense = {
 		player.x = 610;
 		player.y = 620;
 		player.facingRight = false;
-		var rumble2 = new Rumble(410, 540, 700, 430, false, function(){gameObjects.push(new Goalpost("MagentaDuel", 610, 620, 55))}, new Wallie("MagentaDefenseToby", 150, 300, true, true), new Wallie("MagentaDefenseArthur", 670, 300, false, true));
-		var rumble1 = new Rumble(410, 540, 700, 430, true, function(){rumble2.enterTrigger = true});
-		var randleft = rumble1.x-rumble1.width/2+20;
-		var randwidth = rumble1.width-40;
-		for(var i = 0; i < this.bouncies.length; i++) {
-			rumble1.enemies.push(new Bouncie(this.bouncies[i], randleft+Math.random()*randwidth, 130, flipCoin()));
-		}
-		for(var i = 0; i < this.spinnies.length; i++) {
-			rumble2.enemies.push(new Spinnie(this.spinnies[i], randleft+Math.random()*randwidth, 135, flipCoin(), true));
-		}
+		var rumble2 = new Rumble(60, 760, 110, 540, false, ()=>gameObjects.push(new Goalpost("MagentaDuel", 610, 620, 55)),
+			new Wallie("MagentaDefenseToby", 150, 300, true, true),
+			new Wallie("MagentaDefenseArthur", 670, 300, false, true),
+			new Spinnie("MagentaDefenseViolet", 80, 135, true, true),
+			new Spinnie("MagentaDefenseLilac", 100, 135, true, true),
+			new Spinnie("MagentaDefenseWisteria", 120, 135, true, true),
+		);
+		var rumble1 = new Rumble(60, 760, 110, 540, true, ()=>rumble2.enterTrigger=true,
+			new Bouncie("MagentaDefenseMack", 80, 130, true),
+			new Bouncie("MagentaDefenseShy", 100, 130, true),
+			new Bouncie("MagentaDefenseSter", 120, 130, true),
+		);
 		gameObjects = [new RainGenerator(20, 15), rumble1, rumble2,
-			new NPC("MagentaDefenseRefugee1", function(){return Teion.prototype.sprites.Standing1}, 513, 620, false,
+			new NPC("MagentaDefenseRefugee1", Teion.prototype.sprites.normal, 513, 620, false,
 				new DialogLine("Villager", "Please, be careful! More are on their way!", "#BFBFBF")),
-			new NPC("MagentaDefenseRefugee1", function(){return Teion.prototype.sprites.Standing1}, 571, 620, false,
+			new NPC("MagentaDefenseRefugee2", Teion.prototype.sprites.normal, 571, 620, false,
 				new DialogLine("Villager", "Keep it up.", "#BFBFBF"))];
-		return {
-			mainBack : "src/Stages/MagentaTown/MainBack.png",
-			mainFore : "src/Stages/MagentaTown/MainFore.png",
-		};
 	},
-	bouncies : ["MagentaDefenseMack", "MagentaDefenseShy", "MagentaDefenseSter"],
-	spinnies : ["MagentaDefenseViolet", "MagentaDefenseLilac", "MagentaDefenseWisteria"],
 	vessels : ["MagentaDefenseMack", "MagentaDefenseShy", "MagentaDefenseSter", "MagentaDefenseViolet", "MagentaDefenseLilac", "MagentaDefenseWisteria", "MagentaDefenseToby", "MagentaDefenseArthur"],
 	par : 465,
 	previous : "MagentaTown",
 	nextDown : "MagentaDuel",
-	enemies : ["Bouncie", "Spinnie", "Wallie", "Teion"]
+	enemies : [Bouncie, Spinnie, Wallie, Teion],
+	reuseBack : "MagentaTown",
+	reuseFore : "MagentaTown",
 }

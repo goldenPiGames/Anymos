@@ -54,5 +54,5 @@ Stages.AnymisLanding = {
 	//par : 515,
 	previous : "FlightToAnymis",
 	//nextDown : "FlightToAnymis",
-	enemies : ["Walkie", "Hoverie"]
+	enemies : [Walkie, Hoverie]
 }

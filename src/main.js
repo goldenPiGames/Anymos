@@ -1,7 +1,7 @@
 var canvas;
 var ctx;
 var stage;
-const MISC_SPRITE_NAMES = ["MainMenuLogo", "Selector", "Paused", "SelectStage", "SelectStageNo", "SelectStage100", "SelectEnd", "SelectEndNo", "SelectCorners", "Vessel", "MonologueSpot", "GoalpostBottom", "GoalpostSegment", "GoalpostTop", "EndLight", "Beam", "SwitchOn", "SwitchOff", "Gamepad"]
+const MISC_SPRITE_NAMES = ["MainMenuLogo", "Selector", "Paused", "SelectStage", "SelectStageNo", "SelectStage100", "SelectEnd", "SelectEndNo", "SelectCorners", "Vessel", "MonologueSpot", "GoalpostBottom", "GoalpostSegment", "GoalpostTop", "EndLight", "Beam", "Gamepad"]
 const MISC_SFX_NAMES = ["Bump", "Thunder1", //NSMB Wii
 	"Swish3", "Swish4", "Oof", "SPM_Smash", "WindShort", "Wrong"] //zapsplat.com
 var miscSprites = {};
@@ -39,6 +39,7 @@ function begin() {
 	MISC_SFX_NAMES.forEach(function(nom) {
 		miscSFX[nom] = makeSound("src/MiscSFX/"+nom+".mp3");
 	});
+	applySettings();
 }
 function begin2() {
 	doMainMenu();
@@ -67,6 +68,43 @@ function makeImage(src) {
 	};
 	img.src = src;
 	return img;
+}
+
+function makeSprites(sauce, sec, prel = true) {
+	var image;
+	if (typeof sauce == "string") {
+		if (prel)
+			image = makeImage(sauce);
+	} else {
+		image = sauce;
+		sauce = image.src;
+	}
+	var sheetData = {image:image, src:sauce};
+	if (Array.isArray(sec)) {
+		var subs = Array.prototype.slice.call(arguments, 1);
+		subs.forEach(function(oj) {
+			oj.image = sauce;
+			sheetData[oj.name] = oj;
+			oj.parent = sheetData;
+		});
+	} else {
+		for (var sub in sec) {
+			sheetData[sub] = sec[sub];
+			sheetData[sub].image = image;
+			sheetData[sub].parent = sheetData;
+		}
+	}
+	return sheetData;
+}
+
+function loadSprites(data) {
+	//console.log(data);
+	var image = makeImage(data.src);
+	//console.log(image);
+	data.image = image;
+	for (var sub in data) {
+		data[sub].image = image;
+	}
 }
 
 function makeSound(src) {

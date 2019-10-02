@@ -43,7 +43,8 @@ Stages.MagentaDuel = {
 		player.x = 610;
 		player.y = 620;
 		player.facingRight = false;
-		gameObjects = [new RainGenerator(20, 15), new Rumble(410, 540, 700, 430, true, function(){ player.drained = false;
+		gameObjects = [new RainGenerator(20, 15), new Rumble(410, 540, 700, 430, true, function(){
+			player.drained = false;
 			dialog.begin(
 				new DialogLine("Fadour", "Ugh... All I wanted was to follow Sqarnos' wishes to destroy the innocence in the world... Was that really too much to ask?", "#FF00FF"),
 				new DialogLine("Anymos", "Uh... yeh.", "#00FFFF"),
@@ -75,11 +76,11 @@ Stages.MagentaDuel = {
 		};
 	},
 	vessels : ["MagentaDuelFadour1", "MagentaDuelFadour2", "MagentaDuelFadour3"],
-	selectX : Stages.MagentaDefense.selectX,
-	selectY : Stages.MagentaDefense.selectY + LS_Y_SPACING,
 	previous : "MagentaDefense",
 	nextDown : "EndMagentaDefender",
-	enemies : ["Fadour", "Walkie", "Hoverie", "Bouncie", "Spinnie", "Teion"]
+	enemies : [Fadour, Walkie, Hoverie, Bouncie, Spinnie, Teion],
+	reuseBack : "MagentaTown",
+	reuseFore+ : "MagentaTown",
 }
 Stages.EndMagentaDefender = {
 	displayName : "End: Magenta Defender",

@@ -38,7 +38,7 @@ Stages.RedValley = {
 		player.x = 990;
 		player.y = 200;
 		player.facingRight = false;
-		gameObjects = [new Vessel("RedValleyCave", 970, 478), new Vessel("RedValleyCaveJump", 970, 358), new Rumble(490, 500, 340, 200, true, doNothing, new Baron("RedValleyBaron", 490, 500, true, true)), new Goalpost("BlackMountain", 10, 200, 90), new Vessel("RedValleyMid", 490, 298)];
+		gameObjects = [new Vessel("RedValleyCave", 970, 478), new Vessel("RedValleyCaveJump", 970, 358), new Rumble(320, 660, 300, 500, true, doNothing, new Baron("RedValleyBaron", 490, 500, true, true)), new Goalpost("BlackMountain", 10, 200, 90), new Vessel("RedValleyMid", 490, 298)];
 		return {
 			mainBack : "src/Stages/RedValley/MainBack.png",
 			mainFore : "src/Stages/RedValley/MainFore.png",
@@ -50,5 +50,5 @@ Stages.RedValley = {
 	par : 330,
 	previous : "YellowWood",
 	nextDown : "BlackMountain",
-	enemies : ["Baron", "Hoverie"]
+	enemies : [Baron, Hoverie]
 }

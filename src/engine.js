@@ -77,10 +77,11 @@ var gameEngine = {
 		if (paused) {
 			ctx.drawImage(miscSprites.Paused, canvas.width/4, canvas.height/2 - canvas.width / miscSprites.Paused.width * miscSprites.Paused.height / 4, canvas.width / 2, canvas.width / miscSprites.Paused.width * miscSprites.Paused.height / 2);
 			ctx.font = "30px monospace";
+			ctx.textAlign = "center";
 			ctx.fillStyle = "#FFFFFF";
-			ctx.fillText("Press Pause [P]/(START) or Jump [A]/(A) to resume", canvas.width/2 - ctx.measureText("Press Pause [P]/(START) or Jump [A]/(A) to resume").width/2, canvas.height*3/4-40);
+			ctx.fillText("Press Pause [P]/(START) or Jump [A]/(A) to resume", canvas.width/2, canvas.height*3/4-40);
 			if (!firstRun)
-				ctx.fillText("Press Shoot [D]/(X) to exit the level", canvas.width/2 - ctx.measureText("Press Shoot [D]/(X) to exit the level").width/2, canvas.height*3/4);
+				ctx.fillText("Press Shoot [D]/(X) to exit the level", canvas.width/2, canvas.height*3/4);
 			//console.log(canvas.width/2 - ctx.measureText("Press Shoot [D] to exit the level").width/2, ctx.height*3/4)
 			return;
 		}

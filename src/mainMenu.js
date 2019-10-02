@@ -11,7 +11,7 @@ const MAIN_FLOW_HEIGHT = 300;
 const MAIN_FLOW_SPEED = 15;
 var mainMenu = {
 	update : function() {
-		if (controller.jumpClicked && isStageAvailable(currentStageName)) {
+		if (controller.jumpClicked) {
 			this.buttons[this.buttonIndex].func();
 			return;
 		} else if (controller.upClicked && this.buttonIndex > 0)
@@ -38,15 +38,16 @@ var mainMenu = {
 		//console.log(miscSprites["MainMenuLogo"], 0, 0, canvas.width, canvas.height);
 		
 		
-		ctx.font = "40px "+settings.font;
+		ctx.font = "40px "+getFont();
 		ctx.fillStyle = "#FFFFFF";
+		ctx.textAlign = "center";
 		for (var i = 0; i < this.buttons.length; i++) {
-			ctx.fillText(this.buttons[i].text, canvas.width/2 - (ctx.measureText(this.buttons[i].text).width / 2), MAIN_BUTTON_START + MAIN_BUTTON_SPACING * i);
+			ctx.fillText(this.buttons[i].text, canvas.width/2, MAIN_BUTTON_START + MAIN_BUTTON_SPACING * i);
 		}
 		ctx.fillStyle = "#00FFFF";
 		ctx.drawImage(miscSprites.Selector, canvas.width/2 - ctx.measureText(this.buttons[this.buttonIndex].text).width/2 - miscSprites.Selector.width - 10, MAIN_BUTTON_START-40 + MAIN_BUTTON_SPACING * (this.buttonIndex+.5) - miscSprites.Selector.height/2);
 		flipHorizontally(miscSprites.Selector, canvas.width/2 + ctx.measureText(this.buttons[this.buttonIndex].text).width/2 + 10, MAIN_BUTTON_START-40 + MAIN_BUTTON_SPACING * (this.buttonIndex+.5) - miscSprites.Selector.height/2);
-		ctx.font = "30px "+settings.font;
+		ctx.font = "30px "+getFont();
 		ctx.fillStyle = "#BFBFBF";
 		ctx.fillText("A: Select", canvas.width/2-ctx.measureText("A: Select").width/2, canvas.height-50);
 	},
@@ -101,7 +102,7 @@ var newGameConfirm = {
 		ctx.fillStyle = "#000000";
 		ctx.fillRect(canvas.width/2-400, canvas.height/2-75, 800, 150);
 		ctx.fillStyle = "#FF0000";
-		ctx.font = "40px "+settings.font;
+		ctx.font = "40px "+getFont();
 		ctx.fillText("Your previous file will be deleted.", canvas.width/2 - ctx.measureText("Your previous file will be deleted.").width/2, canvas.height/2 - 35);
 		let deltxt = usingGamepad ? "Press Up + Select + A to confirm." : "Press Up + R + A to confirm.";
 		ctx.fillText(deltxt, canvas.width/2 - ctx.measureText(deltxt).width/2, canvas.height/2 + 15);

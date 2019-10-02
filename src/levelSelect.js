@@ -6,7 +6,7 @@ var selector = {x:0, y:0, width:0, height:0};
 
 function doLevelSelect() {
 	if (currentStageName == undefined)
-		currentStageName = "TutorialMovement";
+		currentStageName = "TutorialPrelude";
 	levelSelectActive = true;
 	runnee = levelSelect;
 	minZoom = 1;
@@ -65,7 +65,7 @@ var levelSelect = {
 		var thisser = this;
 		ctx.globalAlpha = 1;
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
-		ctx.font = 12*zoom + "px "+settings.font;
+		ctx.font = 12*zoom + "px "+getFont();
 		ctx.fillStyle = "#FF0000";
 		for (stag in Stages) {
 			this.drawNext(stag, Stages[stag].nextDown);
@@ -75,7 +75,7 @@ var levelSelect = {
 			drawSpriteOnStage(sprite, Stages[stag].selectX, Stages[stag].selectY+sprite.height/2);
 		}
 		drawSpriteOnStage(miscSprites.SelectCorners, cameraFocus.x, cameraFocus.y - LS_CAMYOFF + miscSprites.SelectCorners.height/2);
-		ctx.font = zoom*12+"px "+settings.font;
+		ctx.font = zoom*12+"px "+getFont();
 		ctx.lineWidth = 1*zoom;
 		ctx.strokeStyle = "#000000";
 		ctx.fillStyle = "#FFFFFF";
@@ -90,8 +90,9 @@ var levelSelect = {
 			ctx.lineWidth = 2;
 			ctx.strokeStyle = "#FFFFFF";
 			ctx.strokeRect(infox, 10, LS_INFO_WIDTH, canvas.height - 20);
-			ctx.font = "30px "+settings.font;
+			ctx.font = "30px "+getFont();
 			ctx.fillStyle = "#FFFFFF";
+			ctx.textAlign = "left";
 			ctx.fillText(stag.displayName, infox+10, 45);
 			availAnym();
 			if (!stag.end) {
@@ -99,20 +100,21 @@ var levelSelect = {
 					ctx.fillStyle = isVesselCollected(stag.vessels[i]) ? "#00FFFF" : "#7F7F7F";
 					ctx.fillRect(infox + 10 + 20 * i, 60, 15, 30);
 				}
-				ctx.font = "30px "+settings.font;
+				ctx.font = "30px "+getFont();
 				ctx.fillStyle = "#FFFFFF";
 				ctx.fillText("Starting", infox+10, 200);
 				ctx.fillText("Vessels", infox+10, 240);
 				ctx.fillText("Previous", infox+10, 280);
 				ctx.fillText("Available", infox+10, 330);
 				
-				ctx.font = "30px "+settings.font;
+				ctx.font = "30px "+getFont();
+				ctx.textAlign = "right";
 				ctx.fillStyle = "#00FFFF";
-				ctx.fillText(displayAnym(STARTING_ANYM), infox+LS_INFO_WIDTH-10-ctx.measureText(displayAnym(STARTING_ANYM)).width, 200);
-				ctx.fillText(displayAnym(anymTotal-STARTING_ANYM), infox+LS_INFO_WIDTH-10-ctx.measureText(displayAnym(anymTotal-STARTING_ANYM)).width, 240);
-				ctx.fillText(displayAnym(anymAvailable), infox+LS_INFO_WIDTH-10-ctx.measureText(displayAnym(anymAvailable)).width, 330);
+				ctx.fillText(displayAnym(STARTING_ANYM), infox+LS_INFO_WIDTH-10, 200);
+				ctx.fillText(displayAnym(anymTotal-STARTING_ANYM), infox+LS_INFO_WIDTH-10, 240);
+				ctx.fillText(displayAnym(anymAvailable), infox+LS_INFO_WIDTH-10, 330);
 				ctx.fillStyle = "#FF0000";
-				ctx.fillText(displayAnym(anymTotal-anymAvailable), infox+LS_INFO_WIDTH-10-ctx.measureText(displayAnym(anymTotal-anymAvailable)).width, 280);
+				ctx.fillText(displayAnym(anymTotal-anymAvailable), infox+LS_INFO_WIDTH-10, 280);
 			} else {
 				
 			}
@@ -134,8 +136,9 @@ var levelSelect = {
 			var best = displayAnym(next.best)
 			ctx.lineWidth = 1*zoom;
 			ctx.strokeStyle = "#FFFFFF";
-			ctx.strokeText(best, stagex(next.selectX) - ctx.measureText(best).width/2, stagey((prev.selectY + next.selectY) / 2));
-			ctx.fillText(best, stagex(next.selectX) - ctx.measureText(best).width/2, stagey((prev.selectY + next.selectY) / 2));
+			ctx.textAlign = "center";
+			ctx.strokeText(best, stagex(next.selectX), stagey((prev.selectY + next.selectY) / 2));
+			ctx.fillText(best, stagex(next.selectX), stagey((prev.selectY + next.selectY) / 2));
 		}
 	}
 }

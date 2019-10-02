@@ -46,11 +46,11 @@ Stages.YellowWood = {
 		};
 	},
 	vessels : ["YellowWoodTreetop", "YellowWoodHillCave", "YellowWoodUnderBranch", "YellowWoodUnderLedge", "YellowWoodNathan", "YellowWoodKaren"],
-	selectX : 0,
-	selectY : 150,
+	//selectX : 0,
+	//selectY : 150,
 	par : 530,
-	previous : "BeginningClimb",
+	previous : "TutorialPrelude",
 	nextRight : "GreenMaze",
 	nextLeft : "RedValley",
-	enemies : ["Walkie", "Hoverie"]
+	enemies : [Walkie, Hoverie]
 }

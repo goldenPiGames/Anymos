@@ -26,9 +26,17 @@ RainGenerator.prototype.draw = function() {
 		newDrop = {x : this.boundLeft + Math.random() * (this.boundRight-this.boundLeft), y : this.boundTop};
 		this.drops.push(newDrop);
 	}
-	var i = 0;
-	var drip;
-	while (i < this.drops.length) {
+	this.drops = this.drops.filter(drip => {
+		ctx.lineWidth = zoom;
+		ctx.strokeStyle = this.color;
+		ctx.beginPath();
+		ctx.moveTo(stagex(drip.x), stagey(drip.y), zoom);
+		drip.y += this.dy;
+		ctx.lineTo(stagex(drip.x), stagey(drip.y), zoom);
+		ctx.stroke();
+		return (drip.y <= stageheight() && !isPixelSolid(drip.x, drip.y) && blockOfPixel(drip.x, drip.y).rain);
+	});
+	/*while (i < this.drops.length) {
 		drip = this.drops[i];
 		ctx.lineWidth = zoom;
 		ctx.strokeStyle = this.color;
@@ -37,11 +45,11 @@ RainGenerator.prototype.draw = function() {
 		drip.y += this.dy;
 		ctx.lineTo(stagex(drip.x), stagey(drip.y), zoom);
 		ctx.stroke();
-	if (drip.y > stageheight() || isPixelSolid(drip.x, drip.y)){//blockOfPixel(drip.x, drip.y).rain) {
+		if (drip.y > stageheight() || isPixelSolid(drip.x, drip.y) || !blockOfPixel(drip.x, drip.y).rain) {
 			//console.log(drip.y)
 			this.drops.splice(i, 1);
 		} else {
 			i++;
 		}
-	}
+	}*/
 }

@@ -112,18 +112,28 @@ function drawOnStage(img, dx, dy, dWidth, dHeight) {
 	if (!dHeight) dHeight = img.height;
 	ctx.drawImage(img, (dx - camerax) * zoom + canvas.width/2, (dy - cameray) * zoom + canvas.height/2, dWidth * zoom, dHeight * zoom);
 }
-function drawSpriteOnStage(img, dx, dy, right = true, dWidth = null, dHeight = null) {
-	if (!img || !(img.loaded)) {
-		//console.log("Image is undefined or not loaded",dx,dy);
+function drawSpriteOnStage(sprite, dx, dy, right = true, woff = 1/2, hoff = 1) {
+	if (!sprite || (sprite instanceof HTMLImageElement && !(sprite.loaded))) {
+		console.log(sprite);
 		throw "Image is undefined or not loaded "+dx+", "+dy;
 		return false;
 	}
-	if (!dWidth) dWidth = img.width;
-	if (!dHeight) dHeight = img.height;
+	var dWidth = sprite.width;
+	var dHeight = sprite.height;
+	
 	if (right) {
-		ctx.drawImage(img, (dx - camerax - dWidth/2) * zoom + canvas.width/2, (dy - cameray - dHeight) * zoom + canvas.height/2, dWidth * zoom, dHeight * zoom);
+		if (sprite instanceof HTMLImageElement)
+			ctx.drawImage(sprite, stagex(dx - dWidth*woff), stagey(dy - dHeight*hoff), dWidth * zoom, dHeight * zoom);
+		else
+			ctx.drawImage(sprite.image, sprite.x, sprite.y, sprite.width, sprite.height, stagex(dx - dWidth*woff), stagey(dy - dHeight*hoff), dWidth * zoom, dHeight * zoom);
 	} else {
-		flipHorizontally(img, (dx - camerax - dWidth/2) * zoom + canvas.width/2, (dy - cameray - dHeight) * zoom + canvas.height/2, dWidth * zoom, dHeight * zoom)
+		ctx.translate(stagex(dx + dWidth*(1-woff)), stagey(dy - dHeight*hoff));
+		ctx.scale(-1, 1);
+		if (sprite instanceof HTMLImageElement)
+			ctx.drawImage(sprite, 0, 0, dWidth*zoom, dHeight*zoom);
+		else
+			ctx.drawImage(sprite.image, sprite.x, sprite.y, sprite.width, sprite.height, 0, 0, dWidth*zoom, dHeight*zoom);
+		ctx.setTransform(1, 0, 0, 1, 0, 0);
 	}
 }
 

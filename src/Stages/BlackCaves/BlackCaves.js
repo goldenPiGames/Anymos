@@ -56,10 +56,8 @@ Stages.BlackCaves = {
 		};
 	},
 	vessels : ["BlackCavesRightAtStart", "BlackCavesUpperRight", "BlackCavesJump", "BlackCavesMiddleFallRight", "BlackCavesOwaki", "BlackCavesBigJump"],
-	selectX : Stages.BlackMountain.selectX + LS_X_SPACING,
-	selectY : Stages.BlackMountain.selectY + LS_Y_SPACING,
 	par : 525,
 	previous : "BlackMountain",
 	nextDown : "BlackPrison",
-	enemies : ["Flash", "Walkie", "Hoverie"]
+	enemies : [Naluxos, Walkie, Hoverie]
 }

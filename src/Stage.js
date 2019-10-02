@@ -2,7 +2,8 @@ var staticColl;
 var Stages = {};
 var stageImages;
 var gravity;
-var currentStageName = "TutorialMovement";
+var currentStageName;
+var currentStage;
 var stageActive= false;
 var zoomSteps = [1/2, 1, 2, 3, 4, 6, 8];
 var stageTimer;
@@ -44,11 +45,12 @@ function loadStage(stageName, doStuff) {
 	Switches = {};
 	edgesSolid = true;
 	resetLoading();
-	loadReturn = function(){beginStage(doStuff)};
-	Stages[stageName].load(doStuff); //loading specific stage
+	loadReturn = ()=>beginStage(doStuff);
+	currentStage = Stages[stageName];
+	currentStage.load(doStuff); //loading specific stage
 	stageImages = {
-		mainBack : makeImage("src/Stages/"+currentStageName+"/MainBack.png"),//stageSrcs.mainBack),
-		mainFore : makeImage("src/Stages/"+currentStageName+"/MainFore.png")//stageSrcs.mainFore),
+		mainBack : makeImage("src/Stages/"+(currentStage.reuseBack||currentStageName)+"/MainBack.png"),//stageSrcs.mainBack),
+		mainFore : makeImage("src/Stages/"+(currentStage.reuseFore||currentStageName)+"/MainFore.png")//stageSrcs.mainFore),
 	}
 	Stages[stageName].enemies.forEach(function(nem) {
 		loadEnemy(nem);

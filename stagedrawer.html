@@ -24,7 +24,7 @@
 			var Stages = {};
 			function doNothing(){};
 			var GameObjectBase = {};
-			var Aapew, Bolizos, CardPip, ChansykShuffler, FireDrawer, Fwegos, Hoverie, Mkair, MovingPlatform, Parashoop, SinusoidalPlatform, Walkie;
+			var Aapew, Baron, Bolizos, CardPip, ChansykShuffler, DieWalking, Drrk, FireDrawer, Flipwip, Fricchee, Fwegos, Hoverie, Mkair, MovingPlatform, Naluxos, Parashoop, SinusoidalPlatform, SnakeEyes, Teion, Walkie;
 		</script>
 		
         <script type="text/javascript" src="src/Stages/TutorialMovement/TutorialMovement.js"></script>
@@ -101,35 +101,13 @@
 			var forecanvas = document.getElementById("ForeGraphicsBox");
 			var fbg = document.getElementById("ForeBackgroundBox");
 			var fctx = forecanvas.getContext("2d");
-			var dialog = {begin : function(){}};
+			var dialog = {begin : ()=>{}};
 			var gameObjects = [];
 			var gravity;
 			var SYKLOS_COLOR;
 			var bg_color;
 			function doNothing() {};
 			function playMusic() {}; var songName = "";
-			/*function BeamTurret() {};
-			function Bouncie() {};
-			function CardPip() {};
-			function DialogLine() {};
-			function Door() {};
-			function Drrk() {};
-			function FlashPickup() {};
-			function Flipwip() {};
-			function Fricchee() {};
-			function Goalpost() {};
-			function Hoverie() {};
-			function Mirror() {};
-			function MonologueSpot() {};
-			function MovingPlatformSpawner() {};
-			function NPC() {};
-			function ObscurerRect() {};
-			function RainGenerator() {};
-			function Rumble() {};
-			function SnakeEyes() {};
-			function Switch() {};
-			function Vessel() {};
-			function Walkie() {};*/
 			function drawStage(nom) {
 				localStorage.setItem("ToDraw", nom);
 				if (!Stages[nom])

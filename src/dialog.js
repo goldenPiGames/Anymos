@@ -15,7 +15,7 @@ var dialog = {
 	},
 	update : function(ctx) {
 		this.skipping = controller.attack && !this.skipBuffer;
-		this.skipBuffer = Math.max(0, this.skipBuffer - 1);
+		this.skipBuffer = controller.attack && this.skipBuffer;
 		if (controller.jumpClicked || controller.interactClicked || this.skipping)
 			this.index ++;
 		if (typeof this.list[this.index] == "function") {
@@ -30,6 +30,7 @@ var dialog = {
 	draw : function() {
 		var currentLine = this.list[this.index];
 		ctx.globalAlpha = 0.8;
+		ctx.textAlign = "left";
 		ctx.fillStyle = "#000000";
 		ctx.fillRect(0, canvas.height - DIALOG_HEIGHT, canvas.width, DIALOG_HEIGHT);
 		ctx.fillRect(0, canvas.height - DIALOG_HEIGHT - SPEAKER_BOX_HEIGHT, SPEAKER_BOX_WIDTH, SPEAKER_BOX_HEIGHT);
@@ -44,13 +45,13 @@ var dialog = {
 		ctx.lineTo(SPEAKER_BOX_WIDTH, canvas.height - DIALOG_HEIGHT);
 		ctx.stroke();
 		var fontSize = currentLine.size;
-		ctx.font = fontSize+"px "+settings.font;
+		ctx.font = fontSize+"px "+getFont();
 		ctx.fillStyle = currentLine.color;
 		var lines = getLines(ctx, currentLine.text, canvas.width - (SIDE_MARGINS * 2));
 		for (i = 0; i < lines.length; i++) { 
 			ctx.fillText(lines[i], SIDE_MARGINS, canvas.height - DIALOG_HEIGHT + SIDE_MARGINS + 1.2 * fontSize * (i+.75));
 		}
-		ctx.font = "28px "+settings.font;
+		ctx.font = "28px "+getFont();
 		ctx.fillText(currentLine.speaker, SIDE_MARGINS, canvas.height - DIALOG_HEIGHT - SPEAKER_BOX_HEIGHT/2 + 10);
 	}
 }
