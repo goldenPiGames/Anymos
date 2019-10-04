@@ -88,4 +88,6 @@ Baron.prototype.sprites = makeSprites("src/Enemies/Baron.png", {
 Baron.prototype.width = 40;
 Baron.prototype.height = 58;
 Baron.prototype.maxhp = 1000;
+Baron.prototype.collDamage = 120;
+Baron.prototype.collMaxCD = 60;
 Baron.prototype.doesGravity = true;

@@ -1,6 +1,6 @@
 Stages.ClearCanyon = {
 	displayName : "Clear Canyon",
-	load : function() {
+	load : function(doStuff) {
 		playMusic("Remote Island - Eric Matyas");
 		let B = BLOCK;
 		let C = {solid:true,color:"#04AAF0"}
@@ -28,17 +28,20 @@ Stages.ClearCanyon = {
 		 [B,B,B,B,B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B,B,B,B,B],
 		 [B,B,B,B,B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,C,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B,B,B,B,B],
 		 [B,B,B,B,B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B,B,B,B,B]];
-		zoom = 2;
 		player.x = 1850;
 		player.y = 200;
 		player.facingRight = false;
+		if (doStuff) {
+			zoomd = 2;
+			zoom = 2;
+			dialog.begin(new DialogLine("Anymos", "Oh, wow. That is... quite a drop. I do not want to fall down that.", "#00FFFF"),
+				new DialogLine("???", "Do not worry, my lord. I shall aid you to the best of my ability.", SYKLOS_COLOR),
+				new DialogLine("Anymos", "Hoh? Did I hear something?", "#00FFFF"),
+				new DialogLine("Syklos", "'Tis I, Syklos, Uteion of Wind and Distance. Even from how far away I am now, I can mentally contact you.", SYKLOS_COLOR),
+				new DialogLine("Syklos", "I have created a number of solid platforms of solid air for you to use in crossing the canyon. They are very light, and it may be difficult to see them.", SYKLOS_COLOR),
+				new DialogLine("Syklos", "But I must also request of you a favor. I am currently being held in confinement somewhere in the skies around the Diamond Highway. I would ask that you please rescue me from my predicament.", SYKLOS_COLOR));
+		}
 		gameObjects = [new Vessel("ClearCanyonShortJump", 1280, 188), new Vessel("ClearCanyonBelow", 890, 398), new Hoverie("ClearCanyonCandace", 330, 218, true), new Goalpost("ClubGardens", 10, 200, 80)];
-		dialog.begin(new DialogLine("Anymos", "Oh, wow. That is... quite a drop. I do not want to fall down that.", "#00FFFF"),
-			new DialogLine("???", "Do not worry, my lord. I shall aid you to the best of my ability.", SYKLOS_COLOR),
-			new DialogLine("Anymos", "Hoh? Did I hear something?", "#00FFFF"),
-			new DialogLine("Syklos", "'Tis I, Syklos, Uteion of Wind and Distance. Even from how far away I am now, I can mentally contact you.", SYKLOS_COLOR),
-			new DialogLine("Syklos", "I have created a number of solid platforms of solid air for you to use in crossing the canyon. They are very light, and it may be difficult to see them.", SYKLOS_COLOR),
-			new DialogLine("Syklos", "But I must also request of you a favor. I am currently being held in confinement somewhere in the skies around the Diamond Highway. I would ask that you please rescue me from my predicament.", SYKLOS_COLOR));
 		return {
 			mainBack : "src/Stages/ClearCanyon/MainBack.png",
 			mainFore : "src/Stages/ClearCanyon/MainFore.png",

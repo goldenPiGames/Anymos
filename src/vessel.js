@@ -1,65 +1,70 @@
 const STARTING_ANYM = 4500;
+const VESSEL_VALUE = 30;
 var anymTotal = STARTING_ANYM;
 var anymAvailable = STARTING_ANYM;
-var collectedVesselNames = [];
+var collectedThisRun = [];
 var allVesselNames = [];
+var collectedVessels = {};
+//var vesselsCollected = {};
 
-function Vessel(name, x, y) {
-	this.x = x;
-	this.y = y;
-	this.width = 16;
-	this.height = 16;
-	this.name = name;
-	this.evalCollected();
-	this.collected = false;
-	//allVessels.push(this);
-}
-
-Vessel.prototype = Object.create(GameObjectBase);
-Vessel.prototype.evalCollected = function() {
-	//this.collected = 
-	return localStorage.getItem("Vessel"+this.name) == "true";
-}
-Vessel.prototype.collect = function() {
-	if (prelude) {used -= 30} else
-	if (this.name) {
-		if (!this.collected && localStorage.getItem("Vessel"+this.name) != "true") {
-			anymTotal += 30;
-			anymAvailable += 30;
+class Vessel extends GameObject {
+	constructor(name, x, y) {
+		super();
+		this.x = x;
+		this.y = y;
+		this.width = 16;
+		this.height = 16;
+		this.name = name;
+		this.evalCollected();
+		this.collected = false;
+		//allVessels.push(this);
+	}
+	evalCollected() {
+		//this.collected = 
+		return isVesselCollected(this.name);
+	}
+	collect() {
+		//if (prelude) {used -= 30} else
+		if (this.name) {
+			if (!this.collected && !this.evalCollected()) {
+				anymTotal += VESSEL_VALUE;
+				anymAvailable += VESSEL_VALUE;
+			}
+			this.collected = true;
+			collectedThisRun.push(this.name);
+			this.dead = true;
 		}
-		this.collected = true;
-		collectedVesselNames.push(this.name);
+	}
+	onDeath() {
+		this.collect();
+	}
+	update() {
+		if (!this.collected) {
+			if (this.isTouching(player))
+				this.collect();
+		}
+	}
+	draw() {
+		if (!this.collected)
+			drawSpriteOnStage(miscSprites.Vessel, this.x, this.y);
 	}
 }
-Vessel.prototype.onDeath = function() {
-	this.collect();
-}
-Vessel.prototype.update = function() {
-	if (!this.collected) {
-		if (this.isTouching(player))
-			this.collect();
-	}
-}
-Vessel.prototype.save = function() {
-	if (this.collected)
-		localStorage.setItem("Vessel"+this.name, "true")
-}
-Vessel.prototype.draw = function() {
-	if (!this.collected)
-		drawSpriteOnStage(miscSprites.Vessel, this.x, this.y);
+
+function numVesselsCollected() {
+	//return allVesselNames.reduce((acc, cur) => acc + isVesselCollected(cur), 0);
+	return allVesselNames.reduce((acc, cur) => {
+		//console.log(cur, isVesselCollected(cur));
+		return acc + isVesselCollected(cur);
+	}, 0);
 }
 
 function reEvalAnym() {
-	anymTotal = STARTING_ANYM;
-	allVesselNames.forEach(function(nom) {
-		if (isVesselCollected(nom))
-			anymTotal += 30;
-	});
+	anymTotal = STARTING_ANYM + numVesselsCollected() * VESSEL_VALUE;
 	return anymTotal;
 }
 
 function isVesselCollected(nom) {
-	return localStorage.getItem("Vessel"+nom) == "true";
+	return !!collectedVessels[nom];
 }
 
 function availAnym(innom = null) {
@@ -69,16 +74,16 @@ function availAnym(innom = null) {
 		anymAvailable = anymTotal;
 		return anymTotal;
 	}
-	var ave = availAnym(Stages[nom].previous) - Stages[nom].best;
+	var ave = availAnym(Stages[nom].previous) - Stages[nom].bestTo;
 	if (innom == null)
 		anymAvailable = ave;
 	return ave;
 }
 
-function collectAllVessels() {
+/*function collectAllVessels() {
 	allVesselNames.forEach(function(nom){
 		var ves = new Vessel(nom);
 		ves.collect();
 		ves.save();
 	});
-}
+}*/

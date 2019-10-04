@@ -1,39 +1,44 @@
 function finishStage(next) {
-	if (!prelude) {
+	//if (!prelude) {
 		var vesses = Stages[currentStageName].vessels;
 		stageFinishScreen.collectedBefore = [];
 		for (var i = 0; i < vesses.length; i++) {
 			stageFinishScreen.collectedBefore[i] = isVesselCollected(vesses[i]);
 		}
-		collectedVesselNames.forEach(function(vess){
-			localStorage.setItem("Vessel"+vess, "true");
-		});
+		collectedThisRun.forEach(vess => collectedVessels[vess] = true);
 		stageFinishScreen.collectedNow = [];
 		for (var i = 0; i < vesses.length; i++) {
 			stageFinishScreen.collectedNow[i] = false;
-			for (var j = 0; j < collectedVesselNames.length; j++) {
-				if (vesses[i] == collectedVesselNames[j])
+			for (var j = 0; j < collectedThisRun.length; j++) {
+				if (vesses[i] == collectedThisRun[j])
 					stageFinishScreen.collectedNow[i] = true;
 			}
 		}
-		var prevSuper = Stages[currentStageName].superrun;
+		var prevAll = Stages[currentStageName].bestAll;
 		//console.log(prevSuper, (used < prevSuper || typeof prevSuper != "number" || prevSuper != prevSuper))
-		if (collectedVesselNames.length >= Stages[currentStageName].vessels.length && (used < prevSuper || typeof prevSuper != "number" || prevSuper != prevSuper)) {
-			Stages[currentStageName].superrun = used;
-			localStorage.setItem(currentStageName+"Superrun", used);
+		if (collectedThisRun.length >= Stages[currentStageName].vessels.length && !(prevAll >= used)) {
+			Stages[currentStageName].bestAll = used;
 		}
-		collectedVesselNames = [];
-	}
+		collectedThisRun = [];
+	//}
 	stageFinishScreen.from = currentStageName;
+	var froms = Stages[currentStageName];
 	currentStageName = next;
 	stageFinishScreen.to = currentStageName;
-	var prevBest = Stages[currentStageName].best;
+	var prevBest = Stages[currentStageName].bestTo;
 	stageFinishScreen.prevBest = prevBest;
 	stageFinishScreen.par = Stages[currentStageName].par;
-	if (used < prevBest || typeof prevBest != "number" || prevBest != prevBest) {
-		Stages[currentStageName].best = used;
-		localStorage.setItem(currentStageName+"Best", used);
+	if (!(used >= prevBest)) {
+		Stages[next].bestTo = used;
+		if (froms.nextDown == next)
+			froms.bestDown = used;
+		if (froms.nextLeft == next)
+			froms.bestLeft = used;
+		if (froms.nextRight == next)
+			froms.bestRight = used;
+		//localStorage.setItem(currentStageName+"Best", used);
 	}
+	saveGame();
 	if (firstRun) {
 		loadStage(next, true);
 		return;
@@ -61,10 +66,7 @@ var stageFinishScreen = {
 		//this.context2D.fillRect(0, 0, 800, 600);
 		updateZoom();
 		drawStageBack();
-		gameObjects.forEach(function(obj) {
-			//console.log(obj)
-			obj.draw();
-		});
+		gameObjects.forEach(obj => obj.draw());
 		player.draw();
 		drawStageFore();
 		ctx.textAlign = "center";
@@ -73,7 +75,7 @@ var stageFinishScreen = {
 		ctx.fillRect  (100, 100, canvas.width-200, canvas.height-200);
 		ctx.strokeRect(100, 100, canvas.width-200, canvas.height-200);
 		ctx.fillStyle = "#FFFFFF";
-		var toptxt = this.from==this.to ? Stages[this.from].displayName : (Stages[this.from].displayName + " - " + Stages[this.to].displayName);
+		var toptxt = this.from==this.to ? Stages[this.to].displayName : (Stages[this.to].displayName + " - " + Stages[this.to].displayName);
 		ctx.font = "40px "+getFont();
 		ctx.fillText(toptxt, canvas.width/2, 150);
 		//ctx.font = "40px "+getFont();

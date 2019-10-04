@@ -104,9 +104,6 @@ function saveSettings() {
 var settingsScreen = {
 	update : function() {
 		if (controller.attackClicked) {
-			for (set in settings) {
-				localStorage.setItem(set, settings[set]);
-			}
 			doMainMenu();
 		} else if (controller.upClicked && this.index > 0)
 			this.index --;

@@ -13,7 +13,7 @@ const BLOCK = {name:"Block",solid:true,hazard:0};
 const AIR = {name:"Air",solid:false,cursed:true,hazard:0}
 const DEATH = {name:"Death",solid:false,cursed:true,hazard:Infinity}
 
-function loadStage(stageName, doStuff) {
+function loadStage(stageName, doStuff=true) {
 	if (isEnd(stageName))
 		return false;
 	runnee = loading;
@@ -82,30 +82,23 @@ function isStageAvailable(nom) {
 		return false;
 	if (Stages[nom].previous == undefined)
 		return true;
-	var prevBest = Stages[nom].best;
+	var prevBest = Stages[nom].bestTo;
 	return (typeof prevBest == "number" && prevBest == prevBest)
 }
 
 
-function stage100(nom) {
-	var yeh = true;
+function isStage100(nom) {
+	return Stages[nom].vessels.reduce((acc, cur) => acc && isVesselCollected(cur), true);
+	/*var yeh = true;
 	Stages[nom].vessels.forEach(function(vesnom) {
 		if (localStorage.getItem("Vessel"+vesnom) != "true")
 			yeh = false;
 	});
-	return yeh;
+	return yeh;*/
 }
 
 function isEnd(nom) {
 	if (Stages[nom] == undefined)
 		return false;
 	return Stages[nom].end
-}
-
-function get100() {
-	collectAllVessels();
-	for (stag in Stages) {
-		Stages[stag].best = Stages[stag].par;
-		localStorage.setItem(stag+"Best", Stages[stag].par);
-	}
 }

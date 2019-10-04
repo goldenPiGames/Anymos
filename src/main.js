@@ -9,7 +9,7 @@ var miscSFX = {};
 var firstRun = false;
 var forReal = true;
 const SYKLOS_COLOR = "#00A2E8";
-var usingPizz = (localStorage.getItem("sfxSystem") == "Pizzicato");
+var usingPizz = (settings.sfxSystem);
 
 //var stageBackground;
 
@@ -24,10 +24,7 @@ function begin() {
 	ctx.webkitImageSmoothingEnabled = false;
 	initMusic();
 	engine.run();
-	for (stag in Stages) {
-		Stages[stag].best = parseInt(localStorage.getItem(stag+"Best"));
-		Stages[stag].superrun = parseInt(localStorage.getItem(stag+"Superrun"));
-	}
+	loadGame();
 	loadReturn = begin2;
 	resetLoading();
 	PLAYER_SPRITE_NAMES.forEach(function(nom) {
@@ -40,6 +37,7 @@ function begin() {
 		miscSFX[nom] = makeSound("src/MiscSFX/"+nom+".mp3");
 	});
 	applySettings();
+	//begin2();
 }
 function begin2() {
 	doMainMenu();
@@ -122,21 +120,6 @@ function makeSound(src) {
 		document.body.appendChild(snd);
     }
 	return snd;
-}
-
-function resetSave() {
-	allVesselNames.forEach(function(vess) {
-		localStorage.removeItem("Vessel"+vess)
-	});
-	reEvalAnym();
-	for (stag in Stages) {
-		localStorage.removeItem(stag+"Best");
-		localStorage.removeItem(stag+"Superrun");
-		Stages[stag].best = false;
-	}
-	//currentStageName = "TutorialMovement";
-	//doLevelSelect();
-	//loadStage("TutorialMovement");
 }
 
 function doNothing() {};

@@ -121,7 +121,7 @@ Stages.YstryJungle = {
 	vessels : ["YstryJungleSeeds", "YstryJungleSticks", "YstryJungleNuts", "YstryJungleKonami"],
 	par : 360,
 	previous : "IgmaBeach",
-	nextDown : "IddelMountain",
+	//nextDown : "IddelMountain",
 	enemies : [Flipwip]
 }
 

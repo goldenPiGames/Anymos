@@ -20,7 +20,7 @@ class SnakeEyes extends Enemy {
 			height : 38
 		}
 	}
-	update() {
+	update() {//TODO make not random
 		if (this.doDialog && !this.doneDialog) {
 			this.doneDialog = true;
 			dialog.begin(new DialogLine("???", "INDIVIDUAL WITHOUT WIRELESS SECURITY MARK DETECTED. PLEASE PRESENT IDENTIFICATION AND CREDENTIALS.", "#00FF00"),
@@ -51,6 +51,8 @@ class SnakeEyes extends Enemy {
 			if (this.cycle <= 35) {
 				this.facingRight = player.x > this.x;
 				this.y = this.groundy + (1 - (this.cycle-30)/5) * this.height;
+				if (!this.collRising && this.sendHurtbox(180))
+					this.collRising = true;
 			} else if (this.cycle < SNAKEEYES_CYCLE_LENGTH - 9 && this.cycle % 20 == 0) {
 				gameObjects.push(new PipBullet(this.x-5.5, this.y-116.5, player, 4, flipCoin()?"#FF0000":"#000000"));
 				gameObjects.push(new PipBullet(this.x+5.5, this.y-116.5, player, 4, flipCoin()?"#FF0000":"#000000"));

@@ -43,7 +43,7 @@ Stages.MagentaDuel = {
 		player.x = 610;
 		player.y = 620;
 		player.facingRight = false;
-		gameObjects = [new RainGenerator(20, 15), new Rumble(410, 540, 700, 430, true, function(){
+		gameObjects = [new RainGenerator(20, 15), new Rumble(60, 760, 110, 540, true, function(){
 			player.drained = false;
 			dialog.begin(
 				new DialogLine("Fadour", "Ugh... All I wanted was to follow Sqarnos' wishes to destroy the innocence in the world... Was that really too much to ask?", "#FF00FF"),
@@ -65,10 +65,10 @@ Stages.MagentaDuel = {
 				function(){gameObjects.push(new EndLight("EndMagentaDefender", 420, 520))},
 				new DialogLine("???", MERGE_TEXT3, "#00FFFF"),
 				new DialogLine("Anymos", "...I understand. I take back everything I said about this being pointless. There is still hope. It's time for me to go. Wish me luck.", "#00FFFF"))
-		}, new Fadour("MagentaDuelFadour", 500, 366)),
-			new NPC("MagentaDefenseRefugee1", function(){return Teion.prototype.sprites.Standing1}, 513, 620, false,
+		}, new Fadour("MagentaDuelFadour", 500, 366, false)),
+			new NPC("MagentaDuelRefugee1", Teion.prototype.sprites.normal, 513, 620, false,
 				new DialogLine("Villager", "Please, be careful!", "#BFBFBF")),
-			new NPC("MagentaDefenseRefugee1", function(){return Teion.prototype.sprites.Standing1}, 571, 620, false,
+			new NPC("MagentaDuelRefugee2", Teion.prototype.sprites.normal, 571, 620, false,
 				new DialogLine("Villager", "This is the final push.", "#BFBFBF"))];
 		return {
 			mainBack : "src/Stages/MagentaTown/MainBack.png",

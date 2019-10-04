@@ -3,6 +3,7 @@ const LS_X_SPACING = 50;
 const LS_Y_SPACING = 50;
 const LS_INFO_WIDTH = 360;
 var selector = {x:0, y:0, width:0, height:0};
+const ROOT_STAGE = "TutorialPrelude";
 
 function doLevelSelect() {
 	if (currentStageName == undefined)
@@ -36,7 +37,10 @@ function doLevelSelect() {
 			new DialogLine("Anymos", "As long as I collect a vessel and then reach any goalpost without dying, that vessel is saved permanently and I don't need to collect it again on other visits to the stage.", "#00FFFF"),
 			new DialogLine("Anymos", "If I've collected all of the vessels in a given stage, that stage shows up as cyan instead of white.", "#00FFFF"),
 		);
+		saveGame();
 	}
+	levelSelect.numVessels = numVesselsCollected();
+	levelSelect.refresh();
 }
 var levelSelect = {
 	update : function() {
@@ -71,7 +75,7 @@ var levelSelect = {
 			this.drawNext(stag, Stages[stag].nextDown);
 			this.drawNext(stag, Stages[stag].nextLeft);
 			this.drawNext(stag, Stages[stag].nextRight);
-			var sprite = isEnd(stag) ? (isStageAvailable(stag) ? miscSprites.SelectEnd : miscSprites.SelectEndNo) : (isStageAvailable(stag) ? (stage100(stag) ? miscSprites.SelectStage100 : miscSprites.SelectStage) : miscSprites.SelectStageNo)
+			var sprite = isEnd(stag) ? (isStageAvailable(stag) ? miscSprites.SelectEnd : miscSprites.SelectEndNo) : (isStageAvailable(stag) ? (isStage100(stag) ? miscSprites.SelectStage100 : miscSprites.SelectStage) : miscSprites.SelectStageNo)
 			drawSpriteOnStage(sprite, Stages[stag].selectX, Stages[stag].selectY+sprite.height/2);
 		}
 		drawSpriteOnStage(miscSprites.SelectCorners, cameraFocus.x, cameraFocus.y - LS_CAMYOFF + miscSprites.SelectCorners.height/2);
@@ -94,7 +98,7 @@ var levelSelect = {
 			ctx.fillStyle = "#FFFFFF";
 			ctx.textAlign = "left";
 			ctx.fillText(stag.displayName, infox+10, 45);
-			availAnym();
+			//availAnym();
 			if (!stag.end) {
 				for (var i = 0; i < stag.vessels.length; i++) {
 					ctx.fillStyle = isVesselCollected(stag.vessels[i]) ? "#00FFFF" : "#7F7F7F";
@@ -111,10 +115,10 @@ var levelSelect = {
 				ctx.textAlign = "right";
 				ctx.fillStyle = "#00FFFF";
 				ctx.fillText(displayAnym(STARTING_ANYM), infox+LS_INFO_WIDTH-10, 200);
-				ctx.fillText(displayAnym(anymTotal-STARTING_ANYM), infox+LS_INFO_WIDTH-10, 240);
-				ctx.fillText(displayAnym(anymAvailable), infox+LS_INFO_WIDTH-10, 330);
+				ctx.fillText(displayAnym(this.numVessels*VESSEL_VALUE), infox+LS_INFO_WIDTH-10, 240);
+				ctx.fillText(displayAnym(stag.available), infox+LS_INFO_WIDTH-10, 330);
 				ctx.fillStyle = "#FF0000";
-				ctx.fillText(displayAnym(anymTotal-anymAvailable), infox+LS_INFO_WIDTH-10, 280);
+				ctx.fillText(displayAnym(stag.cumUsed), infox+LS_INFO_WIDTH-10, 280);
 			} else {
 				
 			}
@@ -133,12 +137,29 @@ var levelSelect = {
 		ctx.lineTo(stagex(next.selectX), stagey(next.selectY));
 		ctx.stroke();
 		if (isStageAvailable(nextName)) {
-			var best = displayAnym(next.best)
+			var best = displayAnym(next.bestTo)
 			ctx.lineWidth = 1*zoom;
 			ctx.strokeStyle = "#FFFFFF";
 			ctx.textAlign = "center";
 			ctx.strokeText(best, stagex(next.selectX), stagey((prev.selectY + next.selectY) / 2));
 			ctx.fillText(best, stagex(next.selectX), stagey((prev.selectY + next.selectY) / 2));
 		}
+	},
+	refresh : function() {
+		Stages[ROOT_STAGE].cumUsed = 0;
+		Stages[ROOT_STAGE].available = anymTotal;
+		this.refreshRec(Stages[ROOT_STAGE].nextDown);
+	},
+	refreshRec : function(stagn) {
+		var stags = Stages[stagn];
+		//console.log(stagn);
+		stags.cumUsed = Stages[stags.previous].cumUsed + stags.bestTo;
+		stags.available = STARTING_ANYM + this.numVessels * VESSEL_VALUE - stags.cumUsed;
+		if (stags.nextDown)
+			this.refreshRec(stags.nextDown);
+		if (stags.nextLeft)
+			this.refreshRec(stags.nextLeft);
+		if (stags.nextRight)
+			this.refreshRec(stags.nextRight);
 	}
 }

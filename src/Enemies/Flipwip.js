@@ -65,8 +65,8 @@ Flipwip.prototype.sprites = makeSprites("src/Enemies/Flipwip.png", {
 	flipping2: {x:35, y:0, width:10, height:20},
 	flipping3: {x:45, y:0, width:5, height:20},
 	flipping4: {x:49, y:20, width:1, height:20},
-	attacking0: {x:-8, y:20, width:36, height:20},
+	attacking2: {x:-8, y:20, width:36, height:20},
 	attacking1: {x:-15, y:40, width:50, height:20},
-	attacking2: {x:-30, y:60, width:80, height:20},
+	attacking0: {x:-30, y:60, width:80, height:20},
 }, false);
 Flipwip.prototype.maxhp = 50;

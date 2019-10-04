@@ -495,3 +495,14 @@ function loadEnemy(nom) {
 		}
 	}*/
 }
+
+class CustomObject extends GameObject {
+	constructor(update, draw = doNothing, other = {}) {
+		super();
+		this.update = update;
+		this.draw = draw;
+		for (bluh in other) {
+			this[bluh] = other[bluh];
+		}
+	}
+}

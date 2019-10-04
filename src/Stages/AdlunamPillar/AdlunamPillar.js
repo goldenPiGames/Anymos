@@ -80,6 +80,6 @@ Stages.AdlunamPillar = {
 	vessels : [],
 	par : 360,
 	previous : "InfinityLighthouse",
-	nextDown : "SUltraVeritas",
+	//nextDown : "SUltraVeritas",
 	enemies : ["Flipwip", "Teion"]
 }

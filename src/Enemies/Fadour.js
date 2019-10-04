@@ -4,12 +4,12 @@ const FADOUR_SPAWN_DELAY = 6;
 const FADOUR_SPAWNABLES = [Walkie, Hoverie, Bouncie, Spinnie];
 class Fadour extends Boss {
 	constructor(name, x, y, facingRight, doDialog = true) {
-		this.name = name;
+		super(name);
 		this.x = x;
 		this.y = y;
+		this.facingRight = facingRight;
 		this.dx = -FADOUR_BASE_SPEED;
 		this.dy = 0;
-		this.facingRight = facingRight;
 		this.spinCycle = 0;
 		this.spikeCD = 0;
 		this.spawned = [];
@@ -21,7 +21,7 @@ class Fadour extends Boss {
 		this.portys = [y];
 		this.doDialog = doDialog;
 	}
-	update() {
+	update() {//TODO make not random
 		if (!this.doneportys) {
 			var i = this.y + 80;
 			while (i < cameraBottomBound) {
@@ -82,31 +82,25 @@ class Fadour extends Boss {
 				this.spikeCD = 60;
 		}
 		this.spawned = this.spawned.filter(oj=>!oj.dead);
+		this.facingRight = player.x > this.x;
 	}
 	draw() {
 		var state;
 		if (typeof this.spawnDelay == "number") {
-			state = "Spawning"+this.spawnDelay;
+			state = "spawning"+this.spawnDelay;
 		} else
-			state = "Normal";
-		var sprite = this.sprites[state];
+			state = "normal";
 		if (typeof this.spawnDelay != "number") {
 			this.spinCycle = (this.spinCycle+1) % 6;
-			var spikesSprite = this.sprites["spikesSpinning"+(this.spinCycle)];
-			drawSpriteOnStage(spikesSprite, this.x, this.y-sprite.height/2+spikesSprite.height/2);
+			var spikesSprite = this.sprites["spikesSpinning"+(this.spinCycle)]
+			drawSpriteOnStage(spikesSprite, this.x, this.y-this.height/2+spikesSprite.height/2);
 		}
-		drawSpriteOnStage(sprite, this.x, this.y, player.x>this.x);
+		this.drawSprite(state);
 	}
 	onDeath() {
-		this.spawned.forEach(function(spew) {
-			spew.die();
-		});
-		if (this.name) {
-			for (var i = 1; i <= 3; i++) {
-				new Vessel(this.name+i).collect();
-			}
-		}
-		//console.log(collectedVesselNames)
+		super.onDeath();
+		this.spawned.forEach(spew=>spew.die());
+		//console.log(collectedThisRun)
 		//this.collect();
 		if (this.doDialog) {
 			/*
@@ -134,6 +128,23 @@ class Fadour extends Boss {
 }
 Fadour.prototype.speciesName = "Fadour";
 Fadour.prototype.team = "Sqarnos";
+Fadour.prototype.sprites = makeSprites("src/Enemies/Fadour.png", {
+	normal: {x:0, y:0, width:32, height:32},
+	spawning0: {x:32, y:0, width:32, height:32},
+	spawning1: {x:64, y:0, width:32, height:32},
+	spawning2: {x:96, y:0, width:32, height:32},
+	spawning3: {x:128, y:0, width:32, height:32},
+	spawning4: {x:160, y:0, width:32, height:32},
+	spawning5: {x:192, y:0, width:32, height:32},
+	spawning6: {x:224, y:0, width:32, height:32},
+	spikesSpinning0: {x:0, y:32, width:48, height:48},
+	spikesSpinning1: {x:48, y:32, width:48, height:48},
+	spikesSpinning2: {x:96, y:32, width:48, height:48},
+	spikesSpinning3: {x:144, y:32, width:48, height:48},
+	spikesSpinning4: {x:192, y:32, width:48, height:48},
+	spikesSpinning5: {x:240, y:32, width:48, height:48},
+}, false);
 Fadour.prototype.width = 32;
 Fadour.prototype.height = 32;
 Fadour.prototype.maxhp = 750;
+Fadour.prototype.numVessels = 3;

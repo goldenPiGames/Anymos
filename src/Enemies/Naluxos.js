@@ -13,8 +13,6 @@ class FlashPickup extends GameObject {
 		super();
 		this.x = x;
 		this.y = y;
-		this.width = 20;
-		this.height = 20;
 		this.doDialog = doDialog;
 	}
 	update() {
@@ -33,6 +31,8 @@ class FlashPickup extends GameObject {
 			this.drawSprite("pickup");
 	}
 }
+FlashPickup.prototype.width = 20;
+FlashPickup.prototype.height = 20;
 FlashPickup.prototype.sprites = Naluxos.prototype.sprites;
 
 var specialFlash = {

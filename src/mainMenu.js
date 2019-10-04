@@ -1,5 +1,5 @@
 function doMainMenu() {
-	if (mainMenu.buttonIndex < 1 && localStorage.getItem("TutorialCombatBest"))
+	if (mainMenu.buttonIndex < 1 && !firstRun)
 		mainMenu.buttonIndex = 1;
 	runnee = mainMenu;
 	mainMenu.flowY = 0;
@@ -35,8 +35,6 @@ var mainMenu = {
 		ctx.fillStyle = grad;
 		ctx.fillRect(0, 0, canvas.width, this.flowY);
 		ctx.drawImage(miscSprites["MainMenuLogo"], 0, 0, canvas.width, canvas.height);
-		//console.log(miscSprites["MainMenuLogo"], 0, 0, canvas.width, canvas.height);
-		
 		
 		ctx.font = "40px "+getFont();
 		ctx.fillStyle = "#FFFFFF";
@@ -51,15 +49,15 @@ var mainMenu = {
 		ctx.fillStyle = "#BFBFBF";
 		ctx.fillText("A: Select", canvas.width/2-ctx.measureText("A: Select").width/2, canvas.height-50);
 	},
-	buttonIndex : localStorage.getItem("TutorialCombatBest") ? 1 : 0,
+	buttonIndex : 0,
 	buttons : [
 		{
 			text : "New Game",
 			func : function() {
-				if (!localStorage.getItem("TutorialCombatBest")) {
+				if (!localStorage.getItem("YellowWoodBest")) {
 					resetSave();
 					firstRun = true;
-					loadStage("TutorialMovement");
+					loadStage("TutorialPrelude");
 				} else
 					runnee = newGameConfirm;
 			}
@@ -67,9 +65,10 @@ var mainMenu = {
 		{
 			text : "Continue",
 			func : function(){
-				if (localStorage.getItem("TutorialCombatBest")) {
+				if (!firstRun) {
 					doLevelSelect();
-					firstRun = false;
+				} else if (Stages.TutorialPrelude.bestDown != undefined) {
+					loadStage(currentStageName);
 				}
 			}
 		},
@@ -102,11 +101,12 @@ var newGameConfirm = {
 		ctx.fillStyle = "#000000";
 		ctx.fillRect(canvas.width/2-400, canvas.height/2-75, 800, 150);
 		ctx.fillStyle = "#FF0000";
+		ctx.textAlign = "center";
 		ctx.font = "40px "+getFont();
-		ctx.fillText("Your previous file will be deleted.", canvas.width/2 - ctx.measureText("Your previous file will be deleted.").width/2, canvas.height/2 - 35);
+		ctx.fillText("Your previous file will be deleted.", canvas.width/2, canvas.height/2 - 35);
 		let deltxt = usingGamepad ? "Press Up + Select + A to confirm." : "Press Up + R + A to confirm.";
-		ctx.fillText(deltxt, canvas.width/2 - ctx.measureText(deltxt).width/2, canvas.height/2 + 15);
+		ctx.fillText(deltxt, canvas.width/2, canvas.height/2 + 15);
 		let cantxt = usingGamepad ? "Press B to cancel." : "Press S to cancel.";
-		ctx.fillText(cantxt, canvas.width/2 - ctx.measureText(cantxt).width/2, canvas.height/2 + 65);
+		ctx.fillText(cantxt, canvas.width/2, canvas.height/2 + 65);
 	}
 }

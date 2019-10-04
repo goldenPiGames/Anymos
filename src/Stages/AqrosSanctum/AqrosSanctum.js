@@ -28,7 +28,7 @@ Stages.AqrosSanctum = {
 		player.x = 50;
 		player.y = 300;
 		player.facingRight = true;
-		player.special = "Aqros' Reflector";
+		player.special = specialReflector;
 		dialog.begin(new DialogLine("Aqros", "So, you finally made it. I was getting tired of waiting.", "#0000FF"),
 			new DialogLine("Anymos", "You know, I just recently got retrograde amnesia, and yet, I can tell this isn't really you.", "#00FFFF"),
 			new DialogLine("Aqros", "Oh don't feed me this cliche tripe!", "#0000FF"),
@@ -63,13 +63,13 @@ Stages.AqrosSanctum = {
 	vessels : ["AqrosSanctumVictory1", "AqrosSanctumVictory2", "AqrosSanctumVictory3"],
 	par : 700,
 	//devBest : 175,
-	previous : "VisibleStair",
+	previous : "AqrosCorridor",
 	nextDown : "EndAqros",
-	enemies : ["Mirror", "Aqros", "SinusoidalPlatform"]
+	enemies : [Mirror, AqrosEvil, SinusoidalPlatform]
 }
-/*
+
 Stages.EndAqros = {
 	displayName : "End: Aqros",
 	end : true,
 	previous : "AqrosSanctum",
-}*/
+}

@@ -56,16 +56,26 @@ Stages.AqrosAtrium = {
 		player.x = 1190;
 		player.y = 120;
 		player.facingRight = false;
-		player.special = "Aqros' Reflector";
-		gameObjects = [new Mirror(600, 880, 860), new Door("#7F7F7F", 30, 880, 20, 80), new Door("#FFFFFF", 50, 880, 20, 80), new Door("#FF00FF", 70, 880, 20, 80), new Switch("#FF00FF", 50, 180, true), new Switch("#FF00FF", 1150, 180, true), new Switch("#FFFFFF", 570, 860, true), new Switch("#7F7F7F", 400, 140, true), new MovingPlatformSpawner(960, 810, 40, 8, 960,800, 650,400, 650,300, 720,300), new Vessel("AqrosAtriumUpperLeft", 140, 48), new Vessel("AqrosAtriumCenterRight", 810, 368), new Vessel("AqrosAtriumCenterLeft", 390, 368), new Vessel("AqrosAtriumLowerRight", 1160, 868), new Goalpost("AqrosCorridor", 10, 880, 80)];
-		return {
-			mainBack : "src/Stages/AqrosAtrium/MainBack.png",
-			mainFore : "src/Stages/AqrosAtrium/MainFore.png",
-		};
+		player.special = specialReflector;
+		gameObjects = [
+			new Mirror(600, 880, 860),
+			new Door(0, 30, 880, 20, 80),
+			new Door(1, 50, 880, 20, 80),
+			new Door(2, 70, 880, 20, 80),
+			new Switch(0, 50, 180, true, "#FF00FF"),
+			new Switch(0, 1150, 180, true),
+			new Switch(1, 570, 860, true),
+			new Switch(2, 400, 140, true),
+			new MovingPlatformSpawner(960, 810, 40, 8, 960,800, 650,400, 650,300, 720,300),
+			new Vessel("AqrosAtriumUpperLeft", 140, 48),
+			new Vessel("AqrosAtriumCenterRight", 810, 368),
+			new Vessel("AqrosAtriumCenterLeft", 390, 368),
+			new Vessel("AqrosAtriumLowerRight", 1160, 868),
+			new Goalpost("AqrosCorridor", 10, 880, 80)];
 	},
 	vessels : ["AqrosAtriumUpperLeft", "AqrosAtriumCenterLeft", "AqrosAtriumCenterRight", "AqrosAtriumLowerRight"],
-	par : 120,
+	//par : 120,
 	previous : "AqrosAntechamber",
 	nextDown : "AqrosCorridor",
-	enemies : ["Mirror", "MovingPlatform"]
+	enemies : [Mirror, MovingPlatform, Switch]
 }

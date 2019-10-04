@@ -41,8 +41,8 @@ Stages.AqrosAntechamber = {
 		};
 	},
 	vessels : ["AqrosAntechamberLowerRight"],
-	par : 190,
-	previous : "BlueLakebed",
+	//par : 190,
+	previous : "VisibleStair",
 	nextDown : "AqrosAtrium",
-	enemies : ["Mirror"]
+	enemies : [Mirror]
 }

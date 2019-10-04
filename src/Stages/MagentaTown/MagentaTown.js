@@ -45,6 +45,7 @@ Stages.MagentaTown = {
 		switches = [true];
 		switchColors = ["#8040B0"];
 		gameObjects = [new Vessel("MagentaTownByRightTower", 772, 260), new RainGenerator(20, 15),
+			new Walkie("MagentaTownMcCoy", 250, 460, false),
 			new Walkie("MagentaTownPopoca", 310, 380, false),
 			new Hoverie("MagentaTownElla", 250, 280, true),
 			new Walkie("MagentaTownHatfield", 720, 540, false),

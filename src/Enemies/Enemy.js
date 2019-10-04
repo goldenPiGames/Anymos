@@ -26,14 +26,14 @@ class Boss extends Enemy {
 	constructor(name) {
 		super();
 		if (name) {
+			this.vessels = [];
 			for (var i = 1; i <= this.numVessels; i++) {
-				this.vessels = [];
 				this.vessels.push(new Vessel(name + i));
 			}
 		}
 	}
 	onDeath() {
-		if (this.vessel) {
+		if (this.vessels) {
 			this.vessels.forEach(ves=>ves.collect());
 		}
 	}

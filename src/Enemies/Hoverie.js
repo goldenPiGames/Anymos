@@ -33,7 +33,7 @@ Hoverie.prototype.speciesName = "Hoverie";
 Hoverie.prototype.team = "Sqarnos";
 Hoverie.prototype.sprites = makeSprites("src/Enemies/Hoverie.png", {
 	hovering0 : {x:0, y:0, width:16, height:20},
-	hovering1 : {x:0, y:0, width:16, height:20},
+	hovering1 : {x:16, y:0, width:16, height:20},
 }, false);
 Hoverie.prototype.width = 16;
 Hoverie.prototype.height = 16;
