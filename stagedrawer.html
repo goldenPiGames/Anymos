@@ -24,7 +24,7 @@
 			var Stages = {};
 			function doNothing(){};
 			var GameObjectBase = {};
-			var Aapew, Baron, Bolizos, Bouncie, CardPip, ChansykShuffler, DieWalking, Door, Drrk, Fadour, FireDrawer, Flipwip, Fricchee, Fwegos, Hoverie, Mkair, MovingPlatform, Naluxos, Parashoop, SinusoidalPlatform, SnakeEyes, Spinnie, Switch, Teion, Walkie, Wallie;
+			var Aapew, AqrosEvil, Baron, Bolizos, Bouncie, CardPip, ChansykShuffler, DieWalking, Door, DoubleJumpPickup, Drrk, Fadour, FireDrawer, Flipwip, Fricchee, Fwegos, Hoverie, Mirror, Mkair, MovingPlatform, Naluxos, Parashoop, SinusoidalPlatform, SnakeEyes, Spinnie, Switch, Teion, Walkie, Wallie;
 		</script>
 		
         <script type="text/javascript" src="src/Stages/TutorialMovement/TutorialMovement.js"></script>
@@ -105,11 +105,10 @@
 			var gameObjects = [];
 			var gravity;
 			var SYKLOS_COLOR;
-			var bg_color;
 			function doNothing() {};
 			function playMusic() {}; var songName = "";
 			function drawStage(nom) {
-				localStorage.setItem("ToDraw", nom);
+				localStorage.setItem("AnymosDrawnLast", nom);
 				if (!Stages[nom])
 					throw "Stage \""+nom+"\" does not exist.";
 				try {
@@ -254,8 +253,7 @@
 					}
 				}
 			}
-			bg_color = localStorage.getItem("ToDrawBG");
-			drawStage(localStorage.getItem("ToDraw"));
+			drawStage(localStorage.getItem("AnymosDrawnLast"));
         </script>
     </body>
 </html>

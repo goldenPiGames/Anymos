@@ -1,6 +1,6 @@
 Stages.AqrosAtrium = {
 	displayName : "Aqros' Atrium",
-	load : function() {
+	load : function(doStuff) {
 		playMusic("Underwater Coolness - Eric Matyas");
 		let B = {solid:true,color:"#000080"}
 		let W = {name:"Water",solid:false,hazard:9};
@@ -52,7 +52,10 @@ Stages.AqrosAtrium = {
 		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B,_,_,_,_,B,_,_,_,_,_,_,_,_,B,_,_,_,_,_,B,_,_,_,_,_,_,_,_,_,_,B,B,B,B,B,_,_,B],
 		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B,_,_,_,_,B,_,_,_,_,_,_,_,_,B,_,_,_,_,_,B,_,_,_,_,_,_,_,_,_,B,B,B,B,B,B,_,_,B],
 		 [B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B]];
-		zoom = 1;
+		if (doStuff) {
+			zoom = 1;
+			zoomd = 1;
+		}
 		player.x = 1190;
 		player.y = 120;
 		player.facingRight = false;
@@ -74,8 +77,7 @@ Stages.AqrosAtrium = {
 			new Goalpost("AqrosCorridor", 10, 880, 80)];
 	},
 	vessels : ["AqrosAtriumUpperLeft", "AqrosAtriumCenterLeft", "AqrosAtriumCenterRight", "AqrosAtriumLowerRight"],
-	//par : 120,
 	previous : "AqrosAntechamber",
 	nextDown : "AqrosCorridor",
-	enemies : [Mirror, MovingPlatform, Switch]
+	toLoad : [Mirror, MovingPlatform, Switch]
 }

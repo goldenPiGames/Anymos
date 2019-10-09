@@ -1,7 +1,8 @@
 var canvas;
 var ctx;
 var stage;
-const MISC_SPRITE_NAMES = ["MainMenuLogo", "Selector", "Paused", "SelectStage", "SelectStageNo", "SelectStage100", "SelectEnd", "SelectEndNo", "SelectCorners", "Vessel", "MonologueSpot", "GoalpostBottom", "GoalpostSegment", "GoalpostTop", "EndLight", "Beam", "Gamepad"]
+const MISC_SPRITE_NAMES = ["MainMenuLogo", "Selector", "Paused", "SelectStage", "SelectStageNo", "SelectStage100", "SelectEnd", "SelectEndNo", "SelectCorners", "Gamepad"]
+var miscSprites;
 const MISC_SFX_NAMES = ["Bump", "Thunder1", //NSMB Wii
 	"Swish3", "Swish4", "Oof", "SPM_Smash", "WindShort", "Wrong"] //zapsplat.com
 var miscSprites = {};
@@ -27,12 +28,11 @@ function begin() {
 	loadGame();
 	loadReturn = begin2;
 	resetLoading();
-	PLAYER_SPRITE_NAMES.forEach(function(nom) {
-		playerSprites[nom] = makeImage("src/PlayerSprites/"+nom+".png");
-	});
 	MISC_SPRITE_NAMES.forEach(function(nom) {
 		miscSprites[nom] = makeImage("src/MiscSprites/"+nom+".png");
 	});
+	//TODO make spritesheet for misc sprites
+	//miscSprites = makeSprites("src/MiscSprites.png")
 	MISC_SFX_NAMES.forEach(function(nom) {
 		miscSFX[nom] = makeSound("src/MiscSFX/"+nom+".mp3");
 	});

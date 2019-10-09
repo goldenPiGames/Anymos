@@ -57,5 +57,5 @@ Stages.GreenMaze = {
 	par : 225,
 	previous : "YellowWood",
 	nextDown : "CyanRainforest",
-	enemies : [Walkie, Hoverie]
+	toLoad : [Walkie, Hoverie]
 }

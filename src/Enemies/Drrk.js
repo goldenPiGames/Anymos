@@ -1,7 +1,7 @@
 var DrrkSpriteNames = ["Standing1", "Shadow1", "Middle1"];
 const DRRK_NORMAL_HEIGHT = 34;
 const DRRK_TEXT_COLOR = "#404040";
-class Drrk extends Enemy {
+class Drrk extends Boss {
 	constructor(name, x, y, facingRight, doDialog) {
 		super(name);
 		this.x = x;
@@ -93,31 +93,34 @@ Drrk.prototype.sprites = makeSprites("src/Enemies/Drrk.png", {
 }, false);
 Drrk.prototype.maxhp = 600;
 Drrk.prototype.doesGravity = true;
+Drrk.prototype.numVessels = 5;
 
-function DarkBall(x, y) {
-	this.x = x;
-	this.y = y;
-	this.width = 10;
-	this.height = 10;
-	this.dx = 0;
-	this.dy = 1;
+class DarkBall extends GameObject {
+	constructor(x, y) {
+		super();
+		this.x = x;
+		this.y = y;
+		this.width = 10;
+		this.height = 10;
+		this.dx = 0;
+		this.dy = 1;
+	}
+	update() {
+		this.dy += gravity;
+		this.y += this.dy;
+		if (this.isTouching(player)) {
+			player.getHit(90);
+			this.die();
+		}
+		if (this.dy <= 0 || hazardOfPixel(this.x,this.y) >= 100)
+			this.die();
+	}
+	draw() {
+		ctx.fillStyle = "#000000";
+		ctx.beginPath();
+		ctx.arc(stagex(this.x),stagey(this.y-this.height/2),this.width*.6*zoom,0,2*Math.PI);
+		ctx.fill();
+	}
 }
-DarkBall.prototype = Object.create(GameObjectBase);
 DarkBall.prototype.team = "Sqarnos";
 DarkBall.prototype.doesGravity = true;
-DarkBall.prototype.update = function() {
-	this.dy += gravity;
-	this.y += this.dy;
-	if (this.isTouching(player)) {
-		player.getHit(90);
-		this.die();
-	}
-	if (this.dy <= 0 || hazardOfPixel(this.x,this.y) >= 100)
-		this.die();
-}
-DarkBall.prototype.draw = function() {
-	ctx.fillStyle = "#000000";
-	ctx.beginPath();
-	ctx.arc(stagex(this.x),stagey(this.y-this.height/2),this.width*.6*zoom,0,2*Math.PI);
-	ctx.fill();
-}

@@ -59,5 +59,5 @@ Stages.ThornyOutback = {
 		}
 	},
 	par : 480,
-	enemies : [Hoverie, FireDrawer]
+	toLoad : [Hoverie, FireDrawer]
 }

@@ -46,5 +46,5 @@ Stages.DiamondHighway = {
 	previous : "ClubGardens",
 	nextDown : "HeartFarms",
 	nextLeft : "SkyClimb",
-	enemies : [MovingPlatform, DieWalking, CardPip]
+	toLoad : [MovingPlatform, DieWalking, CardPip]
 }

@@ -51,5 +51,5 @@ Stages.IgmaBeach = {
 	previous : "ZagadCrossing",
 	nextDown : "YstryJungle",
 	nextRight : "InfinityLighthouse",
-	enemies : [Flipwip, Teion]
+	toLoad : [Flipwip, Teion]
 }

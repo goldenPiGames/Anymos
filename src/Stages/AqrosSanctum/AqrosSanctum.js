@@ -65,7 +65,7 @@ Stages.AqrosSanctum = {
 	//devBest : 175,
 	previous : "AqrosCorridor",
 	nextDown : "EndAqros",
-	enemies : [Mirror, AqrosEvil, SinusoidalPlatform]
+	toLoad : [Mirror, AqrosEvil, SinusoidalPlatform]
 }
 
 Stages.EndAqros = {

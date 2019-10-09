@@ -78,7 +78,7 @@ Stages.MagentaDuel = {
 	vessels : ["MagentaDuelFadour1", "MagentaDuelFadour2", "MagentaDuelFadour3"],
 	previous : "MagentaDefense",
 	nextDown : "EndMagentaDefender",
-	enemies : [Fadour, Walkie, Hoverie, Bouncie, Spinnie, Teion],
+	toLoad : [Fadour, Walkie, Hoverie, Bouncie, Spinnie, Teion],
 	reuseBack : "MagentaTown",
 	reuseFore : "MagentaTown",
 }

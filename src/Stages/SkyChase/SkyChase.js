@@ -76,6 +76,6 @@ Stages.SkyChase = {
 	par : 365,
 	previous : "SkyFleet",
 	//nextDown : "Bulpo",
-	enemies : [ChansykShuffler, CardPip, Parashoop, "Teion"],
+	toLoad : [ChansykShuffler, CardPip, Parashoop, "Teion"],
 	startFlying : true,
 }

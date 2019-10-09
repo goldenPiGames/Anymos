@@ -81,7 +81,7 @@ Stages.InfinityLighthouse = {
 	par : 360,
 	previous : "IgmaBeach",
 	nextDown : "AdlunamPillar",
-	enemies : [/*Flipwip, Teion*/]
+	toLoad : [/*Flipwip, Teion*/]
 }
 function SmoothGravityChanger(top, bottom) {
 	this.top = top;

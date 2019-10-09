@@ -79,5 +79,5 @@ Stages.BeginningClimb = {
 	par : 180,
 	previous : "TutorialCombat",
 	nextDown : "YellowWood",
-	enemies : [Walkie, Hoverie, "BeamTurret", "MovingPlatform"]
+	toLoad : [Walkie, Hoverie, "BeamTurret", "MovingPlatform"]
 }

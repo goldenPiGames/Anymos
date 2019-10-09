@@ -87,5 +87,5 @@ Stages.BlueLakebed = {
 	//par : 1020,
 	previous : "BlueLake",
 	nextDown : "VisibleStair",
-	enemies : []
+	toLoad : []
 }

@@ -53,5 +53,5 @@ Stages.ClearCanyon = {
 	par : 480,
 	previous : "BlackMountain",
 	nextDown : "ClubGardens",
-	enemies : [Hoverie]
+	toLoad : [Hoverie]
 }

@@ -44,11 +44,10 @@ Stages.RedValley = {
 			mainFore : "src/Stages/RedValley/MainFore.png",
 		};
 	},
-	vessels : ["RedValleyCave", "RedValleyCaveJump", "RedValleyBaron", "RedValleyMid"],
+	vessels : ["RedValleyCave", "RedValleyCaveJump", "RedValleyBaron1", "RedValleyBaron2", "RedValleyBaron3", "RedValleyMid"],
 	selectX : -1.5*LS_X_SPACING,
 	selectY : Stages.YellowWood.selectY + LS_Y_SPACING,
-	par : 330,
 	previous : "YellowWood",
 	nextDown : "BlackMountain",
-	enemies : [Baron, Hoverie]
+	toLoad : [Baron, Hoverie]
 }

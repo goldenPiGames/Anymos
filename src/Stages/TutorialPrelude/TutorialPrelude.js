@@ -146,85 +146,91 @@ Stages.TutorialPrelude = {
 	selectX : 0,
 	selectY : 0,
 	nextDown : "YellowWood",
-	enemies : [Walkie, Switch]
+	toLoad : [Walkie, Switch]
 }
 
-function TrainingTarget(x, y) {
-	this.hp = this.maxhp;
-	this.x = x;
-	this.y = y;
+class TrainingTarget extends Enemy {
+	constructor(x, y) {
+		super();
+		this.hp = this.maxhp;
+		this.x = x;
+		this.y = y;
+	}
+	update = function() {
+		
+	}
+	draw = function() {
+		ctx.lineWidth = zoom;
+		ctx.strokeStyle = "#FFFFFF";
+		ctx.beginPath();
+		ctx.arc(stagex(this.x), stagey(this.y-this.height/2), this.width/2*zoom,0,2*Math.PI);
+		ctx.stroke();
+		ctx.strokeStyle = "#FF0000";
+		ctx.beginPath();
+		ctx.arc(stagex(this.x), stagey(this.y-this.height/2), this.width/4*zoom,0,2*Math.PI);
+		ctx.stroke();
+	}
 }
-TrainingTarget.prototype = Object.create(GameObjectBase);
 TrainingTarget.prototype.speciesName = "Target";
 TrainingTarget.prototype.width = 20;
 TrainingTarget.prototype.height = 20;
-TrainingTarget.prototype.hittable = true;
-TrainingTarget.prototype.damageable = true;
 TrainingTarget.prototype.maxhp = 55;
 TrainingTarget.prototype.team = "KillMe";
-TrainingTarget.prototype.update = function() {
-	
-}
-TrainingTarget.prototype.draw = function() {
-	ctx.lineWidth = zoom;
-	ctx.strokeStyle = "#FFFFFF";
-	ctx.beginPath();
-	ctx.arc(stagex(this.x), stagey(this.y-this.height/2), this.width/2*zoom,0,2*Math.PI);
-	ctx.stroke();
-	ctx.strokeStyle = "#FF0000";
-	ctx.beginPath();
-	ctx.arc(stagex(this.x), stagey(this.y-this.height/2), this.width/4*zoom,0,2*Math.PI);
-	ctx.stroke();
-}
 
-function PunchingBag(x, y) {
-	this.x = x;
-	this.y = y;
-	this.damage = 0;
+class PunchingBag extends Enemy {
+	constructor(x, y) {
+		super();
+		this.x = x;
+		this.y = y;
+		this.damage = 0;
+	}
+	update() {
+		
+	}
+	draw() {
+		ctx.lineWidth = zoom;
+		ctx.strokeStyle = "#FFFFFF";
+		ctx.strokeRect(stagex(this.x-this.width/2), stagey(this.y-this.height), this.width*zoom, this.height*zoom);
+		ctx.strokeStyle = "#FF0000";
+		ctx.strokeRect(stagex(this.x-this.width/4), stagey(this.y-this.height*3/4), this.width/2*zoom, this.height/2*zoom);
+		ctx.fillStyle = "#FFFFFF";
+		ctx.textAlign = "center";
+		ctx.font = (12*zoom)+"px monospace";
+		ctx.fillText(this.damage, stagex(this.x), stagey(this.y+14));
+	}
+	takeDamage(amount) {
+		this.damage+=amount;
+	}
 }
-PunchingBag.prototype = Object.create(GameObjectBase);
 PunchingBag.prototype.speciesName = "Target";
 PunchingBag.prototype.width = 18;
 PunchingBag.prototype.height = 36;
-PunchingBag.prototype.hittable = true;
-PunchingBag.prototype.damageable = true;
+PunchingBag.prototype.maxhp = 9001;
 PunchingBag.prototype.team = "KillMe";
-PunchingBag.prototype.update = function() {
-	
-}
-PunchingBag.prototype.draw = function() {
-	ctx.lineWidth = zoom;
-	ctx.strokeStyle = "#FFFFFF";
-	ctx.strokeRect(stagex(this.x-this.width/2), stagey(this.y-this.height), this.width*zoom, this.height*zoom);
-	ctx.strokeStyle = "#FF0000";
-	ctx.strokeRect(stagex(this.x-this.width/4), stagey(this.y-this.height*3/4), this.width/2*zoom, this.height/2*zoom);
-	ctx.fillStyle = "#FFFFFF";
-	ctx.textAlign = "center";
-	ctx.font = (12*zoom)+"px monospace";
-	ctx.fillText(this.damage, stagex(this.x), stagey(this.y+14));
-}
-PunchingBag.prototype.takeDamage = function(amount) {
-	this.damage+=amount;
-}
 
-function Spawner(spawnFunc, delay, max) {
-	this.spawnFunc = spawnFunc;
-	this.delay = delay;
-	this.max = max;
-	this.spawned = [];
-	this.cd = 0;
-}
-Spawner.prototype = Object.create(GameObjectBase);
-Spawner.prototype.update = function() {
-	removeDead(this.spawned);
-	if (this.spawned.length < this.max) {
-		this.cd--;
-		if (this.cd <= 0) {
-			var noop = this.spawnFunc();
-			gameObjects.push(noop);
-			this.spawned.push(noop);
-			this.cd = this.delay;
+
+class Spawner extends GameObject {
+	constructor(spawnFunc, delay, max) {
+		super();
+		this.spawnFunc = spawnFunc;
+		this.delay = delay;
+		this.max = max;
+		this.spawned = [];
+		this.cd = 0;
+	}
+	update() {
+		removeDead(this.spawned);
+		if (this.spawned.length < this.max) {
+			this.cd--;
+			if (this.cd <= 0) {
+				var noop = this.spawnFunc();
+				gameObjects.push(noop);
+				this.spawned.push(noop);
+				this.cd = this.delay;
+			}
 		}
 	}
+	draw() {
+		
+	}
 }
-Spawner.prototype.draw = doNothing;

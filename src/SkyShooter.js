@@ -1,16 +1,12 @@
-var waves;
-var currentWave;
-
 var shooterEngine = {
 	begin : function() {
 		runnee = gameReady;
 		gameReady.next = this;
-		player = playerPlane;
 		player.dx = 0;
 		player.dy = 0;
 		player.pipCD = 0;
 		edgesSolid = false;
-		currentWave = [];
+		this.currentWave = [];
 	},
 	update : function() {
 		if (paused) {
@@ -30,13 +26,11 @@ var shooterEngine = {
 			return;
 		}
 		stageTimer++;
-		gameObjects.forEach(function(obj) {
-			obj.update();
-		});
-		playerPlane.update();
+		gameObjects.forEach(oj=>oj.update());
+		player.update();
 		removeDead(gameObjects);
-		removeDead(currentWave);
-		if (currentWave.length <= 0) {
+		removeDead(this.currentWave);
+		if (this.currentWave.length <= 0) {
 			this.nextWave();
 		}
 	},
@@ -45,11 +39,11 @@ var shooterEngine = {
 		gameEngine.draw();
 	},
 	nextWave : function() {
-		currentWave = waves.shift();
-		if (Array.isArray(currentWave)) {
-			Array.prototype.push.apply(gameObjects, currentWave);
-		} else if (typeof currentWave == "function") {
-			currentWave();
+		this.currentWave = this.waves.shift();
+		if (Array.isArray(this.currentWave)) {
+			gameObjects.push(...this.currentWave);
+		} else if (typeof this.currentWave == "function") {
+			this.currentWave();
 			if (runnee == this)
 				this.nextWave();
 		}
@@ -61,15 +55,11 @@ const BOOST_ACCELERATION = 2.5;
 const FLYING_DAMPENING = .8;
 const FLYING_EDGE_SHUNT = 3.5;
 
-var playerPlane = {
-	__proto__ : Object.create(GameObjectBase),
-	width : 60,
-	height : 34,
-	team : "Anymos",
-	hittable : true,
-	damageable : true,
-	state: "Standing0",
-	update : function() {
+class PlanePlayer extends AnymosPlayer {
+	constructor() {
+		super();
+	}
+	update() {
 		if (stageTimer%2)
 			used++;
 		var ath = 0;
@@ -127,14 +117,13 @@ var playerPlane = {
 			this.pipCD--;
 		} else
 			this.pipCD = 0;
-	},
-	draw : function() {
-		drawSpriteOnStage(playerSprites.Plane, this.x, this.y+1, this.facingRight);
-	},
-	getHit : anymos.getHit,
-	takeDamage : anymos.takeDamage,
-	die : function() {
-		exitStage();
-	},
-	//sprites : anymos.sprites,
+	}
+	draw() {
+		this.drawSprite("flying");
+	}
 }
+PlanePlayer.prototype.width = 60;
+PlanePlayer.prototype.height = 34;
+PlanePlayer.prototype.sprites = makeSprites("src/Plane.png", {
+	flying: {x:0, y:0, width:60, height:36},
+}, true);	

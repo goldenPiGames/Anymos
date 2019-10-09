@@ -53,12 +53,9 @@ class AqrosEvil extends Boss {
 		if (this.rainTrapping) {
 			return;
 		} else {
-			if (true) {
-				state = "Standing";
-			} else
-				state = "Normal";
+			state = "standing";
 		}
-		drawSpriteOnStage(this.sprites[state], this.x, this.y, this.facingRight);
+		this.drawSprite("standing");
 		//this.state = null;
 	}
 	rainTrap () {
@@ -135,7 +132,7 @@ class AqrosEvil extends Boss {
 AqrosEvil.prototype.speciesName = "Aqros";
 AqrosEvil.prototype.team = "Sqarnos";
 AqrosEvil.prototype.sprites = makeSprites("src/Enemies/Aqros.png", {
-	standing: {x:0, y:0, width:20, height:40}
+	standing: {x:0, y:0, width:20, height:40},
 }, false);
 AqrosEvil.prototype.numVessels = 5;
 AqrosEvil.prototype.width = 16;

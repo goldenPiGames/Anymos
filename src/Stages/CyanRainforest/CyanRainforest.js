@@ -56,5 +56,5 @@ Stages.CyanRainforest = {
 	par : 495,
 	previous : "GreenMaze",
 	nextDown : "BlueLake",
-	enemies : [Walkie, Hoverie]
+	toLoad : [Walkie, Hoverie]
 }

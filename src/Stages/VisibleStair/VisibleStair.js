@@ -1,6 +1,6 @@
 Stages.VisibleStair = {
 	displayName : "Visible Stair",
-	load : function() {
+	load : function(doStuff) {
 		playMusic("Underwater Coolness - Eric Matyas");
 		let B = {solid:true,color:"#000080"}
 		let W = {name:"Water",solid:false,hazard:14,color:"#276383"};
@@ -37,7 +37,7 @@ Stages.VisibleStair = {
 		 [B,i,i,i,i,i,i,i,i,i,i,i,i,i,i,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
 		 [B,i,i,i,i,i,i,i,i,i,i,i,i,i,i,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
 		 [B,i,i,i,i,B,i,i,i,B,B,i,i,i,B,B,_,_,_,I,I,_,_,_,B,_,_,_,_,B],
-		 [B,i,i,i,i,i,i,i,i,i,i,i,i,i,i,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+		 [B,i,i,i,i,i,i,i,i,i,i,i,i,i,i,_,_,_,_,_,_,_,_,_,_,_,_,_,B,B],
 		 [B,i,i,i,i,i,i,i,i,i,i,i,i,i,i,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
 		 [B,i,i,i,i,i,i,i,i,i,i,i,i,i,i,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
 		 [B,i,i,B,B,i,i,i,i,i,i,i,i,i,i,_,_,_,_,_,_,_,_,_,_,B,B,_,_,B],
@@ -74,19 +74,25 @@ Stages.VisibleStair = {
 		if (doStuff) {
 			zoom = 2;
 			zoomd = 2;
-			dialog.begin(new DialogLine("Aqros", "Still alive, I see.", "#0000FF"),
-				new DialogLine("Anymos", "Of course. You haven't even attempted to attack me at all.", "#00FFFF"),
-				new DialogLine("Aqros", "Why would I try to kill you directly when I can just waste your time with puzzles?", "#0000FF"),
-				new DialogLine("Aqros", "Speaking of which, here's a new type of puzzle for you. The other side of the mirror is solid glass, but your side has invisible platforms.", "#0000FF"));
+			dialog.begin(
+				new DialogLine("Aqros", "So you've arrived.", "#0000FF"),
+				new DialogLine("Anymos", "Of course. That cursed rainstorm up above, it's your doing, isn't it?", "#00FFFF"),
+				new DialogLine("Aqros", "Yes, it is.", "#0000FF"),
+				new DialogLine("Anymos", "Why?", "#00FFFF"),
+				new DialogLine("Aqros", "Wouldn't you like to know?", "#0000FF"));
 		}
-		gameObjects = [new Mirror(300, 1100, 1080), new Goalpost(this.nextDown, 590, 140, 90), new Vessel("VisibleStairFlipAlcoveLeft", 30, 458), new Vessel("VisibleStairFlipAlcoveRight", 570, 458), new Vessel("VisibleStairCaseLeft", 220, 208), new Vessel("VisibleStairCaseRight", 380, 208), new Vessel("VisibleStairGlassCrawl", 30, 78)];
-		return {
-			mainBack : "src/Stages/AqrosFlight/MainBack.png",
-			mainFore : "src/Stages/AqrosFlight/MainFore.png",
-		};
+		gameObjects = [
+			new Mirror(300, 1100, 1080),
+			new Goalpost(this.nextDown, 590, 140, 90),
+			//new Vessel("VisibleStairFlipAlcoveLeft", 30, 458),
+			new Vessel("VisibleStairFlipAlcoveRight", 570, 458),
+			//new Vessel("VisibleStairCaseLeft", 220, 208),
+			new Vessel("VisibleStairCaseRight", 380, 208),
+			//new Vessel("VisibleStairGlassCrawl", 30, 78)
+		];
 	},
-	vessels : ["VisibleStairFlipAlcoveLeft", "VisibleStairFlipAlcoveRight", "VisibleStairCaseLeft", "VisibleStairCaseRight", "VisibleStairGlassCrawl"],
+	vessels : ["VisibleStairFlipAlcoveRight", "VisibleStairCaseRight"],
 	previous : "BlueLakebed",
 	nextDown : "AqrosAntechamber",
-	enemies : [Mirror]
+	toLoad : [Mirror]
 }

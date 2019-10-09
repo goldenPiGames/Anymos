@@ -26,16 +26,12 @@ class CardPip extends Enemy {
 	update() {
 		this.pipCD--;
 		if (this.pipCD <= 0) {
-			gameObjects.push(new PipBullet(this.x, this.y-this.height/2, this.red ? this.angleToLeading(this.nearestEnemy(), 4) : this.angleTo(this.nearestEnemy), 5, this.color));
+			gameObjects.push(new PipBullet(this.x, this.y-this.height/2, this.red ? this.angleToLeading(this.nearestEnemy(), 5) : this.angleTo(this.nearestEnemy()), 5, this.color));
 			//console.log(this.nearestEnemy(), this.angleToLeading(this.nearestEnemy(), 5))
 			this.pipCD = 60;
 		}
 	}
 	draw() {
-		//ctx.fillStyle = this.color;
-		//ctx.fillRect(stagex(this.x-this.width/2+2), stagey(this.y-this.height+2), (this.width-4)*zoom, (this.height-4)*zoom);
-		//console.log("Hovering"+this.rank)
-		//drawSpriteOnStage(this.sprites["Hovering"+this.rank], this.x, this.y);
 		var state = this.rank+(this.red?"red":"black");
 		//console.log(state);
 		this.drawSprite(state);
@@ -47,7 +43,7 @@ CardPip.prototype.sprites = CARD_SPRITES_SMALL;
 CardPip.prototype.maxhp = 30;
 CardPip.prototype.doesGravity = false;
 
-class PipBullet extends Enemy {
+class PipBullet extends GameObject {
 	constructor(x, y, target = player, speed = 4, color = "#000000") {
 		super();
 		this.x = x;

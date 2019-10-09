@@ -61,5 +61,5 @@ Stages.BurningForest = {
 		}
 	},
 	par : 600,
-	enemies : [Hoverie, FireDrawer]
+	toLoad : [Hoverie, FireDrawer]
 }

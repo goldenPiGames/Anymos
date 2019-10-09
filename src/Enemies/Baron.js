@@ -1,5 +1,5 @@
 //var BaronSpriteNames = ["Walking1", "ChargingUp1", "Attacking1"];
-class Baron extends Enemy {
+class Baron extends Boss {
 	constructor(name, x, y, facingRight, doDialog) {
 		super(name);
 		this.x = x;
@@ -11,7 +11,7 @@ class Baron extends Enemy {
 		this.doDialog = doDialog;
 		this.doneDialog = false;
 		this.atkbox = {
-			__proto__ : Object.create(GameObjectBase),
+			isTouching : GameObject.prototype.isTouching,
 			width : 48,
 			height : 38
 		}
@@ -91,3 +91,4 @@ Baron.prototype.maxhp = 1000;
 Baron.prototype.collDamage = 120;
 Baron.prototype.collMaxCD = 60;
 Baron.prototype.doesGravity = true;
+Baron.prototype.numVessels = 3;

@@ -53,12 +53,12 @@ Stages.FlightToAnymis = {
 		gameObjects = [
 			//{update:function(){shooterEngine.begin()}, draw:doNothing}
 		];
-		waves = [
+		shooterEngine.waves = [
 			//[new Aapew(true, 300, 250, true), new Aapew(true, 350, 450, true), new Aapew(true, 300, 650, true)],
 			[new Mkair("FlightToAnymisMkair", true)],
 			//[new ChansykShuffler(300, 600)],
-			function(){finishStage("AnymisLanding")}
-		]
+			()=>finishStage("AnymisLanding")
+		];
 		if (doStuff) {
 			dialog.begin(
 				new DialogLine("Chanos", "This is President Chanos to Anymos and Anymos Escort Force.", CHANOS_COLOR),
@@ -67,14 +67,14 @@ Stages.FlightToAnymis = {
 				new DialogLine("Anymos", "z-what?", "#00FFFF"),
 				new DialogLine("Chanos", "Wait, were you asleep?", CHANOS_COLOR),
 				new DialogLine("Anymos", "I was meditating, not sleeping, I'll have you know.", "#00FFFF"),
-				new DialogLine("Chanos", "Well, listen up. Air traffic control has told me that your escort team didn't make its last scheduled call, so I decided to call you directly.", CHANOS_COLOR),
+				new DialogLine("Chanos", "Well, listen up. Air traffic control has told me that your escort team didn't make its last scheduled call, so I decided to contact you directly.", CHANOS_COLOR),
 				new DialogLine("Anymos", "Oh, I remember the escort team. Huh, I can't see them anywhere...", "#00FFFF"),
 				new DialogLine("Chanos", "...This could be a problem. What do you see?", CHANOS_COLOR),
 				new DialogLine("Anymos", "There's not really much up in these skies. Except for that giant flying thing over there that's looking at me menacingly while quickly approaching me.", "#00FFFF"),
 				new DialogLine("Chanos", "...", CHANOS_COLOR),
 				new DialogLine("Anymos", "...Oh.", "#00FFFF"),
 				new DialogLine("Chanos", "Looks like you'll have to take manual control of the craft.", CHANOS_COLOR),
-				function(){dialog.skipBuffer = 120},
+				()=>dialog.skipBuffer = 120,
 				new DialogLine("Chanos", "You can move in eight directions. You can activate the speed boosters using Jump, the forward beam using Shoot, or the tracking guns using Attack, but no more than one of those at a time.", CHANOS_COLOR),
 			);
 		}
@@ -82,14 +82,14 @@ Stages.FlightToAnymis = {
 		zoomd = 1;
 		//player.x = 900;
 		//player.y = 400;
-		playerPlane.x = 900;
-		playerPlane.y = 400;
-		playerPlane.facingRight = false;
+		player.x = 900;
+		player.y = 400;
+		player.facingRight = false;
 	},
-	vessels : ["FlightToAnymisMkair0", "FlightToAnymisMkair1", "FlightToAnymisMkair2"],
-	par : 365,
+	vessels : ["FlightToAnymisMkair1", "FlightToAnymisMkair2", "FlightToAnymisMkair3", "FlightToAnymisMkair4", "FlightToAnymisMkair5"],
+	//par : 365,
 	previous : "SPDAirport",
 	nextDown : "AnymisLanding",
-	enemies : [Aapew, Mkair],
+	toLoad : [Aapew, Mkair],
 	startFlying : true,
 }

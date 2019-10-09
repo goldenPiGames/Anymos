@@ -14,7 +14,7 @@ class Fadour extends Boss {
 		this.spikeCD = 0;
 		this.spawned = [];
 		this.spikebox = {
-			__proto__ : Object.create(GameObjectBase),
+			isTouching : GameObject.prototype.isTouching,
 			width : 44,
 			height : 44
 		}

@@ -76,7 +76,7 @@ Stages.MesaCliff = {
 			dialog.begin(new DialogLine("Anymos", "This rain has an evil electrical charge. But oddly enough, having shelter over my head feels... nice and relaxing.", "#00FFFF"));
 		dynamicBackdrop = new StormBackdrop();
 	},
-	enemies : [MovingPlatform]
+	toLoad : [MovingPlatform]
 }
 function StormBackdrop() {
 	this.foreCloudsX = 0;

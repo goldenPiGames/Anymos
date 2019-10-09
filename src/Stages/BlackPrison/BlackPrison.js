@@ -43,11 +43,11 @@ Stages.BlackPrison = {
 			dialog.begin(new DialogLine("Naluxos", "I'm right back here in this cage, but watch out! The thing that captured me is still around here somewhere...", "#FFFFFF"),
 				new DialogLine("Naluxos", "But on the bright side, I can illuminate the cave here.", "#FFFFFF"));
 	},
-	vessels : ["BlackPrisonDrrk"],
+	vessels : ["BlackPrisonDrrk1", "BlackPrisonDrrk2", "BlackPrisonDrrk3", "BlackPrisonDrrk4", "BlackPrisonDrrk5"],
 	par : 1890,
 	previous : "BlackCaves",
 	nextDown : "EndNaluxosSavior",
-	enemies : [Drrk, Naluxos]
+	toLoad : [Drrk, Naluxos]
 }
 
 Stages.EndNaluxosSavior = {

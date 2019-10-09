@@ -44,5 +44,5 @@ Stages.AqrosAntechamber = {
 	//par : 190,
 	previous : "VisibleStair",
 	nextDown : "AqrosAtrium",
-	enemies : [Mirror]
+	toLoad : [Mirror]
 }

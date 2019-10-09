@@ -60,7 +60,7 @@ Stages.ZagadCrossing = {
 	par : 510,
 	previous : "GreyHarbor",
 	nextDown : "IgmaBeach",
-	enemies : [Fricchee, Flipwip, Teion/*, OceanWaves*/]
+	toLoad : [Fricchee, Flipwip, Teion/*, OceanWaves*/]
 }
 
 //TODO

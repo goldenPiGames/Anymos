@@ -41,5 +41,5 @@ Stages.AqrosCorridor = {
 	par : 870,
 	previous : "AqrosAtrium",
 	nextDown : "AqrosSanctum",
-	enemies : [Mirror]
+	toLoad : [Mirror]
 }

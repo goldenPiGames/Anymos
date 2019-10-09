@@ -12,13 +12,14 @@ class Mirror extends GameObject {
 		for (var i = 0; i < this.height; i += this.sprites.segment.height) {
 			drawSpriteOnStage(this.sprites.segment, this.x, this.y - i);
 		}
-		ctx.globalAlpha = .5;
 		if (player.y - player.height >= this.y - this.height && player.y <= this.y) {
-			drawSpriteOnStage(playerSprites[player.state+player.stateCycle], 2 * this.x - player.x, player.y, !player.facingRight);
-			if (player.attacking)
-				drawSpriteOnStage(playerSprites["ArmAttacking"+player.attacking], 2 * this.x - player.x, player.y, !player.facingRight);
+			ctx.globalAlpha = .5;
+			var ai = new AnymosAfterimage(player);
+			ai.x = 2 * this.x - ai.x;
+			ai.facingRight = !ai.facingRight;
+			ai.draw();
+			ctx.globalAlpha = 1;
 		}
-		ctx.globalAlpha = 1;
 	}
 	isSolid(x, y) {
 		return (x >= this.x-this.width/2 && x <= this.x+this.width/2 && y <= this.y && y > this.y-this.height);
@@ -45,7 +46,7 @@ class ReflectorPickup extends GameObject {
 				this.doDialog = false;
 				dialog.begin(new DialogLine("Anymos", "So this is... Aqros' Reflector.", "#00FFFF"),
 					new DialogLine("Anymos", "It's a Special, so I can use it by pressing [Shift] or (Right trigger).", "#00FFFF"),
-				new DialogLine("Anymos", "I have the feeling it can interact somehow with the mirrors in here...", "#00FFFF"));
+					new DialogLine("Anymos", "I have the feeling it can interact somehow with the mirrors in here...", "#00FFFF"));
 			}
 		}
 	}
@@ -54,9 +55,9 @@ class ReflectorPickup extends GameObject {
 			this.drawSprite("pickup");
 	}
 }
+ReflectorPickup.prototype.sprites = Mirror.prototype.sprites;
 ReflectorPickup.prototype.width = 20;
 ReflectorPickup.prototype.height = 20;
-ReflectorPickup.prototype.sprites = Mirror.prototype.sprites;
 
 var specialReflector = {
 	name : "Aqros' Reflector",

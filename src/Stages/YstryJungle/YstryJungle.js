@@ -122,7 +122,7 @@ Stages.YstryJungle = {
 	par : 360,
 	previous : "IgmaBeach",
 	//nextDown : "IddelMountain",
-	enemies : [Flipwip]
+	toLoad : [Flipwip]
 }
 
 

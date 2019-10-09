@@ -90,5 +90,5 @@ Stages.MagentaTown = {
 	previous : "BlueLake",
 	nextRight : "MagentaDefense",
 	nextDown : "WhitePlains",
-	enemies : [Walkie, Hoverie, Teion, Switch]
+	toLoad : [Walkie, Hoverie, Teion, Switch]
 }

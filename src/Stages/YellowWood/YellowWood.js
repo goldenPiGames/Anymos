@@ -60,5 +60,5 @@ Stages.YellowWood = {
 	previous : "TutorialPrelude",
 	nextRight : "GreenMaze",
 	nextLeft : "RedValley",
-	enemies : [Walkie, Hoverie]
+	toLoad : [Walkie, Hoverie]
 }

@@ -49,5 +49,5 @@ Stages.GreyHarbor = {
 	par : 480,
 	previous : "WhitePlains",
 	nextDown : "ZagadCrossing",
-	enemies : [Fricchee, Teion]
+	toLoad : [Fricchee, Teion]
 }

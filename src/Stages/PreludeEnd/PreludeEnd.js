@@ -63,5 +63,5 @@ Stages.PreludeEnd = {
 	vessels : [],
 	selectX : 0,
 	selectY : 0,
-	enemies : [Fwegos, FireDrawer]
+	toLoad : [Fwegos, FireDrawer]
 }

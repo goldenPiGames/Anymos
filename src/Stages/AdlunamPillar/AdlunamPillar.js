@@ -81,5 +81,5 @@ Stages.AdlunamPillar = {
 	par : 360,
 	previous : "InfinityLighthouse",
 	//nextDown : "SUltraVeritas",
-	enemies : ["Flipwip", "Teion"]
+	toLoad : ["Flipwip", "Teion"]
 }

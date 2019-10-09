@@ -28,7 +28,7 @@ var engine = {
 		if (dialogActive)
 			dialog.draw();
 		controller.unClick();
-		setTimeout(function(){thisser.run()}, Math.max(0, desiredTime-Date.now()));
+		setTimeout(()=>this.run(), Math.max(0, desiredTime-Date.now()));
 	},
 	
 }
@@ -51,24 +51,12 @@ var gameEngine = {
 			reEvalAnym();
 			loadStage(currentStageName, false);
 			return;
-		}
-		else {
+		} else {
 			stageTimer ++;
-			var thisser = this;
-			//if (dialogActive)
-			//	dialogField.update(this.context2D);
-			//else {
-			//	infoField.update(this.context2D);
 			player.update();
-			gameObjects.forEach(function(obj) {
-				if (runnee.updatesObjects)
-					obj.update();
-			});
+			gameObjects.forEach(oj=>oj.update());
 			removeDead(gameObjects);
 		}
-		//}
-		//if (!dialogActive)
-		//	this.particles.push(randomEmber(this.context2D));
 	},
 	draw : function() {
 		var thisser = this;

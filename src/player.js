@@ -1,4 +1,4 @@
-const PLAYER_SPRITE_NAMES = ["Standing0", "Walking0", "Walking1", "Walking2", "Walking3", "Walking4", "Walking5", "Walking6", "Jumping0", "CrouchJumping0", "Falling0", "Crouching0", "Crawling0", "Crawling1", "Crawling2", "Crawling3", "ArmAttacking1", "ArmAttacking2", "ArmAttacking3", "ArmAttacking4", "Beam", "Dying1", "Dying2", "Dying3", "Dying4", "Dying5", "Dying6", "Dying7", "Plane"];
+//const PLAYER_SPRITE_NAMES = ["Standing0", "Walking0", "Walking1", "Walking2", "Walking3", "Walking4", "Walking5", "Walking6", "Jumping0", "CrouchJumping0", "Falling0", "Crouching0", "Crawling0", "Crawling1", "Crawling2", "Crawling3", "ArmAttacking1", "ArmAttacking2", "ArmAttacking3", "ArmAttacking4", "Beam", "Dying1", "Dying2", "Dying3", "Dying4", "Dying5", "Dying6", "Dying7", "Plane"];
 const DEFAULT_JUMP_SPEED = 9;
 const PLAYER_MELEE_REACH = 25;
 const PLAYER_MELEE_DAMAGE = 60;
@@ -7,33 +7,15 @@ const PLAYER_BEAM_RANGE = 500;
 const PLAYER_NORMAL_HEIGHT = 37;
 const PLAYER_CROUCH_HEIGHT = 18;
 const PLAYER_DEFAULT_PHYSPRES = .05;
-var PLAYER_GROUND_ACCELERATION = 2;
-var collisionDiagnostics = false;
+const PLAYER_GROUND_ACCELERATION = 2;
 var used;
 var player = {};
 
-var anymos = {
-	__proto__ : Object.create(GameObjectBase),
-	name : "Anymos",
-	team : "Anymos",
-	state : "Standing",
-	stateCycle : 0,
-	lastState : "Standing",
-	crouching : false,
-	attacking : false,
-	shooting : false,
-	x : 20,
-	y : 20,
-	dx : 0,
-	dy : 0,
-	drained : true,
-	width : 14,
-	height : PLAYER_NORMAL_HEIGHT,
-	hittable : true,
-	damageable : true,
-	facingRight : true,
-	doesGravity : true,
-	update : function() {
+class AnymosPlayer extends Enemy {
+	constructor() {
+		super();
+	}
+	update() {
 		if (this.drained)
 			this.takeDamage(1);
 		this.shooting = false;
@@ -96,7 +78,7 @@ var anymos = {
 			playSound(miscSFX.Swish3);
 			used += 5;
 			var hitbox = {
-				__proto__ : GameObjectBase,
+				isTouching : GameObject.prototype.isTouching,
 				x : this.x + (this.facingRight?1:-1) * (this.width/4 + PLAYER_MELEE_REACH/2 + 0.5), //hitbox
 				y : this.y - this.height/4,
 				width : PLAYER_MELEE_REACH + this.width/2,
@@ -116,31 +98,29 @@ var anymos = {
 		this.checkHazards();
 		if (this.crouching) {
 			if (controller.left || controller.right) {
-				this.state = "Crawling";
+				this.state = "crawling";
 			} else {
-				this.state = "Crouching";
+				this.state = "crouching";
+			}
+		} else if (this.grounded) {
+			if (controller.left || controller.right) {
+				this.state = "walking";
+			} else {
+				this.state = "standing";
 			}
 		} else {
-			if (this.grounded) {
-				if (controller.left || controller.right) {
-					this.state = "Walking";
-				} else {
-					this.state = "Standing";
-				}
+			if (this.dy < 0) {
+				if (this.lastState == "crouching" || this.lastState == "crawling" || controller.down && this.lastState != "jumping" && this.lastState != "crouchJumping")
+					this.state = "crouchJumping";
+				else
+					this.state = "jumping";
 			} else {
-				if (this.dy < 0) {
-					if (this.lastState.indexOf("Crouching") >= 0 || this.lastState.indexOf("Crawling") >= 0)
-						this.state = "CrouchJumping";
-					else
-						this.state = "Jumping";
-				} else {
-					this.state = "Falling";
-				}
+				this.state = "falling";
 			}
 		}
 		if (this.lastState == this.state) {
 			this.stateCycle++;
-			if (!playerSprites[this.state+this.stateCycle])
+			if (!this.sprites[this.state+this.stateCycle])
 				this.stateCycle = 0;
 		} else {
 			this.stateCycle = 0;
@@ -148,69 +128,125 @@ var anymos = {
 		this.lastState = this.state;
 		this.lastdx = this.dx;
 		this.lastdy = this.dy;
-	},
-	draw : function() {
+	}
+	draw() {
 		//console.log(this.state);
-		drawSpriteOnStage(playerSprites[this.state+this.stateCycle], this.x, this.y, this.facingRight);
+		this.drawSprite(this.state+this.stateCycle);
 		//this.lastState = this.state;
 		if (this.attacking)
-			drawSpriteOnStage(playerSprites["ArmAttacking"+this.attacking], this.x, this.y, this.facingRight);
-	},
-	getHit : function(dmg) {
-		if (!this.hittable)
-			return false;
-		if (this.damageable && dmg > 0) {
-			playSound(miscSFX.Oof);
-			if (this != player) lastHitEnemy = this;
-			return this.takeDamage(dmg);
-		} else 
-			return true;
-	},
-	takeDamage : function(dmg) {
-		if (dmg != undefined && dmg == dmg)
+			this.drawSprite("armAttacking"+this.attacking);
+	}
+	getHit(dmg) {
+		playSound(miscSFX.Oof);
+		super.getHit(dmg);
+	}
+	takeDamage(dmg) {
+		if (typeof dmg == "number" && dmg == dmg)
 			used += dmg;
 		if (used >= anymAvailable)
 			this.die();
-	},
-	die : function() {
+	}
+	die() {
 		doDeath();
 	}
 }
+AnymosPlayer.prototype.name = "Anymos";
+AnymosPlayer.prototype.team = "Anymos";
+AnymosPlayer.prototype.width = 14;
+AnymosPlayer.prototype.height = PLAYER_NORMAL_HEIGHT;
+AnymosPlayer.prototype.dx = 0;
+AnymosPlayer.prototype.dy = 0;
+AnymosPlayer.prototype.doesGravity = true;
+AnymosPlayer.prototype.physicsPrecision = PLAYER_DEFAULT_PHYSPRES;
+AnymosPlayer.prototype.jumpSpeed = DEFAULT_JUMP_SPEED;
+AnymosPlayer.prototype.special = null;
+AnymosPlayer.prototype.grounded = true;
+AnymosPlayer.prototype.crouching = false;
+AnymosPlayer.prototype.attacking = false;
+AnymosPlayer.prototype.shooting = false;
+AnymosPlayer.prototype.drained = true;
+AnymosPlayer.prototype.state = "standing";
+AnymosPlayer.prototype.stateCycle = 0;
+AnymosPlayer.prototype.lastState = "standing";
+AnymosPlayer.prototype.flashing = 0;
 
-var playerSprites = {
-	
-}
+AnymosPlayer.prototype.sprites = makeSprites("src/Anymos.png", {
+	standing0 : {x:0, y:0, width:20, height:40},
+	walking0 : {x:20, y:0, width:20, height:40},
+	walking1 : {x:40, y:0, width:20, height:40},
+	walking2 : {x:60, y:0, width:20, height:40},
+	walking3 : {x:80, y:0, width:20, height:40},
+	walking4 : {x:100, y:0, width:20, height:40},
+	walking5 : {x:120, y:0, width:20, height:40},
+	walking6 : {x:140, y:0, width:20, height:40},
+	crouching0 : {x:0, y:40, width:20, height:40},
+	crawling0 : {x:20, y:40, width:20, height:40},
+	crawling1 : {x:40, y:40, width:20, height:40},
+	crawling2 : {x:60, y:40, width:20, height:40},
+	crawling3 : {x:80, y:40, width:20, height:40},
+	crouchJumping0 : {x:100, y:40, width:20, height:40},
+	jumping0 : {x:0, y:80, width:20, height:40},
+	falling0 : {x:80, y:80, width:20, height:40},
+	armAttacking1 : {x:35, y:120, width:20, height:40},
+	armAttacking2 : {x:55, y:120, width:30, height:40},
+	armAttacking3 : {x:-31, y:120, width:66, height:40},
+	armAttacking4 : {x:85, y:120, width:30, height:40},
+	dying1 : {x:0, y:160, width:20, height:40},
+	dying2 : {x:20, y:160, width:20, height:40},
+	dying3 : {x:40, y:160, width:20, height:40},
+	dying4 : {x:60, y:160, width:20, height:40},
+	dying5 : {x:80, y:160, width:20, height:40},
+	dying6 : {x:100, y:160, width:20, height:40},
+	dying7 : {x:120, y:160, width:20, height:40},
+}, true);
 
-function HorizonBeam(x, y, dx, team, damage) {
-	this.x = x;
-	this.y = y;
-	this.facingRight = dx >= 0;
-	this.dx = dx;
-	this.dy = 0;
-	this.width = Math.abs(dx);
-	this.height = .1;
-	this.team = team;
-	this.damage = damage;
-	switch (team) {
-		case "Anymos" : this.color = "#00FFFF"; break;
-		case "Sqarnos" : this.color = "#FF0000"; break;
-		default : this.color = "#FF0000"; break;
+class HorizonBeam extends GameObject {
+	constructor(x, y, dx, team, damage = 30) {
+		super();
+		this.x = x;
+		this.y = y;
+		this.facingRight = dx >= 0;
+		this.dx = dx;
+		this.dy = 0;
+		this.width = Math.abs(dx);
+		this.height = .1;
+		this.team = team;
+		this.damage = damage;
+		switch (team) {
+			case "Anymos" : this.color = "#00FFFF"; break;
+			case "Sqarnos" : this.color = "#FF0000"; break;
+			default : this.color = "#FF0000"; break;
+		}
+	}
+	update() {
+		this.x += this.dx;
+		if (this.sendHurtbox(this.damage))
+			this.die();
+		if (isPixelSolid(this.x, this.y) || this.x < 0 || this.x > stagewidth() || this.y < 0 || this.y > stageheight())
+			this.die();
+	}
+	draw() {
+		ctx.strokeStyle = this.color;
+		ctx.lineWidth = zoom*2;
+		ctx.beginPath();
+		ctx.moveTo(stagex(this.x-this.width/2), stagey(this.y));
+		ctx.lineTo(stagex(this.x+this.width/2), stagey(this.y));
+		ctx.stroke();
 	}
 }
-HorizonBeam.prototype = Object.create(GameObjectBase);
-HorizonBeam.prototype.physicsPrecision = .5;
-HorizonBeam.prototype.update = function() {
-	this.x += this.dx;
-	if (this.sendHurtbox(this.damage))
-		this.die();
-	if (isPixelSolid(this.x, this.y) || this.x < 0 || this.x > stagewidth() || this.y < 0 || this.y > stageheight())
-		this.die();
-}
-HorizonBeam.prototype.draw = function() {
-	ctx.strokeStyle = this.color;
-	ctx.lineWidth = zoom*2;
-	ctx.beginPath();
-	ctx.moveTo(stagex(this.x-this.width/2), stagey(this.y));
-	ctx.lineTo(stagex(this.x+this.width/2), stagey(this.y));
-	ctx.stroke();
+//HorizonBeam.prototype.physicsPrecision = .5;
+
+class AnymosAfterimage extends AnymosPlayer {
+	constructor(nym) {
+		super();
+		this.x = nym.x;
+		this.y = nym.y;
+		this.facingRight = nym.facingRight;
+		this.attacking = nym.attacking;
+		this.state = nym.state;
+		this.stateCycle = nym.stateCycle;
+	}
+	update() {
+		
+	}
 }

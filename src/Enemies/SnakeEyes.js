@@ -15,7 +15,7 @@ class SnakeEyes extends Enemy {
 		this.collCD = 0;
 		this.cycle = 40;
 		this.mouthbox = {
-			__proto__ : Object.create(GameObjectBase),
+			isTouching : GameObject.prototype.isTouching,
 			width : 48,
 			height : 38
 		}

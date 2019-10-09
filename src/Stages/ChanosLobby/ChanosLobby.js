@@ -1,6 +1,6 @@
 Stages.ChanosLobby = {
 	displayName : "Chanos' Lobby",
-	load : function() {
+	load : function(doStuff) {
 		playMusic("Up In My Jam (All Of A Sudden) - Kubbi");
 		let C = {name:"Concrete",solid:true,color:"#7F7F7F",leafy:false};
 		//let S = {name:"Concrete Secret",solid:false,color:"#878787",leafy:false};
@@ -24,20 +24,21 @@ Stages.ChanosLobby = {
 		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		 [G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G]];
-		zoom = 2;
+		if (doStuff) {
+			zoom = 2;
+			zoomd = 2;
+		}
 		player.x = 10;
 		player.y = 260;
 		player.facingRight = true;
-		gameObjects = [new PokerTest(300, 260, 10, function(){new Vessel("ChanosLobbyPoker1").collect();new Vessel("ChanosLobbyPoker2").collect();new Vessel("ChanosLobbyPoker3").collect();}), new Goalpost("Versus52", 590, 260, 55)];
-		Switches["#FFFFFF"] = true;
-		return {
-			mainBack : "src/Stages/ChanosLobby/MainBack.png",
-			mainFore : "src/Stages/ChanosLobby/MainFore.png",
-		};
+		gameObjects = [
+			//new PokerTest(300, 260, 10, function(){new Vessel("ChanosLobbyPoker1").collect();new Vessel("ChanosLobbyPoker2").collect();new Vessel("ChanosLobbyPoker3").collect();}),
+			new Goalpost("Versus52", 590, 260, 55),
+		];
 	},
 	vessels : ["ChanosLobbyPoker1", "ChanosLobbyPoker2", "ChanosLobbyPoker3"],
 	par : 840,
 	previous : "SpadeDowntown",
 	nextDown : "Versus52",
-	enemies : ["PokerTest"]
+	toLoad : [/*PokerTest*/]
 }

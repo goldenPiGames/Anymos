@@ -68,5 +68,5 @@ Stages.ClubGardens = {
 	par : 415,
 	previous : "ClearCanyon",
 	nextDown : "DiamondHighway",
-	enemies : [Teion/*, DieWalking, CardPip*/]
+	toLoad : [Teion/*, DieWalking, CardPip*/]
 }

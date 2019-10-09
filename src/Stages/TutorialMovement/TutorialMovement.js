@@ -68,5 +68,5 @@ Stages.TutorialMovement = {
 	selectX : 0,
 	selectY : 0,
 	nextDown : "TutorialCombat",
-	enemies : []
+	toLoad : []
 }

@@ -107,5 +107,5 @@ Stages.PeacefulField = {
 	},
 	vessels : [],
 	par : 360,
-	enemies : [Walkie, Hoverie, "Bouncie", "Baron"]
+	toLoad : [Walkie, Hoverie, "Bouncie", "Baron"]
 }

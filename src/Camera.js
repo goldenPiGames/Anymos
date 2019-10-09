@@ -2,7 +2,7 @@ var zoomd = 2.0;
 var zoom = 2.0;
 var minZoom = 1;
 var maxZoom = 6;
-var cameraFocus = player;
+var cameraFocus;
 var cameraxd = 0;
 var camerayd = 0;
 var camerax = 0;

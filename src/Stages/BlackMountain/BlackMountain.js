@@ -75,5 +75,5 @@ Stages.BlackMountain = {
 	previous : "RedValley",
 	nextDown : "ClearCanyon",
 	nextRight : "BlackCaves",
-	enemies : []
+	toLoad : []
 }

@@ -51,5 +51,5 @@ Stages.TutorialCombat = {
 	par : 195,
 	previous : "TutorialMovement",
 	nextDown : "BeginningClimb",
-	enemies : [Walkie]
+	toLoad : [Walkie]
 }

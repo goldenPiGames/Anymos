@@ -47,5 +47,5 @@ Stages.Versus52 = {
 	//par : 840,
 	previous : "ChanosLobby",
 	//nextDown : "Versus52",
-	enemies : ["CardPip"]
+	toLoad : ["CardPip"]
 }

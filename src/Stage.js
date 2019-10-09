@@ -22,36 +22,27 @@ function loadStage(stageName, doStuff=true) {
 	currentStageName = stageName;
 	reEvalAnym();
 	availAnym();
-	player = anymos;
+	player = (Stages[currentStageName].startFlying) ? new PlanePlayer() : new AnymosPlayer();
 	cameraFocus = player;
-	player.physicsPrecision = PLAYER_DEFAULT_PHYSPRES;
-	player.dx = 0;
-	player.dy = 0;
 	used = 0;
 	maxZoom = 6;
 	minZoom = 1;
 	gravity = .5;
 	lastHitEnemy = null;
-	player.grounded = true;
-	player.state = "Standing";
-	player.stateCycle = 0;
-	player.special = null;
-	player.flashing = 0;
-	player.jumpSpeed = DEFAULT_JUMP_SPEED;
 	player.drained = true;
 	oobtopcolor = "#00000000";
 	oobbottomcolor = "#00000000";
 	dynamicBackdrop = null;
-	Switches = {};
+	switches = [];
 	edgesSolid = true;
 	resetLoading();
 	loadReturn = ()=>beginStage(doStuff);
 	currentStage = Stages[stageName];
-	currentStage.load(doStuff); //loading specific stage
 	stageImages = {
 		mainBack : makeImage("src/Stages/"+(currentStage.reuseBack||currentStageName)+"/MainBack.png"),//stageSrcs.mainBack),
 		mainFore : makeImage("src/Stages/"+(currentStage.reuseFore||currentStageName)+"/MainFore.png")//stageSrcs.mainFore),
 	}
+	currentStage.load(doStuff); //loading specific stage
 	Stages[stageName].enemies.forEach(function(nem) {
 		loadEnemy(nem);
 	});
@@ -63,7 +54,7 @@ function beginStage(doStuff) {
 	normalCameraBounds();
 	runnee = gameReady;
 	gameReady.next = gameEngine;
-	zoomd = zoom; //maybe not
+	//zoomd = zoom; //maybe not
 	updateZoom();
 	snapZoom();
 	stageTimer = 0;

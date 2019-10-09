@@ -22,8 +22,11 @@ Stages.SPDAirport = {
 		 [_,C,C,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		 [C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C]];
-		zoom = 3;
-		zoomd = 3;
+		if (doStuff) {
+			zoom = 3;
+			zoomd = 3;
+			dialog.begin(new DialogLine("Attendant", "Attention, Anymos. Please come to the second room on the third floor.", "#7F7F7F"));
+		}
 		player.x = 1180;
 		player.y = 300;
 		player.facingRight = false;
@@ -50,18 +53,21 @@ Stages.SPDAirport = {
 			new DialogLine("Chanos", "To make a long story short, he won. I thought it likely that you died, but you evidently were able to survive. It looks like you lost most of your memory, though.", CHANOS_COLOR),
 			new DialogLine("Chanos", "Now, Sqarnos is a severe threat to my country, and the rest of the world too, so it's in my best interests to help you defeat Sqarnos once again.", CHANOS_COLOR),
 			new DialogLine("Chanos", "I have a plane ready and waiting to transport you to Anymis, where the dark cloud of Sqarnos' influence is spreading.", CHANOS_COLOR),
-			function(){Switches["#808080"] = false;},
+			()=>switches[0]=false,
 			new DialogLine("Chanos", "The plane is outside that gate down there. I've opened it for you.", CHANOS_COLOR),
-			function(){phone.dialog = [];},
+			()=>phone.dialog=[],
 		);
-		gameObjects = [new Goalpost("FlightToAnymis", 340, 300, 100), phone, new Door("#808080", 410, 300, 20, 60)];
-		Switches["#808080"] = true;
-		if (doStuff)
-			dialog.begin(new DialogLine("Attendant", "Attention, Anymos. Please come to the second room on the third floor.", "#7F7F7F"));
+		gameObjects = [
+			new Goalpost("FlightToAnymis", 340, 300, 100),
+			phone,
+			new Door(0, 410, 300, 20, 60)
+		];
+		switches = [true];
+		switchColors = ["#808080"];
 	},
 	vessels : [],
 	par : 515,
 	previous : "SpadeCity",
 	nextDown : "FlightToAnymis",
-	enemies : ["MovingPlatform", "Teion"]
+	toLoad : [MovingPlatform, Teion]
 }

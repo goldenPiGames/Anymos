@@ -64,7 +64,7 @@ Stages.MagentaDefense = {
 	par : 465,
 	previous : "MagentaTown",
 	nextDown : "MagentaDuel",
-	enemies : [Bouncie, Spinnie, Wallie, Teion],
+	toLoad : [Bouncie, Spinnie, Wallie, Teion],
 	reuseBack : "MagentaTown",
 	reuseFore : "MagentaTown",
 }

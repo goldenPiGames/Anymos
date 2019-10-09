@@ -76,5 +76,5 @@ Stages.SkyClimb = {
 	selectY : Stages.DiamondHighway.selectY + LS_Y_SPACING,
 	previous : "DiamondHighway",
 	nextDown : "SkyHighClimb",
-	enemies : []
+	toLoad : []
 }

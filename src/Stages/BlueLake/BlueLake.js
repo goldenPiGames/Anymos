@@ -78,5 +78,5 @@ Stages.BlueLake = {
 	previous : "CyanRainforest",
 	nextLeft : "BlueLakebed",
 	nextDown : "MagentaTown",
-	enemies : [Switch]
+	toLoad : [Switch]
 }

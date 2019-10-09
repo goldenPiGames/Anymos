@@ -40,5 +40,5 @@ Stages.HeartFarms = {
 	par : 500,
 	previous : "DiamondHighway",
 	nextDown : "SpadeCity",
-	enemies : [SnakeEyes]
+	toLoad : [SnakeEyes]
 }
