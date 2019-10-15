@@ -4,6 +4,7 @@ const MUSIC_LIST = [
 	{name:"Blast",                          by:"PeriTune",    site:"https://peritune.com/blast/"},
 	{name:"Boat Paint",                     by:"Al Gorgeous", site:"https://soundcloud.com/al-goregous/boat-paint"},
 	{name:"Breeze",                         by:"PeriTune",      yt:"RINkM_o-e4I", site:"https://peritune.com/breeze/"},
+	{name:"Breeze 2",                       by:"PeriTune",      yt:"fVm5ul0y0kk", site:"https://peritune.com/breeze2/"},
 	{name:"Chamber of Jewels",              by:"Eric Matyas", site:"https://soundimage.org/fantasy-5/"},
 	{name:"Dark Anthem",                    by:"Darren Curtis", yt:"G-VY51L2AQU", site:"https://www.darrencurtismusic.com/horror-mystery"},
 	{name:"Decisions",                      by:"Eric Matyas", site:"https://soundimage.org/introspective/", bpm:95.34},
@@ -52,6 +53,7 @@ MUSIC_LIST.forEach(function(sing, dex) {
 
 const JUKEBOX_ENTRY_HEIGHT = 40;
 function doJukebox() {
+	cameraFocus = {x:0, y:0}
 	runnee = jukebox;
 	zoomd = 1;
 	zoom = 1;

@@ -25,7 +25,7 @@ class AnymosPlayer extends Enemy {
 		if (this.attacking) {
 			this.crouching = false;
 			this.attacking++;
-		} else {
+		} else if (this.playerControlled) {
 			if (controller.attackClicked && !this.crouching)
 				this.attacking = 1;
 			else if (controller.shoot)
@@ -41,37 +41,39 @@ class AnymosPlayer extends Enemy {
 			//if (this.special == "Syklos' Double Jump" && (controller.jumpClicked || controller.specialClicked))
 				//resolveDoubleJump();
 		} else {
-			this.crouching = (controller.down || isPixelSolid(this.x - this.width/2, this.y - PIXELS_PER_BLOCK - 1) || isPixelSolid(this.x + this.width/2, this.y - PIXELS_PER_BLOCK - 1) || controller.down || isPixelSolid(this.x - this.width/2 + 4, this.y - 37) || isPixelSolid(this.x + this.width/2 - 4, this.y - 37)) /*&& (isPixelSolid(this.x-this.width/2, this.y + 1) || isPixelSolid(this.x+this.width/2, this.y + 1)) /*&& !controller.jump*/ && !this.attacking;
+			this.crouching = (controller.down && this.playerControlled || isPixelSolid(this.x - this.width/2, this.y - PIXELS_PER_BLOCK - 1) || isPixelSolid(this.x + this.width/2, this.y - PIXELS_PER_BLOCK - 1) || isPixelSolid(this.x - this.width/2 + 4, this.y - 37) || isPixelSolid(this.x + this.width/2 - 4, this.y - 37)) /*&& (isPixelSolid(this.x-this.width/2, this.y + 1) || isPixelSolid(this.x+this.width/2, this.y + 1)) /*&& !controller.jump*/ && !this.attacking;
 		}
 		this.height = this.crouching ? PLAYER_CROUCH_HEIGHT : PLAYER_NORMAL_HEIGHT;
 		this.dx *= this.grounded ? .6 : .85;
 		if (Math.abs(this.dx) <= .001) this.dx = 0;
-		if (controller.left) {
-			if (this.grounded || this.attacking == 1) { //-------------------------Movement
-				this.dx = Math.max(this.dx-PLAYER_GROUND_ACCELERATION, this.crouching?-2:-5);
-				this.facingRight = false;
-			} else
-				this.dx = Math.max(this.dx-.75, -7);
-		}
-		if (controller.right) {
-			if (this.grounded || this.attacking == 1) {
-				this.dx = Math.min(this.dx+PLAYER_GROUND_ACCELERATION, this.crouching?2:5);
-				this.facingRight = true;
-			} else
-				this.dx = Math.min(this.dx+.75, 7);
-		}
-		if (controller.jumpClicked && this.grounded && !isPixelSolid(this.x-this.width/2, this.y-35) && !isPixelSolid(this.x+this.width/2, this.y-35)) { //Jump
-			playSound(miscSFX.Swish4);
-			this.crouching = false;
-			this.height = PLAYER_NORMAL_HEIGHT;
-			this.dy = -Math.abs(controller.down ? this.jumpSpeed*Math.SQRT1_2 : this.jumpSpeed);
-			if (controller.down) {
-				if (controller.left && this.dx > -6)
-					this.dx = -6;
-				if (controller.right && this.dx < 6)
-					this.dx = 6;
+		if (this.playerControlled) {
+			if (controller.left) {
+				if (this.grounded || this.attacking == 1) { //-------------------------Movement
+					this.dx = Math.max(this.dx-PLAYER_GROUND_ACCELERATION, this.crouching?-2:-5);
+					this.facingRight = false;
+				} else
+					this.dx = Math.max(this.dx-.75, -7);
 			}
-			this.lastdy = this.dy //this may? cause problems later
+			if (controller.right) {
+				if (this.grounded || this.attacking == 1) {
+					this.dx = Math.min(this.dx+PLAYER_GROUND_ACCELERATION, this.crouching?2:5);
+					this.facingRight = true;
+				} else
+					this.dx = Math.min(this.dx+.75, 7);
+			}
+			if (controller.jumpClicked && this.grounded && !isPixelSolid(this.x-this.width/2, this.y-35) && !isPixelSolid(this.x+this.width/2, this.y-35)) { //Jump
+				playSound(miscSFX.Swish4);
+				this.crouching = false;
+				this.height = PLAYER_NORMAL_HEIGHT;
+				this.dy = -Math.abs(controller.down ? this.jumpSpeed*Math.SQRT1_2 : this.jumpSpeed);
+				if (controller.down) {
+					if (controller.left && this.dx > -6)
+						this.dx = -6;
+					if (controller.right && this.dx < 6)
+						this.dx = 6;
+				}
+				this.lastdy = this.dy //this may? cause problems later
+			}
 		}
 		this.physics();
 		if (this.attacking == 3) {
@@ -96,7 +98,9 @@ class AnymosPlayer extends Enemy {
 		if (this.dy >= 0 && this.lastdy <= -gravity*2)
 			playSound(miscSFX.Bump);
 		this.checkHazards();
-		if (this.crouching) {
+		if (this.special == specialChanmote && !this.playerControlled) {
+			this.state = "gaming";
+		} else if (this.crouching) {
 			if (controller.left || controller.right) {
 				this.state = "crawling";
 			} else {
@@ -165,6 +169,7 @@ AnymosPlayer.prototype.crouching = false;
 AnymosPlayer.prototype.attacking = false;
 AnymosPlayer.prototype.shooting = false;
 AnymosPlayer.prototype.drained = true;
+AnymosPlayer.prototype.playerControlled = true;
 AnymosPlayer.prototype.state = "standing";
 AnymosPlayer.prototype.stateCycle = 0;
 AnymosPlayer.prototype.lastState = "standing";
@@ -198,6 +203,7 @@ AnymosPlayer.prototype.sprites = makeSprites("src/Anymos.png", {
 	dying5 : {x:80, y:160, width:20, height:40},
 	dying6 : {x:100, y:160, width:20, height:40},
 	dying7 : {x:120, y:160, width:20, height:40},
+	gaming0 : {x:140, y:80, width:20, height:40},
 }, true);
 
 class HorizonBeam extends GameObject {

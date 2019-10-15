@@ -37,15 +37,12 @@ Stages.Versus52 = {
 			shuffled.push(deck[index]);
 			deck.splice(index, 1);
 		}
-		gameObjects = [new QueueRumble(300, 220, 560, 200, true, doNothing, 5, shuffled)];
-		return {
-			mainBack : "src/Stages/ChanosLobby/MainBack.png",
-			mainFore : "src/Stages/ChanosLobby/MainFore.png",
-		};
+		gameObjects = [
+			new QueueRumble(300, 220, 560, 200, true, doNothing, 5, shuffled)
+		];
 	}, //fucking awesome idea for a special ability: you have a portable video game device with one of those ice slide puzzles. the avatar in the slide puzzle acts as a platform for Anymos, while Anymos acts as a block for the slide puzzle avatar. You press Special to switch between the two.
 	vessels : [],
-	//par : 840,
 	previous : "ChanosLobby",
 	//nextDown : "Versus52",
-	toLoad : ["CardPip"]
+	toLoad : [CardPip]
 }

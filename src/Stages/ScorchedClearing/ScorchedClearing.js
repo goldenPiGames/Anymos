@@ -5,7 +5,7 @@ Stages.ScorchedClearing = {
 	load : function(doStuff) {
 		playMusic("Blast - PeriTune");
 		let D = {solid:true,color:"#451D12",grassyTop:"#303020"};
-		let F = {solid:false,hazard:7,color:"#FF800040",fire:1};
+		let F = {solid:false,hazard:0,color:"#FF800040",fire:0};
 		let _ = {solid:false,color:"#87CEEB00"};
 		edgesSolid = true;
 		//oobtopcolor = "#87CEEB";
@@ -24,21 +24,36 @@ Stages.ScorchedClearing = {
 		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
+		 [F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F],
 		 [D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D]];
-		zoom=3; zoomd=3;
-		minzoom = 3;
+		if (doStuff) {
+			zoom=3;
+			zoomd=3;
+			dialog.begin(
+				new DialogLine("Anymos", "There you are. I think it's safe to assume that the forest fire is your doing?", "#00FFFF"),
+				new DialogLine("Fwegos", "But of course! Who else would it be, but I-", "#FF8000"),
+				new DialogLine("Anymos", "I sorta remember you. What's your name again?", "#00FFFF"),
+				new DialogLine("Fwegos", "There are some who call me Fwegos. I am the Great-", "#FF8000"),
+				new DialogLine("Anymos", "Yeah, yeah, listen, I'll be nice and direct here. There are two ways we can go about this.", "#00FFFF"),
+				new DialogLine("Anymos", "Option one: You remove that forest fire and let me pass through unobstructed.", "#00FFFF"),
+				new DialogLine("Anymos", "Option two: I I fight you and win and step over your nearly-lifeless body on the way to where I'm going.", "#00FFFF"),
+				new DialogLine("Anymos", "I'm in a bit of a hurry, so I'd prefer option one.", "#00FFFF"),
+				new DialogLine("Fwegos", "Ah, but the great Sqarnos commanded me to stop you from reaching  him. So how about option three: I incinerate you and take my place at Sqarnos's right hand?", "#FF8000"),
+				new DialogLine("Anymos", "Option two it is, then.", "#00FFFF"),
+			);
+		}
+		minzoom = 2;
 		player.x = 360;
 		player.y = 280;
 		player.facingRight = false;
-		var fwegos = new Fwegos(40, 280, true, 0, 400, 0, 280);
-		fwegos.die = function() {
+		var fwegos = new Fwegos("ScorchedClearingFwegos", 40, 280, true, 0, 400, 0, 280, F);
+		/*fwegos.onDeath = function() {
 			this.dead = false;
 			this.hittable = false;
 			this.update = doNothing;
 			dialog.begin(
 				new DialogLine("Fwegos", "Aagh! Uncle!", "#FF8000"),
-				function(){player.y=280; player.attacking = false; player.state="Standing"; player.stateCycle=0; gameObjects=[fwegos];},
+				()=>{player.y=280; player.attacking = false; player.state="Standing"; player.stateCycle=0; gameObjects=[fwegos];},
 				new DialogLine("Anymos", "First of all, cancel the forest fire.", "#00FFFF"),
 				new DialogLine("Fwegos", "Done.", "#FF8000"),
 				new DialogLine("Anymos", "Alright, now I've got a few questions for you.", "#00FFFF"),
@@ -55,29 +70,20 @@ Stages.ScorchedClearing = {
 				function(){finishStage("ScorchedClearing")}
 			);
 			dialog.skipBuffer = 25;
-		}
+		}*/
 		gameObjects = [
 			fwegos,
 			new FireDrawer(),
 		];
-		if (doStuff)
-			dialog.begin(new DialogLine("Anymos", "There you are, Fwegos. I think it's safe to assume that the forest fire is your doing?", "#00FFFF"),
-			new DialogLine("Fwegos", "But of course! Who else would it be, but I, Fwegos, Lord of-", "#FF8000"),
-			new DialogLine("Anymos", "Yeah, yeah, listen, I'll be nice and direct here. There are two ways we can go about this.", "#00FFFF"),
-			new DialogLine("Anymos", "Option one: You remove that forest fire and let me pass through unobstructed.", "#00FFFF"),
-			new DialogLine("Anymos", "Option two: I beat the crap out of you, force you to remove the fire, and step over your cold, nearly-lifeless body on the way to Sqarnos.", "#00FFFF"),
-			new DialogLine("Anymos", "I'm in a bit of a hurry, but I'm also in a bad mood, so I could really go either way.", "#00FFFF"),
-			new DialogLine("Fwegos", "How about option three: I incinerate you and take my place at Sqarnos's right hand?", "#FF8000"),
-			new DialogLine("Anymos", "Option two it is, then.", "#00FFFF"),);
 		dynamicBackdrop = {
 			draw : function() {
-				ctx.fillStyle = "#87CEEB"
+				ctx.fillStyle = "#87CEEB";
 				ctx.fillRect(0, 0, canvas.width, canvas.height);
 			}
 		}
 	},
-	vessels : [],
-	selectX : 0,
-	selectY : 0,
-	toLoad : [Fwegos, FireDrawer]
+	vessels : ["BurningForestFwegos1", "BurningForestFwegos2", "BurningForestFwegos3", "BurningForestFwegos4", "BurningForestFwegos5"],
+	previous : "BurningForest",
+	nextDown : "MesaCliff",
+	toLoad : [Fwegos, FireDrawer, Bettie]
 }

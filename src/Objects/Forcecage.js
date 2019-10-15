@@ -1,5 +1,6 @@
 class Forcecage extends GameObject {
 	constructor(outerLeft, outerRight, outerTop, outerBottom, innerLeft, innerRight, innerTop, innerBottom) {
+		super();
 		this.outerLeft = outerLeft;
 		this.outerRight = outerRight;
 		this.outerTop = outerTop;

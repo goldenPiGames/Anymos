@@ -1,8 +1,8 @@
 const BOLIZOS_COLOR = "#C0FF45";
 
-Stages.AltoPillar = {
-	name : "AltoPillar",
-	displayName : "Alto Pillar",
+Stages.Lightningrod = {
+	name : "Lightningrod",
+	displayName : "Lightningrod",
 	description : "Boss fight",
 	load : function(doStuff) {
 		playMusic("Demise - PeriTune");
@@ -60,7 +60,6 @@ Stages.AltoPillar = {
 		dynamicBackdrop = new StormBackdrop();
 	},
 	vessels : [],
-	selectX : 0,
-	selectY : 0,
+	previous : "StormyMesa",
 	toLoad : [Fwegos, FireDrawer]
 }

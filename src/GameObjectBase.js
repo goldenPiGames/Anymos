@@ -7,7 +7,7 @@ class GameObject {
 	}
 	physics() {
 		var cd = false//controller.debug//collisionDiagnostics;
-		this.grounded = this.isGrounded();
+		this.wasGrounded = this.grounded;
 		
 		//if (this.grounded)
 		//	this.dy = Math.min(this.dy, 0)
@@ -54,16 +54,16 @@ class GameObject {
 			return;
 		var cd = controller.debug//collisionDiagnostics;
 		var interval = this.physicsPrecision / Math.max(Math.abs(pdx), Math.abs(pdy), .01)
-		for (i = 0; i < 1.0; i += interval) {
+		for (var i = 0; i < 1.0; i += interval) {
 			var intendedx = this.x + pdx * interval;
 			var intendedy = this.y + pdy * interval;
 			switch (getCollidingWall(intendedx, intendedy, this.width, this.height)) {
 				case -1: this.x = intendedx; this.y = intendedy; if(cd) console.log("clear",i); break;
-				case 0: pdy = Math.max(pdy, 0); if(cd) console.log("top",i); break;
-				case 1: pdx = Math.min(pdx, 0); if(cd) console.log("right",i); break;
-				case 2: pdy = Math.min(pdy, 0); if(cd) console.log("bottom",i); break;
-				case 3: pdx = Math.max(pdx, 0); if(cd) console.log("left",i); break;
-				case 4: pdx = 0; pdy = 0; if(cd) console.log("multiple",i); break;
+				case 0: pdy = Math.max(pdy, 0); break;
+				case 1: pdx = Math.min(pdx, 0); break;
+				case 2: pdy = Math.min(pdy, 0); break;
+				case 3: pdx = Math.max(pdx, 0); break;
+				case 4: pdx = 0; pdy = 0; break;
 			}
 		}
 	}
@@ -199,6 +199,10 @@ class GameObject {
 	}
 }
 GameObject.prototype.physicsPrecision = .08;
+GameObject.prototype.dx = 0;
+GameObject.prototype.dy = 0;
+GameObject.prototype.wasGrounded = true;
+GameObject.prototype.grounded = true;
 
 getCollidingWall = function(x, y, width, height) {
 	ulblock = isPixelSolid(x - width/2, y - height);

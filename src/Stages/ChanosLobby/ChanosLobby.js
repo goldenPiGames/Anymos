@@ -4,41 +4,44 @@ Stages.ChanosLobby = {
 		playMusic("Up In My Jam (All Of A Sudden) - Kubbi");
 		let C = {name:"Concrete",solid:true,color:"#7F7F7F",leafy:false};
 		//let S = {name:"Concrete Secret",solid:false,color:"#878787",leafy:false};
-		let R = {name:"Red",solid:true,color:"#990000",leafy:false};
-		let G = {name:"Green",solid:true,color:"#009900",leafy:false};
-		let B = {name:"Black",solid:true,color:"#000000",leafy:false};
-		let Y = {name:"Yellow",solid:true,color:"#FFD700",leafy:false};
+		let G = {name:"Green",solid:true,color:"#009900"};
+		let Y = {name:"Yellow",solid:true,color:"#FFD700"};
+		let L = {name:"Block",solid:false,blockSlide:true,color:"#BFBFBF",edge:"#404040"};
 		let _ = {name:"Background",solid:false,color:"#BFBFBF"};
 		staticColl =
-		[[Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y],
-		 [Y,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,Y],
-		 [Y,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,Y],
-		 [Y,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,Y],
-		 [Y,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,Y],
-		 [Y,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,Y],
-		 [Y,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,Y],
-		 [Y,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,Y],
-		 [Y,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,Y],
-		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,Y],
-		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-		 [G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G]];
+		[[Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y],
+		 [Y,_,_,Y,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,Y],
+		 [Y,_,_,_,L,_,_,_,_,_,_,_,_,_,_,_,_,_,_,Y],
+		 [Y,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,Y,Y],
+		 [Y,_,_,_,_,_,_,_,_,_,_,_,_,_,_,L,_,_,_,Y],
+		 [Y,_,_,_,_,_,_,_,_,_,Y,_,_,_,_,_,_,_,_,Y],
+		 [Y,_,L,_,_,Y,_,_,_,_,_,_,_,_,_,_,_,_,_,Y],
+		 [Y,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,L,_,Y,Y],
+		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,L,_,Y,_],
+		 [_,_,_,L,_,_,_,_,_,_,_,_,_,_,_,_,L,_,Y,_],
+		 [_,_,_,_,_,_,_,_,_,L,_,_,_,_,_,_,_,_,Y,_],
+		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,Y,_],
+		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,L,_,_,_],
+		 [G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,_,G,G],
+		 [G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G]];
+		edgesSolid = true;
 		if (doStuff) {
-			zoom = 2;
-			zoomd = 2;
+			zoom = 3;
+			zoomd = 3;
 		}
 		player.x = 10;
 		player.y = 260;
 		player.facingRight = true;
 		gameObjects = [
-			//new PokerTest(300, 260, 10, function(){new Vessel("ChanosLobbyPoker1").collect();new Vessel("ChanosLobbyPoker2").collect();new Vessel("ChanosLobbyPoker3").collect();}),
-			new Goalpost("Versus52", 590, 260, 55),
+			new ChanmotePickup(200, 260, doStuff),
+			new SlideBlock(7, 1, 1, 1),
+			new Vessel("ChanosLobbyUpperLeft", 30, 38),
+			new Vessel("ChanosLobbyUpperRight", 370, 38),
+			new Goalpost("Versus52", 390, 260, 95),
 		];
 	},
-	vessels : ["ChanosLobbyPoker1", "ChanosLobbyPoker2", "ChanosLobbyPoker3"],
-	par : 840,
+	vessels : ["ChanosLobbyUpperLeft", "ChanosLobbyUpperRight"],
 	previous : "SpadeDowntown",
 	nextDown : "Versus52",
-	toLoad : [/*PokerTest*/]
+	toLoad : [ChanmotePickup]
 }

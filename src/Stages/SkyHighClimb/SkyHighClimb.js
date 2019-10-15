@@ -69,7 +69,7 @@ Stages.SkyHighClimb = {
 		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,C,C,C,_,_,_,_,_,_,_,_,_,_,_,_,_]];
+		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,C,C,C,_,_,_,_,_,_,_,_,_,_,_,_,C]];
 		if (doStuff) {
 			zoom = 2;
 			zoomd = 2;
@@ -81,13 +81,14 @@ Stages.SkyHighClimb = {
 		player.facingRight = true;
 		gameObjects = [
 			new DoubleJumpPickup(310, 1020, true),
+			new Vessel("SkyHighClimbLowerRight", 590, 1258),
 			new Vessel("SkyHighClimbLeftJump", 90, 1018),
 			new Vessel("SkyHighClimbUpperLeft", 20, 28),
 			new Vessel("SkyHighClimbOverGoalpost", 590, 118),
 			new Goalpost("SkyFleet", 390, 120, 115)
 		];
 	},
-	vessels : ["SkyHighClimbLeftJump", "SkyHighClimbUpperLeft", "SkyHighClimbOverGoalpost"],
+	vessels : ["SkyHighClimbLowerRight", "SkyHighClimbLeftJump", "SkyHighClimbUpperLeft", "SkyHighClimbOverGoalpost"],
 	previous : "SkyClimb",
 	nextDown : "SkyFleet",
 	toLoad : [DoubleJumpPickup]

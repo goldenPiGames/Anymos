@@ -32,6 +32,14 @@ class Boss extends Enemy {
 			}
 		}
 	}
+	checkBenchmarks() {
+		if (this.hp <= this.benchmarks[0]) {
+			this.specialStart = this.specials[0].shift();
+			this.specialStart();
+			this.benchmarks = this.benchmarks.shift();
+			return true;
+		}
+	}
 	onDeath() {
 		if (this.vessels) {
 			this.vessels.forEach(ves=>ves.collect());

@@ -9,8 +9,8 @@ Stages.BurningForest = {
 		let T = {solid:true,color:"#624e2c"};
 		let t = {solid:false,color:"#624e2c80"};
 		let L = {solid:true,color:"#00A040",leafy:true};
-		let B = {solid:true,hazard:5,color:"#624e2c",fire:1};
-		let F = {solid:false,hazard:7,color:"#FF800040",fire:1};
+		let B = {solid:true,hazard:9,color:"#624e2c",fire:1};
+		let F = {solid:false,hazard:9,color:"#FF800040",fire:1};
 		let _ = {solid:false,color:"#87CEEB00"};
 		edgesSolid = true;
 		//oobtopcolor = "#87CEEB";
@@ -30,29 +30,35 @@ Stages.BurningForest = {
 		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B,B,B,B,B,_,_,_,_,_,_,T,T,L,_,_,_,_,B,B,_,_,_,_,_,B,T,T,_,_,_,_,_,_,_,_,_,_,_,_,_,T,T,_,_,_,_,_,_,_,_,_,_,_,_,_,_,T,T,T,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B,B,B,B,_,_,_,_,_,L,T,T,_,_,_,_,_,B,B,_,_,_,_,_,B,T,T,_,_,_,_,_,_,_,_,_,_,_,_,_,T,T,_,_,_,_,_,_,_,_,_,_,_,_,_,_,T,T,T,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B,B,B,B,_,_,_,_,_,_,T,T,_,_,_,_,_,B,B,_,_,_,_,B,B,T,T,_,_,_,_,_,B,T,_,_,_,_,_,_,t,t,_,_,_,_,_,_,_,_,_,_,_,_,_,_,T,T,T,_,_,_,_,L,L,L,_,_,_,_,_,_,_,_],
-		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B,B,B,B,_,_,_,_,_,_,T,T,_,_,_,_,_,B,B,_,_,_,B,B,B,T,T,_,_,_,_,_,B,B,_,_,_,_,_,_,t,t,_,_,_,_,_,_,_,_,_,_,_,_,_,_,T,T,T,_,_,_,_,_,t,_,_,_,_,_,_,_,_,_],
-		 [_,_,_,_,_,_,_,B,_,_,_,_,_,_,_,_,_,_,B,B,B,B,_,_,_,_,_,_,T,T,L,_,_,_,_,t,t,_,_,_,_,B,B,T,T,_,_,_,_,_,B,B,_,_,_,_,_,_,t,t,_,_,_,_,_,_,_,_,_,_,_,_,_,_,T,T,T,_,_,_,_,_,t,_,_,_,_,_,_,_,_,_],
-		 [_,_,_,_,_,_,_,B,_,_,_,_,_,_,_,_,_,_,B,B,B,B,_,_,_,_,_,L,T,T,_,_,_,_,_,t,t,_,_,_,_,_,B,T,T,L,_,_,_,_,B,B,_,_,_,_,_,L,T,T,L,L,_,_,_,_,_,_,_,_,_,_,_,_,B,T,T,_,_,_,L,L,L,L,_,_,_,_,_,_,_,_],
+		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B,B,B,B,_,_,_,_,_,_,T,T,_,_,_,_,_,t,t,_,_,_,B,B,B,T,t,_,_,_,_,_,B,B,_,_,_,_,_,_,t,t,_,_,_,_,_,_,_,_,_,_,_,_,_,_,T,T,T,_,_,_,_,_,t,_,_,_,_,_,_,_,_,_],
+		 [_,_,_,_,_,_,_,B,_,_,_,_,_,_,_,_,_,_,B,B,B,B,_,_,_,_,_,_,T,T,L,_,_,_,_,t,t,_,_,_,_,B,B,T,t,_,_,_,_,_,B,B,_,_,_,_,_,_,t,t,_,_,_,_,_,_,_,_,_,_,_,_,_,_,T,T,T,_,_,_,_,_,t,_,_,_,_,_,_,_,_,_],
+		 [_,_,_,_,_,_,_,B,_,_,_,_,_,_,_,_,_,_,B,B,B,B,_,_,_,_,_,L,T,T,_,_,_,_,_,t,t,_,_,_,_,_,B,T,T,T,_,_,_,_,B,B,_,_,_,_,_,L,T,T,L,L,_,_,_,_,_,_,_,_,_,_,_,_,B,T,T,_,_,_,L,L,L,L,_,_,_,_,_,_,_,_],
 		 [_,_,_,_,_,_,_,B,_,_,_,_,_,_,_,_,_,_,B,B,B,B,_,_,_,_,_,_,T,B,_,_,_,_,_,t,t,_,_,_,_,_,B,T,B,_,_,_,_,_,B,B,_,_,_,_,_,_,T,T,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B,T,T,_,_,_,_,_,t,_,_,_,_,_,_,_,_,_],
 		 [_,_,_,_,_,_,_,B,_,_,_,_,_,_,_,_,_,_,B,B,B,B,_,_,_,_,_,_,B,B,_,_,_,_,_,B,B,_,_,_,_,_,B,B,B,_,_,_,_,_,B,B,_,_,_,_,_,_,B,B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B,T,T,_,_,_,_,_,t,_,_,_,_,_,_,_,_,_],
 		 [_,_,_,F,F,F,F,B,F,F,F,F,G,G,F,F,F,F,B,B,B,B,F,F,F,F,F,F,B,B,F,F,F,G,G,G,G,G,G,F,F,F,B,B,B,F,F,F,F,F,B,B,F,F,F,F,F,F,B,B,F,F,F,F,F,F,F,F,F,F,F,F,F,F,B,B,T,_,_,_,_,_,t,_,_,_,_,_,_,_,_,_],
 		 [D,D,D,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G],
 		 [D,D,D,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G],
 		 [D,D,D,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G]];
-		if (doStuff){zoom=2; zoomd=2}
+		if (doStuff) {
+			zoom=2;
+			zoomd=2;
+			dialog.begin(
+				new DialogLine("Anymos", "Aw. I think I liked this forest.", "#00FFFF"),
+				new DialogLine("Anymos", "And I think that this isn't the first time some idiot burned it down.", "#00FFFF"),
+				new DialogLine("Anymos", "I should try to not touch the fire and just get through here..", "#00FFFF"),);
+		}
 		player.x = 1800;
 		player.y = 400;
 		player.facingRight = false;
 		
 		gameObjects = [
-			new Goalpost("BurningForest", 10, 400, 160),
+			new Vessel("BurningForestHollow", 890, 308),
+			new Vessel("BurningForestOverBack1", 1120, 48),
+			new Vessel("BurningForestOverBack2", 1240, 48),
+			new Vessel("BurningForestAboveGoalpost", 10, 238),
+			new Goalpost("ScorchedClearing", 10, 400, 160),
 			new FireDrawer(),
 		];
-		if (doStuff)
-			dialog.begin(new DialogLine("Anymos", "Ah, here's the lovely and aptly-named Non-Burning Forest. Normally, I'd go around it, but I'm in a bit of a hurry, and the fastest route is directly through it.", "#00FFFF"),
-			new DialogLine("Anymos", "...Wait. Is that... fire?", "#00FFFF"),
-			new DialogLine("Anymos", "*Sigh* Seriously? Of course, that's exactly the kind of thing he'd do, too...", "#00FFFF"),
-			new DialogLine("Anymos", "Well, anyway. I should try to minimize my contact with the fire.", "#00FFFF"),);
 		dynamicBackdrop = {
 			draw : function() {
 				ctx.fillStyle = "#87CEEB"
@@ -60,6 +66,8 @@ Stages.BurningForest = {
 			}
 		}
 	},
-	par : 600,
+	vessels : ["BurningForestHollow", "BurningForestOverBack1", "BurningForestOverBack2", "BurningForestAboveGoalpost"],
+	previous : "AnymisLanding",
+	nextDown : "ScorchedClearing",
 	toLoad : [Hoverie, FireDrawer]
 }

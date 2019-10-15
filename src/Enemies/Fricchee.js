@@ -26,7 +26,7 @@ class Fricchee extends Enemy {
 				this.jumpDelay--;
 		} else {
 			if (stageTimer % 30 < 4) {
-				gameObjects.push(new Beam(this.x + (this.facingRight?1:-1) * 12, this.y - this.height - 2, this.facingRight, this.team));
+				gameObjects.push(new HorizonBeam(this.x + (this.facingRight?1:-1) * 12, this.y - this.height - 2, this.facingRight?10:-10, this.team, 30));
 			}
 		}
 	}

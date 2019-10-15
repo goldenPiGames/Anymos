@@ -35,6 +35,7 @@ Stages.CyanRainforest = {
 		player.facingRight = true;
 		if (doStuff) {
 			zoom = 2;
+			zoomd = 2;
 			dialog.begin(new DialogLine("Anymos", "There's a rainstorm here. I suppose it's called the Cyan Rainforest for a reason.", "#00FFFF"),
 				new DialogLine("Anymos", "...Wait, how do I know it's called the Cyan Rainforest? I mean, that's a pretty intuitive name, but still...", "#00FFFF"),
 				new DialogLine("Anymos", "Anyway, something feels off about this rain. I should especially try to minimize my time spent in the rain.", "#00FFFF"));

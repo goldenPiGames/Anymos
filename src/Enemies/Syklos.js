@@ -9,34 +9,6 @@ Syklos.prototype.sprites = makeSprites("src/Enemies/Syklos.png", {
 	pickup: {x:0, y:0, width:20, height:20},
 }, false);
 
-class DoubleJumpPickup extends GameObject {
-	constructor(x, y, doDialog = true) {
-		super();
-		this.x = x;
-		this.y = y;
-		this.doDialog = doDialog;
-	}
-	update() {
-		if (this.isTouching(player) && controller.interactClicked && player.special != specialDoubleJump) {
-			player.special = specialDoubleJump;
-			if (this.doDialog) {
-				this.doDialog = false;
-				dialog.begin(new DialogLine("Syklos", "That will allow you to create a platform of air, much like the ones that I have been creating in order to aid you on your travel.", SYKLOS_COLOR),
-					new DialogLine("Syklos", "However, it lasts for only a an instant, and pushes you in the direction you want, effectively allowing you to make a second jump in midair.", SYKLOS_COLOR),
-					new DialogLine("Syklos", "You can use it by pressing either Jump [A]/(A) or Special [Shift]/(R) in midair.", SYKLOS_COLOR),
-					new DialogLine("Syklos", "Doing so will cost you only about one third of a second per use, and you cannot use it again until you land on a more permanent platform.", SYKLOS_COLOR));
-			}
-		}
-	}
-	draw() {
-		if (player.special != specialDoubleJump)
-			this.drawSprite("pickup");
-	}
-}
-DoubleJumpPickup.prototype.sprites = Syklos.prototype.sprites;
-DoubleJumpPickup.prototype.width = 20;
-DoubleJumpPickup.prototype.height = 20;
-
 var specialDoubleJump = {
 	name : "Syklos' Double Jump",
 	update : function() {
@@ -58,6 +30,19 @@ var specialDoubleJump = {
 		}
 	}
 }
+
+class DoubleJumpPickup extends SpecialPickup {
+	getDialog() {
+		return [
+			new DialogLine("Syklos", "That will allow you to create a platform of air, much like the ones that I have been creating in order to aid you on your travel.", SYKLOS_COLOR),
+			new DialogLine("Syklos", "However, it lasts for only a an instant, and pushes you in the direction you want, effectively allowing you to make a second jump in midair.", SYKLOS_COLOR),
+			new DialogLine("Syklos", "You can use it by pressing either Jump [A]/(A) or Special [Shift]/(R) in midair.", SYKLOS_COLOR),
+			new DialogLine("Syklos", "Doing so will cost you only about one third of a second per use, and you cannot use it again until you land on a more permanent platform.", SYKLOS_COLOR),
+		];
+	}
+}
+DoubleJumpPickup.prototype.special = specialDoubleJump;
+DoubleJumpPickup.prototype.sprites = Syklos.prototype.sprites;
 /*function DoubleJumpPuff(x, y) {
 	this.x = x;
 	this.y = y;

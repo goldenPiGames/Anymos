@@ -63,7 +63,10 @@ Stages.MesaCliff = {
 		 [R,R,R,R,R,R,R,R,R,R,R,R,R,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		 [R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R],
 		 [R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R]];
-		if (doStuff){zoom=2; zoomd=2}
+		if (doStuff){
+			zoom=2;
+			zoomd=2;
+		}
 		player.x = 500;
 		player.y = 240;
 		player.facingRight = false;
@@ -76,6 +79,9 @@ Stages.MesaCliff = {
 			dialog.begin(new DialogLine("Anymos", "This rain has an evil electrical charge. But oddly enough, having shelter over my head feels... nice and relaxing.", "#00FFFF"));
 		dynamicBackdrop = new StormBackdrop();
 	},
+	vessels : [],
+	previous : "ScorchedClearing",
+	nextDown : "StormyMesa",
 	toLoad : [MovingPlatform]
 }
 function StormBackdrop() {

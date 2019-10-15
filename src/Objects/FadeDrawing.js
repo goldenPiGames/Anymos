@@ -1,16 +1,18 @@
-function FadeDrawing(drawFunction, opacity, fadeSpeed = 0) {
-	this.drawFunction = drawFunction;
-	this.opacity = opacity;
-	this.fadeSpeed = fadeSpeed;
-}
-FadeDrawing.prototype = Object.create(GameObjectBase);
-FadeDrawing.prototype.update = function() {
-	this.opacity -= this.fadeSpeed;
-	if (this.opacity <= 0)
-		this.die();
-}
-FadeDrawing.prototype.draw = function() {
-	ctx.globalAlpha = this.opacity;
-	this.drawFunction(this.opacity);
-	ctx.globalAlpha = 1;
+class FadeDrawing extends GameObject {
+	constructor(drawFunction, opacity = 1, fadeSpeed = .2) {
+		super();
+		this.drawFunction = drawFunction;
+		this.opacity = opacity;
+		this.fadeSpeed = fadeSpeed;
+	}
+	update() {
+		this.opacity -= this.fadeSpeed;
+		if (this.opacity <= 0)
+			this.die();
+	}
+	draw() {
+		ctx.globalAlpha = this.opacity;
+		this.drawFunction(this.opacity);
+		ctx.globalAlpha = 1;
+	}
 }

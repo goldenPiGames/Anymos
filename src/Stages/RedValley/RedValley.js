@@ -1,6 +1,6 @@
-Stages.RedValley = {
+Stages.RedValley = {//TODO make different level, like Orange something
 	displayName : "Red Valley",
-	load : function() {
+	load : function(doStuff) {
 		playMusic("Mountainside - Eric Matyas");
 		let B = {solid:true,color:"#672F0A"};
 		let S = {name:"secret",solid:false,color:"#73350D"}
@@ -33,12 +33,21 @@ Stages.RedValley = {
 		 [B,B,B,B,B,B,B,B,B,B,B,B,B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B,B,B,B,B,B,B,B,B,B,B,B,S,S,S,B],
 		 [B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B],
 		 [B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B]];
-		gravity = .5;
-		zoom = 3;
+		if (doStuff) {
+			zoomd = 3;
+			zoom = 3;
+		}
 		player.x = 990;
 		player.y = 200;
 		player.facingRight = false;
-		gameObjects = [new Vessel("RedValleyCave", 970, 478), new Vessel("RedValleyCaveJump", 970, 358), new Rumble(320, 660, 300, 500, true, doNothing, new Baron("RedValleyBaron", 490, 500, true, true)), new Goalpost("BlackMountain", 10, 200, 90), new Vessel("RedValleyMid", 490, 298)];
+		gameObjects = [
+			new Vessel("RedValleyCave", 970, 478),
+			new Vessel("RedValleyCaveJump", 970, 358),
+			new Rumble(320, 660, 300, 500, true, doNothing, 
+				new Baron("RedValleyBaron", 490, 500, true, true)),
+			new Goalpost("BlackMountain", 10, 200, 90),
+			new Vessel("RedValleyMid", 490, 298)
+		];
 		return {
 			mainBack : "src/Stages/RedValley/MainBack.png",
 			mainFore : "src/Stages/RedValley/MainFore.png",

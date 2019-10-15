@@ -25,39 +25,12 @@ class Mirror extends GameObject {
 		return (x >= this.x-this.width/2 && x <= this.x+this.width/2 && y <= this.y && y > this.y-this.height);
 	}
 }
-Mirror.prototype.sprites = makeSprites("src/Enemies/Mirror.png", {
+Mirror.prototype.sprites = makeSprites("src/Objects/Mirror.png", {
 	segment: {x:0, y:0, width:10, height:10},
 	pickup: {x:10, y:0, width:20, height:20},
 }, false);
 Mirror.prototype.width = 10;
 Mirror.prototype.isMirror = true;
-
-class ReflectorPickup extends GameObject {
-	constructor(x, y, doDialog = true) {
-		super();
-		this.x = x;
-		this.y = y;
-		this.doDialog = doDialog;
-	}
-	update() {
-		if (this.isTouching(player) && controller.interactClicked && player.special != specialReflector) {
-			player.special = specialReflector;
-			if (this.doDialog) {
-				this.doDialog = false;
-				dialog.begin(new DialogLine("Anymos", "So this is... Aqros' Reflector.", "#00FFFF"),
-					new DialogLine("Anymos", "It's a Special, so I can use it by pressing [Shift] or (Right trigger).", "#00FFFF"),
-					new DialogLine("Anymos", "I have the feeling it can interact somehow with the mirrors in here...", "#00FFFF"));
-			}
-		}
-	}
-	draw() {
-		if (player.special != specialReflector)
-			this.drawSprite("pickup");
-	}
-}
-ReflectorPickup.prototype.sprites = Mirror.prototype.sprites;
-ReflectorPickup.prototype.width = 20;
-ReflectorPickup.prototype.height = 20;
 
 var specialReflector = {
 	name : "Aqros' Reflector",
@@ -82,7 +55,7 @@ var specialReflector = {
 					player.facingRight = !player.facingRight;
 					gameObjects.push(new FadeDrawing(function() {
 						ctx.lineWidth = 2 * zoom;
-						ctx.strokeStyle = "#00FFFF";
+						ctx.strokeStyle = "#0080FF";
 						ctx.beginPath();
 						ctx.moveTo(stagex(px), stagey(py));
 						ctx.lineTo(stagex(intendedx), stagey(py));
@@ -93,3 +66,15 @@ var specialReflector = {
 		}
 	}
 }
+
+class ReflectorPickup extends SpecialPickup {
+	getDialog() {
+		return [
+			DialogLine("Anymos", "So this is... Aqros' Reflector.", "#00FFFF"),
+			new DialogLine("Anymos", "It's a Special, so I can use it by pressing [Shift] or (Right trigger).", "#00FFFF"),
+			new DialogLine("Anymos", "I have the feeling it can interact somehow with the mirrors in here...", "#00FFFF"),
+		];
+	}
+}
+ReflectorPickup.prototype.special = specialReflector;
+ReflectorPickup.prototype.sprites = Mirror.prototype.sprites;

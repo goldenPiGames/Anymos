@@ -21,7 +21,7 @@ death = {
 		gameObjects.forEach(function(obj) {
 			obj.draw();
 		});
-		player.state = "Dying";
+		player.state = "dying";
 		player.stateCycle = this.timer;
 		player.draw();
 		drawStageFore();

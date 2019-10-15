@@ -1,6 +1,6 @@
 Stages.BlackMountain = {
 	displayName : "Black Mountain",
-	load : function() {
+	load : function(doStuff) {
 		playMusic("Fantasy Game Background - Eric Matyas");
 		let B = BLOCK;
 		let _ = AIR;
@@ -57,8 +57,10 @@ Stages.BlackMountain = {
 		 [_,_,_,_,B,B,B,B,B,B,_,_,_,_,_,_,_,_,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,_,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,_,_,_,_],
 		 [_,_,_,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,_,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,_,_,_],
 		 [B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B]];
-		gravity = .5;
-		zoom = 1;
+		if (doStuff) {
+			zoom = 1;
+			zoomd = 1;
+		}
 		player.x = 1270;
 		player.y = 1020;
 		player.facingRight = false;

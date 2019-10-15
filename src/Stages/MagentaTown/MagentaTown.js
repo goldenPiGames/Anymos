@@ -1,6 +1,6 @@
 Stages.MagentaTown = {
 	displayName : "Magenta Town",
-	load : function() {
+	load : function(doStuff) {
 		playMusic("Tempest - Darren Curtis");
 		let B = BLOCK;
 		let l = {name:"Rain",solid:false,hazard:1,rain:true};
@@ -38,7 +38,10 @@ Stages.MagentaTown = {
 		 [B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,_,B,_,_,_,_,_,_,B,B,B,B,B,B,B,B,B,B],
 		 [B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,_,_,_,_,_,_,_,_,B,B,B,B,B,B,B,B,B,B],
 		 [B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B]];
-		zoom = 2;
+		if (doStuff) {
+			zoomd = 2;
+			zoom = 2;
+		}
 		player.x = 10; //TODO make fighting optional for throughway
 		player.y = 540;
 		player.facingRight = true;

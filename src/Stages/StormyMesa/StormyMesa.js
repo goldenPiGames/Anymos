@@ -20,7 +20,7 @@ Stages.StormyMesa = {
 		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,R,R,R,_,_,_,_,_,_,_,R,R,R,_,_,_,_,_,_,_,_,_,_,_,R,R,R,R,R,R,_,_,_,_,_,_,_,_,R,R,R,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,R,R,R,_,_,_,_,_,_,_,_,_,_,R,R,R,_],
+		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,R,R,R,_,_,_,_,_,_,_,R,R,R,_,_,_,_,_,_,_,_,_,_,_,R,R,R,R,R,R,_,_,_,_,_,_,_,_,R,R,R,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,R,R,R,_,_,_,_,_,_,_,_,_,_,R,R,R,R],
 		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,R,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,R,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		 [_,_,R,_,_,_,_,_,_,_,_,_,_,_,_,_,_,R,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
@@ -46,13 +46,19 @@ Stages.StormyMesa = {
 		 [R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R],
 		 [R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R],
 		 [R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R]];
-		if (doStuff){zoom=2; zoomd=2}
+		if (doStuff){
+			zoom=2;
+			zoomd=2;
+			dialog.begin(
+				new DialogLine("Anymos", "This rain has an evil electrical charge. But oddly enough, having shelter over my head feels... nice and relaxing.", "#00FFFF")
+			);
+		}
 		player.x = 2130;
 		player.y = 240;
 		player.facingRight = false;
 		player.drained = false;
 		gameObjects = [
-			new Goalpost("StormyMesa", 390, 240, 160),
+			new Goalpost("Lightningrod", 390, 240, 160),
 			new SinusoidalPlatform(2000, 170, 40, 81, .02),
 			new SinusoidalPlatform(1760, 170, 40, 61, .02, Math.PI),
 			new SinusoidalPlatform(1600, 170, 40, 61, .02),
@@ -62,14 +68,16 @@ Stages.StormyMesa = {
 			new SinusoidalPlatform(830, 170, 60, 41, .02),
 			new MovingPlatformSpawner(950, 370, 20, 7, 950, 360, 990, 360, 990, 240, 930, 240),
 			new RainGenerator(20, 30, "#C0FF4580"),
-			{update:function(){player.takeDamage(player.exposureToSky()*5)},draw:doNothing},
+			new CustomObject(()=>player.takeDamage(Math.ceil(player.exposureToSky()*30))),
 		];
-		if (doStuff)
-			dialog.begin(new DialogLine("Anymos", "This rain has an evil electrical charge. But oddly enough, having shelter over my head feels... nice and relaxing.", "#00FFFF"));
 		dynamicBackdrop = new StormBackdrop();
 	},
-	toLoad : [SinusoidalPlatform, MovingPlatform]
+	vessels : [],
+	previous : "MesaCliff",
+	nextDown : "Lightningrod",
+	toLoad : [SinusoidalPlatform/*, MovingPlatform*/]
 }
+
 function StormBackdrop() {
 	this.foreCloudsX = 0;
 	this.midCloudsX = 0;

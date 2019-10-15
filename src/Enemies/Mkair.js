@@ -185,6 +185,7 @@ MkairPeriphSpiralgun.prototype.bulletCD = 10;
 //TODO not have redundant bullet classes
 class MkairBullet extends GameObject {
 	constructor(x, y, theta, speed) {
+		super();
 		this.x = x;
 		this.y = y;
 		this.theta = theta;

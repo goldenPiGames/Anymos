@@ -1,26 +1,25 @@
 function finishStage(next) {
-	//if (!prelude) {
-		var vesses = Stages[currentStageName].vessels;
-		stageFinishScreen.collectedBefore = [];
-		for (var i = 0; i < vesses.length; i++) {
-			stageFinishScreen.collectedBefore[i] = isVesselCollected(vesses[i]);
+	//console.log(next)
+	var vesses = Stages[currentStageName].vessels;
+	stageFinishScreen.collectedBefore = [];
+	for (var i = 0; i < vesses.length; i++) {
+		stageFinishScreen.collectedBefore[i] = isVesselCollected(vesses[i]);
+	}
+	collectedThisRun.forEach(vess => collectedVessels[vess] = true);
+	stageFinishScreen.collectedNow = [];
+	for (var i = 0; i < vesses.length; i++) {
+		stageFinishScreen.collectedNow[i] = false;
+		for (var j = 0; j < collectedThisRun.length; j++) {
+			if (vesses[i] == collectedThisRun[j])
+				stageFinishScreen.collectedNow[i] = true;
 		}
-		collectedThisRun.forEach(vess => collectedVessels[vess] = true);
-		stageFinishScreen.collectedNow = [];
-		for (var i = 0; i < vesses.length; i++) {
-			stageFinishScreen.collectedNow[i] = false;
-			for (var j = 0; j < collectedThisRun.length; j++) {
-				if (vesses[i] == collectedThisRun[j])
-					stageFinishScreen.collectedNow[i] = true;
-			}
-		}
-		var prevAll = Stages[currentStageName].bestAll;
-		//console.log(prevSuper, (used < prevSuper || typeof prevSuper != "number" || prevSuper != prevSuper))
-		if (collectedThisRun.length >= Stages[currentStageName].vessels.length && !(prevAll >= used)) {
-			Stages[currentStageName].bestAll = used;
-		}
-		collectedThisRun = [];
-	//}
+	}
+	var prevAll = Stages[currentStageName].bestAll;
+	//console.log(prevSuper, (used < prevSuper || typeof prevSuper != "number" || prevSuper != prevSuper))
+	if (collectedThisRun.length >= Stages[currentStageName].vessels.length && !(prevAll >= used)) {
+		Stages[currentStageName].bestAll = used;
+	}
+	collectedThisRun = [];
 	stageFinishScreen.from = currentStageName;
 	var froms = Stages[currentStageName];
 	currentStageName = next;
@@ -50,7 +49,9 @@ function finishStage(next) {
 var stageFinishScreen = {
 	solenoidCt : 0,
 	update : function() {
-		if (controller.jumpClicked) {
+		if (controller.restartClicked) {
+			loadStage(this.from, false);
+		} else if (controller.jumpClicked) {
 			doLevelSelect();
 		}
 	},
@@ -75,7 +76,7 @@ var stageFinishScreen = {
 		ctx.fillRect  (100, 100, canvas.width-200, canvas.height-200);
 		ctx.strokeRect(100, 100, canvas.width-200, canvas.height-200);
 		ctx.fillStyle = "#FFFFFF";
-		var toptxt = this.from==this.to ? Stages[this.to].displayName : (Stages[this.to].displayName + " - " + Stages[this.to].displayName);
+		var toptxt = this.from==this.to ? Stages[this.to].displayName : (Stages[this.from].displayName + " - " + Stages[this.to].displayName);
 		ctx.font = "40px "+getFont();
 		ctx.fillText(toptxt, canvas.width/2, 150);
 		//ctx.font = "40px "+getFont();

@@ -16,7 +16,7 @@ class AqrosEvil extends Boss {
 		this.benchmarks = [2000,          1600,       1200,          400,           60]
 		this.specials   = [this.rainTrap, this.flood, this.rainTrap, this.rainTrap, this.flood]
 	}
-	update() {
+	update() {//TODO use new benchmark system with alternate update functions
 		if (this.boundLeft == undefined) {
 			this.boundLeft = cameraLeftBound+20;
 			this.boundRight = cameraRightBound-20;

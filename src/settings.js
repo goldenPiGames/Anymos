@@ -13,8 +13,8 @@ const SETTINGS_INFO = {
 		name : "SFX",
 		description : "Whether sound effects will be played.",
 		choices : [
-			{name:"Off", description:"Music is muted."},
-			{name:"On", description:"Music is played."},
+			{name:"Off", description:"Sound effects are muted."},
+			{name:"On", description:"Sound effects are played."},
 		],
 		default:1,
 	},

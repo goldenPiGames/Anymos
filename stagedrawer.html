@@ -24,57 +24,51 @@
 			var Stages = {};
 			function doNothing(){};
 			var GameObjectBase = {};
-			var Aapew, AqrosEvil, Baron, Bolizos, Bouncie, CardPip, ChansykShuffler, DieWalking, Door, DoubleJumpPickup, Drrk, Fadour, FireDrawer, Flipwip, Fricchee, Fwegos, Hoverie, Mirror, Mkair, MovingPlatform, Naluxos, Parashoop, SinusoidalPlatform, SnakeEyes, Spinnie, Switch, Teion, Walkie, Wallie;
+			var Aapew, AqrosEvil, Baron, Bolizos, Bouncie, CardPip, ChanmotePickup, ChansykShuffler, DieWalking, Door, DoubleJumpPickup, Drrk, Enemy, Fadour, FireDrawer, Flipwip, Fricchee, Fwegos, Hoverie, Mirror, Mkair, MovingPlatform, Naluxos, Parashoop, SinusoidalPlatform, SnakeEyes, Spinnie, Switch, Syklos, Teion, Walkie, Wallie;
 		</script>
 		
-        <script type="text/javascript" src="src/Stages/TutorialMovement/TutorialMovement.js"></script>
-        <script type="text/javascript" src="src/Stages/TutorialCombat/TutorialCombat.js"></script>
-        <script type="text/javascript" src="src/Stages/BeginningClimb/BeginningClimb.js"></script>
-        <script type="text/javascript" src="src/Stages/YellowWood/YellowWood.js"></script>
-        <script type="text/javascript" src="src/Stages/RedValley/RedValley.js"></script>
-        <script type="text/javascript" src="src/Stages/BlackMountain/BlackMountain.js"></script>
-        <script type="text/javascript" src="src/Stages/BlackCaves/BlackCaves.js"></script>
-        <script type="text/javascript" src="src/Stages/BlackPrison/BlackPrison.js"></script>
-        <script type="text/javascript" src="src/Stages/ClearCanyon/ClearCanyon.js"></script>
-        <script type="text/javascript" src="src/Stages/ClubGardens/ClubGardens.js"></script>
-        <script type="text/javascript" src="src/Stages/DiamondHighway/DiamondHighway.js"></script>
-        <script type="text/javascript" src="src/Stages/SkyClimb/SkyClimb.js"></script>
-        <script type="text/javascript" src="src/Stages/SkyHighClimb/SkyHighClimb.js"></script>
-        <script type="text/javascript" src="src/Stages/SkyFleet/SkyFleet.js"></script>
-        <script type="text/javascript" src="src/Stages/HeartFarms/HeartFarms.js"></script>
-        <script type="text/javascript" src="src/Stages/SpadeCity/SpadeCity.js"></script>
-        <script type="text/javascript" src="src/Stages/SpadeDowntown/SpadeDowntown.js"></script>
-        <script type="text/javascript" src="src/Stages/ChanosLobby/ChanosLobby.js"></script>
-        <script type="text/javascript" src="src/Stages/Versus52/Versus52.js"></script>
-        <script type="text/javascript" src="src/Stages/SPDAirport/SPDAirport.js"></script>
-        <script type="text/javascript" src="src/Stages/FlightToAnymis/FlightToAnymis.js"></script>
-        <script type="text/javascript" src="src/Stages/GreenMaze/GreenMaze.js"></script>
-        <script type="text/javascript" src="src/Stages/CyanRainforest/CyanRainforest.js"></script>
-        <script type="text/javascript" src="src/Stages/BlueLake/BlueLake.js"></script>
-        <script type="text/javascript" src="src/Stages/BlueLakebed/BlueLakebed.js"></script>
-        <script type="text/javascript" src="src/Stages/AqrosAntechamber/AqrosAntechamber.js"></script>
-        <script type="text/javascript" src="src/Stages/AqrosAtrium/AqrosAtrium.js"></script>
-        <script type="text/javascript" src="src/Stages/AqrosCorridor/AqrosCorridor.js"></script>
-        <script type="text/javascript" src="src/Stages/VisibleStair/VisibleStair.js"></script>
-        <script type="text/javascript" src="src/Stages/AqrosSanctum/AqrosSanctum.js"></script>
-        <script type="text/javascript" src="src/Stages/MagentaTown/MagentaTown.js"></script>
-        <script type="text/javascript" src="src/Stages/MagentaDefense/MagentaDefense.js"></script>
-        <script type="text/javascript" src="src/Stages/MagentaDuel/MagentaDuel.js"></script>
-        <script type="text/javascript" src="src/Stages/WhitePlains/WhitePlains.js"></script>
-        <script type="text/javascript" src="src/Stages/GreyHarbor/GreyHarbor.js"></script>
-        <script type="text/javascript" src="src/Stages/ZagadCrossing/ZagadCrossing.js"></script>
-        <script type="text/javascript" src="src/Stages/IgmaBeach/IgmaBeach.js"></script>
-        <script type="text/javascript" src="src/Stages/InfinityLighthouse/InfinityLighthouse.js"></script>
-        <script type="text/javascript" src="src/Stages/YstryJungle/YstryJungle.js"></script>
-		
-        <script type="text/javascript" src="src/Stages/TutorialPrelude/TutorialPrelude.js"></script>
-		<script type="text/javascript" src="src/Stages/PeacefulField/PeacefulField.js"></script>
+		<script type="text/javascript" src="src/Stages/TutorialPrelude/TutorialPrelude.js"></script>
+		<script type="text/javascript" src="src/Stages/YellowWood/YellowWood.js"></script>
+		<script type="text/javascript" src="src/Stages/RedValley/RedValley.js"></script>
+		<script type="text/javascript" src="src/Stages/BlackMountain/BlackMountain.js"></script>
+		<script type="text/javascript" src="src/Stages/BlackCaves/BlackCaves.js"></script>
+		<script type="text/javascript" src="src/Stages/BlackPrison/BlackPrison.js"></script>
+		<script type="text/javascript" src="src/Stages/ClearCanyon/ClearCanyon.js"></script>
+		<script type="text/javascript" src="src/Stages/ClubGardens/ClubGardens.js"></script>
+		<script type="text/javascript" src="src/Stages/DiamondHighway/DiamondHighway.js"></script>
+		<script type="text/javascript" src="src/Stages/SkyClimb/SkyClimb.js"></script>
+		<script type="text/javascript" src="src/Stages/SkyHighClimb/SkyHighClimb.js"></script>
+		<script type="text/javascript" src="src/Stages/SkyFleet/SkyFleet.js"></script>
+		<script type="text/javascript" src="src/Stages/SkyChase/SkyChase.js"></script>
+		<script type="text/javascript" src="src/Stages/HeartFarms/HeartFarms.js"></script>
+		<script type="text/javascript" src="src/Stages/SpadeCity/SpadeCity.js"></script>
+		<script type="text/javascript" src="src/Stages/SpadeDowntown/SpadeDowntown.js"></script>
+		<script type="text/javascript" src="src/Stages/ChanosLobby/ChanosLobby.js"></script>
+		<script type="text/javascript" src="src/Stages/Versus52/Versus52.js"></script>
+		<script type="text/javascript" src="src/Stages/SPDAirport/SPDAirport.js"></script>
+		<script type="text/javascript" src="src/Stages/FlightToAnymis/FlightToAnymis.js"></script>
+		<script type="text/javascript" src="src/Stages/AnymisLanding/AnymisLanding.js"></script>
 		<script type="text/javascript" src="src/Stages/BurningForest/BurningForest.js"></script>
 		<script type="text/javascript" src="src/Stages/ScorchedClearing/ScorchedClearing.js"></script>
-		<script type="text/javascript" src="src/Stages/ThornyOutback/ThornyOutback.js"></script>
-		<script type="text/javascript" src="src/Stages/MesaCliff/MesaCliff.js"></script>
-		<script type="text/javascript" src="src/Stages/StormyMesa/StormyMesa.js"></script>
-		<script type="text/javascript" src="src/Stages/AltoPillar/AltoPillar.js"></script>
+		<script type="text/javascript" src="src/Stages/GreenMaze/GreenMaze.js"></script>
+		<script type="text/javascript" src="src/Stages/CyanRainforest/CyanRainforest.js"></script>
+		<script type="text/javascript" src="src/Stages/BlueLake/BlueLake.js"></script>
+		<script type="text/javascript" src="src/Stages/BlueLakebed/BlueLakebed.js"></script>
+		<script type="text/javascript" src="src/Stages/VisibleStair/VisibleStair.js"></script>
+		<script type="text/javascript" src="src/Stages/AqrosAntechamber/AqrosAntechamber.js"></script>
+		<script type="text/javascript" src="src/Stages/AqrosAtrium/AqrosAtrium.js"></script>
+		<script type="text/javascript" src="src/Stages/AqrosCorridor/AqrosCorridor.js"></script>
+		<script type="text/javascript" src="src/Stages/AqrosSanctum/AqrosSanctum.js"></script>
+		<script type="text/javascript" src="src/Stages/MagentaTown/MagentaTown.js"></script>
+		<script type="text/javascript" src="src/Stages/MagentaDefense/MagentaDefense.js"></script>
+		<script type="text/javascript" src="src/Stages/MagentaDuel/MagentaDuel.js"></script>
+		<script type="text/javascript" src="src/Stages/WhitePlains/WhitePlains.js"></script>
+		<script type="text/javascript" src="src/Stages/GreyHarbor/GreyHarbor.js"></script>
+		<script type="text/javascript" src="src/Stages/ZagadCrossing/ZagadCrossing.js"></script>
+		<script type="text/javascript" src="src/Stages/IgmaBeach/IgmaBeach.js"></script>
+		<script type="text/javascript" src="src/Stages/InfinityLighthouse/InfinityLighthouse.js"></script>
+		<script type="text/javascript" src="src/Stages/AdlunamPillar/AdlunamPillar.js"></script>
+		<script type="text/javascript" src="src/Stages/YstryJungle/YstryJungle.js"></script>
 		
 		</head>
     <body>
@@ -198,6 +192,7 @@
 									fctx.fillRect(n, o, Math.floor(Math.random()*3), 1);
 								}
 							}
+							bctx.fillRect(i*PIXELS_PER_BLOCK,j*PIXELS_PER_BLOCK,PIXELS_PER_BLOCK,PIXELS_PER_BLOCK);
 						} else if (staticColl[j][i].fore) {
 							fctx.fillStyle = staticColl[j][i].color || (staticColl[j][i].solid && !staticColl[j][i].leafy ? "#7F7F7F" : (staticColl[j][i].hazard ? "#BF7F7F" : "#00A2E8"));
 							fctx.fillRect(i*PIXELS_PER_BLOCK,j*PIXELS_PER_BLOCK,PIXELS_PER_BLOCK,PIXELS_PER_BLOCK);
@@ -207,25 +202,25 @@
 						}
 						if (staticColl[j][i].edge) {
 							bctx.fillStyle = staticColl[j][i].edge;
-							var thissolid = staticColl[j][i].solid
+							var thisedge = staticColl[j][i].edge;
 							var goBottom = j < staticColl.length-1;
 							var goRight = i < staticColl[0].length-1;
 							//var edgeTop = j > 0 && thissolid != staticColl[j-1][i].solid;
 							//var edgeBottom = goBottom && thissolid != staticColl[j+1][i].solid;
 							//var edgeLeft = i > 0 && thissolid != staticColl[j][i-1].solid;
 							//var edgeRight = goRight && thissolid != staticColl[j][i+1].solid;
-							if (j > 0 && thissolid != staticColl[j-1][i].solid)
+							if (j > 0 && thisedge != staticColl[j-1][i].edge)
 								bctx.fillRect(i*PIXELS_PER_BLOCK, j*PIXELS_PER_BLOCK, 20, 1);
-							if (goBottom && thissolid != staticColl[j+1][i].solid)
+							if (goBottom && thisedge != staticColl[j+1][i].edge)
 								bctx.fillRect(i*PIXELS_PER_BLOCK, (j+1)*PIXELS_PER_BLOCK-1, 20, 1);
-							if (i > 0 && thissolid != staticColl[j][i-1].solid)
+							if (i > 0 && thisedge != staticColl[j][i-1].edge)
 								bctx.fillRect(i*PIXELS_PER_BLOCK, j*PIXELS_PER_BLOCK, 1, 20);
-							if (goRight && thissolid != staticColl[j][i+1].solid)
+							if (goRight && thisedge != staticColl[j][i+1].edge)
 								bctx.fillRect((i+1)*PIXELS_PER_BLOCK-1, j*PIXELS_PER_BLOCK, 1, 20);
-							var cornerUpperLeft = j > 0 && i > 0 && thissolid != staticColl[j-1][i-1].solid;
-							var cornerLowerLeft = goBottom && i > 0 && thissolid != staticColl[j+1][i-1].solid;
-							var cornerUpperRight = j > 0 && goRight && thissolid != staticColl[j-1][i+1].solid;
-							var cornerLowerRight = goBottom && goRight && thissolid != staticColl[j+1][i+1].solid;
+							var cornerUpperLeft = j > 0 && i > 0 && thisedge != staticColl[j-1][i-1].edge;
+							var cornerLowerLeft = goBottom && i > 0 && thisedge != staticColl[j+1][i-1].edge;
+							var cornerUpperRight = j > 0 && goRight && thisedge != staticColl[j-1][i+1].edge;
+							var cornerLowerRight = goBottom && goRight && thisedge != staticColl[j+1][i+1].edge;
 							if (cornerUpperLeft)
 								bctx.fillRect(i*PIXELS_PER_BLOCK, j*PIXELS_PER_BLOCK, 1, 1);
 							if (cornerLowerLeft)

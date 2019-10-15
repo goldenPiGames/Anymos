@@ -40,10 +40,10 @@ function loadStage(stageName, doStuff=true) {
 	currentStage = Stages[stageName];
 	stageImages = {
 		mainBack : makeImage("src/Stages/"+(currentStage.reuseBack||currentStageName)+"/MainBack.png"),//stageSrcs.mainBack),
-		mainFore : makeImage("src/Stages/"+(currentStage.reuseFore||currentStageName)+"/MainFore.png")//stageSrcs.mainFore),
+		mainFore : makeImage("src/Stages/"+(currentStage.reuseFore||currentStageName)+"/MainFore.png"),//stageSrcs.mainFore),
 	}
 	currentStage.load(doStuff); //loading specific stage
-	Stages[stageName].enemies.forEach(function(nem) {
+	Stages[stageName].toLoad.forEach(function(nem) {
 		loadEnemy(nem);
 	});
 	return true;
