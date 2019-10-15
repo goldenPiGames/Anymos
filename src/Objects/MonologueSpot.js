@@ -1,6 +1,6 @@
 class MonologueSpot extends NPC {
 	constructor(name, x, y, ...dialog) {
-		super(name, MonologueSpot.prototype.sprites.bubble, x, y, true, ...dialog.map(gar => DialogLine("Anymos", gar, "#00FFFF")));
+		super(name, MonologueSpot.prototype.sprites.bubble, x, y, true, ...dialog.map(gar => new DialogLine("Anymos", gar, "#00FFFF")));
 	}
 	update() {
 		super.update();
