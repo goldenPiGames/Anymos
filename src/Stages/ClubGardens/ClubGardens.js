@@ -1,10 +1,10 @@
 Stages.ClubGardens = {
 	displayName : "Club Gardens",
-	load : function() {
+	load : function(doStuff) {
 		playMusic("Sculpture Garden - Eric Matyas");
 		let H = {name:"Hedge",solid:true,color:"#228B22",leafy:true};
-		let S = {name:"HedgeSecret",solid:false,color:"#2A972A",leafy:true};
-		let C = {solid:true,color:"#04AAF0"};
+		let S = {name:"HedgeSecret",solid:false,color:"#3A972A",leafy:true};
+		let C = {solid:true,color:"#04AAF0",edge:"#005174"};
 		let _ = {solid:false,color:"#00A2E8"};
 		staticColl =
 		[[_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
@@ -21,7 +21,7 @@ Stages.ClubGardens = {
 		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,H,H,H,H,_,_,_,_,H,H,H,H,_,_,_,_,_,_,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,_,_,_,_,_,_,H,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,H,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,H,H,H,H,H,_,_,H,H,H,H,H,_,_,_,_,_,_,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,_,_,_,_,_,_,H,_,_,_,H,H,_,_,_,_,_,_,_,_,H,H,_,_,_,H,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,H,H,H,H,H,H,H,H,H,H,H,H,_,_,_,_,_,_,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,_,_,_,_,_,_,H,_,_,H,H,H,H,_,_,_,_,_,_,H,H,H,H,_,_,H,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,H,H,H,H,H,H,H,H,H,H,H,H,_,_,_,_,_,_,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,_,_,C,C,_,_,H,_,_,H,H,H,H,_,_,_,_,_,_,H,H,H,H,_,_,H,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
+		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,H,H,H,H,H,H,H,H,H,H,H,H,_,_,_,_,_,_,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,_,_,C,C,_,_,S,_,_,H,H,H,H,_,_,_,_,_,_,H,H,H,H,_,_,H,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,H,H,H,H,H,H,H,H,H,H,H,H,_,_,_,_,_,_,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,_,_,_,_,_,_,S,_,_,_,H,H,_,_,_,_,_,_,_,_,H,H,_,_,_,H,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,H,H,H,H,H,H,H,H,H,H,H,H,_,_,_,_,_,_,H,H,H,H,H,H,H,H,H,_,_,H,_,_,H,_,_,_,_,_,_,S,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,H,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,H,H,H,H,H,H,H,H,H,H,H,H,_,_,_,_,_,_,H,H,H,H,H,H,H,H,H,_,_,H,_,_,H,_,_,_,_,_,_,S,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,H,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
@@ -37,7 +37,10 @@ Stages.ClubGardens = {
 		 [_,_,_,_,_,_,_,H,H,H,H,H,H,H,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,H,S,H,H,H,H,H,H,H,H,H,H,H,H,H,_,_,_,_,_,_,S,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,H,_,_,_,H,H,H,H,H,H,H,_,_,_,_,_,_,_,_,_],
 		 [_,_,_,_,_,_,_,_,_,_,H,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,_,_,_,_,_,_,H,_,_,_,_,_,_,_,_,_,_,_,_],
 		 [H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H,H]];
-		zoom = 2;
+		if (doStuff) {
+			zoom = 2;
+			zoomd = 2;
+		}
 		player.x = 1910;
 		player.y = 580;
 		player.facingRight = false;
@@ -59,14 +62,10 @@ Stages.ClubGardens = {
 				new DialogLine("Local", "(Oh, and also, I never told you nothing, got that?)", "#BFBFBF"),
 				new DialogLine("Local", "*ahem* This place is named the Club Gardens after the suit in cards. President Chanos loves playing cards almost as much as he loves his people and his people love him!", "#BFBFBF"))];
 		//dialog.begin(new DialogLine("Anymos", "There are people here. I can talk to them by pressing Interact - [Space] or (L)."));
-		return {
-			mainBack : "src/Stages/ClubGardens/MainBack.png",
-			mainFore : "src/Stages/ClubGardens/MainFore.png",
-		};
 	},
 	vessels : ["ClubGardensDie", "ClubGardensChanosUpperRight", "ClubGardensChanosUpperLeft", "ClubGardensUpperRight", "ClubGardensUpperLeft", "ClubGardensChanosLowerRight", "ClubGardensChanosLowerLeft", "ClubGardensTalkIncentive"],
-	par : 415,
 	previous : "ClearCanyon",
 	nextDown : "DiamondHighway",
+	parDown : 480,
 	toLoad : [Teion/*, DieWalking, CardPip*/]
 }

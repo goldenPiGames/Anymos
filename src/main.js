@@ -1,6 +1,6 @@
 var canvas;
 var ctx;
-var stage;
+//var stage;
 const MISC_SPRITE_NAMES = ["MainMenuLogo", "Selector", "Paused", "SelectStage", "SelectStageNo", "SelectStage100", "SelectEnd", "SelectEndNo", "SelectCorners", "Gamepad"]
 var miscSprites;
 const MISC_SFX_NAMES = ["Bump", "Thunder1", //NSMB Wii

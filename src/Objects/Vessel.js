@@ -1,4 +1,4 @@
-const STARTING_ANYM = 3600;
+const STARTING_ANYM = 4500//3600;
 const VESSEL_VALUE = 30;
 var anymTotal = STARTING_ANYM;
 var anymAvailable = STARTING_ANYM;

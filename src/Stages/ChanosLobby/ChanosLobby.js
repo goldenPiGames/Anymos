@@ -43,5 +43,6 @@ Stages.ChanosLobby = {
 	vessels : ["ChanosLobbyUpperLeft", "ChanosLobbyUpperRight"],
 	previous : "SpadeDowntown",
 	nextDown : "Versus52",
+	parDown : 225,
 	toLoad : [ChanmotePickup]
 }

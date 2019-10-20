@@ -53,7 +53,7 @@ MUSIC_LIST.forEach(function(sing, dex) {
 
 const JUKEBOX_ENTRY_HEIGHT = 40;
 function doJukebox() {
-	cameraFocus = {x:0, y:0}
+	cameraFocus = {x:0, y:0, width:0, height:0}
 	runnee = jukebox;
 	zoomd = 1;
 	zoom = 1;

@@ -75,7 +75,7 @@ Stages.MagentaDuel = {
 			mainFore : "src/Stages/MagentaTown/MainFore.png",
 		};
 	},
-	vessels : ["MagentaDuelFadour1", "MagentaDuelFadour2", "MagentaDuelFadour3"],
+	vessels : ["MagentaDuelFadour1", "MagentaDuelFadour2", "MagentaDuelFadour3", "MagentaDuelFadour4", "MagentaDuelFadour5"],
 	previous : "MagentaDefense",
 	nextDown : "EndMagentaDefender",
 	toLoad : [Fadour, Walkie, Hoverie, Bouncie, Spinnie, Teion],

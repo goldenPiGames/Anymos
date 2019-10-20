@@ -3,8 +3,9 @@ Stages.SkyHighClimb = {
 	load : function(doStuff) {
 		playMusic("Reaching Altitude - Eric Matyas");
 		let B = {name:"Block",solid:true,color:"#7F7F7F"};
-		let C = {solid:true,color:"#04AAF0"}
+		let C = {solid:true,color:"#04AAF0",edge:"#005174"}
 		let _ = {name:"Air",colid:false,color:"#1099D8"};
+		oobtopcolor = "#10A2D8";
 		staticColl =
 		[[_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
@@ -80,7 +81,7 @@ Stages.SkyHighClimb = {
 		player.y = 1260;
 		player.facingRight = true;
 		gameObjects = [
-			new DoubleJumpPickup(310, 1020, true),
+			new DoubleJumpPickup(310, 1020, doStuff),
 			new Vessel("SkyHighClimbLowerRight", 590, 1258),
 			new Vessel("SkyHighClimbLeftJump", 90, 1018),
 			new Vessel("SkyHighClimbUpperLeft", 20, 28),
@@ -91,5 +92,6 @@ Stages.SkyHighClimb = {
 	vessels : ["SkyHighClimbLowerRight", "SkyHighClimbLeftJump", "SkyHighClimbUpperLeft", "SkyHighClimbOverGoalpost"],
 	previous : "SkyClimb",
 	nextDown : "SkyFleet",
+	parDown : 480,
 	toLoad : [DoubleJumpPickup]
 }

@@ -58,5 +58,6 @@ Stages.RedValley = {//TODO make different level, like Orange something
 	selectY : Stages.YellowWood.selectY + LS_Y_SPACING,
 	previous : "YellowWood",
 	nextDown : "BlackMountain",
+	parDown : 510,
 	toLoad : [Baron, Hoverie]
 }

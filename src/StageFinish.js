@@ -26,7 +26,7 @@ function finishStage(next) {
 	stageFinishScreen.to = currentStageName;
 	var prevBest = Stages[currentStageName].bestTo;
 	stageFinishScreen.prevBest = prevBest;
-	stageFinishScreen.par = Stages[currentStageName].par;
+	stageFinishScreen.par = Stages[currentStageName].parTo;
 	if (!(used >= prevBest)) {
 		Stages[next].bestTo = used;
 		if (froms.nextDown == next)
@@ -96,13 +96,11 @@ var stageFinishScreen = {
 		var better = !(this.prevBest < used);
 		ctx.fillStyle = this.solenoid && better ? "#00FFFF" : "#FFFFFF";
 		ctx.fillText(displayAnym(used), alR, 220);
-		if (!prelude) {
-			ctx.textAlign = "right";
-			ctx.fillText("Vessels: ", alL, 380);
-			for (var i = 0; i < this.collectedNow.length; i++) {
-				ctx.fillStyle = this.collectedNow[i] ? (this.collectedBefore[i] ? "#00FFFF" : (this.solenoid ? "#00FF80" : "#00FFFF")) : (this.collectedBefore[i] ? "#BFBFBF" : "#7F7F7F");
-				ctx.fillRect(canvas.width/2 + 10 + 30 * i, 350, 25, 40);
-			}
+		ctx.textAlign = "right";
+		ctx.fillText("Vessels: ", alL, 380);
+		for (var i = 0; i < this.collectedNow.length; i++) {
+			ctx.fillStyle = this.collectedNow[i] ? (this.collectedBefore[i] ? "#00FFFF" : (this.solenoid ? "#00FF80" : "#00FFFF")) : (this.collectedBefore[i] ? "#BFBFBF" : "#7F7F7F");
+			ctx.fillRect(canvas.width/2 + 10 + 30 * i, 350, 25, 40);
 		}
 	}
 }

@@ -107,15 +107,12 @@ Stages.SpadeCity = {
 			new ObscurerRect(1350, 970, 160, 450, "#7F7F7F"),
 			new ObscurerRect(490, 970, 160, 470, "#7F7F7F"),
 		];
-		return {
-			mainBack : "src/Stages/SpadeCity/MainBack.png",
-			mainFore : "src/Stages/SpadeCity/MainFore.png",
-		};
 	},
 	vessels : ["SpadeCityEtra", "SpadeCityVivent", "SpadeCityAlley2", "SpadeCityConstructionTop", "SpadeCityConstructionBottom", "SpadeCitySkydz"],
-	par : 540,
 	previous : "HeartFarms",
 	nextDown : "SPDAirport",
+	parDown : 510,
 	nextRight : "SpadeDowntown",
+	parRight : 465,
 	toLoad : [MovingPlatform, Teion]
 }

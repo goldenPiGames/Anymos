@@ -87,9 +87,9 @@ Stages.FlightToAnymis = {
 		player.facingRight = false;
 	},
 	vessels : ["FlightToAnymisMkair1", "FlightToAnymisMkair2", "FlightToAnymisMkair3", "FlightToAnymisMkair4", "FlightToAnymisMkair5"],
-	//par : 365,
 	previous : "SPDAirport",
 	nextDown : "AnymisLanding",
+	parDown : 840,
 	toLoad : [Aapew, Mkair],
 	startFlying : true,
 }

@@ -25,9 +25,9 @@ Stages.WhitePlains = {
 		zoom = 2;
 		player.x = 10;
 		player.y = 280;
-		player.facingRight = true; //TODO make it deterministic somehow
+		player.facingRight = true;
 		gameObjects = [
-			new DarkBallSpawner(.5),
+			new DarkBallSpawner(.5), //TODO make it deterministic somehow
 			new Walkie("WhitePlainsBen", 1000, 260, true),
 			new Vessel("WhitePlainsLeftJumpRight", 320, 160),
 			new Vessel("WhitePlainsMiddleJumpLeft", 820, 140),

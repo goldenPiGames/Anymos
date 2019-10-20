@@ -81,17 +81,12 @@ Stages.MagentaTown = {
 				new DialogLine("Anymos", "I'm not in great shape right now, I have to admit.", "#00FFFF"),
 				new DialogLine("Villager", "I'm just relieved you're finally here.", "#BFBFBF"),
 				new DialogLine("Anymos", "Alright. I won't let you down.", "#00FFFF"))];
-		return {
-			mainBack : "src/Stages/MagentaTown/MainBack.png",
-			mainFore : "src/Stages/MagentaTown/MainFore.png",
-		};
 	},
 	vessels : ["MagentaTownMcCoy", "MagentaTownPopoca", "MagentaTownElla", "MagentaTownHatfield", "MagentaTownJack", "MagentaTownDumbbell", "MagentaTownMalana", "MagentaTownByRightTower"],
-	selectX : Stages.BlueLake.selectX,
-	selectY : Stages.BlueLake.selectY + LS_Y_SPACING,
-	par : 430,
 	previous : "BlueLake",
-	nextRight : "MagentaDefense",
 	nextDown : "WhitePlains",
+	parDown : 210,
+	nextRight : "MagentaDefense",
+	parRight : 525,
 	toLoad : [Walkie, Hoverie, Teion, Switch]
 }

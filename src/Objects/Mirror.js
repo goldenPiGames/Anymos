@@ -70,7 +70,7 @@ var specialReflector = {
 class ReflectorPickup extends SpecialPickup {
 	getDialog() {
 		return [
-			DialogLine("Anymos", "So this is... Aqros' Reflector.", "#00FFFF"),
+			new DialogLine("Anymos", "So this is... Aqros' Reflector.", "#00FFFF"),
 			new DialogLine("Anymos", "It's a Special, so I can use it by pressing [Shift] or (Right trigger).", "#00FFFF"),
 			new DialogLine("Anymos", "I have the feeling it can interact somehow with the mirrors in here...", "#00FFFF"),
 		];

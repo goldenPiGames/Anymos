@@ -146,6 +146,7 @@ Stages.TutorialPrelude = {
 	selectX : 0,
 	selectY : 0,
 	nextDown : "YellowWood",
+	parDown : 0,
 	toLoad : [Walkie, Switch]
 }
 

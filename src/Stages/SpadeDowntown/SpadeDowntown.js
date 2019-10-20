@@ -56,13 +56,13 @@ Stages.SpadeDowntown = {
 		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		 [C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C]];
-		player.x = 20;
-		player.y = 900;
-		player.facingRight = true;
 		if (doStuff) {
 			zoom = 2;
 			zoomd = 2;
 		}
+		player.x = 20;
+		player.y = 900;
+		player.facingRight = true;
 		gameObjects = [
 			new Switch(0, 140, 830, true, "#FF0000"),
 			new Switch(1, 810, 400, true, "#00FF00"),
@@ -78,7 +78,7 @@ Stages.SpadeDowntown = {
 				new DieWalking(170, 680, true, 30),
 				new CardPip(490, 660, 3, false),
 				new DieWalking(510, 680, false, 30)),
-			new BeamTurret(1680, 790, false, 0, 35),
+			new BeamTurret(1680, 790, false, 0, 35), //TODO make this not a bus
 			new Goalpost("ChanosLobby", 1970, 900, 75),
 			new Vessel("SpadeDowntownRedUpperLeft", 170, 638),
 			new Vessel("SpadeDowntownOffRed", 130, 798),
@@ -86,13 +86,10 @@ Stages.SpadeDowntown = {
 			new Vessel("SpadeDowntownAboveGreen", 790, 238),
 			new Vessel("SpadeDowntownBlackEnd", 1670, 808),
 			new Vessel("SpadeDowntownAboveTowerEntrance", 1910, 678)];
-		return {
-			mainBack : "src/Stages/SpadeDowntown/MainBack.png",
-			mainFore : "src/Stages/SpadeDowntown/MainFore.png",
-		};
 	},
 	vessels : ["SpadeDowntownRedUpperLeft", "SpadeDowntownOffRed", "SpadeDowntownGreenMiddle", "SpadeDowntownAboveGreen", "SpadeDowntownBlackEnd", "SpadeDowntownAboveTowerEntrance"],
 	previous : "SpadeCity",
 	nextDown : "ChanosLobby",
+	parDown : 900,
 	toLoad : [Switch, DieWalking, CardPip, Teion]
 }

@@ -1,10 +1,12 @@
 Stages.SkyClimb = {
 	displayName : "Sky Climb",
-	load : function() {
+	load : function(doStuff) {
 		playMusic("Reaching Altitude - Eric Matyas");
 		let B = {name:"Block",solid:true,color:"#7F7F7F"};
-		let C = {solid:true,color:"#04AAF0"}
+		let C = {solid:true,color:"#04AAF0",edge:"#005174"}
 		let _ = {name:"Air",colid:false,color:"#10A2D8"};
+		oobtopcolor = "#10A2D8";
+		oobbottomcolor = "#10A2D8";//TODO color in sides
 		staticColl =
 		[[_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
@@ -60,7 +62,10 @@ Stages.SkyClimb = {
 		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,C,C,C,_,_,_,_,_,_,_,_,_,_,_,_,_]];
-		zoom = 2;
+		if (doStuff) {
+			zoom = 2;
+			zoomd = 2;
+		}
 		player.x = 310;
 		player.y = 1060;
 		player.facingRight = true;
@@ -71,10 +76,8 @@ Stages.SkyClimb = {
 		};
 	},
 	vessels : ["SkyClimbSecretEntrance", "SkyClimbPinpoint1", "SkyClimbPinpoint2"],
-	par : 315,
-	selectX : Stages.DiamondHighway.selectX - LS_X_SPACING,
-	selectY : Stages.DiamondHighway.selectY + LS_Y_SPACING,
 	previous : "DiamondHighway",
 	nextDown : "SkyHighClimb",
+	parDown : 420,
 	toLoad : []
 }

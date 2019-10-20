@@ -74,6 +74,12 @@ Stages.ScorchedClearing = {
 		gameObjects = [
 			fwegos,
 			new FireDrawer(),
+			new CustomObject(function() {
+				if (fwegos.dead) {
+					gameObjects.push(new Goalpost("MesaCliff", 10, 280, 100));
+					player.drained = false;
+				}
+			}),
 		];
 		dynamicBackdrop = {
 			draw : function() {
@@ -82,7 +88,7 @@ Stages.ScorchedClearing = {
 			}
 		}
 	},
-	vessels : ["BurningForestFwegos1", "BurningForestFwegos2", "BurningForestFwegos3", "BurningForestFwegos4", "BurningForestFwegos5"],
+	vessels : ["ScorchedClearingFwegos1", "ScorchedClearingFwegos2", "ScorchedClearingFwegos3", "ScorchedClearingFwegos4", "ScorchedClearingFwegos5"],
 	previous : "BurningForest",
 	nextDown : "MesaCliff",
 	toLoad : [Fwegos, FireDrawer, Bettie]

@@ -84,8 +84,8 @@ Stages.BlueLakebed = {
 		];
 	},
 	vessels : ["BlueLakebedLowerRight"],
-	//par : 1020,
 	previous : "BlueLake",
 	nextDown : "VisibleStair",
+	parDown : 150,
 	toLoad : []
 }

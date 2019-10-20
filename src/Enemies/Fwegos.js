@@ -22,7 +22,7 @@ class Fwegos extends Boss {
 		this.boundRight = br;
 		this.boundTop = bt;
 		this.boundBottom = bb;
-		this.atkbox = {
+		this.bladeBox = {
 			isTouching : GameObject.prototype.isTouching,
 			width : 60,
 			height : 40
@@ -31,8 +31,8 @@ class Fwegos extends Boss {
 		this.ballCycle = 0;
 		this.collCD = 0;
 		this.update = this.updateNormal;
-		this.benchmarks = [1000,           700,            400];
-		this.specials   = [this.startRush, this.startRain, this.startRush];
+		this.benchmarks = [/*1000,           700,            400*/];
+		this.specials   = [/*this.startRush, this.startRain, this.startRush*/];
 	}
 	updateNormal() {
 		if (this.boundLeft == undefined) {
@@ -41,74 +41,60 @@ class Fwegos extends Boss {
 			this.boundTop = cameraTopBound+10;
 			this.boundBottom = cameraBottomBound-10;
 		}
-		this.atkbox.x = this.x + (this.facingRight?1:-1) * (this.atkbox.width/2);
-		this.atkbox.y = this.y;
+		this.bladeBox.x = this.x + (this.facingRight?1:-1) * (this.bladeBox.width/2);
+		this.bladeBox.y = this.y;
 		
-		if (this.attacking) {
-			if (this.attacking == FWEGOS_ATTACK_STARTUP-4) {
-				playSound(this.sfx.Blast);
+		if (this.blading) {
+			if (this.blading == this.bladeStartup) {
+				//playSound(this.sfx.Blast);
+				this.sendHurtbox(210, this.bladeBox);
 			}
-			if (this.attacking == FWEGOS_ATTACK_STARTUP) {
-				this.sendHurtbox(210, this.atkbox);
-				this.attackCD = 45;
-			}
-			this.attacking++;
-			if (this.attacking > FWEGOS_ATTACK_TIME+1)
-				this.attacking = false;
+			this.blading++;
+			if (this.blading > this.bladeStartup + this.bladeEndlag)
+				this.blading = false;
 		} else if (this.throwing) {
 			this.throwing ++;
 			if (this.throwing >= 10) {
 				gameObjects.push(new FwegBomb(this.x, this.y, 0, -5)); //TODO give actual velocity
 				this.throwing = false;
-				this.attackCD = 60;
+				this.actionCD = 60;
 			}
-		} else if (!this.grounded) {
-			
-		} else if (!this.wasGrounded) {
-			if (this.grounded) {
+		} else if (this.leaping) {
+			if (!this.grounded) {
+				
+			} else if (this.leaping == "ready") {
+				this.dx = 0;
 				gameObjects.push(new FwegBlast(this.x, this.y), new FwegWave(this.x, this.y, false), new FwegWave(this.x, this.y, true));
-				this.attackCD = 60;
+				this.leaping = 1;
+				this.actionCD = 60;
+			} else if (this.leaping < 15) {
+				this.leaping ++;
+			} else {
+				this.leaping = false;
 			}
 		} else if (!this.checkBenchmarks()) {
 			//if (this.grounded && Math.random() < .02)
 				//this.dy = -DEFAULT_JUMP_SPEED;
 			//this.facingRight = (player.x > this.x);
 			//this.dx = (this.facingRight?1:-1)*FWEGOS_BASE_SPEED;
-			this.attackCD--;
-			if (this.attackCD <= 0) {
+			this.actionCD--;
+			if (this.actionCD <= 0) {
 				if (Math.abs(this.x - player.x) >= this.jumpMinDistance) {
+					this.leaping = "ready";
 					this.dy = -this.jumpSpeed;
 					this.dx = (player.x-this.x) / (Math.abs(this.dy) * 2 / (gravity || .1));
-				} if ((player.x > this.x) == this.facingRight) {
-					
+					this.facingRight = this.dx > 0;
+				} else if (this.bladeBox.isTouching(player)) {
+					this.blading = 1;
+					this.dx = 0;
+				} else {
+					this.facingRight = (player.x > this.x);
+					this.dx = this.facingRight ? this.walkSpeed : -this.walkSpeed;
 				}
 			}
 		}
 		this.physics();
 		this.checkCollHit();
-	}
-	draw() {
-		var state;
-		if (this.hp <= 0) {
-			state = "defeated";
-		} else if (this.update != this.updateNormal) {
-			/*this.ballCycle++;
-			if (this.ballCycle > 2)
-				this.ballCycle = 0;
-			state = "Ball" + this.ballCycle;*/
-			state = "ball";
-		} else if (this.attacking) {
-			var relat = this.attacking-FWEGOS_ATTACK_STARTUP;
-			if (relat < -4)
-				state = "readying";
-			else if (relat <= 3)
-				state = "blasting"+relat;
-			else 
-				state = "standing";
-		} else
-			state = "standing";
-		drawSpriteOnStage(this.sprites[state], this.x, this.y, this.facingRight);
-		//this.state = null;
 	}
 
 	ballUp() {
@@ -196,21 +182,54 @@ class Fwegos extends Boss {
 		gameObjects.push(new FwegWave(this.x, this.boundBottom, false), new FwegWave(this.x, this.boundBottom, true));
 		playSound(this.sfx.BlastL);
 	}
+	
+	draw() {
+		var state;
+		if (this.hp <= 0) {
+			state = "defeated";
+		} else if (this.update != this.updateNormal) {
+			/*this.ballCycle++;
+			if (this.ballCycle > 2)
+				this.ballCycle = 0;
+			state = "Ball" + this.ballCycle;*/
+			state = "ball";
+		} else if (this.blading) {
+			if (this.blading < this.bladeStartup)
+				state = "bladeStartup";
+			else
+				state = "bladeSwing";
+		} else if (this.leaping) {
+			if (!this.grounded)
+				state = "leapAir";
+			else
+				state = "leapAfter";
+		} else
+			state = "standing";
+		//console.log(state);
+		drawSpriteOnStage(this.sprites[state], this.x, this.y, this.facingRight);
+		//this.state = null;
+	}
 }
 Fwegos.prototype.speciesName = "Fwegos";
 Fwegos.prototype.team = "Sqarnos";
 //Fwegos.prototype.spriteNames = ["Standing", "Readying", "Blasting-4", "Blasting-3", "Blasting-2", "Blasting-1", "Blasting0", "Blasting1", "Blasting2", "Blasting3", "Ball", "Defeated", "Shockwave"]
 Fwegos.prototype.sprites = makeSprites("src/Enemies/Fwegos.png", {
 	standing : {x:0, y:0, width:20, height:40},
-	//standing : {x:0, y:0, width:20, height:40},
-	//standing : {x:0, y:0, width:20, height:40},
+	bladeStartup : {x:70, y:40, width:40, height:40},
+	bladeSwing : {x:-25, y:40, width:90, height:40},
+	leapAir : {x:40, y:0, width:30, height:40},
+	leapAfter : {x:70, y:0, width:30, height:40},
+	wave : {x:0, y:80, width:20, height:10},
 }, false);
 Fwegos.prototype.sfxNames = ["Blast", "BlastL"]
 Fwegos.prototype.maxhp = 1300;
 Fwegos.prototype.doesGravity = true;
-Fwegos.prototype.attackCD = 0;
+Fwegos.prototype.actionCD = 0;
 Fwegos.prototype.collDamage = 90;
 Fwegos.prototype.collMaxCD = 45;
+Fwegos.prototype.bladeStartup = 45;
+Fwegos.prototype.bladeEndlag = 5;
+Fwegos.prototype.walkSpeed = 5;
 Fwegos.prototype.jumpSpeed = 10;
 Fwegos.prototype.jumpMinDistance = 200;
 Fwegos.prototype.numVessels = 5;
@@ -308,8 +327,8 @@ class FwegWave extends GameObject {
 			this.die();
 	}
 	draw() {
-		drawSpriteOnStage(Fwegos.prototype.sprites.Shockwave, this.x, this.y, this.facingRight);
+		this.drawSprite("wave");
 	}
 }
-FwegWave.prototype.team = "Sqarnos";
+FwegWave.prototype.team = Fwegos.prototype.team;
 FwegWave.prototype.sprites = Fwegos.prototype.sprites;

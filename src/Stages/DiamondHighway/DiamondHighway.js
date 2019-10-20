@@ -1,10 +1,12 @@
 Stages.DiamondHighway = {
 	displayName : "Diamond Highway",
-	load : function() {
+	load : function(doStuff) {
 		playMusic("Beatdown City - Darren Curtis");
 		let B = {name:"Block",solid:true,color:"#7F7F7F"};
 		let C = {solid:true,color:"#04AAF0"}
-		let _ = AIR;
+		let _ = {solid:false,color:"#00A2E8"};
+		oobtopcolor = "#00A2E8";
+		oobbottomcolor = "#7F7F7F";
 		staticColl =
 		[[_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,C,C,C,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
@@ -26,25 +28,37 @@ Stages.DiamondHighway = {
 		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		 [B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B]];
-		zoom = 2;
+		if (doStuff) {
+			zoom = 2;
+			zoomd = 2;
+		}
 		player.x = 2150;
 		player.y = 380;
 		player.facingRight = false;
-		gameObjects = [new MovingPlatformSpawner(2020, 330, 80, 4.5, 2020,230, 150,230, 150,50, 50,50, 50,230, -50,230), new MovingPlatformSpawner(1620, 330, 80, 4.5, 1620,230, -50,230), new MovingPlatformSpawner(1220, 330, 80, 4.5, 1220,230, -50,230), new MovingPlatformSpawner(820, 330, 80, 4.5, 820,230, -50,230), new MovingPlatformSpawner(420, 330, 80, 4.5, 420,230, -50,230), new Vessel("DiamondHighwayBelowCloud", 1870, 78), new Vessel("DiamondHighwayCage1Crouch", 920, 218), new Vessel("DiamondHighwayCage2Crouch", 560, 218), new Vessel("DiamondHighwayFinalCrouch", 40, 218), new Vessel("DiamondHighwayAllTheWay", 80, 18), new Goalpost("HeartFarms", 10, 380, 200), new Goalpost("SkyClimb", 1870, 40, 40),
+		gameObjects = [
+			new MovingPlatformSpawner(2020, 330, 80, 4.5, 2020,230, 150,230, 150,50, 50,50, 50,230, -50,230),
+			new MovingPlatformSpawner(1620, 330, 80, 4.5, 1620,230, -50,230),
+			new MovingPlatformSpawner(1220, 330, 80, 4.5, 1220,230, -50,230),
+			new MovingPlatformSpawner(820, 330, 80, 4.5, 820,230, -50,230),
+			new MovingPlatformSpawner(420, 330, 80, 4.5, 420,230, -50,230),
+			new Vessel("DiamondHighwayBelowCloud", 1870, 78),
+			new Vessel("DiamondHighwayCage1Crouch", 920, 218),
+			new Vessel("DiamondHighwayCage2Crouch", 560, 218),
+			new Vessel("DiamondHighwayFinalCrouch", 40, 218),
+			new Vessel("DiamondHighwayAllTheWay", 80, 18),
+			new Goalpost("HeartFarms", 10, 380, 200),
+			new Goalpost("SkyClimb", 1870, 40, 40),
 			new Rumble(1680, 1960, 260, 380, true, doNothing, new DieWalking(1810, 380, false, 25), new DieWalking(1830, 380, true, 25)),
 			new Rumble(1280, 1560, 260, 380, true, doNothing, new CardPip(1300, 300), new CardPip(1540, 300)),
 			new Rumble(880, 1160, 260, 380, true, doNothing, new CardPip(900, 300), new CardPip(1140, 300)),
 			new Rumble(480, 760, 260, 380, true, doNothing, new DieWalking(610, 380, true, 15), new CardPip(500, 290), new CardPip(740, 290)),
 		];
-		return {
-			mainBack : "src/Stages/DiamondHighway/MainBack.png",
-			mainFore : "src/Stages/DiamondHighway/MainFore.png",
-		};
 	},
 	vessels : ["DiamondHighwayBelowCloud", "DiamondHighwayCage1Crouch", "DiamondHighwayCage2Crouch", "DiamondHighwayFinalCrouch", "DiamondHighwayAllTheWay"],
-	par : 465,
 	previous : "ClubGardens",
 	nextDown : "HeartFarms",
+	parDown : 540,
 	nextLeft : "SkyClimb",
+	parLeft : 330,
 	toLoad : [MovingPlatform, DieWalking, CardPip]
 }

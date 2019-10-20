@@ -94,5 +94,6 @@ Stages.VisibleStair = {
 	vessels : ["VisibleStairFlipAlcoveRight", "VisibleStairCaseRight"],
 	previous : "BlueLakebed",
 	nextDown : "AqrosAntechamber",
+	parDown : 615,
 	toLoad : [Mirror]
 }

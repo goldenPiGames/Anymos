@@ -17,7 +17,13 @@ function loadGame() {
 		}
 		for (nom in Stages) {
 			var stagt = Stages[nom];
-			if (stagt.previous) {
+			if (stagt.nextDown)
+				Stages[stagt.nextDown].bestTo = stagt.bestDown;
+			if (stagt.nextLeft)
+				Stages[stagt.nextLeft].bestTo = stagt.bestLeft;
+			if (stagt.nextRight)
+				Stages[stagt.nextRight].bestTo = stagt.bestRight;
+			/*if (stagt.previous) {
 				var froms = Stages[stagt.previous];
 				if (froms.nextDown == nom)
 					stagt.bestTo = froms.bestDown;
@@ -25,7 +31,7 @@ function loadGame() {
 					stagt.bestTo = froms.bestLeft;
 				if (froms.nextRight == nom)
 					stagt.bestTo = froms.bestRight;
-			}
+			}*/
 		}
 		firstRun = stuff.firstRun;
 		if (firstRun)

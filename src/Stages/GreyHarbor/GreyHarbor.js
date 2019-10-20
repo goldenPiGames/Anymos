@@ -1,6 +1,6 @@
 Stages.GreyHarbor = {
 	displayName : "Grey Harbor",
-	load : function() {
+	load : function(doStuff) {
 		playMusic("Tempest - Darren Curtis");
 		let B = BLOCK;
 		let W = {name:"Water",solid:false,hazard:1,color:"#4040BF"};
@@ -25,7 +25,10 @@ Stages.GreyHarbor = {
 		 [B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,W,W,W,W,U,W,W,W,W,U,W,W,W,W,W,W,W,W,W,W,W,W,W,W],
 		 [B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,W,W,W,W,U,W,W,W,W,U,W,W,W,W,W,W,W,W,W,W,W,W,W,W],
 		 [B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,D,D,D,D,U,D,D,D,D,U,D,D,D,D,D,D,D,D,D,D,D,D,D,D]];
-		zoom = 2;
+		if (doStuff) {
+			zoom = 2;
+			zoomd = 2;
+		}
 		player.x = 30;
 		player.y = 220;
 		player.facingRight = true;
@@ -39,15 +42,11 @@ Stages.GreyHarbor = {
 				new DialogLine("Caps", "Well, you see... I'd love to help you, but unfortunately, I have a bit of an issue with a giant spherical shark with a frickin' laser beam on its head, so trying to launch a ship would be risky, to say the least.", "#BFBFBF"),
 				new DialogLine("Anymos", "I'm on it.", "#00FFFF"),
 				new DialogLine("Caps", "I'll start getting a boat ready. Let's have a nice chat on the boat once we launch, eh?", "#BFBFBF"))
-			];
-		return {
-			mainBack : "src/Stages/GreyHarbor/MainBack.png",
-			mainFore : "src/Stages/GreyHarbor/MainFore.png",
-		};
+		];
 	},
 	vessels : ["GreyHarborOut", "GreyHarborFricchee"],
-	par : 480,
 	previous : "WhitePlains",
 	nextDown : "ZagadCrossing",
+	parDown : 450,
 	toLoad : [Fricchee, Teion]
 }

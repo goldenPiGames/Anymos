@@ -4,8 +4,9 @@ Stages.ClearCanyon = {
 		playMusic("Remote Island - Eric Matyas");
 		let G = {solid:true,color:"#228B22"};
 		let B = {solid:true,color:"#20202080"};
-		let C = {solid:true,color:"#04AAF0"};
+		let C = {solid:true,color:"#04AAF0",edge:"#005174"};
 		let _ = {solid:false,color:"#00A2E8"};
+		oobtopcolor = "#10A2D8";
 		staticColl =
 		[[_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
@@ -29,9 +30,6 @@ Stages.ClearCanyon = {
 		 [G,G,G,G,G,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B,B,B,B,B],
 		 [G,G,G,G,G,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,C,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B,B,B,B,B],
 		 [G,G,G,G,G,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B,B,B,B,B]];
-		player.x = 1850;
-		player.y = 200;
-		player.facingRight = false;
 		if (doStuff) {
 			zoomd = 2;
 			zoom = 2;
@@ -42,6 +40,9 @@ Stages.ClearCanyon = {
 				new DialogLine("Syklos", "I have created a number of solid platforms of solid air for you to use in crossing the canyon. They are very light, and it may be difficult to see them.", SYKLOS_COLOR),
 				new DialogLine("Syklos", "But I must also request of you a favor. I am currently being held in confinement somewhere in the skies around the Diamond Highway. I would ask that you please rescue me from my predicament.", SYKLOS_COLOR));
 		}
+		player.x = 1850;
+		player.y = 200;
+		player.facingRight = false;
 		gameObjects = [
 			new Vessel("ClearCanyonShortJump", 1280, 188),
 			new Vessel("ClearCanyonAbove", 1140, 48),
@@ -49,16 +50,10 @@ Stages.ClearCanyon = {
 			new Hoverie("ClearCanyonCandace", 330, 218, true),
 			new Goalpost("ClubGardens", 10, 200, 80)
 		];
-		return {
-			mainBack : "src/Stages/ClearCanyon/MainBack.png",
-			mainFore : "src/Stages/ClearCanyon/MainFore.png",
-		};
 	},
 	vessels : ["ClearCanyonShortJump", "ClearCanyonAbove", "ClearCanyonBelow", "ClearCanyonCandace"],
-	selectX : Stages.BlackMountain.selectX,
-	selectY : Stages.BlackMountain.selectY + LS_Y_SPACING,
-	par : 480,
 	previous : "BlackMountain",
 	nextDown : "ClubGardens",
+	parDown : 480,
 	toLoad : [Hoverie]
 }

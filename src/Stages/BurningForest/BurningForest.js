@@ -61,7 +61,7 @@ Stages.BurningForest = {
 		];
 		dynamicBackdrop = {
 			draw : function() {
-				ctx.fillStyle = "#87CEEB"
+				ctx.fillStyle = "#87CEEB";
 				ctx.fillRect(0, 0, canvas.width, canvas.height);
 			}
 		}
@@ -69,5 +69,6 @@ Stages.BurningForest = {
 	vessels : ["BurningForestHollow", "BurningForestOverBack1", "BurningForestOverBack2", "BurningForestAboveGoalpost"],
 	previous : "AnymisLanding",
 	nextDown : "ScorchedClearing",
+	parDown : 585,
 	toLoad : [Hoverie, FireDrawer]
 }

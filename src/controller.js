@@ -1,5 +1,5 @@
 const COMMAND_LIST = ["left", "right", "up", "down", "jump", "attack", "shoot", "special", "interact", "switch", "zoomOut", "zoomIn", "minimap", "trueSight", "pause", "restart", "any"]
-const GAMEPAD_COMMANDS = ["jump", "attack", "shoot", "switch", "interact", "special", "trueSight", "debug", "restart", "pause", "?", "?"]//, "up", "down", "left", "right"];
+const GAMEPAD_COMMANDS = ["jump", "attack", "shoot", "switch", "interact", "special", "?", "debug", "restart", "pause", "?", "?"]//, "up", "down", "left", "right"];
 var usingGamepad = false;
 var controller = {
 	keyCodeToCommand: function(keyCode) {
@@ -16,8 +16,6 @@ var controller = {
 			case 81 : return "switch";
 			case 189 : return "zoomOut";
 			case 187 : return "zoomIn";
-			case 48 : return "minimap";
-			case 17 : return "trueSight";
 			case 80 : return "pause";
 			case 82 : return "restart";
 			case 192 : return "debug"
@@ -27,7 +25,7 @@ var controller = {
 	doKey : function(name, pressed) {
 		if (pressed && !this[name])
 			this[name+"Clicked"] = true;
-		this[name] = pressed
+		this[name] = pressed;
 	},
 	unClick : function() {
 		COMMAND_LIST.forEach(function(nom) {

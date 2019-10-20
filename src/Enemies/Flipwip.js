@@ -32,7 +32,7 @@ class Flipwip extends Enemy {
 		} else if (this.cycle > 0) {
 			
 		} else {
-			this.cycle = FLIPWIP_APPEAR_TIME + Math.floor((Math.random()+.5) * this.avgdelay);
+			this.cycle = FLIPWIP_APPEAR_TIME + this.avgdelay;
 		}
 	}
 	draw() {

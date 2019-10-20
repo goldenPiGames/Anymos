@@ -54,8 +54,8 @@ Stages.CyanRainforest = {
 		};
 	},
 	vessels : ["CyanRainforestCosmo", "CyanRainforestLowerRight", "CyanRainforestFruit", "CyanRainforestDon", "CyanRainforestUpperLeft", "CyanRainforestKathy"],
-	par : 495,
 	previous : "GreenMaze",
 	nextDown : "BlueLake",
+	parDown : 1065,
 	toLoad : [Walkie, Hoverie]
 }

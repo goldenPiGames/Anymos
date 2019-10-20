@@ -29,13 +29,7 @@ function doLevelSelect() {
 		dialog.begin(
 			new DialogLine("Anymos", "Where am I? Is this death?", "#00FFFF"),
 			new DialogLine("Anymos", "...No, this isn't death. I am... above such things. I have the power to try again. I have the power to do everything.", "#00FFFF"),
-			function(){zoom = 1},
-			new DialogLine("Anymos", "This is a visualization of branching timelines", "#00FFFF"),
-			new DialogLine("Anymos", "When I start a stage, the amount of time I have is equal to "+displayAnym(STARTING_ANYM)+", plus "+displayAnym(30)+" for each Vessel I've collected, minus my best time from each stage leading up to it.", "#00FFFF"),
-			new DialogLine("Anymos", "Whenever I don't have enough time to complete the next stage, there are two things I can do: improve my time on previous stages, or collect more Vessels on any of the stages.", "#00FFFF"),
-			new DialogLine("Anymos", "When I try to get a better time on previous stages, only my fastest run counts.", "#00FFFF"),
-			new DialogLine("Anymos", "As long as I collect a vessel and then reach any goalpost without dying, that vessel is saved permanently and I don't need to collect it again on other visits to the stage.", "#00FFFF"),
-			new DialogLine("Anymos", "If I've collected all of the vessels in a given stage, that stage shows up as cyan instead of white.", "#00FFFF"),
+			()=>levelSelect.showTutorial(),
 		);
 		saveGame();
 	}
@@ -45,7 +39,10 @@ function doLevelSelect() {
 var levelSelect = {
 	update : function() {
 		if (controller.jumpClicked && isStageAvailable(currentStageName)) {
-			loadStage(currentStageName, true);
+			if (Stages[currentStageName].available < Stages[currentStageName].parDown)
+				runnee = impossibleLevelConfirm;
+			else
+				loadStage(currentStageName, true);
 			return;
 		} else if (controller.upClicked && isStageAvailable(Stages[currentStageName].previous))
 			currentStageName = Stages[currentStageName].previous;
@@ -58,6 +55,8 @@ var levelSelect = {
 		else if (controller.attackClicked) {
 			doMainMenu();
 			return;
+		} else if (controller.restartClicked) {
+			this.showTutorial();
 		}
 		cameraFocus.x = Stages[currentStageName].selectX;
 		cameraFocus.y = Stages[currentStageName].selectY + LS_CAMYOFF;
@@ -119,6 +118,33 @@ var levelSelect = {
 				ctx.fillText(displayAnym(stag.available), infox+LS_INFO_WIDTH-10, 330);
 				ctx.fillStyle = "#FF0000";
 				ctx.fillText(displayAnym(stag.cumUsed), infox+LS_INFO_WIDTH-10, 280);
+				
+				ctx.fillStyle = "#FFFFFF";
+				if (stag.nextDown) {
+					ctx.textAlign = "left";
+					ctx.fillText("Down Best:", infox+10, 400);
+					ctx.fillText("Down Par:", infox+10, 440);
+					ctx.textAlign = "right";
+					ctx.fillText(displayAnym(stag.bestDown), infox+LS_INFO_WIDTH-10, 400);
+					ctx.fillText(displayAnym(stag.parDown), infox+LS_INFO_WIDTH-10, 440);
+				}
+				
+				if (stag.nextLeft) {
+					ctx.textAlign = "left";
+					ctx.fillText("Left Best:", infox+10, 500);
+					ctx.fillText("Left Par:", infox+10, 540);
+					ctx.textAlign = "right";
+					ctx.fillText(displayAnym(stag.bestLeft), infox+LS_INFO_WIDTH-10, 500);
+					ctx.fillText(displayAnym(stag.parLeft), infox+LS_INFO_WIDTH-10, 540);
+				}
+				if (stag.nextRight) {
+					ctx.textAlign = "left";
+					ctx.fillText("Right Best:", infox+10, 600);
+					ctx.fillText("Right Par:", infox+10, 640);
+					ctx.textAlign = "right";
+					ctx.fillText(displayAnym(stag.bestRight), infox+LS_INFO_WIDTH-10, 600);
+					ctx.fillText(displayAnym(stag.parRight), infox+LS_INFO_WIDTH-10, 640);
+				}
 			} else {
 				
 			}
@@ -161,5 +187,43 @@ var levelSelect = {
 			this.refreshRec(stags.nextLeft);
 		if (stags.nextRight)
 			this.refreshRec(stags.nextRight);
+	},
+	showTutorial : function() {
+		dialog.begin(
+			new DialogLine("Anymos", "This is a visualization of branching timelines", "#00FFFF"),
+			new DialogLine("Anymos", "When I start a stage, the amount of time I have is equal to "+displayAnym(STARTING_ANYM)+", plus "+displayAnym(VESSEL_VALUE)+" for each Vessel I've collected, minus my best time from each stage leading up to it.", "#00FFFF"),
+			new DialogLine("Anymos", "Whenever I don't have enough time to complete the next stage, there are two things I can do: improve my time on previous stages, or collect more Vessels on any of the stages.", "#00FFFF"),
+			new DialogLine("Anymos", "When I try to get a better time on previous stages, only my fastest run counts.", "#00FFFF"),
+			new DialogLine("Anymos", "When collecting vessels: As long as I collect a vessel and then reach any goalpost without dying, that vessel is saved permanently, and I can never lose it. I don't need to collect it again on other visits to the stage.", "#00FFFF"),
+			new DialogLine("Anymos", "I also don't need to collect all the vessels on a single run. I can come back to collect the ones I missed.", "#00FFFF"),
+			new DialogLine("Anymos", "If I've collected all of the vessels in a given stage, that stage shows up as cyan instead of white.", "#00FFFF"),
+		);
+	},
+}
+
+var impossibleLevelConfirm = {
+	update : function() {
+		if (controller.attackClicked)
+			runnee = levelSelect;
+		else if (controller.jumpClicked) {
+			loadStage(currentStageName, true);
+		}
+	},
+	draw : function() {
+		levelSelect.draw();
+		ctx.lineWidth = 4;
+		ctx.strokeStyle = "#FFFFFF";
+		ctx.strokeRect(canvas.width/2-400, canvas.height/2-100, 800, 200);
+		ctx.fillStyle = "#000000";
+		ctx.fillRect(canvas.width/2-400, canvas.height/2-100, 800, 200);
+		ctx.fillStyle = "#FF0000";
+		ctx.textAlign = "center";
+		ctx.font = "40px "+getFont();
+		ctx.fillText("Your Anym is less than par.", canvas.width/2, canvas.height/2 - 55);
+		ctx.fillText("You most likely cannot finish.", canvas.width/2, canvas.height/2 - 5);
+		let conftxt = usingGamepad ? "A: Proceed anyway" : "A: Proceed anyway";
+		ctx.fillText(conftxt, canvas.width/2, canvas.height/2 + 45);
+		let cantxt = usingGamepad ? "B: Cancel" : "S: Cancel";
+		ctx.fillText(cantxt, canvas.width/2, canvas.height/2 + 95);
 	}
 }

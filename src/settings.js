@@ -41,8 +41,8 @@ const SETTINGS_INFO = {
 		name : "Profanity",
 		description : "Slightly changes some dialog.",
 		choices : [
-			{name:"Off", description:"Safe for your ears."},
-			{name:"On", description:"Not so much."},
+			{name:"Clean", description:"Safe for your pure ears."},
+			{name:"Profane", description:"Not always so much."},
 		],
 		default:0,
 	},

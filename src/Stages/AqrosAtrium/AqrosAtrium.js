@@ -79,5 +79,6 @@ Stages.AqrosAtrium = {
 	vessels : ["AqrosAtriumUpperLeft", "AqrosAtriumCenterLeft", "AqrosAtriumCenterRight", "AqrosAtriumLowerRight"],
 	previous : "AqrosAntechamber",
 	nextDown : "AqrosCorridor",
+	parDown : 900,
 	toLoad : [Mirror, MovingPlatform, Switch]
 }

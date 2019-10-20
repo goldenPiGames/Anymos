@@ -64,18 +64,22 @@ Stages.BlackMountain = {
 		player.x = 1270;
 		player.y = 1020;
 		player.facingRight = false;
-		gameObjects = [new Vessel("BlackMountainRightLower", 970, 768), new Vessel("BlackMountainRightLowerFurther", 840, 768), new Vessel("BlackMountainRightUpper", 730, 558), new Vessel("BlackMountainAbove", 650, 18), new Vessel("BlackMountainTop", 670, 398), new Vessel("BlackMountainLeftLower", 350, 878), new Goalpost("ClearCanyon", 10, 1020, 140), new Goalpost("BlackCaves", 690, 1020, 120)];
-		return {
-			mainBack : "src/Stages/BlackMountain/MainBack.png",
-			mainFore : "src/Stages/BlackMountain/MainFore.png",
-		};
+		gameObjects = [
+			new Vessel("BlackMountainRightLower", 970, 768),
+			new Vessel("BlackMountainRightLowerFurther", 840, 768),
+			new Vessel("BlackMountainRightUpper", 730, 558),
+			new Vessel("BlackMountainAbove", 650, 18),
+			new Vessel("BlackMountainTop", 670, 398),
+			new Vessel("BlackMountainLeftLower", 350, 878),
+			new Goalpost("ClearCanyon", 10, 1020, 140),
+			new Goalpost("BlackCaves", 690, 1020, 120)
+		];
 	},
 	vessels : ["BlackMountainRightLower", "BlackMountainRightLowerFurther", "BlackMountainRightUpper", "BlackMountainAbove", "BlackMountainTop", "BlackMountainLeftLower"],
-	selectX : Stages.RedValley.selectX,
-	selectY : Stages.RedValley.selectY + LS_Y_SPACING,
-	par : 480,
 	previous : "RedValley",
 	nextDown : "ClearCanyon",
+	parDown : 480,
 	nextRight : "BlackCaves",
+	parRight : 525,
 	toLoad : []
 }

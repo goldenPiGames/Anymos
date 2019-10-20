@@ -63,7 +63,7 @@ Stages.MesaCliff = {
 		 [R,R,R,R,R,R,R,R,R,R,R,R,R,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		 [R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R],
 		 [R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R]];
-		if (doStuff){
+		if (doStuff)  {
 			zoom=2;
 			zoomd=2;
 		}
@@ -72,8 +72,7 @@ Stages.MesaCliff = {
 		player.facingRight = false;
 		player.drained = false;
 		gameObjects = [
-			new Goalpost("MesaCliff", 10, 240, 160),
-			{update:function(){player.takeDamage(player.exposureToSky()*5)},draw:doNothing},
+			new Goalpost("StormyMesa", 10, 240, 160),
 		];
 		if (doStuff)
 			dialog.begin(new DialogLine("Anymos", "This rain has an evil electrical charge. But oddly enough, having shelter over my head feels... nice and relaxing.", "#00FFFF"));
@@ -84,7 +83,7 @@ Stages.MesaCliff = {
 	nextDown : "StormyMesa",
 	toLoad : [MovingPlatform]
 }
-function StormBackdrop() {
+/*function StormBackdrop() {
 	this.foreCloudsX = 0;
 	this.midCloudsX = 0;
 	this.timeSinceBolt = 50;
@@ -122,4 +121,4 @@ StormBackdrop.prototype.draw = function() {
 	}
 	if (this.timeSinceBolt > 120 && Math.random() < .01) 
 		this.timeSinceBolt = 0;
-}
+}*/

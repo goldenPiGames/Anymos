@@ -54,7 +54,7 @@ var mainMenu = {
 		{
 			text : "New Game",
 			func : function() {
-				if (!localStorage.getItem("YellowWoodBest")) {
+				if (firstRun) {
 					resetSave();
 					firstRun = true;
 					loadStage("TutorialPrelude");

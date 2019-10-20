@@ -46,10 +46,6 @@ Stages.BlueLake = {
 		 [B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,W,_,_,W,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B],
 		 [B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,W,_,_,W,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B],
 		 [B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,_,_,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B]];
-		gravity = .5;
-		player.x = 20;
-		player.y = 560;
-		player.facingRight = true;
 		if (doStuff) {
 			zoomd = 2;
 			zoom = 2;
@@ -59,6 +55,9 @@ Stages.BlueLake = {
 				new DialogLine("Anymos", "Last I remember, the water of this lake was not only clean and pure, but was a place where something good was venerated...", "#00FFFF"),
 				new DialogLine("Anymos", "Wait, I remember? I remember? I don't remember much as far as details... but there's definitely something very wrong about the state of the lake.", "#00FFFF"));
 		}
+		player.x = 20;
+		player.y = 560;
+		player.facingRight = true;
 		gameObjects = [new Door(0, 680, 580, 40, 20), new Door(1, 680, 600, 80, 20),
 			new Vessel("BlueLakeLeftTowerCupboard", 230, 298),
 			new Vessel("BlueLakeAboveLeftTower", 260, 18),
@@ -68,15 +67,12 @@ Stages.BlueLake = {
 			new Switch(0, 270, 210, true, "#0000FF"),
 			new Switch(1, 1090, 210, true, "#808080"),
 			new RainGenerator(20, 15), new Goalpost("MagentaTown", 1280, 560, 100), new Goalpost("BlueLakebed", 680, 760, 100)];
-		return {
-			mainBack : "src/Stages/BlueLake/MainBack.png",
-			mainFore : "src/Stages/BlueLake/MainFore.png",
-		};
 	},
 	vessels : ["BlueLakeLeftTowerCupboard", "BlueLakeAboveLeftTower", "BlueLakeRightTowerCrawl", "BlueLakeAboveRightTower", "BlueLakeIntoHole"],
-	//par : 1040,
 	previous : "CyanRainforest",
-	nextLeft : "BlueLakebed",
 	nextDown : "MagentaTown",
+	parDown : 435,
+	nextLeft : "BlueLakebed",
+	parLeft : 1020,
 	toLoad : [Switch]
 }

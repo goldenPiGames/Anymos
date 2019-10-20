@@ -5,7 +5,7 @@ Stages.SPDAirport = {
 		let C = {name:"Concrete",solid:true,color:"#7F7F7F",leafy:false};
 		let S = {name:"Concrete Secret",solid:false,color:"#878787",leafy:false};
 		let _ = {name:"Walls",solid:false,color:"#BFBFBF"};
-		staticColl =
+		staticColl =//TODO redraw, Possibly remove or overhaul.
 		[[_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C],
 		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,C,_,_,_,_,_,_,C,_,_,_,_,_,_,_,C,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,C],
 		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,C,_,_,_,_,_,_,C,_,_,_,_,_,_,_,C,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,C],
@@ -66,8 +66,8 @@ Stages.SPDAirport = {
 		switchColors = ["#808080"];
 	},
 	vessels : [],
-	par : 515,
 	previous : "SpadeCity",
 	nextDown : "FlightToAnymis",
+	parDown : 360,
 	toLoad : [MovingPlatform, Teion]
 }

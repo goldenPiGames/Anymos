@@ -147,4 +147,4 @@ Fadour.prototype.sprites = makeSprites("src/Enemies/Fadour.png", {
 Fadour.prototype.width = 32;
 Fadour.prototype.height = 32;
 Fadour.prototype.maxhp = 750;
-Fadour.prototype.numVessels = 3;
+Fadour.prototype.numVessels = 5;

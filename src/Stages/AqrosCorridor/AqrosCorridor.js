@@ -1,6 +1,6 @@
 Stages.AqrosCorridor = {
 	displayName : "Aqros' Corridor",
-	load : function() {
+	load : function(doStuff) {
 		playMusic("Underwater Coolness - Eric Matyas");
 		let B = {solid:true,color:"#000080"}
 		let W = {name:"Water",solid:false,hazard:14,color:"#276383"};
@@ -25,21 +25,26 @@ Stages.AqrosCorridor = {
 		 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
 		 [B,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,B],
 		 [B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B]];
-		zoom = 2;
+		if (doStuff) {
+			zoom = 2;
+			zoomd = 2;
+		}
 		player.x = 1630;
 		player.y = 220;
 		player.facingRight = false;
 		player.special = specialReflector;
-		gameObjects = [new Mirror(420, 260, 240), new Mirror(820, 260, 240), new Mirror(1220, 260, 240), new Vessel("AqrosCorridorUpperRight", 1608, 40), new Vessel("AqrosCorridorLowerRight", 1610, 298), new Vessel("AqrosCorridorLowerLeft", 30, 298),
+		gameObjects = [
+			new Mirror(420, 260, 240),
+			new Mirror(820, 260, 240),
+			new Mirror(1220, 260, 240),
+			new Vessel("AqrosCorridorUpperRight", 1608, 40),
+			new Vessel("AqrosCorridorLowerRight", 1610, 298),
+			new Vessel("AqrosCorridorLowerLeft", 30, 298),
 			new Goalpost("AqrosSanctum", 10, 220, 90)];
-		return {
-			mainBack : "src/Stages/AqrosCorridor/MainBack.png",
-			mainFore : "src/Stages/AqrosCorridor/MainFore.png",
-		};
 	},
 	vessels : ["AqrosCorridorUpperRight", "AqrosCorridorLowerRight", "AqrosCorridorLowerLeft"],
-	par : 870,
 	previous : "AqrosAtrium",
 	nextDown : "AqrosSanctum",
+	parDown : 240,
 	toLoad : [Mirror]
 }

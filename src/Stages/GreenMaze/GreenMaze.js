@@ -54,16 +54,12 @@ Stages.GreenMaze = {
 			new Hoverie("GreenMazeHelen", 300, 220, true),
 			new Goalpost("CyanRainforest", 650, 400, 60)];
 		dialog.begin(new DialogLine("Anymos", "This is an oddly mazelike, organized forest. My vision is restricted, so I can't zoom out.", "#00FFFF"));
-		return {
-			mainBack : "src/Stages/GreenMaze/MainBack.png",
-			mainFore : "src/Stages/GreenMaze/MainFore.png",
-		};
 	},
 	vessels : ["GreenMazeUpperLeft", "GreenMazeHelen", "GreenMazeUpperRight", "GreenMazeLowerLeft", "GreenMazeLowerRight", "GreenMazeWulfgar"],
 	selectX : 1.5*LS_X_SPACING,
 	selectY : Stages.YellowWood.selectY + LS_Y_SPACING,
-	par : 225,
 	previous : "YellowWood",
 	nextDown : "CyanRainforest",
+	parDown : 495,
 	toLoad : [Walkie, Hoverie]
 }
