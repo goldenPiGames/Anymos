@@ -31,7 +31,6 @@ class AnymosPlayer extends Enemy {
 			else if (controller.shoot)
 				this.shooting = true;
 		}
-		if (this.flashing) this.flashing = Math.max(this.flashing - FLASH_REDUCE_RATE, 0);
 		if (this.special) {
 			this.special.update(this);
 		}
@@ -173,7 +172,6 @@ AnymosPlayer.prototype.playerControlled = true;
 AnymosPlayer.prototype.state = "standing";
 AnymosPlayer.prototype.stateCycle = 0;
 AnymosPlayer.prototype.lastState = "standing";
-AnymosPlayer.prototype.flashing = 0;
 
 AnymosPlayer.prototype.sprites = makeSprites("src/Anymos.png", {
 	standing0 : {x:0, y:0, width:20, height:40},

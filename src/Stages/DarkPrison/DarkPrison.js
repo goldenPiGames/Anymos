@@ -1,4 +1,4 @@
-Stages.BlackPrison = {
+Stages.DarkPrison = {
 	displayName : "Black Prison",
 	load : function(doStuff) {
 		playMusic("The Darkness Below - Eric Matyas");
@@ -9,9 +9,12 @@ Stages.BlackPrison = {
 		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		 [B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B]];
-		gravity = .5;
-		zoom = 2;
-		minZoom = 2;
+		if (doStuff) {
+			zoom = 2;
+			minZoom = 2;
+			dialog.begin(new DialogLine("Naluxos", "I'm right back here in this cage, but watch out! The thing that captured me is still around here somewhere...", "#FFFFFF"),
+				new DialogLine("Naluxos", "But on the bright side, I can illuminate the cave here.", "#FFFFFF"));
+		}
 		player.x = 10;
 		player.y = 60;
 		player.facingRight = true;
@@ -36,16 +39,13 @@ Stages.BlackPrison = {
 				new DialogLine("Naluxos", "Wait, what was that?", "#FFFFFF"),
 				new DialogLine("???", MERGE_TEXT2, "#00FFFF"),
 				new DialogLine("Naluxos", "Isn't that your voice, Anymos? But it's not coming from you...", "#FFFFFF"),
-				function(){gameObjects.push(new EndLight("EndNaluxosSavior", 300, 60))},
+				()=>gameObjects.push(new EndLight("EndNaluxosSavior", 300, 60)),
 				new DialogLine("???", MERGE_TEXT3, "#00FFFF"),
 				new DialogLine("Anymos", "...I understand now. It's time to go, Naluxos.", "#00FFFF"))];
-		if (doStuff)
-			dialog.begin(new DialogLine("Naluxos", "I'm right back here in this cage, but watch out! The thing that captured me is still around here somewhere...", "#FFFFFF"),
-				new DialogLine("Naluxos", "But on the bright side, I can illuminate the cave here.", "#FFFFFF"));
 	},
 	vessels : ["BlackPrisonDrrk1", "BlackPrisonDrrk2", "BlackPrisonDrrk3", "BlackPrisonDrrk4", "BlackPrisonDrrk5"],
 	par : 1890,
-	previous : "BlackCaves",
+	previous : "DarkCaverns",
 	nextDown : "EndNaluxosSavior",
 	toLoad : [Drrk, Naluxos]
 }
@@ -54,5 +54,5 @@ Stages.EndNaluxosSavior = {
 	displayName : "End: Naluxos' Savior",
 	end : true,
 	//par : 855,
-	previous : "BlackPrison",
+	previous : "DarkPrison",
 }

@@ -11,9 +11,10 @@ const FLASH_REDUCE_RATE = .05;
 var specialFlash = {
 	name : "Naluxos' Flash",
 	update : function() {
+		this.active = Math.max(0, this.active - FLASH_REDUCE_RATE);
 		if (controller.specialClicked) {
-			used += 30;
-			player.flashing = 1;
+			used += 60;
+			this.active = 1;
 		}
 	}
 }

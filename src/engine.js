@@ -17,7 +17,6 @@ var engine = {
     frameDelay : 1000 / FPS,
 	particles : [],
 	run : function() {
-		var thisser = this;
 		var desiredTime = Date.now() + this.frameDelay;
 		controller.fromGamepad();
 		if (dialogActive)

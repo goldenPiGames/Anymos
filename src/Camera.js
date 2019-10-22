@@ -14,6 +14,7 @@ var cameraBottomBound = 900;
 var oobtopcolor = "#000000";
 var oobbottomcolor = "#000000";
 var dynamicBackdrop = null;
+var dynamicForeground = null;
 
 function drawStageBack() {
 	if (dynamicBackdrop)
@@ -31,9 +32,9 @@ function drawStageBack() {
 	drawOnStage(stageImages.mainBack, 0, 0, stageImages.mainBack.width, stageImages.mainBack.height);
 }
 function drawStageFore() {
-	ctx.globalAlpha = 1 - player.flashing;
 	drawOnStage(stageImages.mainFore, 0, 0, stageImages.mainFore.width, stageImages.mainFore.height);
-	ctx.globalAlpha = 1;
+	if (dynamicForeground)
+		dynamicForeground.draw();
 }
 
 function updateZoom() {

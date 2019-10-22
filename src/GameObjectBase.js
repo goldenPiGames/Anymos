@@ -136,6 +136,9 @@ class GameObject {
 		}
 		return hit;
 	}
+	distanceTo(target) {
+		return Math.sqrt(Math.pow(this.x-target.x, 2) + Math.pow(this.y-target.y, 2))
+	}
 	nearestEnemy() {
 		var sof = null;
 		var dist = Infinity;
@@ -144,7 +147,7 @@ class GameObject {
 		var thisser = this;
 		all.forEach(function(oj) {
 			if (oj.hittable && oj.team != thisser.team) {
-				var cdist = Math.sqrt(Math.pow(thisser.x-oj.x, 2) + Math.pow(thisser.y-oj.y, 2));
+				var cdist = this.distanceTo(oj);;
 				//console.log(Math.pow(thisser.x-oj.x, 2), Math.pow(thisser.y-oj.y, 2))
 				if (cdist < dist) {
 					dist = cdist;
