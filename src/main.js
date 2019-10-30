@@ -1,5 +1,7 @@
 var canvas;
 var ctx;
+var fcanvas;
+var fctx;
 //var stage;
 const MISC_SPRITE_NAMES = ["MainMenuLogo", "Selector", "Paused", "SelectStage", "SelectStageNo", "SelectStage100", "SelectEnd", "SelectEndNo", "SelectCorners", "Gamepad"]
 var miscSprites;
@@ -10,7 +12,7 @@ var miscSFX = {};
 var firstRun = false;
 var forReal = true;
 const SYKLOS_COLOR = "#00A2E8";
-var usingPizz = (settings.sfxSystem);
+var usingPizz = settings.sfxSystem;
 
 //var stageBackground;
 
@@ -18,11 +20,18 @@ function begin() {
 	eventCatcherDiv = document.getElementById("EventCatcher");
     // eventCatcherDiv events go here
 	
-	canvas = document.getElementById("GraphicsBox");
+	canvas = document.getElementById("GameCanvas");
 	ctx = canvas.getContext("2d");
 	ctx.imageSmoothingEnabled = false;
 //	ctx.mozImageSmoothingEnabled = false;
 	ctx.webkitImageSmoothingEnabled = false;
+	
+	fcanvas = document.getElementById("ForeCanvas");
+	fctx = fcanvas.getContext("2d");
+	fctx.imageSmoothingEnabled = false;
+//	fctx.mozImageSmoothingEnabled = false;
+	fctx.webkitImageSmoothingEnabled = false;
+	
 	initMusic();
 	engine.run();
 	loadGame();

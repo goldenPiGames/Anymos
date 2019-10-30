@@ -13,7 +13,6 @@
 				-ms-interpolation-mode: nearest-neighbor; 
 			}
 		</style>
-		<!-- <script src='https://cdn1.kongregate.com/javascripts/kongregate_api.js'></script> -->
         <script>
 			var player = {};
 			const LS_X_SPACING = 10;
@@ -24,8 +23,11 @@
 			var Stages = {};
 			function doNothing(){};
 			var GameObjectBase = {};
-			var Aapew, AqrosEvil, Baron, Bettie, Bolizos, Bouncie, CardPip, ChanmotePickup, ChansykShuffler, DieWalking, Door, DoubleJumpPickup, Drrk, Enemy, Fadour, FireDrawer, Flipwip, Fricchee, Fwegos, Hoverie, Mirror, Mkair, MovingPlatform, Naluxos, Parashoop, SinusoidalPlatform, SnakeEyes, Spinnie, Switch, Syklos, Teion, Walkie, Wallie;
+			var Aapew, AqrosEvil, Baron, Bettie, Bolizos, Bouncie, CardPip, ChanmotePickup, ChansykShuffler, DieWalking, Door, DoubleJumpPickup, Drrk, Enemy, Fadour, FireDrawer, Flipwip, Fricchee, Fwegos, Hoverie, Mirror, Mkair, MovingPlatform, Naluxos, Parashoop, SinusoidalPlatform, SnakeEyes, Spinnie, Switch, Syklos, Teion, Vessel, Walkie, Wallie;
+			//function makeImage(){};
 		</script>
+		
+		<script type="text/javascript" src="src/TeleportMaze.js"></script>
 		
 		<script type="text/javascript" src="src/Stages/TutorialPrelude/TutorialPrelude.js"></script>
 		<script type="text/javascript" src="src/Stages/YellowWood/YellowWood.js"></script>
@@ -121,6 +123,7 @@
 				fbg.style.width = staticColl[0].length * PIXELS_PER_BLOCK + "px"
 				fbg.style.height = staticColl.length * PIXELS_PER_BLOCK + "px"
 				fctx.clearRect(0, 0, forecanvas.width, forecanvas.height);
+				bctx.fillStyle = localStorage.getItem("AnymosDrawnBack");
 				for (var i = 0; i < staticColl[0].length; i++) {
 					for (var j = 0; j < staticColl.length; j++) {
 						if (staticColl[j][i].thorns) {
@@ -248,6 +251,7 @@
 						}
 					}
 				}
+				localStorage.setItem("AnymosDrawnBack", bctx.fillStyle);
 			}
 			drawStage(localStorage.getItem("AnymosDrawnLast"));
         </script>

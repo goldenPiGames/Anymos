@@ -33,6 +33,8 @@ function loadStage(stageName, doStuff=true) {
 	oobtopcolor = "#00000000";
 	oobbottomcolor = "#00000000";
 	dynamicBackdrop = null;
+	dynamicForeground = null;
+	illuminateFore = false;
 	switches = [];
 	edgesSolid = true;
 	resetLoading();
@@ -49,8 +51,6 @@ function loadStage(stageName, doStuff=true) {
 	return true;
 }
 function beginStage(doStuff) {
-	if (!doStuff)
-		dialogActive = false;
 	normalCameraBounds();
 	runnee = gameReady;
 	gameReady.next = gameEngine;

@@ -13,7 +13,7 @@ var dialog = {
 		this.skipBuffer = 1;
 		dialogActive = true;
 	},
-	update : function(ctx) {
+	update : function() {
 		this.skipping = controller.attack && !this.skipBuffer;
 		this.skipBuffer = controller.attack && this.skipBuffer;
 		if (controller.jumpClicked || controller.interactClicked || this.skipping)
@@ -29,30 +29,30 @@ var dialog = {
 	},
 	draw : function() {
 		var currentLine = this.list[this.index];
-		ctx.globalAlpha = 0.8;
-		ctx.textAlign = "left";
-		ctx.fillStyle = "#000000";
-		ctx.fillRect(0, canvas.height - DIALOG_HEIGHT, canvas.width, DIALOG_HEIGHT);
-		ctx.fillRect(0, canvas.height - DIALOG_HEIGHT - SPEAKER_BOX_HEIGHT, SPEAKER_BOX_WIDTH, SPEAKER_BOX_HEIGHT);
-		ctx.globalAlpha = 1.0;
-		ctx.lineWidth = 2;
-		ctx.strokeStyle = "#FFFFFF";
-		ctx.beginPath();
-		ctx.moveTo(canvas.width, canvas.height - DIALOG_HEIGHT);
-		ctx.lineTo(1, canvas.height - DIALOG_HEIGHT);
-		ctx.lineTo(1, canvas.height - DIALOG_HEIGHT - SPEAKER_BOX_HEIGHT);
-		ctx.lineTo(SPEAKER_BOX_WIDTH, canvas.height - DIALOG_HEIGHT - SPEAKER_BOX_HEIGHT);
-		ctx.lineTo(SPEAKER_BOX_WIDTH, canvas.height - DIALOG_HEIGHT);
-		ctx.stroke();
+		fctx.globalAlpha = 0.8;
+		fctx.textAlign = "left";
+		fctx.fillStyle = "#000000";
+		fctx.fillRect(0, fcanvas.height - DIALOG_HEIGHT, fcanvas.width, DIALOG_HEIGHT);
+		fctx.fillRect(0, fcanvas.height - DIALOG_HEIGHT - SPEAKER_BOX_HEIGHT, SPEAKER_BOX_WIDTH, SPEAKER_BOX_HEIGHT);
+		fctx.globalAlpha = 1.0;
+		fctx.lineWidth = 2;
+		fctx.strokeStyle = "#FFFFFF";
+		fctx.beginPath();
+		fctx.moveTo(fcanvas.width, fcanvas.height - DIALOG_HEIGHT);
+		fctx.lineTo(1, fcanvas.height - DIALOG_HEIGHT);
+		fctx.lineTo(1, fcanvas.height - DIALOG_HEIGHT - SPEAKER_BOX_HEIGHT);
+		fctx.lineTo(SPEAKER_BOX_WIDTH, fcanvas.height - DIALOG_HEIGHT - SPEAKER_BOX_HEIGHT);
+		fctx.lineTo(SPEAKER_BOX_WIDTH, fcanvas.height - DIALOG_HEIGHT);
+		fctx.stroke();
 		var fontSize = currentLine.size;
-		ctx.font = fontSize+"px "+getFont();
-		ctx.fillStyle = currentLine.color;
-		var lines = getLines(ctx, currentLine.text, canvas.width - (SIDE_MARGINS * 2));
+		fctx.font = fontSize+"px "+getFont();
+		fctx.fillStyle = currentLine.color;
+		var lines = getLines(fctx, currentLine.text, fcanvas.width - (SIDE_MARGINS * 2));
 		for (i = 0; i < lines.length; i++) { 
-			ctx.fillText(lines[i], SIDE_MARGINS, canvas.height - DIALOG_HEIGHT + SIDE_MARGINS + 1.2 * fontSize * (i+.75));
+			fctx.fillText(lines[i], SIDE_MARGINS, fcanvas.height - DIALOG_HEIGHT + SIDE_MARGINS + 1.2 * fontSize * (i+.75));
 		}
-		ctx.font = "28px "+getFont();
-		ctx.fillText(currentLine.speaker, SIDE_MARGINS, canvas.height - DIALOG_HEIGHT - SPEAKER_BOX_HEIGHT/2 + 10);
+		fctx.font = "28px "+getFont();
+		fctx.fillText(currentLine.speaker, SIDE_MARGINS, fcanvas.height - DIALOG_HEIGHT - SPEAKER_BOX_HEIGHT/2 + 10);
 	}
 }
 
@@ -73,7 +73,7 @@ var DialogLine = function(speaker, text, color = "#FFFFFF", size = 24, style = "
 /**
  * @author @crazy2b from StackOverflow
  */
-function getLines(ctx, text, maxWidth) {
+function getLines(fctx, text, maxWidth) {
 	if (text === undefined)
 		return [""]//["Something was passed undefined text.", "Nice coding there, boyo."];
 	if (Array.isArray(text))
@@ -84,7 +84,7 @@ function getLines(ctx, text, maxWidth) {
 
     for (var i = 1; i < words.length; i++) {
         var word = words[i];
-        var width = ctx.measureText(currentLine + " " + word).width;
+        var width = fctx.measureText(currentLine + " " + word).width;
         if (width < maxWidth) {
             currentLine += " " + word;
         } else {

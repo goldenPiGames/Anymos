@@ -62,7 +62,7 @@ var stageFinishScreen = {
 			this.solenoid = !this.solenoid;
 		}
 		ctx.globalAlpha = 1;
-		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		clearCanvases();
 		//this.context2D.fillStyle = BG_COLOR;
 		//this.context2D.fillRect(0, 0, 800, 600);
 		updateZoom();
@@ -70,37 +70,37 @@ var stageFinishScreen = {
 		gameObjects.forEach(obj => obj.draw());
 		player.draw();
 		drawStageFore();
-		ctx.textAlign = "center";
-		ctx.strokeStyle = "#FFFFFF";
-		ctx.fillStyle = "#202020C0";
-		ctx.fillRect  (100, 100, canvas.width-200, canvas.height-200);
-		ctx.strokeRect(100, 100, canvas.width-200, canvas.height-200);
-		ctx.fillStyle = "#FFFFFF";
+		fctx.textAlign = "center";
+		fctx.strokeStyle = "#FFFFFF";
+		fctx.fillStyle = "#202020C0";
+		fctx.fillRect  (100, 100, canvas.width-200, canvas.height-200);
+		fctx.strokeRect(100, 100, canvas.width-200, canvas.height-200);
+		fctx.fillStyle = "#FFFFFF";
 		var toptxt = this.from==this.to ? Stages[this.to].displayName : (Stages[this.from].displayName + " - " + Stages[this.to].displayName);
-		ctx.font = "40px "+getFont();
-		ctx.fillText(toptxt, canvas.width/2, 150);
-		//ctx.font = "40px "+getFont();
+		fctx.font = "40px "+getFont();
+		fctx.fillText(toptxt, canvas.width/2, 150);
+		//fctx.font = "40px "+getFont();
 		var alL = canvas.width/2-10
 		var alR = canvas.width/2+10
-		ctx.textAlign = "right";
-		ctx.fillText("This run: ", alL, 220);
-		ctx.fillText("Previous best: ", alL, 270);
-		ctx.textAlign = "left";
-		ctx.fillText(displayAnym(this.prevBest), alR, 270);
+		fctx.textAlign = "right";
+		fctx.fillText("This run: ", alL, 220);
+		fctx.fillText("Previous best: ", alL, 270);
+		fctx.textAlign = "left";
+		fctx.fillText(displayAnym(this.prevBest), alR, 270);
 		if (this.par) {
-			ctx.textAlign = "right";
-			ctx.fillText("Par: ", alL, 320);
-			ctx.textAlign = "left";
-			ctx.fillText(displayAnym(this.par), alR, 320);
+			fctx.textAlign = "right";
+			fctx.fillText("Par: ", alL, 320);
+			fctx.textAlign = "left";
+			fctx.fillText(displayAnym(this.par), alR, 320);
 		}
 		var better = !(this.prevBest < used);
-		ctx.fillStyle = this.solenoid && better ? "#00FFFF" : "#FFFFFF";
-		ctx.fillText(displayAnym(used), alR, 220);
-		ctx.textAlign = "right";
-		ctx.fillText("Vessels: ", alL, 380);
+		fctx.fillStyle = this.solenoid && better ? "#00FFFF" : "#FFFFFF";
+		fctx.fillText(displayAnym(used), alR, 220);
+		fctx.textAlign = "right";
+		fctx.fillText("Vessels: ", alL, 380);
 		for (var i = 0; i < this.collectedNow.length; i++) {
-			ctx.fillStyle = this.collectedNow[i] ? (this.collectedBefore[i] ? "#00FFFF" : (this.solenoid ? "#00FF80" : "#00FFFF")) : (this.collectedBefore[i] ? "#BFBFBF" : "#7F7F7F");
-			ctx.fillRect(canvas.width/2 + 10 + 30 * i, 350, 25, 40);
+			fctx.fillStyle = this.collectedNow[i] ? (this.collectedBefore[i] ? "#00FFFF" : (this.solenoid ? "#00FF80" : "#00FFFF")) : (this.collectedBefore[i] ? "#BFBFBF" : "#7F7F7F");
+			fctx.fillRect(canvas.width/2 + 10 + 30 * i, 350, 25, 40);
 		}
 	}
 }

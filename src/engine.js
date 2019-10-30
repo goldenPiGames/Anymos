@@ -4,14 +4,13 @@ var loading = {
 	},
 	draw : function() {
 		ctx.globalAlpha = 1;
-		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		clearCanvases();
 	}
 }
 var runnee = loading;
 var paused = false;
 var gameObjects = [];
 const FPS = 30; //30
-const TRUE_SIGHT_RADIUS = 64;
 
 var engine = {
     frameDelay : 1000 / FPS,
@@ -31,6 +30,8 @@ var engine = {
 	},
 	
 }
+
+//const TRUE_SIGHT_RADIUS = 64;
 
 var gameEngine = {
 	name : "Game Engine",
@@ -58,9 +59,8 @@ var gameEngine = {
 		}
 	},
 	draw : function() {
-		var thisser = this;
 		ctx.globalAlpha = 1;
-		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		clearCanvases();
 		if (paused) {
 			ctx.drawImage(miscSprites.Paused, canvas.width/4, canvas.height/2 - canvas.width / miscSprites.Paused.width * miscSprites.Paused.height / 4, canvas.width / 2, canvas.width / miscSprites.Paused.width * miscSprites.Paused.height / 2);
 			ctx.font = "30px monospace";
@@ -69,20 +69,14 @@ var gameEngine = {
 			ctx.fillText("Press Pause [P]/(START) or Jump [A]/(A) to resume", canvas.width/2, canvas.height*3/4-40);
 			if (!firstRun)
 				ctx.fillText("Press Shoot [D]/(X) to exit the level", canvas.width/2, canvas.height*3/4);
-			//console.log(canvas.width/2 - ctx.measureText("Press Shoot [D] to exit the level").width/2, ctx.height*3/4)
 			return;
 		}
-		//this.context2D.fillStyle = BG_COLOR;
-		//this.context2D.fillRect(0, 0, 800, 600);
 		updateZoom();
 		drawStageBack();
-		gameObjects.forEach(function(obj) {
-			//console.log(obj)
-			obj.draw();
-		});
+		gameObjects.forEach(obj => obj.draw());
 		player.draw();
 		drawStageFore();
-		if (controller.trueSight) {
+		/*if (controller.trueSight) {
 			for (var i = -TRUE_SIGHT_RADIUS; i <= TRUE_SIGHT_RADIUS; i+=2) {
 				for (var j = Math.round(-TRUE_SIGHT_RADIUS*Math.cos(Math.asin(i/TRUE_SIGHT_RADIUS)) - 20); j <= TRUE_SIGHT_RADIUS*Math.cos(Math.asin(i/TRUE_SIGHT_RADIUS)) - 20; j+=2) {
 					//console.log (i, j)
@@ -91,22 +85,7 @@ var gameEngine = {
 				}
 			}
 			player.draw();
-		}
-		/*if (dialogActive)
-			dialogField.draw(this.context2D);
-		else
-			infoField.draw(this.context2D);
-		var i = 0;
-		while (i < this.particles.length) {
-			if (this.particles[i].dead) {
-				this.particles.splice(i, 1);
-			} else {
-				this.particles[i].go(this.context2D);
-				i++;
-			}
-		}
-		this.context2D.mouse.lastx = this.context2D.mouse.x;
-		this.context2D.mouse.lasty = this.context2D.mouse.y;*/
+		}*/
 		hud.draw();
 	},
 	updatesObjects : true
@@ -147,4 +126,9 @@ function playSound(snd) {
 			snd.play();
 		}
 	}
+}
+
+function clearCanvases() {
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	fctx.clearRect(0, 0, fcanvas.width, fcanvas.height);
 }

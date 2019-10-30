@@ -52,32 +52,37 @@ Stages.ZagadCrossing = {
 		caps = new NPC("ZagadCrossingCaps", Teion.prototype.sprites.Caps, 180, 160, true,
 			new DialogLine("Caps", "We're almost to Longuis. Take it easy.", "#7F7F7F"));
 		caps.dead = true;
-		rumble1 = new Rumble(0, 600, 0, 300, true, ()=>rumble2.enterTrigger = true, new Flipwip(60));
-		rumble2 = new Rumble(0, 600, 0, 300, false, ()=>rumble3.enterTrigger = true, new Fricchee("ZagadCrossingFricchee", 120, 220, true));
-		rumble3 = new Rumble(0, 600, 0, 300, false, ()=>{player.drained = false; caps.dead = false; gameObjects.push(caps, new Goalpost("IgmaBeach", 430, 160, 80))}, new Flipwip(30), new Flipwip(35));
+		rumble1 = new Rumble(0, 600, 0, 300, true, ()=>rumble2.enterTrigger = true,
+			new Flipwip("ZagadCrossingBootie", 60));
+		rumble2 = new Rumble(0, 600, 0, 300, false, ()=>rumble3.enterTrigger = true,
+			new Fricchee("ZagadCrossingFricchee", 120, 220, true));
+		rumble3 = new Rumble(0, 600, 0, 300, false, ()=>{player.drained = false; caps.dead = false; gameObjects.push(caps, new Goalpost("IgmaBeach", 430, 160, 80))},
+			new Flipwip("ZagadCrossingAlgoboo", 30),
+			new Flipwip("ZagadCrossingSiboo", 35));
 		rumble1.enemies[0].cycle = FLIPWIP_APPEAR_TIME+10;
 		rumble3.enemies[0].cycle = FLIPWIP_APPEAR_TIME+15;
 		rumble3.enemies[1].cycle = FLIPWIP_APPEAR_TIME+30;
-		gameObjects = [new Vessel("ZagadCrossingBowsprit", 478, 160), rumble1, rumble2, rumble3, new OceanWaves(80, -10), caps];
+		gameObjects = [
+			new Vessel("ZagadCrossingBowsprit", 478, 160),
+			rumble1,
+			rumble2,
+			rumble3,
+			caps];
+		dynamicForeground = new OceanWaves(80, -10);
 	},
-	vessels : ["ZagadCrossingBowsprit", "ZagadCrossingFricchee"],
-	par : 510,
+	vessels : ["ZagadCrossingBowsprit", "ZagadCrossingBootie", "ZagadCrossingFricchee", "ZagadCrossingAlgoboo", "ZagadCrossingSiboo"],
 	previous : "GreyHarbor",
 	nextDown : "IgmaBeach",
-	toLoad : [Fricchee, Flipwip, Teion/*, OceanWaves*/]
+	toLoad : [Fricchee, Flipwip, Teion]
 }
 
 //TODO
-function OceanWaves(depth, dx) {
-	this.depth = depth;
-	this.dx = dx;
-}
-OceanWaves.prototype.update = function() {
-	
-}
-OceanWaves.prototype.draw = function() {
-	
-}
-OceanWaves.prototype.init = function() {
-	this.segmentsList = [];
+class OceanWaves {
+	constructor(depth, dx) {
+		this.depth = depth;
+		this.dx = dx;
+	}
+	draw() {
+		
+	}
 }

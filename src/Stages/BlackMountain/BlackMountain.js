@@ -4,8 +4,8 @@ Stages.BlackMountain = {
 		playMusic("Fantasy Game Background - Eric Matyas");
 		let B = {solid:true,color:"#000000"};
 		let _ = {solid:false,color:"#00A2E8"};
-		let s = {solid:false,color:"#404040"};
-		let S = {solid:false,color:"#202020"};
+		let s = {solid:false,color:"#202020"};
+		let S = {solid:false,color:"#101010"};//TODO make insides dark
 		staticColl =
 		[[_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],

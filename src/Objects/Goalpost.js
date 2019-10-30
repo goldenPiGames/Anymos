@@ -21,7 +21,7 @@ class Goalpost extends GameObject {
 }
 Goalpost.prototype.sprites = makeSprites("src/Objects/Goalpost.png", {
 	top: {x:0, y:0, width:18, height:17},
-	segment: {x:6, y:17, width:6, height:10},
+	segment: {x:6, y:18, width:6, height:8},
 	bottom: {x:2, y:27, width:14, height:6},
 }, true);
 Goalpost.prototype.width = 14;
@@ -38,3 +38,4 @@ EndLight.prototype.sprites = makeSprites("src/Objects/EndLight.png", {
 	light : {x:0, y:0, width:20, height:30},
 }, true);
 EndLight.prototype.width = 20;
+EndLight.prototype.illumination = 300;

@@ -47,7 +47,7 @@ var mainMenu = {
 		flipHorizontally(miscSprites.Selector, canvas.width/2 + ctx.measureText(this.buttons[this.buttonIndex].text).width/2 + 10, MAIN_BUTTON_START-40 + MAIN_BUTTON_SPACING * (this.buttonIndex+.5) - miscSprites.Selector.height/2);
 		ctx.font = "30px "+getFont();
 		ctx.fillStyle = "#BFBFBF";
-		ctx.fillText("A: Select", canvas.width/2-ctx.measureText("A: Select").width/2, canvas.height-50);
+		ctx.fillText("A: Select", canvas.width/2, canvas.height-50);
 	},
 	buttonIndex : 0,
 	buttons : [

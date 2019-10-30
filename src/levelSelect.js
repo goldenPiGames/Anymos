@@ -67,7 +67,7 @@ var levelSelect = {
 		cameraFocus.y = Stages[currentStageName].selectY + LS_CAMYOFF;
 		var thisser = this;
 		ctx.globalAlpha = 1;
-		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		clearCanvases();
 		ctx.font = 12*zoom + "px "+getFont();
 		ctx.fillStyle = "#FF0000";
 		for (stag in Stages) {

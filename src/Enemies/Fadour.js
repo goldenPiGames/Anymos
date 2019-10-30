@@ -109,7 +109,7 @@ class Fadour extends Boss {
 				new DialogLine("Anymos", "Yeh.", "#00FFFF"));*/
 		}
 	}
-	port() {
+	port() {//TODO make deterministic
 		var lasty = this.y;
 		this.y = this.portys[Math.floor(this.portys.length*Math.random())];
 		if (this.y == lasty)

@@ -3,7 +3,7 @@ Stages.DarkCaverns = {
 	load : function(doStuff) {
 		playMusic("The Darkness Below - Eric Matyas");
 		let B = {name:"Stone",solid:true,color:"#101010"};
-		let _ = {name:"Air",solid:false,color:"#505050"};
+		let _ = {name:"Air",solid:false,color:"#808080"};
 		staticColl =
 		[[B,_,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B],
 		 [B,_,B,B,B,B,B,B,B,B,B,B,B,B,B,B,_,B,B,B,B,B,B,B,B,B,B,B,B,B],
@@ -32,13 +32,13 @@ Stages.DarkCaverns = {
 		player.facingRight = false;
 		player.special = specialFlash;
 		gameObjects = [
-			new FlashPickup(70, 240, doStuff),
 			new Vessel("DarkCavernsLeft", 50, 158),
 			new Vessel("DarkCavernsBigJump", 330, 38),
 			new Walkie("DarkCavernsOwaki", 570, 320, false),
 			new Hoverie("DarkCavernsYoshida", 570, 158, false),
 			new Goalpost("DarkPrison", 592, 160, 60)];
-		dynamicForeground = new DarknessFore();
+		//dynamicForeground = new DarknessFore();
+		illuminateFore = true;
 	},
 	vessels : ["DarkCavernsLeft", "DarkCavernsBigJump", "DarkCavernsOwaki", "DarkCavernsYoshida"],
 	previous : "DarkTunnels",

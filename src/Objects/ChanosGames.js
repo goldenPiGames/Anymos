@@ -5,7 +5,7 @@ var specialChanmote = {
 		player.playerControlled = !this.active;
 	},
 	isActive : function() {
-		return (this.active && player.special == this);
+		return player.special == this && this.active;
 	},
 	active : false,
 }

@@ -22,6 +22,7 @@ const MUSIC_LIST = [
 	{name:"Mountainside",                   by:"Eric Matyas", site:"https://soundimage.org/quiet-peaceful-mellow/"},
 	{name:"Move it Out",                    by:"Eric Matyas", site:"https://soundimage.org/epic-battle/"},
 	{name:"Mysterious Deep",                by:"Eric Matyas", site:"https://soundimage.org/nature-science-3/"},
+	{name:"Night 2",                        by:"PeriTune",      yt:"GO8FavhnqiU", site:"https://peritune.com/night2/"},
 	{name:"Pay The Reaper",                 by:"Darren Curtis", yt:"_fjnQMHrk0k", site:"https://www.darrencurtismusic.com/horror-mystery"},
 	{name:"Rapid 2",                        by:"PeriTune",    site:"https://peritune.com/rapid2/"},
 	{name:"Reaching Altitude",              by:"Eric Matyas", site:"https://soundimage.org/aerial-drone/"},

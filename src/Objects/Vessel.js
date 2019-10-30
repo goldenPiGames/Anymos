@@ -12,8 +12,6 @@ class Vessel extends GameObject {
 		super();
 		this.x = x;
 		this.y = y;
-		this.width = 16;
-		this.height = 16;
 		this.name = name;
 		this.evalCollected();
 		this.collected = false;
@@ -49,9 +47,12 @@ class Vessel extends GameObject {
 			this.drawSprite("floating");
 	}
 }
+Vessel.prototype.width = 16;
+Vessel.prototype.height = 16;
 Vessel.prototype.sprites = makeSprites("src/Objects/Vessel.png", {
 	floating: {x:0, y:0, width:16, height:16},
 }, true);
+Vessel.prototype.illumination = 8;
 
 function numVesselsCollected() {
 	//return allVesselNames.reduce((acc, cur) => acc + isVesselCollected(cur), 0);

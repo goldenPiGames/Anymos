@@ -145,7 +145,7 @@ class GameObject {
 		var all = gameObjects.slice();
 		all.push(player);
 		var thisser = this;
-		all.forEach(function(oj) {
+		all.forEach(oj => {
 			if (oj.hittable && oj.team != thisser.team) {
 				var cdist = this.distanceTo(oj);;
 				//console.log(Math.pow(thisser.x-oj.x, 2), Math.pow(thisser.y-oj.y, 2))

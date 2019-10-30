@@ -32,6 +32,11 @@ Stages.RedValley = {//TODO make different level, like Orange something
 		 [B,B,B,B,B,B,B,B,B,B,B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B,B,B,B,B,B,B,B,B,B,S,S,S,S,B],
 		 [B,B,B,B,B,B,B,B,B,B,B,B,B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B,B,B,B,B,B,B,B,B,B,B,B,S,S,S,B],
 		 [B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B],
+		 [B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B],
+		 [B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B],
+		 [B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B],
+		 [B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B],
+		 [B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B],
 		 [B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B]];
 		if (doStuff) {
 			zoomd = 3;
@@ -45,19 +50,16 @@ Stages.RedValley = {//TODO make different level, like Orange something
 			new Vessel("RedValleyCaveJump", 970, 358),
 			new Rumble(320, 660, 300, 500, true, doNothing, 
 				new Baron("RedValleyBaron", 490, 500, true, true)),
-			new Goalpost("BlackMountain", 10, 200, 90),
-			new Vessel("RedValleyMid", 490, 298)
+			new Goalpost("BlackMountain", 310, 480, 130),
+			new Vessel("RedValleyMid", 490, 298),
+			new Vessel("RedValleyOverGoalpost", 10, 198)
 		];
-		return {
-			mainBack : "src/Stages/RedValley/MainBack.png",
-			mainFore : "src/Stages/RedValley/MainFore.png",
-		};
 	},
-	vessels : ["RedValleyCave", "RedValleyCaveJump", "RedValleyBaron1", "RedValleyBaron2", "RedValleyBaron3", "RedValleyMid"],
+	vessels : ["RedValleyCave", "RedValleyCaveJump", "RedValleyBaron1", "RedValleyBaron2", "RedValleyBaron3", "RedValleyMid", "RedValleyOverGoalpost"],
 	selectX : -1.5*LS_X_SPACING,
 	selectY : Stages.YellowWood.selectY + LS_Y_SPACING,
 	previous : "YellowWood",
 	nextDown : "BlackMountain",
-	parDown : 510,
+	parDown : 450,
 	toLoad : [Baron, Hoverie]
 }

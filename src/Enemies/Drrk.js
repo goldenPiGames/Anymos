@@ -1,4 +1,3 @@
-var DrrkSpriteNames = ["Standing1", "Shadow1", "Middle1"];
 const DRRK_NORMAL_HEIGHT = 34;
 const DRRK_TEXT_COLOR = "#404040";
 class Drrk extends Boss {
@@ -44,7 +43,7 @@ class Drrk extends Boss {
 				new DialogLine("Anymos", "Who are you? Where are you? Why did you kidnap Naluxos?", "#00FFFF"),
 				new DialogLine("Drrk", "I am Drrk, a being of darkness and shadow... Oh how I hate Naluxos and his brilliant, pure light... I just need to hold him here and make sure he doesn't escape...", DRRK_TEXT_COLOR),
 				new DialogLine("Drrk", "Just imagining how proud I'll make Lord Sqarnos gives me a case of the gleeful chortles, drr drr drr...", DRRK_TEXT_COLOR),
-				function(){playMusic("Wicked Dreams - Eric Matyas")},
+				()=>playMusic("Wicked Dreams - Eric Matyas"),
 				new DialogLine("Drrk", "But enough of that. Silent and swift as a shadow, I strike.", DRRK_TEXT_COLOR));
 		}
 	}
@@ -88,8 +87,8 @@ Drrk.prototype.speciesName = "Drrk";
 Drrk.prototype.team = "Sqarnos";
 Drrk.prototype.sprites = makeSprites("src/Enemies/Drrk.png", {
 	standing1 : {x:0, y:0, width:20, height:34},
-	middle1 : {x:0, y:0, width:20, height:34},
-	shadow1 : {x:0, y:0, width:20, height:34},
+	middle1 : {x:20, y:0, width:20, height:34},
+	shadow1 : {x:40, y:0, width:20, height:34},
 }, false);
 Drrk.prototype.maxhp = 600;
 Drrk.prototype.doesGravity = true;

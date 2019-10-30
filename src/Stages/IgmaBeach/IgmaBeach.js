@@ -1,14 +1,14 @@
 Stages.IgmaBeach = {
 	displayName : "Igma Beach",
-	load : function() {
+	load : function(doStuff) {
 		playMusic("Anomalies Abound - Eric Matyas");
 		let B = {name:"Ship",solid:true,color:"#967F69"};
 		let S = {name:"Sand",solid:true,color:"#f2d2a9"};
 		let F = {name:"FakeSand",solid:false,color:"#c2a2d9"};
 		let C = {name:"Construct",solid:true,color:"#EFEFEF"};
-		let W = {name:"Water",solid:false,hazard:1,color:"#4040BF"};
-		let _ = AIR;
-		let D = DEATH;
+		let W = {name:"Water",solid:false,hazard:1,color:"#4040BF"};//TODO add water in foreground
+		let _ = {solid:false,color:"#00A2E8"};
+		//let D = {solid:false,hazard:Infinity,color:"#4040BF"};
 		staticColl =
 		[[_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,C,_,_,_,_,_,_,_,_,C,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,C,_,_,_,_,_,_,_,_,C,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
@@ -29,27 +29,36 @@ Stages.IgmaBeach = {
 		 [_,_,_,_,_,_,_,_,B,B,B,B,B,B,B,B,B,B,B,B,B,_,_,_,_,_,_,_,_,_,_,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,F,F,F,F,F,S,S,S,S,S,S,S,S,S,S,S,S,F],
 		 [W,W,W,W,W,W,W,W,W,B,B,B,B,B,B,B,B,B,B,B,W,W,W,W,W,W,W,W,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,F,F,F,F,F,S,S,S,S,S,F,F,S,S,S,S,S,F],
 		 [W,W,W,W,W,W,W,W,W,B,B,B,B,B,B,B,B,B,W,W,W,W,W,W,W,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,F,F,F,F,F,S,S,S,S,S,F,F,F,F,F,F,F,F],
-		 [W,W,W,W,W,W,W,W,W,B,B,B,B,B,B,B,B,B,W,W,W,W,W,W,W,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,F,F,F,F,F,F,F,F,F,F,S,S,S,S,S,S,S],
-		 [D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S]];
-		zoom = 3;
+		 [W,W,W,W,W,W,W,W,W,B,B,B,B,B,B,B,B,W,W,W,W,W,W,W,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,F,F,F,F,F,F,F,F,F,F,S,S,S,S,S,S,S],
+		 [W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S],
+		 [W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S],
+		 [W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S,S]];
+		if (doStuff) {
+			zoom = 3;
+			zoomd = 3;
+			dialog.begin(
+				new DialogLine("Caps", "Here we are: Igma Beach on the island of Longuis. Good luck.", "#BFBFBF"));
+		}
 		minZoom = 2;
 		player.x = 440;
 		player.y = 280;
 		player.facingRight = true;
-		gameObjects = [new Flipwip(161), new Flipwip(271), new Flipwip(314), new Goalpost("YstryJungle", 2006, 300, 100), new Goalpost("InfinityLighthouse", 1500, 80, 70), new Vessel("IgmaBeachFarLeft", 80, 158), new Vessel("IgmaBeachOverTower", 1670, 98), new Vessel("IgmaBeachUnderGoalpost", 2030, 198)];
-		dialog.begin(
-			new DialogLine("Caps", "Here we are: Igma Beach on the island of Longuis. Good luck.", "#BFBFBF"));
-		return {
-			mainBack : "src/Stages/IgmaBeach/MainBack.png",
-			mainFore : "src/Stages/IgmaBeach/MainFore.png",
-		};
+		player.illumination = 40;
+		gameObjects = [
+			new Flipwip("IgmaBeachGuld", 161),
+			new Flipwip("IgmaBeachPai", 314),
+			new Goalpost("YstryJungle", 2005, 300, 100),
+			new Goalpost("InfinityLighthouse", 1500, 80, 70),
+			new Vessel("IgmaBeachFarLeft", 80, 158),
+			new Vessel("IgmaBeachUnderBoat", 350, 398),
+			new Vessel("IgmaBeachOverTower", 1670, 98),
+			new Vessel("IgmaBeachUnderGoalpost", 2030, 198)];
+		illuminateFore = true;
 	},
-	vessels : ["IgmaBeachFarLeft", "IgmaBeachOverTower", "IgmaBeachUnderGoalpost"],
-	selectX : Stages.ZagadCrossing.selectX,
-	selectY : Stages.ZagadCrossing.selectY + LS_Y_SPACING,
-	par : 360,
+	vessels : ["IgmaBeachGuld", "IgmaBeachPai", "IgmaBeachFarLeft", "IgmaBeachUnderBoat", "IgmaBeachOverTower", "IgmaBeachUnderGoalpost"],
 	previous : "ZagadCrossing",
 	nextDown : "YstryJungle",
+	parDown : 330,
 	nextRight : "InfinityLighthouse",
 	toLoad : [Flipwip, Teion]
 }

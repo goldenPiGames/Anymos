@@ -15,20 +15,3 @@ ObscurerImage.prototype.draw = function() {
 		drawSpriteOnStage(this.img, this.x, this.y);
 	}
 }
-
-function ObscurerRect(x, y, width, height, color) {
-	this.x = x;
-	this.y = y;
-	this.width = width;
-	this.height = height;
-	this.color = color;
-}
-ObscurerRect.prototype.update = function() {
-	
-}
-ObscurerRect.prototype.draw = function() {
-	if (!player.isTouching(this)) {
-		ctx.fillStyle = this.color;
-		ctx.fillRect(stagex(this.x-this.width/2), stagey(this.y-this.height), this.width * zoom, this.height * zoom);
-	}
-}

@@ -5,8 +5,8 @@ const FLIPWIP_APPEAR_TIME = 40;
 const FLIPWIP_FLIPPING_FRAMES = 4;
 
 class Flipwip extends Enemy {
-	constructor(avgdelay) {
-		super();
+	constructor(name, avgdelay) {
+		super(name);
 		this.cycle = -1;
 		this.avgdelay = Math.max(avgdelay, 6);
 		this.x = NaN;

@@ -15,6 +15,7 @@ var oobtopcolor = "#000000";
 var oobbottomcolor = "#000000";
 var dynamicBackdrop = null;
 var dynamicForeground = null;
+var illuminateFore = false;
 
 function drawStageBack() {
 	if (dynamicBackdrop)
@@ -32,9 +33,15 @@ function drawStageBack() {
 	drawOnStage(stageImages.mainBack, 0, 0, stageImages.mainBack.width, stageImages.mainBack.height);
 }
 function drawStageFore() {
-	drawOnStage(stageImages.mainFore, 0, 0, stageImages.mainFore.width, stageImages.mainFore.height);
-	if (dynamicForeground)
-		dynamicForeground.draw();
+	//drawOnStage(stageImages.mainFore, 0, 0, stageImages.mainFore.width, stageImages.mainFore.height);
+	if (illuminateFore)
+		fctx.globalAlpha = 1 - specialFlash.isActive();
+	fctx.drawImage(stageImages.mainFore, -camerax * zoom + canvas.width/2, -cameray * zoom + canvas.height/2, stageImages.mainFore.width * zoom, stageImages.mainFore.height * zoom);
+	fctx.globalAlpha = 1;
+	if (illuminateFore)
+		clearIlluminationFore();
+	/*if (dynamicForeground)
+		dynamicForeground.draw();*/
 }
 
 function updateZoom() {

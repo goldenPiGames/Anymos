@@ -41,6 +41,7 @@ Stages.DarkTunnels = {
 		player.x = 70;
 		player.y = 5;
 		player.facingRight = false;
+		player.illumination = 0;
 		gameObjects = [
 			new FlashPickup(70, 240, doStuff),
 			new Vessel("DarkTunnelsBumpAround1", 200, 58),
@@ -52,27 +53,12 @@ Stages.DarkTunnels = {
 			new Vessel("DarkTunnelAfterJumpLeft", 70, 358),
 			//new Vessel("DarkTunnelsBigJump", 330, 378),
 			new Goalpost("DarkCaverns", 30, 480, 60)];
-		dynamicForeground = new DarknessFore();
+		//dynamicForeground = new DarknessFore();
+		illuminateFore = true;
 	},
 	vessels : ["DarkTunnelsBumpAround1", "DarkTunnelsBumpAround2", "DarkTunnelsBumpAround3", "DarkTunnelsUpperRight", "DarkTunnelsJump", "DarkTunnelsMiddleFallRight", "DarkTunnelAfterJumpLeft"],
 	previous : "BlackMountain",
 	parDown : 2000,
 	nextDown : "DarkCaverns",
 	toLoad : [Naluxos, Walkie, Hoverie]
-}
-
-class DarknessFore {
-	constructor(lightsource) {
-		this.lightsource = lightsource;
-	}
-	draw() {
-		ctx.globalAlpha = 1 - specialFlash.active;
-		ctx.fillStyle = "#000000";
-		ctx.fillRect(0, 0, canvas.width, canvas.height);
-		if (this.lightsource && player.special != specialFlash) {
-			ctx.globalAlpha = Math.max(0, 1 - (player.distanceTo(this.lightsource) / 100));
-			this.lightsource.draw();
-			player.draw();
-		}
-	}
 }
