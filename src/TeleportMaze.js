@@ -1,65 +1,82 @@
-class TeleportMazeSegment/* extends GameObject*/ {
-	constructor(staticColl, mainBack, mainFore, objects) {
-		//super();
-		this.staticColl = staticColl;
-		this.width = this.staticColl[0].length * PIXELS_PER_BLOCK;
-		this.height = this.staticColl.length * PIXELS_PER_BLOCK;
-		this.mainBack = mainBack;
-		this.mainFore = mainFore;
-		this.objects = [this];
-		this.objects.push(...objects);
+class TeleportMaze {
+	constructor(segments) {
+		//console.log(segments);
+		this.segments = segments;
+		for (nom in this.segments) {
+			var seg = this.segments[nom];
+			seg.name = nom;
+			seg.width = seg.staticColl[0].length * PIXELS_PER_BLOCK;
+			seg.height = seg.staticColl.length * PIXELS_PER_BLOCK;
+			seg.objects.unshift(this);
+		}
 	}
 	update() {
-		var thisser = this;
-		if (player.x < 0 && this.left) {
-			this.left.enter();
-			player.x += this.left.width;
-			camerax += this.left.width;
-			gameObjects.push(
-				new FadeDrawing(function(){drawOnStage(thisser.mainBack, thisser.left.width, 0)}, 1, .001),
-				new FadeDrawing(function(){drawOnStage(thisser.mainFore, thisser.left.width, 0)}, 1, .001)
-			);
+		if (player.x < 0 && this.current.left) {
+			this.enter(this.current.left);
+			player.x += this.width;
+			camerax += this.width;
+			this.previousX = this.width;
+			this.previousY = 0;
 		}
-		if (player.x > this.width && this.right) {
-			this.right.enter();
+		if (player.x > this.width && this.current.right) {
+			this.previousX = -this.width;
+			this.previousY = 0;
 			player.x -= this.width;
 			camerax -= this.width;
-			gameObjects.push(
-				new FadeDrawing(function(){drawOnStage(thisser.mainBack, -thisser.width, 0)}, 1, .001),
-				new FadeDrawing(function(){drawOnStage(thisser.mainFore, -thisser.width, 0)}, 1, .001),
-			);
+			this.enter(this.current.right);
 		}
-		if (player.y - player.height/2 < 0 && this.up) {
-			this.up.enter();
-			player.y += this.up.height;
-			//console.log(player.dy);
+		if (player.y - player.height/2 < 0 && this.current.up) {
+			this.enter(this.current.up);
+			player.y += this.height;
+			cameray += this.width;
+			this.previousX = 0;
+			this.previousY = this.height;
 			if (player.dy > -6.5)
 				player.dy = -6.5;
-			cameray += this.up.height;
-			gameObjects.push(
-				new FadeDrawing(function(){drawOnStage(thisser.mainBack, 0, thisser.up.height)}, 1, .001),
-				new FadeDrawing(function(){drawOnStage(thisser.mainFore, 0, thisser.up.height)}, 1, .001)
-			);
 		}
-		if (player.y - player.height/2 > this.height && this.down) {
-			this.down.enter();
+		if (player.y - player.height/2 > this.height && this.current.down) {
+			this.previousX = 0;
+			this.previousY = -this.height;
 			player.y -= this.height;
 			cameray -= this.height;
-			gameObjects.push(
-				new FadeDrawing(function(){drawOnStage(thisser.mainBack, 0, -thisser.height)}, 1, .001),
-				new FadeDrawing(function(){drawOnStage(thisser.mainFore, 0, -thisser.height)}, 1, .001),
-			);
+			this.enter(this.current.down);
 		}
 	}
-	draw() {
-		
+	start(name) {
+		edgesSolid = false;
+		this.enter(name);
 	}
-	enter() {
-		staticColl = this.staticColl;
-		stageImages.mainBack = this.mainBack;
-		stageImages.mainFore = this.mainFore;
-		cameraRightBound = this.mainBack.width;
-		cameraBottomBound = this.mainBack.height;
-		gameObjects = this.objects;
+	enter(seg) {
+		this.previous = this.current;
+		seg = this.asStage(seg);
+		console.log(seg.name);
+		this.current = seg;
+		this.width = seg.width;
+		this.height = seg.height;
+		staticColl = seg.staticColl;
+		stageImages.mainBack = seg.mainBack;
+		stageImages.mainFore = seg.mainFore;
+		cameraRightBound = seg.width;
+		cameraBottomBound = seg.height;
+		gameObjects = seg.objects;
+	}
+	asStage(seg) {
+		return typeof seg == "string" ? this.segments[seg] : seg;
+	}
+	draw() {
+		if (this.previous) {
+			drawOnStage(this.previous.mainBack, this.previousX, this.previousY);
+			drawOnStage(this.previous.mainFore, this.previousX, this.previousY);
+		}
+	}
+}
+
+function makeTeleportMazeSegmentGenerator(defaults) {
+	return function(spliss) {
+		for (prop in defaults) {
+			if (spliss[prop] == undefined)
+				spliss[prop] = defaults[prop];
+		}
+		return spliss;
 	}
 }

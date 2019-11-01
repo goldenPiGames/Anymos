@@ -1,148 +1,235 @@
+const FWEGOS_BASE_SPEED = 3.5;
+const FWEGOS_ATTACK_STARTUP = 30;
+const FWEGOS_ATTACK_TIME = 50;
+const FWEGOS_RUSH_SPEED = 12;
+const FWEGOS_NORMAL_WIDTH = 15;
+const FWEGOS_NORMAL_HEIGHT = 37;
+const FWEGOS_BALL_SIZE = 20;
+const FWEGOS_WAVE_SPEED = 8;
 
-
-function Bolizos(x, y, facingRight, bl, br, bt, bb) {
-	this.name = name;
-	this.hp = this.maxhp;
-	this.x = x;
-	this.y = y;
-	this.width = FWEGOS_NORMAL_WIDTH;
-	this.height = FWEGOS_NORMAL_HEIGHT;
-	this.dx = 0;
-	this.dy = 0;
-	this.facingRight = facingRight;
-	//this.specialCD = 150;
-	this.boundLeft = bl;
-	this.boundRight = br;
-	this.boundTop = bt;
-	this.boundBottom = bb;
-	this.atkbox = {
-		__proto__ : Object.create(GameObjectBase),
-		width : 60,
-		height : 40
-	}
-	this.ballCycle = 0;
-	this.collCD = 0;
-	this.update = this.updateNormal;
-	this.benchmarks = [1000,           700,            400]
-	this.specials   = [this.startRush, this.startRain, this.startRush]
-}
-Bolizos.prototype = Object.create(GameObjectBase);
-Bolizos.prototype.speciesName = "Bolizos";
-Bolizos.prototype.team = "Sqarnos";
-Bolizos.prototype.spriteNames = ["Standing", "Readying", "Blasting-4", "Blasting-3", "Blasting-2", "Blasting-1", "Blasting0", "Blasting1", "Blasting2", "Blasting3", "Ball", "Defeated"]
-Bolizos.prototype.sfxNames = ["Thunder"]
-Bolizos.prototype.hittable = true;
-Bolizos.prototype.damageable = true;
-Bolizos.prototype.maxhp = 1300;
-Bolizos.prototype.doesGravity = true;
-Bolizos.prototype.updateNormal = function() {
-	
-}
-Bolizos.prototype.draw = function() {
-	var state;
-	if (this.hp <= 0) {
-		state = "Defeated";
-	} else if (this.update != this.updateNormal) {
-		/*this.ballCycle++;
-		if (this.ballCycle > 2)
-			this.ballCycle = 0;
-		state = "Ball" + this.ballCycle;*/
-		state = "Ball";
-	} else if (this.attacking) {
-		var relat = this.attacking-FWEGOS_ATTACK_STARTUP;
-		if (relat < -4)
-			state = "Readying";
-		else if (relat <= 3)
-			state = "Blasting"+relat;
-		else 
-			state = "Standing";
-	} else
-		state = "Standing";
-	drawSpriteOnStage(this.sprites[state], this.x, this.y, this.facingRight);
-	//this.state = null;
-}
-
-Bolizos.prototype.ballUp = function() {
-	this.hittable = false;
-	player.drained = false;
-	this.update = this.updateBall;
-}
-Bolizos.prototype.updateBall = function() {
-	this.dy -= 1;
-	this.y += this.dy;
-	if (this.y < this.boundTop-20) {
-		this.update = this.nextUpdate;
-	}
-}
-Bolizos.prototype.ballReturn = function() {
-	this.x = (this.boundLeft + this.boundRight)/2;
-	this.y = this.boundTop;
-	this.dx = 0;
-	this.dy = 0;
-	this.update = this.updateReturn;
-}
-Bolizos.prototype.updateReturn = function() {
-	this.dy += gravity;
-	this.physics();
-	if (this.dy <= 0) {
-		this.update = this.updateNormal;
-		this.hittable = true;
-		player.drained = true;
+class Bolizos extends Boss {
+	constructor(name, x, y, facingRight, bl, br, bt, bb, manipBlock) {
+		super(name);
+		this.x = x;
+		this.y = y;
 		this.width = FWEGOS_NORMAL_WIDTH;
 		this.height = FWEGOS_NORMAL_HEIGHT;
+		this.dx = 0;
+		this.dy = 0;
+		this.facingRight = facingRight;
+		//this.specialCD = 150;
+		this.boundLeft = bl;
+		this.boundRight = br;
+		this.boundTop = bt;
+		this.boundBottom = bb;
+		this.bladeBox = {
+			isTouching : GameObject.prototype.isTouching,
+			width : 60,
+			height : 40
+		}
+		this.manipBlock = manipBlock;
+		this.ballCycle = 0;
+		this.collCD = 0;
+		this.update = this.updateNormal;
+		this.benchmarks = [/*1000,           700,            400*/];
+		this.specials   = [/*this.startRush, this.startRain, this.startRush*/];
 	}
-}
+	updateNormal() {
+		if (this.boundLeft == undefined) {
+			this.boundLeft = cameraLeftBound+10;
+			this.boundRight = cameraRightBound-10;
+			this.boundTop = cameraTopBound+10;
+			this.boundBottom = cameraBottomBound-10;
+		}
+		this.bladeBox.x = this.x + (this.facingRight?1:-1) * (this.bladeBox.width/2);
+		this.bladeBox.y = this.y;
+		
+		if (this.blading) {
+			if (this.blading == this.bladeStartup) {
+				//playSound(this.sfx.Blast);
+				this.sendHurtbox(210, this.bladeBox);
+			}
+			this.blading++;
+			if (this.blading > this.bladeStartup + this.bladeEndlag)
+				this.blading = false;
+		} else if (this.throwing) {
+			this.throwing ++;
+			if (this.throwing >= 10) {
+				gameObjects.push(new FwegBomb(this.x, this.y, 0, -5)); //TODO give actual velocity
+				this.throwing = false;
+				this.actionCD = 60;
+			}
+		} else if (this.leaping) {
+			if (!this.grounded) {
+				
+			} else if (this.leaping == "ready") {
+				this.dx = 0;
+				gameObjects.push(new FwegBlast(this.x, this.y), new FwegWave(this.x, this.y, false), new FwegWave(this.x, this.y, true));
+				this.leaping = 1;
+				this.actionCD = 60;
+			} else if (this.leaping < 15) {
+				this.leaping ++;
+			} else {
+				this.leaping = false;
+			}
+		} else if (!this.checkBenchmarks()) {
+			//if (this.grounded && Math.random() < .02)
+				//this.dy = -DEFAULT_JUMP_SPEED;
+			//this.facingRight = (player.x > this.x);
+			//this.dx = (this.facingRight?1:-1)*FWEGOS_BASE_SPEED;
+			this.actionCD--;
+			if (this.actionCD <= 0) {
+				if (Math.abs(this.x - player.x) >= this.jumpMinDistance) {
+					this.leaping = "ready";
+					this.dy = -this.jumpSpeed;
+					this.dx = (player.x-this.x) / (Math.abs(this.dy) * 2 / (gravity || .1));
+					this.facingRight = this.dx > 0;
+				} else if (this.bladeBox.isTouching(player)) {
+					this.blading = 1;
+					this.dx = 0;
+				} else {
+					this.facingRight = (player.x > this.x);
+					this.dx = this.facingRight ? this.walkSpeed : -this.walkSpeed;
+				}
+			}
+		}
+		this.physics();
+		this.checkCollHit();
+	}
 
-Bolizos.prototype.startRush = function() {
-	this.rushes = 5;
-	this.nextUpdate = this.updateRush;
-	this.ballUp();
-}
-Bolizos.prototype.updateRush = function() {
-	if (this.x < this.boundLeft-20 || this.x > this.boundRight+20 || this.y < this.boundTop-10) {
-		if (this.rushes <= 0) {
-			this.ballReturn();
-		} else {
-			this.rushes--;
-			var siderng = Math.random();
-			if (siderng <= .5) {
+	ballUp() {
+		this.hittable = false;
+		player.drained = false;
+		this.update = this.updateBall;
+	}
+	updateBall() {
+		this.dy -= 1;
+		this.y += this.dy;
+		if (this.y < this.boundTop-20) {
+			this.update = this.nextUpdate;
+		}
+	}
+	ballReturn() {
+		this.x = (this.boundLeft + this.boundRight)/2;
+		this.y = this.boundTop;
+		this.dx = 0;
+		this.dy = 0;
+		this.update = this.updateReturn;
+	}
+	updateReturn() {
+		this.dy += gravity;
+		this.physics();
+		if (this.dy <= 0) {
+			this.makeWaves();
+			this.update = this.updateNormal;
+			this.hittable = true;
+			player.drained = true;
+			this.width = FWEGOS_NORMAL_WIDTH;
+			this.height = FWEGOS_NORMAL_HEIGHT;
+		}
+	}
+
+	startRush() {
+		this.rushes = 5;
+		this.nextUpdate = this.updateRush;
+		this.ballUp();
+	}
+	updateRush() {
+		if (this.x < this.boundLeft-20 || this.x > this.boundRight+20 || this.y < this.boundTop-10) {
+			if (this.rushes <= 0) {
+				this.ballReturn();
+			} else {
+				this.rushes--;
 				this.x = this.boundLeft+Math.random()*(this.boundRight-this.boundLeft);
 				this.y = this.boundTop;
-			} else {
-				this.x = (siderng < .75) ? (this.boundLeft-10) : (this.boundRight+10);
-				this.y = this.boundTop+Math.random()*(this.boundBottom-this.boundTop);
+				var theta = this.angleTo(player) + (.5+Math.random())*.2;
+				this.dx = FWEGOS_RUSH_SPEED * Math.cos(theta);
+				this.dy = FWEGOS_RUSH_SPEED * Math.sin(theta);
+				this.facingRight = (this.dx > 0);
+				this.hitYet = false;
 			}
-			var theta = this.angleTo(player) + (.5+Math.random())*.2;
-			this.dx = FWEGOS_RUSH_SPEED * Math.cos(theta);
-			this.dy = FWEGOS_RUSH_SPEED * Math.sin(theta);
-			this.facingRight = (this.dx > 0);
-			this.hitYet = false;
-		}
-	} else {
-		for (var i = 0; i < 4; i++) {
-			this.x += this.dx/4;
-			this.y += this.dy/4;
-			if (this.y > this.boundBottom)
-				this.dy = -this.dy;
-			if (!this.hitYet) {
-				if (this.sendHurtbox(120) == player)
-					this.hitYet = true;
+		} else {
+			for (var i = 0; i < 4; i++) {
+				this.x += this.dx/4;
+				this.y += this.dy/4;
+				if (this.y > this.boundBottom) {
+					this.dy = -this.dy;
+					this.makeWaves();
+				}
+				if (!this.hitYet) {
+					if (this.sendHurtbox(120) == player)
+						this.hitYet = true;
+				}
 			}
 		}
 	}
-}
 
-Bolizos.prototype.startRain = function() {
-	this.rainTimer = 200;
-	this.nextUpdate = this.updateRain;
-	this.ballUp();
-}
-Bolizos.prototype.updateRain = function() {
-	this.rainTimer--;
-	if (this.rainTimer%2 == 0 && this.rainTimer > 20) {
-		gameObjects.push(new FwegDrop(this.boundLeft+Math.random()*(this.boundRight-this.boundLeft), this.boundTop));
+	startRain() {
+		this.rainTimer = 200;
+		this.nextUpdate = this.updateRain;
+		this.ballUp();
 	}
-	if (this.rainTimer <= 0) {
-		this.ballReturn();
+	updateRain() {
+		this.rainTimer--;
+		if (this.rainTimer%2 == 0 && this.rainTimer > 20) {
+			gameObjects.push(new FwegDrop(this.boundLeft+Math.random()*(this.boundRight-this.boundLeft), this.boundTop));
+		}
+		if (this.rainTimer <= 0) {
+			this.ballReturn();
+		}
+	}
+	makeWaves() {
+		gameObjects.push(new FwegWave(this.x, this.boundBottom, false), new FwegWave(this.x, this.boundBottom, true));
+		playSound(this.sfx.BlastL);
+	}
+	
+	draw() {
+		var state;
+		if (this.hp <= 0) {
+			state = "defeated";
+		} else if (this.update != this.updateNormal) {
+			/*this.ballCycle++;
+			if (this.ballCycle > 2)
+				this.ballCycle = 0;
+			state = "Ball" + this.ballCycle;*/
+			state = "ball";
+		} else if (this.blading) {
+			if (this.blading < this.bladeStartup)
+				state = "bladeStartup";
+			else
+				state = "bladeSwing";
+		} else if (this.leaping) {
+			if (!this.grounded)
+				state = "leapAir";
+			else
+				state = "leapAfter";
+		} else
+			state = "standing";
+		//console.log(state);
+		drawSpriteOnStage(this.sprites[state], this.x, this.y, this.facingRight);
+		//this.state = null;
 	}
 }
+Bolizos.prototype.speciesName = "Bolizos";
+Bolizos.prototype.team = "Sqarnos";
+//Bolizos.prototype.spriteNames = ["Standing", "Readying", "Blasting-4", "Blasting-3", "Blasting-2", "Blasting-1", "Blasting0", "Blasting1", "Blasting2", "Blasting3", "Ball", "Defeated", "Shockwave"]
+Bolizos.prototype.sprites = makeSprites("src/Enemies/Bolizos.png", {
+	standing : {x:0, y:0, width:20, height:40},
+	bladeStartup : {x:70, y:40, width:40, height:40},
+	bladeSwing : {x:-25, y:40, width:90, height:40},
+	leapAir : {x:40, y:0, width:30, height:40},
+	leapAfter : {x:70, y:0, width:30, height:40},
+	wave : {x:0, y:80, width:20, height:10},
+}, false);
+Bolizos.prototype.sfxNames = ["Blast", "BlastL"]
+Bolizos.prototype.maxhp = 1300;
+Bolizos.prototype.doesGravity = true;
+Bolizos.prototype.actionCD = 0;
+Bolizos.prototype.collDamage = 90;
+Bolizos.prototype.collMaxCD = 45;
+Bolizos.prototype.bladeStartup = 45;
+Bolizos.prototype.bladeEndlag = 5;
+Bolizos.prototype.walkSpeed = 5;
+Bolizos.prototype.jumpSpeed = 10;
+Bolizos.prototype.jumpMinDistance = 200;
+Bolizos.prototype.numVessels = 5;

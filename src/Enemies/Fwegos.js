@@ -31,8 +31,8 @@ class Fwegos extends Boss {
 		this.ballCycle = 0;
 		this.collCD = 0;
 		this.update = this.updateNormal;
-		this.benchmarks = [/*1000,           700,            400*/];
-		this.specials   = [/*this.startRush, this.startRain, this.startRush*/];
+		this.benchmarks = [1000];
+		this.specials   = [this.summonBetties];
 	}
 	updateNormal() {
 		if (this.boundLeft == undefined) {
@@ -96,91 +96,24 @@ class Fwegos extends Boss {
 		this.physics();
 		this.checkCollHit();
 	}
-
-	ballUp() {
-		this.hittable = false;
-		player.drained = false;
-		this.update = this.updateBall;
-	}
-	updateBall() {
-		this.dy -= 1;
-		this.y += this.dy;
-		if (this.y < this.boundTop-20) {
-			this.update = this.nextUpdate;
-		}
-	}
-	ballReturn() {
-		this.x = (this.boundLeft + this.boundRight)/2;
-		this.y = this.boundTop;
-		this.dx = 0;
-		this.dy = 0;
-		this.update = this.updateReturn;
-	}
-	updateReturn() {
-		this.dy += gravity;
-		this.physics();
-		if (this.dy <= 0) {
-			this.makeWaves();
-			this.update = this.updateNormal;
-			this.hittable = true;
-			player.drained = true;
-			this.width = FWEGOS_NORMAL_WIDTH;
-			this.height = FWEGOS_NORMAL_HEIGHT;
-		}
-	}
-
-	startRush() {
-		this.rushes = 5;
-		this.nextUpdate = this.updateRush;
-		this.ballUp();
-	}
-	updateRush() {
-		if (this.x < this.boundLeft-20 || this.x > this.boundRight+20 || this.y < this.boundTop-10) {
-			if (this.rushes <= 0) {
-				this.ballReturn();
-			} else {
-				this.rushes--;
-				this.x = this.boundLeft+Math.random()*(this.boundRight-this.boundLeft);
-				this.y = this.boundTop;
-				var theta = this.angleTo(player) + (.5+Math.random())*.2;
-				this.dx = FWEGOS_RUSH_SPEED * Math.cos(theta);
-				this.dy = FWEGOS_RUSH_SPEED * Math.sin(theta);
-				this.facingRight = (this.dx > 0);
-				this.hitYet = false;
-			}
+	
+	summonBetties() {
+		if (player.x < this.getXOfPortion(1/3)) {
+			this.addBettie(this.getXOfPortion(3/6));
+			this.addBettie(this.getXOfPortion(5/6));
+		} else if (player.x > this.getXOfPortion(2/3)) {
+			this.addBettie(this.getXOfPortion(1/6));
+			this.addBettie(this.getXOfPortion(3/6));
 		} else {
-			for (var i = 0; i < 4; i++) {
-				this.x += this.dx/4;
-				this.y += this.dy/4;
-				if (this.y > this.boundBottom) {
-					this.dy = -this.dy;
-					this.makeWaves();
-				}
-				if (!this.hitYet) {
-					if (this.sendHurtbox(120) == player)
-						this.hitYet = true;
-				}
-			}
+			this.addBettie(this.getXOfPortion(1/6));
+			this.addBettie(this.getXOfPortion(5/6));
 		}
 	}
-
-	startRain() {
-		this.rainTimer = 200;
-		this.nextUpdate = this.updateRain;
-		this.ballUp();
+	addBettie(x) {
+		gameObjects.push(new Bettie(null, x, this.boundTop + Bettie.prototype.height));
 	}
-	updateRain() {
-		this.rainTimer--;
-		if (this.rainTimer%2 == 0 && this.rainTimer > 20) {
-			gameObjects.push(new FwegDrop(this.boundLeft+Math.random()*(this.boundRight-this.boundLeft), this.boundTop));
-		}
-		if (this.rainTimer <= 0) {
-			this.ballReturn();
-		}
-	}
-	makeWaves() {
-		gameObjects.push(new FwegWave(this.x, this.boundBottom, false), new FwegWave(this.x, this.boundBottom, true));
-		playSound(this.sfx.BlastL);
+	getXOfPortion(portion) {
+		return this.boundLeft + (this.boundRight - this.boundLeft) * portion;
 	}
 	
 	draw() {
@@ -231,7 +164,7 @@ Fwegos.prototype.bladeStartup = 45;
 Fwegos.prototype.bladeEndlag = 5;
 Fwegos.prototype.walkSpeed = 5;
 Fwegos.prototype.jumpSpeed = 10;
-Fwegos.prototype.jumpMinDistance = 200;
+Fwegos.prototype.jumpMinDistance = 150;
 Fwegos.prototype.numVessels = 5;
 
 class FwegBomb extends GameObject {

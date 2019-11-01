@@ -36,7 +36,7 @@ class Boss extends Enemy {
 		if (this.hp <= this.benchmarks[0]) {
 			this.specialStart = this.specials.shift();
 			this.specialStart();
-			this.benchmarks = this.benchmarks.shift();
+			this.benchmarks.shift();
 			return true;
 		}
 	}

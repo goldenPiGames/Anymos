@@ -7,213 +7,360 @@ Stages.YstryJungle = {
 		let F = {solid:false,color:"#11A131",leafy:true};
 		let W = {solid:true,color:"#634D2D",leafy:false};
 		let R = B//{solid:true,color:"#7F7F7F",leafy:false};
+		let M = {solid:true,color:"#F0F0F0",leafy:false};
 		let _ = {solid:false,color:"#20E060"};
 		staticColl = 
-			[[B,B,B,B,B,B,B,B,_,_,_,_,B,B,B,B,B,B,B,B],
-			 [F,_,_,B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [F,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [B,_,R,R,R,_,_,_,_,B,B,_,_,_,_,_,_,_,_,B],
-			 [B,_,R,R,R,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [B,_,R,R,R,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-			 [_,_,_,_,B,B,_,_,_,_,_,_,_,_,B,B,_,_,_,_],
-			 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-			 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-			 [B,_,_,_,_,_,B,B,_,_,_,_,B,B,_,_,_,_,_,B],
-			 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [B,B,B,B,B,B,B,B,_,_,_,_,B,B,B,B,B,B,B,B]],
-		
-		/*[[_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_]];*/
+				[[B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,B,B,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,B,B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B]],
 		minZoom = 3;
 		if (doStuff) {
 			zoomd = 3;
 			zoom = 3;
 		}
 		var blankBack = makeImage("src/Stages/YstryJungle/MainBack.png");
-		var tmsStarting = new TeleportMazeSegment(
-			[[B,B,B,B,B,B,B,B,_,_,_,_,B,B,B,B,B,B,B,B],
-			 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [B,_,_,_,_,_,_,_,_,B,B,_,_,_,_,_,_,_,_,B],
-			 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [_,_,_,_,_,B,B,_,_,_,_,_,_,B,B,_,_,_,_,_],
-			 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-			 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-			 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-			 [B,_,_,_,_,_,_,_,B,B,B,B,_,_,_,_,_,_,_,B],
-			 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [B,B,B,B,B,B,B,B,_,_,_,_,B,B,B,B,B,B,B,B]],
-			blankBack, makeImage("src/Stages/YstryJungle/StartingFore.png"), []);
-		tmsStarting.down = tmsStarting;
-		tmsStarting.left = tmsStarting;
-		var tmsLostWoods1 = new TeleportMazeSegment(
-			[[B,B,B,B,B,B,B,B,_,_,_,_,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B],
-			 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B,_,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [B,_,_,_,_,_,_,_,_,B,B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [_,_,_,_,_,_,_,B,B,_,_,B,B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B,B,B],
-			 [_,_,_,_,_,B,B,_,_,_,_,_,_,B,B,_,_,_,_,B,B,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B,B,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B,B,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [B,_,_,B,B,_,_,_,_,_,_,_,_,_,_,B,B,_,_,B,B,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B,B,_,_,_,B,_,_,_,_,_,_,_,B],
-			 [B,B,B,B,B,B,B,B,_,_,_,_,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B]],
-			makeImage("src/Stages/YstryJungle/LostWoods1Back.png"), makeImage("src/Stages/YstryJungle/LostWoods1Fore.png"), [
-					new Vessel("YstryJungleSeeds", 620, 148),
-				]);
-		tmsStarting.right = tmsLostWoods1; tmsLostWoods1.left = tmsStarting;
-		tmsLostWoods1.down = tmsStarting;
-		var tmsLostWoods2 = new TeleportMazeSegment(
-			[[B,B,B,B,B,B,B,B,_,_,_,_,B,B,B,B,B,B,_,B],
-			 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B,_,_,_,B],
-			 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,R,R,R,_,B],
-			 [B,_,_,_,_,_,_,_,_,_,B,B,_,_,_,R,R,R,_,B],
-			 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,R,R,R,_,B],
-			 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-			 [_,_,_,_,_,_,B,B,_,_,_,_,B,B,_,_,_,_,_,_],
-			 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-			 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-			 [B,_,_,B,B,_,_,_,_,_,_,_,_,_,_,B,B,_,_,B],
-			 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [B,B,B,B,B,B,B,B,_,_,_,_,B,B,B,B,B,B,B,B]],
-			blankBack/*makeImage("src/Stages/YstryJungle/LostWoods2Back.png")*/, makeImage("src/Stages/YstryJungle/LostWoods2Fore.png"), [
-					new Vessel("YstryJungleBoulderCornerDrop", 370, 58),
-				]);
-		tmsLostWoods1.up = tmsLostWoods2; tmsLostWoods2.down = tmsLostWoods1;
-		tmsLostWoods2.left = tmsStarting;
-		tmsLostWoods2.up = tmsStarting;
-		var tmsLostWoods3 = new TeleportMazeSegment(
-			[[B,B,B,B,B,B,B,B,_,_,_,_,B,B,B,B,B,B,B,B],
-			 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [B,_,_,_,_,_,_,_,B,B,B,B,_,_,_,_,_,_,_,B],
-			 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-			 [_,_,_,B,B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-			 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-			 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-			 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B,B],
-			 [B,_,_,_,_,B,B,_,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,B,_,_,_,_,B],
-			 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,B,_,_,_,_,B],
-			 [B,B,B,B,B,B,B,B,_,_,_,_,B,B,B,B,B,B,F,B]],
-			blankBack, makeImage("src/Stages/YstryJungle/LostWoods3Fore.png"), []);
-		tmsLostWoods2.right = tmsLostWoods3; tmsLostWoods3.left = tmsLostWoods2;
-		tmsLostWoods3.down = tmsLostWoods2;
-		tmsLostWoods3.right = tmsStarting;
-		var tmsLostWoods4 = new TeleportMazeSegment(
-			[[B,B,B,B,B,B,B,B,_,_,_,_,B,B,B,B,B,B,B,B],
-			 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [B,_,_,_,_,_,_,_,_,B,B,_,_,_,_,_,_,_,_,B],
-			 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-			 [_,_,_,_,_,B,B,_,_,_,_,_,_,B,B,_,_,_,_,_],
-			 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-			 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-			 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [B,_,_,_,_,_,_,_,B,B,B,B,_,_,_,_,_,_,_,B],
-			 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [B,B,B,B,B,B,B,B,_,_,_,_,B,B,B,B,B,B,B,B]],
-			blankBack, makeImage("src/Stages/YstryJungle/LostWoods4Fore.png"), []);
-		tmsLostWoods3.up = tmsLostWoods4; tmsLostWoods4.down = tmsLostWoods3;
-		tmsLostWoods4.left = tmsStarting;
-		tmsLostWoods4.right = tmsLostWoods1;
-		var tmsLostWoods5 = new TeleportMazeSegment(
-			[[B,B,B,B,B,B,B,B,_,_,_,_,B,B,B,B,B,B,_,B],
-			 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B,_,_,_,F],
-			 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,F],
-			 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,R,R,R,_,B],
-			 [B,_,_,_,_,_,_,_,B,B,_,_,_,_,_,R,R,R,_,B],
-			 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,R,R,R,_,B],
-			 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-			 [_,_,_,_,_,_,B,B,_,_,_,_,B,B,_,_,_,_,_,_],
-			 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-			 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-			 [B,_,_,B,B,_,_,_,_,_,_,_,_,_,_,B,B,_,_,B],
-			 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [B,B,B,B,B,B,B,B,_,_,_,_,B,B,B,B,B,B,B,B]],
-			blankBack, makeImage("src/Stages/YstryJungle/LostWoods5Fore.png"), [
-					new Vessel("YstryJungleBoulderCornerWalk", 340, 48),
-				]);
-		tmsLostWoods4.up = tmsLostWoods5; tmsLostWoods5.down = tmsLostWoods4;
-		tmsLostWoods5.up = tmsLostWoods3;
-		tmsLostWoods5.right = tmsLostWoods4;
-		var tmsLostWoods6 = new TeleportMazeSegment(
-			[[B,B,B,B,B,B,B,B,_,_,_,_,B,B,B,B,B,B,B,B],
-			 [F,_,_,B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [F,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [B,_,R,R,R,_,_,_,_,B,B,_,_,_,_,_,_,_,_,B],
-			 [B,_,R,R,R,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [B,_,R,R,R,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-			 [_,_,_,_,B,B,_,_,_,_,_,_,_,_,B,B,_,_,_,_],
-			 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-			 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-			 [B,_,_,_,_,_,B,B,_,_,_,_,B,B,_,_,_,_,_,B],
-			 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
-			 [B,B,B,B,B,B,B,B,_,_,_,_,B,B,B,B,B,B,B,B]],
-			blankBack, makeImage("src/Stages/YstryJungle/LostWoods6Fore.png"), []);
-		tmsLostWoods5.left = tmsLostWoods6; tmsLostWoods6.right = tmsLostWoods5;
-		tmsLostWoods6.left = tmsLostWoods5;
-		tmsLostWoods6.down = tmsStarting;
-		var tmsKonamis = [];
-		for (var i = 0; i < 8; i++) {
-			tmsKonamis[i] = new TeleportMazeSegment(tmsStarting.staticColl, tmsStarting.mainBack, tmsStarting.mainFore, []);
-			tmsKonamis[i].left = tmsStarting.left; tmsKonamis[i].right = tmsStarting.right; tmsKonamis[i].up = tmsStarting.up; tmsKonamis[i].down = tmsStarting.down;
-		}
-		tmsStarting.up = tmsKonamis[0];
-		tmsKonamis[0].up = tmsKonamis[1];
-		tmsKonamis[1].down = tmsKonamis[2];
-		tmsKonamis[2].down = tmsKonamis[3];
-		tmsKonamis[3].left = tmsKonamis[4];
-		tmsKonamis[4].right = tmsKonamis[5];
-		tmsKonamis[5].left = tmsKonamis[6];
-		tmsKonamis[6].right = tmsKonamis[7];
-		tmsKonamis[7].objects = [new Vessel("YstryJungleKonami", 300, 200)]
-		edgesSolid = false;
-		tmsStarting.enter();
+		var makeComboSegment = makeTeleportMazeSegmentGenerator({
+				staticColl :
+				[[B,B,B,B,B,B,B,B,_,_,_,_,B,B,B,B,B,B,B,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,B,B,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [_,_,_,_,_,B,B,_,_,_,_,_,_,B,B,_,_,_,_,_],
+				 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
+				 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
+				 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
+				 [B,_,_,_,_,_,_,_,B,B,B,B,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,B,B,B,B,B,B,B,_,_,_,_,B,B,B,B,B,B,B,B]],
+				mainBack : blankBack,
+				mainFore : makeImage("src/Stages/YstryJungle/StartingFore.png"),
+				objects : [],
+				up   : "Konami1",
+				down : "Starting",
+				left : "Starting",
+				right: "LostWoods1",
+			});
+		var maze = new TeleportMaze({
+			"Starting" : {
+				start : true,
+				staticColl:
+				[[B,B,B,B,B,B,B,B,_,_,_,_,B,B,B,B,B,B,B,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,B,B,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [_,_,_,_,_,B,B,_,_,_,_,_,_,B,B,_,_,_,_,_],
+				 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
+				 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
+				 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
+				 [B,_,_,_,_,_,_,_,B,B,B,B,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,B,B,B,B,B,B,B,_,_,_,_,B,B,B,B,B,B,B,B]],
+				mainBack : blankBack,
+				mainFore : makeImage("src/Stages/YstryJungle/StartingFore.png"),
+				objects : [],
+				up   : "Konami1",
+				down : "Starting",
+				left : "Starting",
+				right: "LostWoods1",
+			},
+			"LostWoods1" : {
+				staticColl :
+				[[B,B,B,B,B,B,B,B,_,_,_,_,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,B,B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [_,_,_,_,_,_,_,B,B,_,_,B,B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B,B,B],
+				 [_,_,_,_,_,B,B,_,_,_,_,_,_,B,B,_,_,_,_,B,B,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B,B,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B,B,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,B,B,_,_,_,_,_,_,_,_,_,_,B,B,_,_,B,B,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B,B,_,_,_,B,_,_,_,_,_,_,_,B],
+				 [B,B,B,B,B,B,B,B,_,_,_,_,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B]],
+				mainBack: makeImage("src/Stages/YstryJungle/LostWoods1Back.png"),
+				mainFore: makeImage("src/Stages/YstryJungle/LostWoods1Fore.png"),
+				objects: [
+						new Vessel("YstryJungleSeeds", 620, 148),
+					],
+				up   : "LostWoods2",
+				down : "Starting",
+				left : "Starting",
+			},
+			"LostWoods2" : {
+				staticColl :
+				[[B,B,B,B,B,B,B,B,_,_,_,_,B,B,B,B,B,B,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,R,R,R,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,B,B,_,_,_,R,R,R,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,R,R,R,_,B],
+				 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
+				 [_,_,_,_,_,_,B,B,_,_,_,_,B,B,_,_,_,_,_,_],
+				 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
+				 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
+				 [B,_,_,B,B,_,_,_,_,_,_,_,_,_,_,B,B,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,B,B,B,B,B,B,B,_,_,_,_,B,B,B,B,B,B,B,B]],
+				mainBack : blankBack,
+				mainFore : makeImage("src/Stages/YstryJungle/LostWoods2Fore.png"),
+				objects : [
+						new Vessel("YstryJungleBoulderCornerDrop", 370, 58),
+					],
+				up   : "Starting",
+				down : "LostWoods1",
+				left : "Starting",
+				right: "LostWoods3",
+			},
+			"LostWoods3" : {
+				staticColl :
+				[[B,B,B,B,B,B,B,B,_,_,_,_,B,B,B,B,B,B,B,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,B,B,B,B,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
+				 [_,_,_,B,B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
+				 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
+				 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B,B],
+				 [B,_,_,_,_,B,B,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,B,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,B,_,_,_,_,B],
+				 [B,B,B,B,B,B,B,B,_,_,_,_,B,B,B,B,B,B,F,B]],
+				mainBack : blankBack,
+				mainFore : makeImage("src/Stages/YstryJungle/LostWoods3Fore.png"),
+				objects : [],
+				up   : "LostWoods4",
+				down : "LostWoods2",
+				left : "LostWoods2",
+				right: "Starting",
+			},
+			"LostWoods4" : {
+				staticColl :
+				[[B,B,B,B,B,B,B,B,_,_,_,_,B,B,B,B,B,B,B,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,B,B,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
+				 [_,_,_,_,_,B,B,_,_,_,_,_,_,B,B,_,_,_,_,_],
+				 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
+				 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,B,B,B,B,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,B,B,B,B,B,B,B,_,_,_,_,B,B,B,B,B,B,B,B]],
+				mainBack : blankBack,
+				mainFore : makeImage("src/Stages/YstryJungle/LostWoods4Fore.png"),
+				objects : [],
+				up   : "LostWoods5",
+				down : "LostWoods3",
+				left : "Starting",
+				right: "LostWoods1",
+			},
+			"LostWoods5" : {
+				staticColl :
+				[[B,B,B,B,B,B,B,B,_,_,_,_,B,B,B,B,B,B,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B,_,_,_,F],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,F],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,R,R,R,_,B],
+				 [B,_,_,_,_,_,_,_,B,B,_,_,_,_,_,R,R,R,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,R,R,R,_,B],
+				 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
+				 [_,_,_,_,_,_,B,B,_,_,_,_,B,B,_,_,_,_,_,_],
+				 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
+				 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
+				 [B,_,_,B,B,_,_,_,_,_,_,_,_,_,_,B,B,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,B,B,B,B,B,B,B,_,_,_,_,B,B,B,B,B,B,B,B]],
+				mainBack : blankBack,
+				mainFore : makeImage("src/Stages/YstryJungle/LostWoods5Fore.png"),
+				objects	: [
+						new Vessel("YstryJungleBoulderCornerWalk", 340, 48),
+					],
+				up   : "LostWoods3",
+				down : "LostWoods4",
+				left : "LostWoods6",
+				right: "LostWoods4",
+			},
+			"LostWoods6" : {
+				staticColl :
+				[[B,B,B,B,B,B,B,B,_,_,_,_,B,B,B,B,B,B,B,B],
+				 [F,_,_,B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [F,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,R,R,R,_,_,_,_,B,B,_,_,_,_,_,_,_,_,B],
+				 [B,_,R,R,R,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,R,R,R,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
+				 [_,_,_,_,B,B,_,_,_,_,_,_,_,_,B,B,_,_,_,_],
+				 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
+				 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
+				 [B,_,_,_,_,_,B,B,_,_,_,_,B,B,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,B,B,B,B,B,B,B,_,_,_,_,B,B,B,B,B,B,B,B]],
+				mainBack : blankBack,
+				mainFore : makeImage("src/Stages/YstryJungle/LostWoods6Fore.png"),
+				objects : [],
+				up   : "LostWoodsGrove",
+				down : "Starting",
+				left : "LostWoods5",
+				right: "LostWoods5",
+			},
+			"LostWoodsGrove" : {
+				staticColl :
+				[[B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,F],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,F],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,F],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,F],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,B,B,B,B,B,B,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,B,B,B,B,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
+				 [B,_,_,B,B,B,B,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,B,B,B,B,B,B,B,_,_,_,_,B,B,B,B,B,B,B,B]],
+				mainBack : blankBack,
+				mainFore : makeImage("src/Stages/YstryJungle/LostWoodsGroveFore.png"),
+				objects : [
+					new Goalpost("IddelMountain", 350, 140, 72),
+				],
+				down : "LostWoods6",
+				right: "OverGrovePost",
+			},
+			"OverGrovePost" : {
+				staticColl :
+				[[B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,B,B,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,B,B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B]],
+				mainBack : blankBack,
+				mainFore : makeImage("src/Stages/YstryJungle/OverGrovePostFore.png"),
+				objects : [
+					new Vessel("YstryJungleOverGrovePost", 200, 48),
+				],
+				left: "LostWoodsGrove",
+				down : "Starting",
+			},
+			"Konami1" : makeComboSegment({
+				up   : "Konami2",
+				left : "Lankyroot2",
+			}),
+			"Konami2" : makeComboSegment({
+				up : "Konami2",
+				down : "Konami3",
+			}),
+			"Konami3" : makeComboSegment({
+				down : "Konami4",
+			}),
+			"Konami4" : makeComboSegment({
+				left : "Konami5",
+			}),
+			"Konami5" : makeComboSegment({
+				right : "Konami6",
+			}),
+			"Konami6" : makeComboSegment({
+				left : "Konami7",
+			}),
+			"Konami7" : makeComboSegment({
+				right : "KonamiFinish",
+			}),
+			"KonamiFinish" : makeComboSegment({
+				objects : [
+						new Vessel("YstryJungleKonami", 300, 200)
+					],
+			}),
+			"Lankyroot2" : makeComboSegment({
+				up   : "Lankyroot3",
+			}),
+			"Lankyroot3" : makeComboSegment({
+				right: "Lankyroot4",
+			}),
+			"Lankyroot4" : makeComboSegment({
+				right: "LankyrootLostRuins",
+			}),
+			"LankyrootLostRuins" : {
+				start : true,
+				staticColl:
+				[[B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,B],
+				 [B,_,_,_,M,_,_,_,_,_,_,M,_,_,_,_,_,_,_,B],
+				 [_,_,_,_,M,_,_,_,_,_,_,M,_,_,_,_,_,_,_,B],
+				 [_,_,_,_,M,_,_,_,_,_,_,M,_,_,_,_,_,_,_,B],
+				 [_,_,_,_,M,_,_,_,_,_,_,M,_,_,_,_,M,M,M,B],
+				 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,M,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,M,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,M,M,M,M,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,M,_,_,M,_,_,B],
+				 [B,_,_,_,_,_,_,_,_,_,_,_,_,M,_,_,M,_,_,B],
+				 [B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B]],
+				mainBack : makeImage("src/Stages/YstryJungle/LostRuinsBack.png"),
+				mainFore : makeImage("src/Stages/YstryJungle/LostRuinsFore.png"),
+				objects : [
+						new Vessel("YstryJungleLostRuinsPillar", 90, 100),
+						new Flipwip("YstryJungleLostRuinsEnemy", 150),
+					],
+				left : "Lankyroot4",
+			},
+		});
+		maze.start("Starting");
+		//maze.start("LostWoodsGrove"); used = 900;
 		player.x = 280;
 		player.y = 280;
 		player.facingRight = true;
 	},
-	vessels : ["YstryJungleSeeds", "YstryJungleBoulderCornerDrop", "YstryJungleBoulderCornerWalk", "YstryJungleKonami"],
+	vessels : ["YstryJungleKonami", "YstryJungleLostRuinsPillar", "YstryJungleLostRuinsEnemy", "YstryJungleSeeds", "YstryJungleBoulderCornerDrop", "YstryJungleBoulderCornerWalk", "YstryJungleOverGrovePost"], //TODO more vessels
 	previous : "IgmaBeach",
-	//nextDown : "IddelMountain",
+	nextDown : "IddelMountain",
+	parDown : 600,
 	toLoad : [Flipwip]
 }
-
-
