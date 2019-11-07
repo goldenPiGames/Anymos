@@ -73,6 +73,7 @@ Stages.ZagadCrossing = {
 	vessels : ["ZagadCrossingBowsprit", "ZagadCrossingBootie", "ZagadCrossingFricchee", "ZagadCrossingAlgoboo", "ZagadCrossingSiboo"],
 	previous : "GreyHarbor",
 	nextDown : "IgmaBeach",
+	parDown : 480,
 	toLoad : [Fricchee, Flipwip, Teion]
 }
 

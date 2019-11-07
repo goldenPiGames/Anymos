@@ -2,10 +2,10 @@ Stages.BlackMountain = {
 	displayName : "Black Mountain",
 	load : function(doStuff) {
 		playMusic("Fantasy Game Background - Eric Matyas");
-		let B = {solid:true,color:"#000000"};
+		let B = {solid:true,back:"#010101",fore:"#000000"};
 		let _ = {solid:false,color:"#00A2E8"};
-		let s = {solid:false,color:"#202020"};
-		let S = {solid:false,color:"#101010"};//TODO make insides dark
+		let s = {solid:false,back:"#404040",fore:"#000000"};
+		let S = {solid:false,back:"#202020",fore:"#000000"};//TODO make insides dark
 		staticColl =
 		[[_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
@@ -66,6 +66,7 @@ Stages.BlackMountain = {
 		player.x = 1270;
 		player.y = 1020;
 		player.facingRight = false;
+		player.illumination = 49;
 		gameObjects = [
 			new Vessel("BlackMountainRightLower", 970, 768),
 			new Vessel("BlackMountainRightLowerFurther", 840, 768),
@@ -76,6 +77,7 @@ Stages.BlackMountain = {
 			new Goalpost("ClearCanyon", 10, 1020, 140),
 			new Goalpost("DarkTunnels", 690, 1020, 120)
 		];
+		illuminateFore = true;
 	},
 	vessels : ["BlackMountainRightLower", "BlackMountainRightLowerFurther", "BlackMountainRightUpper", "BlackMountainAbove", "BlackMountainTop", "BlackMountainLeftLower"],
 	previous : "RedValley",

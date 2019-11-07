@@ -1,0 +1,270 @@
+<html>
+	<head>
+		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+		<meta content="utf-8" http-equiv="encoding">
+		<title>Maker</title>
+		<style>
+			body {
+				color : #FEFEFE;
+				background-color : #202020;
+			}
+			canvas {
+				image-rendering: optimizeSpeed;
+				image-rendering: -moz-crisp-edges;
+				image-rendering: -webkit-optimize-contrast;
+				image-rendering: -o-crisp-edges;
+				image-rendering: pixelated;
+				-ms-interpolation-mode: nearest-neighbor; 
+			}
+			.blockpicker {
+				height : 50px;
+				width : 50px;
+			}
+			.blockletter {
+				width : 30px;
+			}
+		</style>
+		<script>
+			var player = {};
+		</script>
+		<!-- <script type="text/javascript" src="src/Stage.js"></script> -->
+		<script>
+		</script>
+		
+		
+	</head>
+	<body>
+		<div id="Width">
+			Width:
+			<button onclick="setSize(width-1,height)">-</button>
+			<span id="WidthText"></span>
+			<button onclick="setSize(width+1,height)">+</button>
+		</div>
+		<div id="Width">
+			Height:
+			<button onclick="setSize(width,height-1)">-</button>
+			<span id="HeightText"></span>
+			<button onclick="setSize(width,height+1)">+</button>
+		</div>
+		<div id="Blocks">
+			<div id="Block0">
+				<div id="Block0Picker" class="blockpicker" oncontextmenu="return false"></div>
+				<input id="Block0Letter" class="blockletter" type="text"></input>
+				<input id="Block0Color" class="blockcolor" type="text"></input>
+			</div>
+			<div id="Block1">
+				<div id="Block1Picker" class="blockpicker" oncontextmenu="return false"></div>
+				<input id="Block1Letter" class="blockletter" type="text"></input>
+				<input id="Block1Color" class="blockcolor" type="text"></input>
+			</div>
+			<div id="Block2">
+				<div id="Block2Picker" class="blockpicker" oncontextmenu="return false"></div>
+				<input id="Block2Letter" class="blockletter" type="text"></input>
+				<input id="Block2Color" class="blockcolor" type="text"></input>
+			</div>
+			<div id="Block3">
+				<div id="Block3Picker" class="blockpicker" oncontextmenu="return false"></div>
+				<input id="Block3Letter" class="blockletter" type="text"></input>
+				<input id="Block3Color" class="blockcolor" type="text"></input>
+			</div>
+		</div>
+		<br>
+		<div id="BackgroundBox" style="overflow:hidden; left: 0px; top: 0px; width: 1200px; height: 900px; background-color: #000000; border-color: #BBBBBB; border-style: solid; border-width: 0px;">
+			<canvas id="GraphicsBox" width="1200px" height="900px" style="overflow:hidden; width: 100%; height: 100%; left: 0px; top: 0px;" oncontextmenu="return false">Your browser requires Canvas support to play this game.</canvas>
+			<!-- <div id="EventCatcher" style="overflow:scroll; position: absolute; left: -100px; top: -100px; width: 1000px; height: 800px;">
+				<div style="height: 4000px; width: 10px;"></div>
+			</div> -->
+		</div>
+		<button onclick="doSaveAndPrint()">Save & Print</button>
+		<input type="text" id="Input"></input>
+		<button onclick="parseInput(input.value)">Parse input</button>
+		<script>
+			const PIXELS_PER_BLOCK = 20;
+			const MAX_BLOCKS = 4;
+			var width;
+			var height;
+			var grid;
+			var numBlockTypes = 2;
+			var blockLetters = ["_", "B", "s", "L"];
+			var blockColors = ["#BFBFBF", "#404040", "#4040BF", "#40BF40", "#BF4040"];
+			var blocksPicked = [1, 2, 0];
+			var canvas = document.getElementById("GraphicsBox");
+			var backbox = document.getElementById("BackgroundBox");
+			var ctx = canvas.getContext("2d");
+			var widthSpan = document.getElementById("WidthText");
+			var heightSpan = document.getElementById("HeightText");
+			var input = document.getElementById("Input");
+			var drawing = false;
+			var blockBar = [];
+			
+			for (var i = 0; i < MAX_BLOCKS; i++) {
+				let ib = i;
+				blockBar[i] = document.getElementById("Block"+i);
+				blockBar[i].picker = document.getElementById("Block"+i+"Picker");
+				blockBar[i].picker.addEventListener("mousedown", function(e) {
+					e.preventDefault();
+					//console.log(e.button);
+					blocksPicked[e.button] = ib;
+				});
+				blockBar[i].inputLetter = document.getElementById("Block"+i+"Letter");
+				blockBar[i].inputLetter.addEventListener("change", function(e) {
+					blockLetters[ib] = blockBar[ib].inputLetter.value;
+				});
+				blockBar[i].inputColor = document.getElementById("Block"+i+"Color");
+				blockBar[i].inputColor.addEventListener("change", function(e) {
+					blockColors[ib] = blockBar[ib].inputColor.value;
+					blockBar[ib].picker.style.backgroundColor = blockColors[ib];
+					drawAll();
+				});
+			}
+			
+			backbox.addEventListener("mousedown", function(e) {
+				e.preventDefault();
+				drawing = e.button;
+				setBlock(Math.floor(e.offsetX/PIXELS_PER_BLOCK), Math.floor(e.offsetY/PIXELS_PER_BLOCK), blocksPicked[drawing]);
+			});
+			
+			backbox.addEventListener("mousemove", function(e) {
+				if (typeof drawing == "number")
+					setBlock(Math.floor(e.offsetX/PIXELS_PER_BLOCK), Math.floor(e.offsetY/PIXELS_PER_BLOCK), blocksPicked[drawing]);
+			});
+			
+			window.addEventListener("mouseup", function(e) {
+				drawing = false;
+			});
+			
+			function changeBlock(x, y) {
+				grid[y][x] = (grid[y][x] + 1) % numBlockTypes;
+				drawBlock(x, y);
+				return grid[y][x];
+			}
+			
+			function setBlock(x, y, val) {
+				grid[y][x] = val;
+				drawBlock(x, y);
+			}
+			
+			function setSize(w, h) {
+				var oldwidth = width;
+				var oldheight = height;
+				width = w;
+				height = h;
+				widthSpan.innerHTML = width;
+				heightSpan.innerHTML = height;
+				//grid.length = height;
+				for (var i = 0; i < height; i++) {
+					if (grid.length <= i) {
+						grid[i] = new Array(width).fill(0);
+					} else if (grid[i].length < width) {
+						for (var j = oldwidth; j < width; j++) {
+							grid[i][j] = 0;
+						}
+					}
+				}
+				drawAll();
+			}
+			
+			function drawBlock(x, y) {
+				ctx.fillStyle = blockColors[grid[y][x]];
+				ctx.fillRect(x*PIXELS_PER_BLOCK, y*PIXELS_PER_BLOCK, PIXELS_PER_BLOCK, PIXELS_PER_BLOCK);
+			}
+			
+			function drawAll() {
+				canvas.width = width * PIXELS_PER_BLOCK;
+				canvas.height = height * PIXELS_PER_BLOCK;
+				canvas.style.width = canvas.width;
+				canvas.style.height = canvas.height;
+				backbox.style.width = canvas.width;
+				backbox.style.height = canvas.height;
+				for (var x = 0; x < width; x++) {
+					for (var y = 0; y < height; y++) {
+						drawBlock(x, y);
+					}
+				}
+			}
+			
+			function updateBlockBar() {
+				for (var i = 0; i < blockBar.length; i++) {
+					blockBar[i].picker.style.backgroundColor = blockColors[i];
+					blockBar[i].inputLetter.value = blockLetters[i];
+					blockBar[i].inputColor.value = blockColors[i];
+				}
+			}
+			
+			function getOutput() {
+				var out = "[";
+				for (var x = 0; x < height; x++) {
+					out += "[";
+					for (var y = 0; y < width; y++) {
+						out += blockLetters[grid[x][y]] + ",";
+					}
+					out += "]";
+					if (x < height - 1)
+						out += ",\n\t\t ";
+				}
+				out += "];"
+				return out;
+			}
+			
+			function parseInput(str) {
+				str = str.replace(/[;]/g, "");
+				console.log(str);
+				blockLetters = [];
+				var letters = str.replace(/[\[\],\W]/g, "");
+				console.log(letters);
+				var failsafe = 100;
+				while (letters.length > 0 && failsafe > 0) {
+					failsafe--;
+					blockLetters.push(letters[0]);
+					letters = letters.replace(new RegExp(letters[0], "g"), "");
+				}
+				console.log(blockLetters);
+				numBlockTypes = blockLetters.length;
+				for(var i = 0; i < blockLetters.length; i++) {
+					str = str.replace(new RegExp(blockLetters[i], "g"), i);
+				}
+				console.log(str);
+				grid = JSON.parse(str);
+				setSize(grid[0].length, grid.length);
+			}
+			
+			function loadStuff() {
+				var stuff = localStorage.getItem("AnymosStageMakerStuff");
+				if (stuff) {
+					stuff = JSON.parse(stuff);
+					blockLetters = stuff.blockLetters;
+					blockColors = stuff.blockColors;
+					grid = stuff.grid;
+					setSize(stuff.width, stuff.height);
+				} else {
+					width = 0;
+					height = 0;
+					grid = [[]];
+					setSize(30, 20);
+				}
+				updateBlockBar();
+			}
+			
+			function doSaveAndPrint() {
+				saveStuff();
+				var out = getOutput();
+				input.value = out;
+				console.log(out);
+			}
+			
+			function saveStuff() {
+				var stuff = {};
+				stuff.blockLetters = blockLetters;
+				stuff.blockColors = blockColors;
+				stuff.width = width;
+				stuff.height = height;
+				stuff.grid  = grid;
+				localStorage.setItem("AnymosStageMakerStuff", JSON.stringify(stuff));
+			}
+			
+			loadStuff();
+			drawAll();
+			//updateBlockBar();
+		</script>
+	</body>
+</html>

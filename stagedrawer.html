@@ -1,7 +1,7 @@
 <html>
-    <head>
-        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-        <meta content="utf-8" http-equiv="encoding">
+	<head>
+		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+		<meta content="utf-8" http-equiv="encoding">
 		<title>Illustrator</title>
 		<style>
 			canvas {
@@ -13,12 +13,12 @@
 				-ms-interpolation-mode: nearest-neighbor; 
 			}
 		</style>
-        <script>
+		<script>
 			var player = {};
 			const LS_X_SPACING = 10;
 			const LS_Y_SPACING = 10;
 		</script>
-        <!-- <script type="text/javascript" src="src/Stage.js"></script> -->
+		<!-- <script type="text/javascript" src="src/Stage.js"></script> -->
 		<script>
 			var Stages = {};
 			function doNothing(){};
@@ -53,6 +53,9 @@
 		<script type="text/javascript" src="src/Stages/AnymisLanding/AnymisLanding.js"></script>
 		<script type="text/javascript" src="src/Stages/BurningForest/BurningForest.js"></script>
 		<script type="text/javascript" src="src/Stages/ScorchedClearing/ScorchedClearing.js"></script>
+		<script type="text/javascript" src="src/Stages/MesaCliff/MesaCliff.js"></script>
+		<script type="text/javascript" src="src/Stages/StormyMesa/StormyMesa.js"></script>
+		<script type="text/javascript" src="src/Stages/Lightningrod/Lightningrod.js"></script>
 		<script type="text/javascript" src="src/Stages/GreenMaze/GreenMaze.js"></script>
 		<script type="text/javascript" src="src/Stages/CyanRainforest/CyanRainforest.js"></script>
 		<script type="text/javascript" src="src/Stages/BlueLake/BlueLake.js"></script>
@@ -72,24 +75,25 @@
 		<script type="text/javascript" src="src/Stages/InfinityLighthouse/InfinityLighthouse.js"></script>
 		<script type="text/javascript" src="src/Stages/AdlunamPillar/AdlunamPillar.js"></script>
 		<script type="text/javascript" src="src/Stages/YstryJungle/YstryJungle.js"></script>
+		<script type="text/javascript" src="src/Stages/IddelMountain/IddelMountain.js"></script>
 		
-		</head>
-    <body>
-        <div id="BackBackgroundBox" style="overflow:hidden; left: 0px; top: 0px; width: 1200px; height: 900px; background-color: #000000; border-color: #BBBBBB; border-style: solid; border-width: 0px;">
-            <canvas id="BackGraphicsBox" width="1200px" height="900px" style="overflow:hidden; width: 100%; height: 100%; left: 0px; top: 0px;">Your browser requires Canvas support to play this game.</canvas>
-            <!-- <div id="EventCatcher" style="overflow:scroll; position: absolute; left: -100px; top: -100px; width: 1000px; height: 800px;">
-                <div style="height: 4000px; width: 10px;"></div>
-            </div> -->
-        </div>
+	</head>
+	<body>
+		<div id="BackBackgroundBox" style="overflow:hidden; left: 0px; top: 0px; width: 1200px; height: 900px; background-color: #000000; border-color: #BBBBBB; border-style: solid; border-width: 0px;">
+			<canvas id="BackGraphicsBox" width="1200px" height="900px" style="overflow:hidden; width: 100%; height: 100%; left: 0px; top: 0px;">Your browser requires Canvas support to play this game.</canvas>
+			<!-- <div id="EventCatcher" style="overflow:scroll; position: absolute; left: -100px; top: -100px; width: 1000px; height: 800px;">
+				<div style="height: 4000px; width: 10px;"></div>
+			</div> -->
+		</div>
 		<div id="ForeBackgroundBox" style="overflow:hidden; left: 0px; top: 0px; width: 1200px; height: 900px; background-color: #FFFFFF; border-color: #BBBBBB; border-style: solid; border-width: 0px;">
-            <canvas id="ForeGraphicsBox" width="1200px" height="900px" style="overflow:hidden; width: 100%; height: 100%; left: 0px; top: 0px;">Your browser requires Canvas support to play this game.</canvas>
-            <!-- <div id="EventCatcher" style="overflow:scroll; position: absolute; left: -100px; top: -100px; width: 1000px; height: 800px;">
-                <div style="height: 4000px; width: 10px;"></div>
-            </div> -->
-        </div>
+			<canvas id="ForeGraphicsBox" width="1200px" height="900px" style="overflow:hidden; width: 100%; height: 100%; left: 0px; top: 0px;">Your browser requires Canvas support to play this game.</canvas>
+			<!-- <div id="EventCatcher" style="overflow:scroll; position: absolute; left: -100px; top: -100px; width: 1000px; height: 800px;">
+				<div style="height: 4000px; width: 10px;"></div>
+			</div> -->
+		</div>
 		
-        <script>
-            //var player = {};
+		<script>
+			//var player = {};
 			var staticColl;
 			const PIXELS_PER_BLOCK = 20;
 			var backcanvas = document.getElementById("BackGraphicsBox");
@@ -198,8 +202,12 @@
 							}
 							bctx.fillRect(i*PIXELS_PER_BLOCK,j*PIXELS_PER_BLOCK,PIXELS_PER_BLOCK,PIXELS_PER_BLOCK);
 						} else if (staticColl[j][i].fore) {
-							fctx.fillStyle = staticColl[j][i].color || (staticColl[j][i].solid && !staticColl[j][i].leafy ? "#7F7F7F" : (staticColl[j][i].hazard ? "#BF7F7F" : "#00A2E8"));
+							fctx.fillStyle = typeof staticColl[j][i].fore == "string" ? staticColl[j][i].fore : staticColl[j][i].color;
 							fctx.fillRect(i*PIXELS_PER_BLOCK,j*PIXELS_PER_BLOCK,PIXELS_PER_BLOCK,PIXELS_PER_BLOCK);
+							if (staticColl[j][i].back) {
+								bctx.fillStyle = staticColl[j][i].back;
+								bctx.fillRect(i*PIXELS_PER_BLOCK,j*PIXELS_PER_BLOCK,PIXELS_PER_BLOCK,PIXELS_PER_BLOCK);
+							}
 						} else {
 							bctx.fillStyle = staticColl[j][i].color || (staticColl[j][i].solid && !staticColl[j][i].leafy ? "#7F7F7F" : (staticColl[j][i].hazard ? "#BF7F7F" : "#00A2E8"));
 							bctx.fillRect(i*PIXELS_PER_BLOCK,j*PIXELS_PER_BLOCK,PIXELS_PER_BLOCK,PIXELS_PER_BLOCK);
@@ -254,6 +262,6 @@
 				localStorage.setItem("AnymosDrawnBack", bctx.fillStyle);
 			}
 			drawStage(localStorage.getItem("AnymosDrawnLast"));
-        </script>
-    </body>
+		</script>
+	</body>
 </html>

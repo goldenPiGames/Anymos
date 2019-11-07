@@ -22,7 +22,7 @@ class Flipwip extends Enemy {
 			this.x = player.x + (this.facingRight?-30:30);
 			this.y = player.y-player.height/2+Math.random()*this.height;
 		} else if (this.cycle == FLIPWIP_ATTACK_TIME) {
-			playSound(miscSFX.SPM_Smash);
+			playSFX("SPM_Smash");
 			this.sendHurtbox(90, this.x + (this.facingRight?1:-1) * (this.width/4 + FLIPWIP_REACH/2), this.y, this.width + FLIPWIP_REACH, this.height);
 		} else if (this.cycle > FLIPWIP_APPEAR_TIME) {
 			this.x = NaN;
@@ -69,4 +69,5 @@ Flipwip.prototype.sprites = makeSprites("src/Enemies/Flipwip.png", {
 	attacking1: {x:-15, y:40, width:50, height:20},
 	attacking0: {x:-30, y:60, width:80, height:20},
 }, false);
+Flipwip.prototype.sfxNames = ["SPM_Smash"];
 Flipwip.prototype.maxhp = 50;

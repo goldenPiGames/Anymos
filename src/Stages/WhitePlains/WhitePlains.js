@@ -40,9 +40,9 @@ Stages.WhitePlains = {
 		};
 	},
 	vessels : ["WhitePlainsLeftJumpRight", "WhitePlainsMiddleJumpLeft", "WhitePlainsBen", "WhitePlainsMidRightJumpRight"],
-	par : 420,
 	previous : "MagentaTown",
 	nextDown : "GreyHarbor",
+	parDown : 600,
 	toLoad : [Walkie]
 }
 

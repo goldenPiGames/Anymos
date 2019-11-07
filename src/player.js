@@ -37,8 +37,6 @@ class AnymosPlayer extends Enemy {
 		if (!this.grounded) {
 			this.height = PLAYER_NORMAL_HEIGHT;
 			this.crouching = isPixelSolid(this.x - this.width/2 + 1, this.y - this.height) || isPixelSolid(this.x + this.width/2 - 1, this.y - this.height);
-			//if (this.special == "Syklos' Double Jump" && (controller.jumpClicked || controller.specialClicked))
-				//resolveDoubleJump();
 		} else {
 			this.crouching = (controller.down && this.playerControlled || isPixelSolid(this.x - this.width/2, this.y - PIXELS_PER_BLOCK - 1) || isPixelSolid(this.x + this.width/2, this.y - PIXELS_PER_BLOCK - 1) || isPixelSolid(this.x - this.width/2 + 4, this.y - 37) || isPixelSolid(this.x + this.width/2 - 4, this.y - 37)) /*&& (isPixelSolid(this.x-this.width/2, this.y + 1) || isPixelSolid(this.x+this.width/2, this.y + 1)) /*&& !controller.jump*/ && !this.attacking;
 		}
@@ -61,7 +59,7 @@ class AnymosPlayer extends Enemy {
 					this.dx = Math.min(this.dx+.75, 7);
 			}
 			if (controller.jumpClicked && this.grounded && !isPixelSolid(this.x-this.width/2, this.y-35) && !isPixelSolid(this.x+this.width/2, this.y-35)) { //Jump
-				playSound(miscSFX.Swish4);
+				playSFX("Swish4");
 				this.crouching = false;
 				this.height = PLAYER_NORMAL_HEIGHT;
 				this.dy = -Math.abs(controller.down ? this.jumpSpeed*Math.SQRT1_2 : this.jumpSpeed);
@@ -76,7 +74,7 @@ class AnymosPlayer extends Enemy {
 		}
 		this.physics();
 		if (this.attacking == 3) {
-			playSound(miscSFX.Swish3);
+			playSFX("Swish3");
 			used += 5;
 			var hitbox = {
 				isTouching : GameObject.prototype.isTouching,
@@ -95,7 +93,7 @@ class AnymosPlayer extends Enemy {
 			gameObjects.push(new HorizonBeam(this.x, this.y-(!this.crouching?34:15), this.facingRight?15:-15, "Anymos", PLAYER_RANGED_DAMAGE));
 		}
 		if (this.dy >= 0 && this.lastdy <= -gravity*2)
-			playSound(miscSFX.Bump);
+			playSFX("Bump");
 		this.checkHazards();
 		if (this.special == specialChanmote && !this.playerControlled) {
 			this.state = "gaming";
@@ -140,7 +138,7 @@ class AnymosPlayer extends Enemy {
 			this.drawSprite("armAttacking"+this.attacking);
 	}
 	getHit(dmg) {
-		playSound(miscSFX.Oof);
+		playSFX("Oof");
 		super.getHit(dmg);
 	}
 	takeDamage(dmg) {

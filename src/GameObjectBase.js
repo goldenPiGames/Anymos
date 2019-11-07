@@ -193,6 +193,8 @@ class GameObject {
 	}
 	drawSprite(sprit) {
 		//console.log(sprit);
+		if (typeof sprit == "string" && !this.sprites[sprit])
+			throw "Data for \""+sprit+"\" is not found in sprite data.";
 		drawSpriteOnStage(typeof sprit == "string" ? this.sprites[sprit] : sprit, this.x, this.y, this.facingRight);
 	}
 	fillRect(color) {
@@ -244,6 +246,9 @@ getCollidingWall = function(x, y, width, height) {
 
 function loadEnemy(nom) {
 	loadSprites(nom.prototype.sprites);
+	if (nom.prototype.sfxNames) {
+		nom.prototype.sfxNames.forEach(nom=>loadSFX(nom));
+	}
 	/*if (typeof nom == "string") {
 		window[nom].prototype.sprites = {};
 		var ritz = window[nom].prototype.sprites;

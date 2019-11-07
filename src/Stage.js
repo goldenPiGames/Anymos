@@ -29,7 +29,6 @@ function loadStage(stageName, doStuff=true) {
 	minZoom = 1;
 	gravity = .5;
 	lastHitEnemy = null;
-	player.drained = true;
 	oobtopcolor = "#00000000";
 	oobbottomcolor = "#00000000";
 	dynamicBackdrop = null;
@@ -41,8 +40,8 @@ function loadStage(stageName, doStuff=true) {
 	loadReturn = ()=>beginStage(doStuff);
 	currentStage = Stages[stageName];
 	stageImages = {
-		mainBack : makeImage("src/Stages/"+(currentStage.reuseBack||currentStageName)+"/MainBack.png"),//stageSrcs.mainBack),
-		mainFore : makeImage("src/Stages/"+(currentStage.reuseFore||currentStageName)+"/MainFore.png"),//stageSrcs.mainFore),
+		mainBack : makeImage("src/Stages/"+(currentStage.reuseBack||currentStageName)+"/MainBack.png"),
+		mainFore : makeImage("src/Stages/"+(currentStage.reuseFore||currentStageName)+"/MainFore.png"),
 	}
 	currentStage.load(doStuff); //loading specific stage
 	Stages[stageName].toLoad.forEach(function(nem) {

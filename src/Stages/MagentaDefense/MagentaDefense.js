@@ -36,12 +36,12 @@ Stages.MagentaDefense = {
 		 [B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,_,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B],
 		 [B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,_,B,_,_,_,_,_,_,B,B,B,B,B,B,B,B,B,B],
 		 [B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,_,B,_,_,_,_,_,_,B,B,B,B,B,B,B,B,B,B],
-		 [B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,_,_,_,_,_,_,_,_,B,B,B,B,B,B,B,B,B,B],
+		 [B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,_,_,_,_,_,_,_,_,B,B,B,B,B,B,B,B,B,B],+
 		 [B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B]];
 		zoom = 2;
 		player.x = 610;
 		player.y = 620;
-		player.facingRight = false;
+		player.facingRight = false;//TODO add some remote bomb power
 		var rumble2 = new Rumble(60, 760, 110, 540, false, ()=>gameObjects.push(new Goalpost("MagentaDuel", 610, 620, 55)),
 			new Wallie("MagentaDefenseToby", 150, 300, true, true),
 			new Wallie("MagentaDefenseArthur", 670, 300, false, true),

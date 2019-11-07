@@ -5,8 +5,8 @@ Stages.ScorchedClearing = {
 	load : function(doStuff) {
 		playMusic("Blast - PeriTune");
 		let D = {solid:true,color:"#451D12",grassyTop:"#303020"};
-		let F = {solid:false,hazard:0,color:"#FF800040",fire:0};
-		let _ = {solid:false,color:"#87CEEB00"};
+		let F = {solid:false,color:"#89CEFB",hazard:0,fire:0};
+		let _ = {solid:false,color:"#87CEEB"};
 		edgesSolid = true;
 		//oobtopcolor = "#87CEEB";
 		//oobbottomcolor = "#492116";
@@ -21,10 +21,10 @@ Stages.ScorchedClearing = {
 		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		 [F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F],
+		 [D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D],
+		 [D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D],
+		 [D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D],
 		 [D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D]];
 		if (doStuff) {
 			zoom=3;
@@ -44,9 +44,9 @@ Stages.ScorchedClearing = {
 		}
 		minzoom = 2;
 		player.x = 360;
-		player.y = 280;
+		player.y = 220;
 		player.facingRight = false;
-		var fwegos = new Fwegos("ScorchedClearingFwegos", 40, 280, true, 0, 400, 0, 280, F);
+		var fwegos = new Fwegos("ScorchedClearingFwegos", 40, 220, true, 0, 400, 0, 220, F);
 		/*fwegos.onDeath = function() {
 			this.dead = false;
 			this.hittable = false;
@@ -76,20 +76,22 @@ Stages.ScorchedClearing = {
 			new FireDrawer(),
 			new CustomObject(function() {
 				if (fwegos.dead) {
-					gameObjects.push(new Goalpost("MesaCliff", 10, 280, 100));
+					this.die();
+					gameObjects.push(new Goalpost("MesaCliff", 10, 220, 100));
 					player.drained = false;
 				}
 			}),
 		];
-		dynamicBackdrop = {
+		/*dynamicBackdrop = {
 			draw : function() {
 				ctx.fillStyle = "#87CEEB";
 				ctx.fillRect(0, 0, canvas.width, canvas.height);
 			}
-		}
+		}*/
 	},
-	vessels : ["ScorchedClearingFwegos1", "ScorchedClearingFwegos2", "ScorchedClearingFwegos3", "ScorchedClearingFwegos4", "ScorchedClearingFwegos5"],
+	vessels : ["ScorchedClearingFwegos1", "ScorchedClearingFwegos2", "ScorchedClearingFwegos3", "ScorchedClearingFwegos4", "ScorchedClearingFwegos5", "ScorchedClearingFwegosBettie1", "ScorchedClearingFwegosBettie2"],
 	previous : "BurningForest",
 	nextDown : "MesaCliff",
+	parDown : 720,
 	toLoad : [Fwegos, FireDrawer, Bettie]
 }

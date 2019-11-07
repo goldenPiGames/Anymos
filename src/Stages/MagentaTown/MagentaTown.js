@@ -42,7 +42,7 @@ Stages.MagentaTown = {
 			zoomd = 2;
 			zoom = 2;
 		}
-		player.x = 10; //TODO make fighting optional for throughway
+		player.x = 10;
 		player.y = 540;
 		player.facingRight = true;
 		switches = [true];
@@ -85,7 +85,7 @@ Stages.MagentaTown = {
 	vessels : ["MagentaTownMcCoy", "MagentaTownPopoca", "MagentaTownElla", "MagentaTownHatfield", "MagentaTownJack", "MagentaTownDumbbell", "MagentaTownMalana", "MagentaTownByRightTower"],
 	previous : "BlueLake",
 	nextDown : "WhitePlains",
-	parDown : 210,
+	parDown : 240,
 	nextRight : "MagentaDefense",
 	parRight : 525,
 	toLoad : [Walkie, Hoverie, Teion, Switch]

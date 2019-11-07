@@ -362,5 +362,5 @@ Stages.YstryJungle = {
 	previous : "IgmaBeach",
 	nextDown : "IddelMountain",
 	parDown : 600,
-	toLoad : [Flipwip]
+	toLoad : [Flipwip],
 }

@@ -5,8 +5,6 @@ var fctx;
 //var stage;
 const MISC_SPRITE_NAMES = ["MainMenuLogo", "Selector", "Paused", "SelectStage", "SelectStageNo", "SelectStage100", "SelectEnd", "SelectEndNo", "SelectCorners", "Gamepad"]
 var miscSprites;
-const MISC_SFX_NAMES = ["Bump", "Thunder1", //NSMB Wii
-	"Swish3", "Swish4", "Oof", "SPM_Smash", "WindShort", "Wrong"] //zapsplat.com
 var miscSprites = {};
 var miscSFX = {};
 var firstRun = false;
@@ -42,9 +40,7 @@ function begin() {
 	});
 	//TODO make spritesheet for misc sprites
 	//miscSprites = makeSprites("src/MiscSprites.png")
-	MISC_SFX_NAMES.forEach(function(nom) {
-		miscSFX[nom] = makeSound("src/MiscSFX/"+nom+".mp3");
-	});
+	loadDefaultSFX();
 	applySettings();
 	//begin2();
 }
@@ -112,23 +108,6 @@ function loadSprites(data) {
 	for (var sub in data) {
 		data[sub].image = image;
 	}
-}
-
-function makeSound(src) {
-	//loadingTotal++;
-	var snd;
-	if (usingPizz) {
-		snd = new Pizzicato.Sound(src);
-		snd.attack = 0;
-	} else {
-		snd = document.createElement("audio");
-		snd.src = src;
-		snd.setAttribute("preload", "auto");
-		snd.setAttribute("controls", "none");
-		snd.style.display = "none";
-		document.body.appendChild(snd);
-    }
-	return snd;
 }
 
 function doNothing() {};

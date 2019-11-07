@@ -117,17 +117,6 @@ function removeDead(ray) {
 	}
 }
 
-function playSound(snd) {
-	if (settings.sfx != "Off") {
-		if (usingPizz) {
-			snd.play(0, 0);
-		} else {
-			snd.currentTime = 0;
-			snd.play();
-		}
-	}
-}
-
 function clearCanvases() {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	fctx.clearRect(0, 0, fcanvas.width, fcanvas.height);

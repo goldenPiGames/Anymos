@@ -1,7 +1,8 @@
 class Enemy extends GameObject {
 	constructor(name) {
 		super();
-		if (name)
+		this.name = name;
+		if (name && !this.numVessels)
 			this.vessel = new Vessel(name);
 		this.hp = this.maxhp;
 	}
@@ -24,7 +25,7 @@ Enemy.prototype.collCD = 0;
 
 class Boss extends Enemy {
 	constructor(name) {
-		super();
+		super(name);
 		if (name) {
 			this.vessels = [];
 			for (var i = 1; i <= this.numVessels; i++) {

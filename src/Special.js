@@ -12,6 +12,8 @@ class SpecialPickup extends GameObject {
 				this.doDialog = false;
 				dialog.begin(this.getDialog());
 			}
+			if (this.onCollect)
+				this.onCollect();
 		}
 	}
 	draw() {

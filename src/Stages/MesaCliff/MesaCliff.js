@@ -66,6 +66,7 @@ Stages.MesaCliff = {
 		if (doStuff)  {
 			zoom=2;
 			zoomd=2;
+			dialog.begin(new DialogLine("Anymos", "This rain has an evil electrical charge. But oddly enough, having shelter over my head feels... nice and relaxing.", "#00FFFF"));
 		}
 		player.x = 500;
 		player.y = 240;
@@ -74,8 +75,6 @@ Stages.MesaCliff = {
 		gameObjects = [
 			new Goalpost("StormyMesa", 10, 240, 160),
 		];
-		if (doStuff)
-			dialog.begin(new DialogLine("Anymos", "This rain has an evil electrical charge. But oddly enough, having shelter over my head feels... nice and relaxing.", "#00FFFF"));
 		dynamicBackdrop = new StormBackdrop();
 	},
 	vessels : [],
