@@ -15,8 +15,6 @@ class MovingPlatformSpawner extends GameObject {
 		this.spawnCD = 0;
 		this.xdests = [];
 		this.ydests = [];
-		//var thisser = this;
-		//var rest = Array.prototype.slice.call(arguments, 4);
 		dests.forEach((cord, deck) => {
 			if (deck % 2 == 0)
 				this.xdests.push(cord)
@@ -32,7 +30,7 @@ class MovingPlatformSpawner extends GameObject {
 		}
 	}
 	draw() {
-		var spr = MovingPlatform.prototype.sprites.spawnerSegment;
+		var spr = this.sprites.spawnerSegment;
 		for (var i = this.x - this.width/2 + spr.width/2; i <= this.x + this.width/2 - spr.width/2; i += spr.width) {
 			drawSpriteOnStage(spr, i, this.y);
 		}

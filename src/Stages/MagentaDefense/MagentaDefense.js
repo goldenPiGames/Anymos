@@ -1,6 +1,6 @@
 Stages.MagentaDefense = {
 	displayName : "Magenta Defense",
-	load : function() {
+	load : function(doStuff) {
 		playMusic("Tempest - Darren Curtis");
 		let B = BLOCK;
 		let l = {name:"Rain",solid:false,hazard:1,rain:true};
@@ -36,13 +36,16 @@ Stages.MagentaDefense = {
 		 [B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,_,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B],
 		 [B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,_,B,_,_,_,_,_,_,B,B,B,B,B,B,B,B,B,B],
 		 [B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,_,B,_,_,_,_,_,_,B,B,B,B,B,B,B,B,B,B],
-		 [B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,_,_,_,_,_,_,_,_,B,B,B,B,B,B,B,B,B,B],+
+		 [B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,_,_,_,_,_,_,_,_,B,B,B,B,B,B,B,B,B,B],
 		 [B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B,B]];
-		zoom = 2;
+		if (doStuff) {
+			zoom = 2;
+			zoomd = 2;
+		}
 		player.x = 610;
 		player.y = 620;
-		player.facingRight = false;//TODO add some remote bomb power
-		var rumble2 = new Rumble(60, 760, 110, 540, false, ()=>gameObjects.push(new Goalpost("MagentaDuel", 610, 620, 55)),
+		player.facingRight = false;//TODO why doesn't it work
+		var rumble2 = new Rumble(60, 760, 110, 540, false, ()=>gameObjects.push(new Goalpost("MagentaDuel", 420, 380, 55)),
 			new Wallie("MagentaDefenseToby", 150, 300, true, true),
 			new Wallie("MagentaDefenseArthur", 670, 300, false, true),
 			new Spinnie("MagentaDefenseViolet", 80, 135, true, true),
@@ -58,13 +61,13 @@ Stages.MagentaDefense = {
 			new NPC("MagentaDefenseRefugee1", Teion.prototype.sprites.normal, 513, 620, false,
 				new DialogLine("Villager", "Please, be careful! More are on their way!", "#BFBFBF")),
 			new NPC("MagentaDefenseRefugee2", Teion.prototype.sprites.normal, 571, 620, false,
-				new DialogLine("Villager", "Keep it up.", "#BFBFBF"))];
+				new DialogLine("Villager", "Keep it up.", "#BFBFBF")),
+			new BombPickup(380, 540, doStuff, "MagentaDefenseBomb")];
 	},
-	vessels : ["MagentaDefenseMack", "MagentaDefenseShy", "MagentaDefenseSter", "MagentaDefenseViolet", "MagentaDefenseLilac", "MagentaDefenseWisteria", "MagentaDefenseToby", "MagentaDefenseArthur"],
-	par : 465,
+	vessels : ["MagentaDefenseBomb", "MagentaDefenseMack", "MagentaDefenseShy", "MagentaDefenseSter", "MagentaDefenseViolet", "MagentaDefenseLilac", "MagentaDefenseWisteria", "MagentaDefenseToby", "MagentaDefenseArthur"],
 	previous : "MagentaTown",
 	nextDown : "MagentaDuel",
-	toLoad : [Bouncie, Spinnie, Wallie, Teion],
+	toLoad : [Bouncie, Spinnie, Wallie, Teion, AnymBomb],
 	reuseBack : "MagentaTown",
 	reuseFore : "MagentaTown",
 }

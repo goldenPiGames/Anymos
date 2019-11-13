@@ -60,6 +60,6 @@ Stages.GreenMaze = {
 	selectY : Stages.YellowWood.selectY + LS_Y_SPACING,
 	previous : "YellowWood",
 	nextDown : "CyanRainforest",
-	parDown : 495,
+	parDown : 540,
 	toLoad : [Walkie, Hoverie]
 }

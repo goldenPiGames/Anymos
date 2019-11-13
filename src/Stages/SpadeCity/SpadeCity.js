@@ -3,7 +3,7 @@ Stages.SpadeCity = {
 	load : function(doStuff) {
 		playMusic("Beatdown City - Darren Curtis");
 		let C = {name:"Concrete",solid:true,color:"#7F7F7F",leafy:false};
-		let S = {name:"Concrete Secret",solid:false,color:"#878787",leafy:false};
+		let S = {name:"Concrete Secret",solid:false,color:"#878787",leafy:false};//TODO make Skydz opening more obvious
 		let B = {name:"Beam",solid:true,color:"#BF7F7F",leafy:false};
 		let _ = AIR;
 		staticColl =

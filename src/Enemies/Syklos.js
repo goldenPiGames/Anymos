@@ -15,7 +15,7 @@ var specialDoubleJump = {
 		if (player.grounded)
 			player.doubleJump = true;
 		if ((controller.specialClicked || controller.jumpClicked) && !player.grounded && player.doubleJump) {
-			playSound(miscSFX.WindShort);
+			playSFX("WindShort");
 			player.dy = -Math.abs(controller.down ? DEFAULT_JUMP_SPEED*Math.SQRT1_2 : DEFAULT_JUMP_SPEED);
 			player.doubleJump = false;
 			used += 10;

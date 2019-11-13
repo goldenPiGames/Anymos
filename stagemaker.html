@@ -16,12 +16,22 @@
 				image-rendering: pixelated;
 				-ms-interpolation-mode: nearest-neighbor; 
 			}
+			#Blocks {
+				width : 100%;
+			}
+			.block {
+				display : inline-block;
+				float : left;
+			}
 			.blockpicker {
 				height : 50px;
 				width : 50px;
 			}
 			.blockletter {
 				width : 30px;
+			}
+			.blockcolor {
+				width : 100px;
 			}
 		</style>
 		<script>
@@ -47,22 +57,22 @@
 			<button onclick="setSize(width,height+1)">+</button>
 		</div>
 		<div id="Blocks">
-			<div id="Block0">
+			<div id="Block0" class="block">
 				<div id="Block0Picker" class="blockpicker" oncontextmenu="return false"></div>
 				<input id="Block0Letter" class="blockletter" type="text"></input>
 				<input id="Block0Color" class="blockcolor" type="text"></input>
 			</div>
-			<div id="Block1">
+			<div id="Block1" class="block">
 				<div id="Block1Picker" class="blockpicker" oncontextmenu="return false"></div>
 				<input id="Block1Letter" class="blockletter" type="text"></input>
 				<input id="Block1Color" class="blockcolor" type="text"></input>
 			</div>
-			<div id="Block2">
+			<div id="Block2" class="block">
 				<div id="Block2Picker" class="blockpicker" oncontextmenu="return false"></div>
 				<input id="Block2Letter" class="blockletter" type="text"></input>
 				<input id="Block2Color" class="blockcolor" type="text"></input>
 			</div>
-			<div id="Block3">
+			<div id="Block3" class="block">
 				<div id="Block3Picker" class="blockpicker" oncontextmenu="return false"></div>
 				<input id="Block3Letter" class="blockletter" type="text"></input>
 				<input id="Block3Color" class="blockcolor" type="text"></input>
@@ -193,13 +203,15 @@
 			
 			function getOutput() {
 				var out = "[";
-				for (var x = 0; x < height; x++) {
+				for (var i = 0; i < height; i++) {
 					out += "[";
-					for (var y = 0; y < width; y++) {
-						out += blockLetters[grid[x][y]] + ",";
+					for (var j = 0; j < width; j++) {
+						out += blockLetters[grid[i][j]]
+						if (j < width - 1)
+							out += ",";
 					}
 					out += "]";
-					if (x < height - 1)
+					if (i < height - 1)
 						out += ",\n\t\t ";
 				}
 				out += "];"

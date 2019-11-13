@@ -102,11 +102,13 @@ function makeSprites(sauce, sec, prel = true) {
 
 function loadSprites(data) {
 	//console.log(data);
-	var image = makeImage(data.src);
-	//console.log(image);
-	data.image = image;
-	for (var sub in data) {
-		data[sub].image = image;
+	if (data) {
+		var image = makeImage(data.src);
+		//console.log(image);
+		data.image = image;
+		for (var sub in data) {
+			data[sub].image = image;
+		}
 	}
 }
 

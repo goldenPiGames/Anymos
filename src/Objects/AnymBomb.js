@@ -1,20 +1,49 @@
 class AnymBomb extends GameObject {
+	constructor(user) {
+		super();
+		this.user = user;
+		this.x = user.x;
+		this.y = user.y;
+		this.team = user.team;
+	}
 	update() {
+		//TODO sound effect
 		if (this.detonated) {
-			if (this.detonated == 3) {
-				this.sendHurtbox
-			} else if (this.detonated >= 10) {
-				
+			if (this.detonated == 5) {
+				this.sendHurtbox(this.damage);
 			}
+			if (this.detonated > 9)
+				this.die();
+			else
+				this.detonated++;
 		}
 	}
 	draw() {
-		
+		if (this.detonated <= 9)
+			this.drawSprite("bomb"+this.detonated);
 	}
 	detonate() {
-		this.detonated = 1;
+		this.detonated = 5;
 	}
 }
+AnymBomb.prototype.team = "Anymos";
+AnymBomb.prototype.sprites = makeSprites("src/Objects/AnymBomb.png", {
+	bomb0 : {x:0, y:  0, width:40, height:40},
+	bomb1 : {x:0, y: 40, width:40, height:40},
+	bomb2 : {x:0, y: 80, width:40, height:40},
+	bomb3 : {x:0, y:120, width:40, height:40},
+	bomb4 : {x:0, y:160, width:40, height:40},
+	bomb5 : {x:0, y:200, width:40, height:40},
+	bomb6 : {x:0, y:240, width:40, height:40},
+	bomb7 : {x:0, y:280, width:40, height:40},
+	bomb8 : {x:0, y:320, width:40, height:40},
+	bomb9 : {x:0, y:360, width:40, height:40},
+	pickup : {x:0, y:400, width:20, height:20},
+}, false);
+AnymBomb.prototype.width = 40;
+AnymBomb.prototype.height = 40;
+AnymBomb.prototype.damage = 150;
+AnymBomb.prototype.detonated = 0;
 
 var specialBomb = {
 	name : "Anymos' Delay Bomb",
@@ -24,8 +53,8 @@ var specialBomb = {
 			if (found) {
 				found.detonate();
 			} else {
-				used
-				gameObjects.push(new AnymBomb(player.x, player.y));
+				used += 15;
+				gameObjects.push(new AnymBomb(holder));
 			}
 		}
 	},
