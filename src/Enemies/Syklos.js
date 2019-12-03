@@ -11,22 +11,22 @@ Syklos.prototype.sprites = makeSprites("src/Enemies/Syklos.png", {
 
 var specialDoubleJump = {
 	name : "Syklos' Double Jump",
-	update : function() {
-		if (player.grounded)
-			player.doubleJump = true;
-		if ((controller.specialClicked || controller.jumpClicked) && !player.grounded && player.doubleJump) {
+	update : function(holder) {
+		if (holder.grounded)
+			holder.doubleJump = true;
+		if ((holder.controller.specialClicked || holder.controller.jumpClicked) && !holder.grounded && holder.doubleJump) {
 			playSFX("WindShort");
-			player.dy = -Math.abs(controller.down ? DEFAULT_JUMP_SPEED*Math.SQRT1_2 : DEFAULT_JUMP_SPEED);
-			player.doubleJump = false;
+			holder.dy = -Math.abs(holder.controller.crouch ? DEFAULT_JUMP_SPEED*Math.SQRT1_2 : DEFAULT_JUMP_SPEED);
+			holder.doubleJump = false;
 			used += 10;
-			if (controller.left && player.dx > -5) {
-				player.dx = -5;
-				player.facingRight = false;
-			} else if (controller.right && player.dx < 5) {
-				player.dx = 5;
-				player.facingRight = true;
+			if (holder.controller.left && holder.dx > -5) {
+				holder.dx = -5;
+				holder.facingRight = false;
+			} else if (holder.controller.right && holder.dx < 5) {
+				holder.dx = 5;
+				holder.facingRight = true;
 			}
-			//gameObjects.push(new DoubleJumpPuff(player.x, player.y));
+			//gameObjects.push(new DoubleJumpPuff(holder.x, holder.y));
 		}
 	}
 }

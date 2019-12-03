@@ -4,11 +4,14 @@ const LS_Y_SPACING = 50;
 const LS_INFO_WIDTH = 360;
 var selector = {x:0, y:0, width:0, height:0};
 const ROOT_STAGE = "TutorialPrelude";
+const ROOT_STAGE_COOP = "TutorialMultiplayer";
 
-function doLevelSelect() {
-	if (currentStageName == undefined)
-		currentStageName = "TutorialPrelude";
-	levelSelectActive = true;
+function doLevelSelect(cursorStart) {
+	emergencyStuff.hidden = true;
+	if (cursorStart)
+		currentStageName = cursorStart;
+	else if (currentStageName == undefined)
+		currentStageName = ROOT_STAGE;
 	runnee = levelSelect;
 	minZoom = 1;
 	maxZoom = 6;
@@ -38,24 +41,24 @@ function doLevelSelect() {
 }
 var levelSelect = {
 	update : function() {
-		if (controller.jumpClicked && isStageAvailable(currentStageName)) {
+		if (globalController.selectClicked && isStageAvailable(currentStageName)) {
 			if (Stages[currentStageName].available < Stages[currentStageName].parDown)
 				runnee = impossibleLevelConfirm;
 			else
 				loadStage(currentStageName, true);
 			return;
-		} else if (controller.upClicked && isStageAvailable(Stages[currentStageName].previous))
+		} else if (globalController.menuUpClicked && isStageAvailable(Stages[currentStageName].previous))
 			currentStageName = Stages[currentStageName].previous;
-		else if (controller.downClicked && isStageAvailable(Stages[currentStageName].nextDown))
+		else if (globalController.menuDownClicked && isStageAvailable(Stages[currentStageName].nextDown))
 			currentStageName = Stages[currentStageName].nextDown;
-		else if (controller.leftClicked && isStageAvailable(Stages[currentStageName].nextLeft))
+		else if (globalController.menuLeftClicked && isStageAvailable(Stages[currentStageName].nextLeft))
 			currentStageName = Stages[currentStageName].nextLeft;
-		else if (controller.rightClicked && isStageAvailable(Stages[currentStageName].nextRight))
+		else if (globalController.menuRightClicked && isStageAvailable(Stages[currentStageName].nextRight))
 			currentStageName = Stages[currentStageName].nextRight;
-		else if (controller.attackClicked) {
+		else if (globalController.cancelClicked) {
 			doMainMenu();
 			return;
-		} else if (controller.restartClicked) {
+		} else if (globalController.restartClicked) {
 			this.showTutorial();
 		}
 		cameraFocus.x = Stages[currentStageName].selectX;
@@ -85,7 +88,7 @@ var levelSelect = {
 		//ctx.strokeText(Stages[currentStageName].displayName, stagex(cameraFocus.x) - ctx.measureText(Stages[currentStageName].displayName).width/2, stagey(cameraFocus.y - LS_CAMYOFF - miscSprites.SelectStage.height/2 - 2));
 		//ctx.fillText(Stages[currentStageName].displayName, stagex(cameraFocus.x) - ctx.measureText(Stages[currentStageName].displayName).width/2, stagey(cameraFocus.y - LS_CAMYOFF - miscSprites.SelectStage.height/2 - 2));
 		
-		if (!controller.shoot && !dialogActive) {
+		if (!globalController.shoot && !dialogActive) {
 			var stag = Stages[currentStageName];
 			var infox = stag.selectX <= 0 ? 10 : (canvas.width - 10 - LS_INFO_WIDTH);
 			ctx.fillStyle = "#000000bf";
@@ -172,9 +175,13 @@ var levelSelect = {
 		}
 	},
 	refresh : function() {
-		Stages[ROOT_STAGE].cumUsed = 0;
-		Stages[ROOT_STAGE].available = anymTotal;
-		this.refreshRec(Stages[ROOT_STAGE].nextDown);
+		this.refreshRoot(ROOT_STAGE);
+		this.refreshRoot(ROOT_STAGE_COOP);
+	},
+	refreshRoot : function(stagn) {
+		Stages[stagn].cumUsed = 0;
+		Stages[stagn].available = anymTotal + this.numVessels * VESSEL_VALUE;
+		this.refreshRec(Stages[stagn].nextDown);
 	},
 	refreshRec : function(stagn) {
 		var stags = Stages[stagn];
@@ -203,9 +210,9 @@ var levelSelect = {
 
 var impossibleLevelConfirm = {
 	update : function() {
-		if (controller.attackClicked)
+		if (globalController.cancelClicked)
 			runnee = levelSelect;
-		else if (controller.jumpClicked) {
+		else if (globalController.selectClicked) {
 			loadStage(currentStageName, true);
 		}
 	},

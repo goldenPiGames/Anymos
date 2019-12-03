@@ -90,6 +90,7 @@ function getFont() {
 }
 
 function doSettings() {
+	emergencyStuff.hidden = true;
 	runnee = settingsScreen;
 }
 
@@ -103,15 +104,15 @@ function saveSettings() {
 
 var settingsScreen = {
 	update : function() {
-		if (controller.attackClicked) {
+		if (globalController.cancelClicked) {
 			doMainMenu();
-		} else if (controller.upClicked && this.index > 0)
+		} else if (globalController.menuUpClicked && this.index > 0)
 			this.index --;
-		else if (controller.downClicked && this.index < SETTINGS_INFO.list.length-1)
+		else if (globalController.menuDownClicked && this.index < SETTINGS_INFO.list.length-1)
 			this.index ++;
-		else if (controller.leftClicked || controller.rightClicked) {
+		else if (globalController.menuLeftClicked || globalController.rightClicked) {
 			var cname = SETTINGS_INFO.list[this.index];
-			if (controller.rightClicked) {
+			if (globalController.menuRightClicked) {
 				settings[cname] ++;
 				if (settings[cname] >= SETTINGS_INFO[cname].choices.length)
 					settings[cname] = 0;
@@ -122,25 +123,11 @@ var settingsScreen = {
 			}
 			applySettings();
 			saveSettings();
-			/*var choices = SETTINGS_INFO[SETTINGS_INFO.list[this.index]].choices;
-			var current = settings[SETTINGS_INFO.list[this.index]];
-			var cindex = choices.findIndex(function(ping){return ping == current});
-			var nindex;
-			if (controller.rightClicked) {
-				nindex = cindex + 1;
-				if (nindex >= choices.length)
-					nindex -= choices.length;
-			} else {
-				nindex = cindex - 1;
-				if (nindex < 0)
-					nindex += choices.length;
-			}
-			settings[SETTINGS_INFO.list[this.index]] = choices[nindex];*/
 		}
 	},
 	draw : function() {
 		ctx.globalAlpha = 1;
-		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		clearCanvases();
 		ctx.font = (SETTINGS_ENTRY_HEIGHT-10)+"px "+getFont();
 		ctx.fillStyle = "#FFFFFF";
 		ctx.drawImage(miscSprites.Selector, 10, 20 + SETTINGS_ENTRY_HEIGHT * (this.index+.5) - miscSprites.Selector.height/2);

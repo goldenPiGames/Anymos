@@ -26,6 +26,20 @@ Goalpost.prototype.sprites = makeSprites("src/Objects/Goalpost.png", {
 }, true);
 Goalpost.prototype.width = 14;
 
+class GoalpostMulti extends Goalpost {
+	update() {
+		if (players.reduce((acc, p) => acc && this.isTouching(p))) {
+			finishStage(this.toStage);
+		}
+	}
+}
+Goalpost.prototype.sprites = makeSprites("src/Objects/Goalpost.png", {
+	top: {x:0, y:0, width:18, height:17},
+	segment: {x:6, y:18, width:6, height:8},
+	bottom: {x:2, y:27, width:14, height:6},
+}, true);
+Goalpost.prototype.width = 14;
+
 class EndLight extends Goalpost {
 	constructor(toStage, x, y) {
 		super(toStage, x, y, 30);

@@ -6,15 +6,17 @@ class SpecialPickup extends GameObject {
 		this.doDialog = doDialog;
 	}
 	update() {
-		if (this.isTouching(player) && controller.interactClicked && player.special != this.special) {
-			player.special = this.special;
-			if (this.doDialog) {
-				this.doDialog = false;
-				dialog.begin(this.getDialog());
+		allObjects().forEach(oj => {
+			if (oj.controller && this.isTouching(oj) && oj.controller.interactClicked) {
+				oj.special = this.special;
+				if (this.doDialog) {
+					this.doDialog = false;
+					dialog.begin(this.getDialog());
+				}
+				if (this.onCollect)
+					this.onCollect();
 			}
-			if (this.onCollect)
-				this.onCollect();
-		}
+		});
 	}
 	draw() {
 		if (player.special != this.special)

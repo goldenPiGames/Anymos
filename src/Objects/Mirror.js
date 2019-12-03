@@ -34,25 +34,25 @@ Mirror.prototype.isMirror = true;
 
 var specialReflector = {
 	name : "Aqros' Reflector",
-	update : function() {
-		if (controller.specialClicked) {
+	update : function(holder) {
+		if (holder.controller.specialClicked) {
 			var mir = null;
 			var dist = Infinity;
 			gameObjects.forEach(function(oj) {
-				if (oj.isMirror && player.y <= oj.y && player.y-player.height >= oj.y-oj.height && Math.abs(oj.x - player.x) < dist) {
+				if (oj.isMirror && holder.y <= oj.y && holder.y-holder.height >= oj.y-oj.height && Math.abs(oj.x - holder.x) < dist) {
 					mir = oj;
-					dist = Math.abs(oj.x - player.x);
+					dist = Math.abs(oj.x - holder.x);
 				}
 			})
 			//console.log(mir);
 			if (mir) {
-				var intendedx = 2 * mir.x - player.x;
-				if (!isPixelSolid(intendedx-player.width/2, player.y) && !isPixelSolid(intendedx+player.width/2, player.y) && !isPixelSolid(intendedx-player.width/2, player.y-player.height/2) && !isPixelSolid(intendedx+player.width/2, player.y-player.height/2) && !isPixelSolid(intendedx-player.width/2, player.y-player.height) && !isPixelSolid(intendedx+player.width/2, player.y-player.height)) {
-					var px = player.x;
-					var py = player.y - player.height/2;
-					player.x = intendedx;
-					player.dx = - player.dx;
-					player.facingRight = !player.facingRight;
+				var intendedx = 2 * mir.x - holder.x;
+				if (!isPixelSolid(intendedx-holder.width/2, holder.y) && !isPixelSolid(intendedx+holder.width/2, holder.y) && !isPixelSolid(intendedx-holder.width/2, holder.y-holder.height/2) && !isPixelSolid(intendedx+holder.width/2, holder.y-holder.height/2) && !isPixelSolid(intendedx-holder.width/2, holder.y-holder.height) && !isPixelSolid(intendedx+holder.width/2, holder.y-holder.height)) {
+					var px = holder.x;
+					var py = holder.y - holder.height/2;
+					holder.x = intendedx;
+					holder.dx = - holder.dx;
+					holder.facingRight = !holder.facingRight;
 					gameObjects.push(new FadeDrawing(function() {
 						ctx.lineWidth = 2 * zoom;
 						ctx.strokeStyle = "#0080FF";

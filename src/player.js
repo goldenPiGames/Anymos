@@ -26,9 +26,9 @@ class AnymosPlayer extends Enemy {
 			this.crouching = false;
 			this.attacking++;
 		} else if (this.playerControlled) {
-			if (controller.attackClicked && !this.crouching)
+			if (this.controller.attackClicked && !this.crouching)
 				this.attacking = 1;
-			else if (controller.shoot)
+			else if (this.controller.shoot)
 				this.shooting = true;
 		}
 		if (this.special) {
@@ -38,35 +38,35 @@ class AnymosPlayer extends Enemy {
 			this.height = PLAYER_NORMAL_HEIGHT;
 			this.crouching = isPixelSolid(this.x - this.width/2 + 1, this.y - this.height) || isPixelSolid(this.x + this.width/2 - 1, this.y - this.height);
 		} else {
-			this.crouching = (controller.down && this.playerControlled || isPixelSolid(this.x - this.width/2, this.y - PIXELS_PER_BLOCK - 1) || isPixelSolid(this.x + this.width/2, this.y - PIXELS_PER_BLOCK - 1) || isPixelSolid(this.x - this.width/2 + 4, this.y - 37) || isPixelSolid(this.x + this.width/2 - 4, this.y - 37)) /*&& (isPixelSolid(this.x-this.width/2, this.y + 1) || isPixelSolid(this.x+this.width/2, this.y + 1)) /*&& !controller.jump*/ && !this.attacking;
+			this.crouching = (this.controller.down && this.playerControlled || isPixelSolid(this.x - this.width/2, this.y - PIXELS_PER_BLOCK - 1) || isPixelSolid(this.x + this.width/2, this.y - PIXELS_PER_BLOCK - 1) || isPixelSolid(this.x - this.width/2 + 4, this.y - 37) || isPixelSolid(this.x + this.width/2 - 4, this.y - 37)) /*&& (isPixelSolid(this.x-this.width/2, this.y + 1) || isPixelSolid(this.x+this.width/2, this.y + 1)) /*&& !this.controller.jump*/ && !this.attacking;
 		}
 		this.height = this.crouching ? PLAYER_CROUCH_HEIGHT : PLAYER_NORMAL_HEIGHT;
 		this.dx *= this.grounded ? .6 : .85;
 		if (Math.abs(this.dx) <= .001) this.dx = 0;
 		if (this.playerControlled) {
-			if (controller.left) {
+			if (this.controller.left) {
 				if (this.grounded || this.attacking == 1) { //-------------------------Movement
 					this.dx = Math.max(this.dx-PLAYER_GROUND_ACCELERATION, this.crouching?-2:-5);
 					this.facingRight = false;
 				} else
 					this.dx = Math.max(this.dx-.75, -7);
 			}
-			if (controller.right) {
+			if (this.controller.right) {
 				if (this.grounded || this.attacking == 1) {
 					this.dx = Math.min(this.dx+PLAYER_GROUND_ACCELERATION, this.crouching?2:5);
 					this.facingRight = true;
 				} else
 					this.dx = Math.min(this.dx+.75, 7);
 			}
-			if (controller.jumpClicked && this.grounded && !isPixelSolid(this.x-this.width/2, this.y-35) && !isPixelSolid(this.x+this.width/2, this.y-35)) { //Jump
+			if (this.controller.jumpClicked && this.grounded && !isPixelSolid(this.x-this.width/2, this.y-35) && !isPixelSolid(this.x+this.width/2, this.y-35)) { //Jump
 				playSFX("Swish4");
 				this.crouching = false;
 				this.height = PLAYER_NORMAL_HEIGHT;
-				this.dy = -Math.abs(controller.down ? this.jumpSpeed*Math.SQRT1_2 : this.jumpSpeed);
-				if (controller.down) {
-					if (controller.left && this.dx > -6)
+				this.dy = -Math.abs(this.controller.down ? this.jumpSpeed*Math.SQRT1_2 : this.jumpSpeed);
+				if (this.controller.down) {
+					if (this.controller.left && this.dx > -6)
 						this.dx = -6;
-					if (controller.right && this.dx < 6)
+					if (this.controller.right && this.dx < 6)
 						this.dx = 6;
 				}
 				this.lastdy = this.dy //this may? cause problems later
@@ -92,26 +92,26 @@ class AnymosPlayer extends Enemy {
 			used += 2;
 			gameObjects.push(new HorizonBeam(this.x, this.y-(!this.crouching?34:15), this.facingRight?15:-15, "Anymos", PLAYER_RANGED_DAMAGE));
 		}
-		if (this.dy >= 0 && this.lastdy <= -gravity*2)
+		if (this.dy >= 0 && this.lastdy < -2)
 			playSFX("Bump");
 		this.checkHazards();
 		if (this.special == specialChanmote && !this.playerControlled) {
 			this.state = "gaming";
 		} else if (this.crouching) {
-			if (controller.left || controller.right) {
+			if (this.controller.left || this.controller.right) {
 				this.state = "crawling";
 			} else {
 				this.state = "crouching";
 			}
 		} else if (this.grounded) {
-			if (controller.left || controller.right) {
+			if (this.controller.left || this.controller.right) {
 				this.state = "walking";
 			} else {
 				this.state = "standing";
 			}
 		} else {
 			if (this.dy < 0) {
-				if (this.lastState == "crouching" || this.lastState == "crawling" || controller.down && this.lastState != "jumping" && this.lastState != "crouchJumping")
+				if (this.lastState == "crouching" || this.lastState == "crawling" || this.controller.down && this.lastState != "jumping" && this.lastState != "crouchJumping")
 					this.state = "crouchJumping";
 				else
 					this.state = "jumping";
@@ -170,6 +170,7 @@ AnymosPlayer.prototype.playerControlled = true;
 AnymosPlayer.prototype.state = "standing";
 AnymosPlayer.prototype.stateCycle = 0;
 AnymosPlayer.prototype.lastState = "standing";
+AnymosPlayer.prototype.controller = globalController;
 
 AnymosPlayer.prototype.sprites = makeSprites("src/Anymos.png", {
 	standing0 : {x:0, y:0, width:20, height:40},

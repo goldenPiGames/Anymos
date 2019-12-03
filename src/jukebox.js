@@ -54,8 +54,9 @@ MUSIC_LIST.forEach(function(sing, dex) {
 
 const JUKEBOX_ENTRY_HEIGHT = 40;
 function doJukebox() {
-	cameraFocus = {x:0, y:0, width:0, height:0}
+	emergencyStuff.hidden = true;
 	runnee = jukebox;
+	cameraFocus = {x:0, y:0, width:0, height:0};
 	zoomd = 1;
 	zoom = 1;
 	maxZoom = 1;
@@ -68,19 +69,19 @@ function doJukebox() {
 }
 var jukebox = {
 	update : function() {
-		if (controller.attackClicked) {
+		if (globalController.cancelClicked) {
 			doMainMenu();
 			return;
-		} else if (controller.upClicked) {
+		} else if (globalController.menuUpClicked) {
 			this.songIndex--;
 			if (this.songIndex < 0)
 				this.songIndex += MUSIC_LIST.length;
-		} else if (controller.downClicked) {
+		} else if (globalController.menuDownClicked) {
 			this.songIndex++;
 			if (this.songIndex >= MUSIC_LIST.length)
 				this.songIndex -= MUSIC_LIST.length;
 		}
-		if (controller.jumpClicked) {
+		if (globalController.selectClicked) {
 			if (songName == this.fullSongName()) {
 				if (music.paused)
 					music.play();
@@ -89,11 +90,11 @@ var jukebox = {
 			} else
 				playMusic(MUSIC_LIST[this.songIndex].name + " - " + MUSIC_LIST[this.songIndex].by);
 		}
-		if (controller.switchClicked) {
-			window.open("https://www.youtube.com/watch?v="+MUSIC_LIST[this.songIndex].yt+"&list=PLZ6OranCcmGrWLVqKyRKL9KQXFjcRXaOk", "_blank");
+		if (globalController.switchClicked) {
+			window.open("https://www.youtube.com/watch?v="+MUSIC_LIST[this.songIndex].yt/*+"&list=PLZ6OranCcmGrWLVqKyRKL9KQXFjcRXaOk"*/, "_blank");
 			music.pause();
 		}
-		if (controller.shootClicked) {
+		if (globalController.shootClicked) {
 			window.open(MUSIC_LIST[this.songIndex].site, "_blank");
 			music.pause();
 		}
@@ -102,8 +103,8 @@ var jukebox = {
 	},
 	draw : function() {
 		ctx.globalAlpha = 1;
-		ctx.clearRect(0, 0, canvas.width, canvas.height);
-		ctx.font = (JUKEBOX_ENTRY_HEIGHT-10)+"px "+settings.font;
+		clearCanvases();
+		ctx.font = (JUKEBOX_ENTRY_HEIGHT-10)+"px "+getFont();
 		ctx.fillStyle = "#FFFFFF";
 		for (var i = 0; i < MUSIC_LIST.length; i++) {
 			ctx.textAlign = "left";
@@ -115,10 +116,10 @@ var jukebox = {
 		ctx.font = (JUKEBOX_ENTRY_HEIGHT-10)+"px "+settings.font;
 		ctx.textAlign = "left";
 		ctx.fillText("A: "+(songName == this.fullSongName() && !music.paused ? "Pause":"Play"), canvas.width*2/3 + 10, 40);
-		ctx.fillText((usingGamepad?"B":"S") + ": Exit", canvas.width*2/3 + 30, canvas.height-40);
-		ctx.fillText((usingGamepad?"X":"D") + ": Artist's site", canvas.width*2/3 + 10, 90);
-		if (MUSIC_LIST[this.songIndex].yt)
-			ctx.fillText((usingGamepad?"Y":"Q") + ": YouTube", canvas.width*2/3 + 10, 140);
+		ctx.fillText("Cancel : Exit", canvas.width*2/3 + 30, canvas.height-40);
+		ctx.fillText("Shoot : Artist's site", canvas.width*2/3 + 10, 90);
+		//if (MUSIC_LIST[this.songIndex].yt)
+			//ctx.fillText((usingGamepad?"Y":"Q") + ": YouTube", canvas.width*2/3 + 10, 140);
 	},
 	songIndex : 0,
 	fullSongName : function(index = -1) {

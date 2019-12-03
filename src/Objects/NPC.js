@@ -15,7 +15,7 @@ class NPC extends GameObject {
 		/*if (!this.inited) {
 			this.init();
 		}*/
-		if (this.isTouching(player) && controller.interactClicked) {
+		if (this.isTouching(player) && player.controller.interactClicked) {
 			this.facingRight = (this.x < player.x);
 			player.facingRight = !this.facingRight;
 			

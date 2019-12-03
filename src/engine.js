@@ -8,7 +8,6 @@ var loading = {
 	}
 }
 var runnee = loading;
-var paused = false;
 var gameObjects = [];
 const FPS = 30; //30
 
@@ -17,7 +16,8 @@ var engine = {
 	particles : [],
 	run : function() {
 		var desiredTime = Date.now() + this.frameDelay;
-		controller.fromGamepad();
+		//controller.fromGamepad();
+		updateControllersBefore();
 		if (dialogActive)
 			dialog.update();
 		else
@@ -25,7 +25,8 @@ var engine = {
 		runnee.draw();
 		if (dialogActive)
 			dialog.draw();
-		controller.unClick();
+		updateControllersAfter();
+		//controller.unClick();
 		setTimeout(()=>this.run(), Math.max(0, desiredTime-Date.now()));
 	},
 	
@@ -36,59 +37,38 @@ var engine = {
 var gameEngine = {
 	name : "Game Engine",
 	update : function() {
-		if (paused) {
-			if (controller.shootClicked && !firstRun)
-				exitStage();
-			if (controller.jumpClicked || controller.pauseClicked)
-				paused = false;
+		if (globalController.pauseClicked) {
+			pause.begin();
 			return;
 		}
-		if (controller.pauseClicked) {
-			paused = true;
-			return;
-		}
-		if (controller.restartClicked) {
+		if (globalController.restartClicked) {
 			reEvalAnym();
 			loadStage(currentStageName, false);
 			return;
-		} else {
-			stageTimer ++;
-			player.update();
-			gameObjects.forEach(oj=>oj.update());
-			removeDead(gameObjects);
 		}
+		stageTimer ++;
+		player.update();
+		gameObjects.forEach(oj=>oj.update());
+		removeDead(gameObjects);
 	},
 	draw : function() {
 		ctx.globalAlpha = 1;
 		clearCanvases();
-		if (paused) {
-			ctx.drawImage(miscSprites.Paused, canvas.width/4, canvas.height/2 - canvas.width / miscSprites.Paused.width * miscSprites.Paused.height / 4, canvas.width / 2, canvas.width / miscSprites.Paused.width * miscSprites.Paused.height / 2);
-			ctx.font = "30px monospace";
-			ctx.textAlign = "center";
-			ctx.fillStyle = "#FFFFFF";
-			ctx.fillText("Press Pause [P]/(START) or Jump [A]/(A) to resume", canvas.width/2, canvas.height*3/4-40);
-			if (!firstRun)
-				ctx.fillText("Press Shoot [D]/(X) to exit the level", canvas.width/2, canvas.height*3/4);
-			return;
-		}
 		updateZoom();
 		drawStageBack();
-		gameObjects.forEach(obj => obj.draw());
+		gameObjects.forEach(oj => oj.draw());
 		player.draw();
 		drawStageFore();
-		/*if (controller.trueSight) {
-			for (var i = -TRUE_SIGHT_RADIUS; i <= TRUE_SIGHT_RADIUS; i+=2) {
-				for (var j = Math.round(-TRUE_SIGHT_RADIUS*Math.cos(Math.asin(i/TRUE_SIGHT_RADIUS)) - 20); j <= TRUE_SIGHT_RADIUS*Math.cos(Math.asin(i/TRUE_SIGHT_RADIUS)) - 20; j+=2) {
-					//console.log (i, j)
-					ctx.fillStyle = isPixelSolid(player.x+i, player.y+j) ? "#000000" : "#FFFFFF"
-					ctx.fillRect(stagex(player.x+i), stagey(player.y+j), zoom + 0, zoom + .5)
-				}
-			}
-			player.draw();
-		}*/
 		hud.draw();
 	},
 	updatesObjects : true
+}
+
+function allObjects() {
+	if (runnee == multiplayerEngine)
+		return [...players, ...gameObjects]
+	else
+		return [player, ...gameObjects];
 }
 
 //var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -97,7 +77,7 @@ var gameReady = {
 	name : "Ready",
 	next : gameEngine,
 	update : function() {
-		if (controller.leftClicked || controller.rightClicked || controller.upClicked || controller.downClicked || controller.jumpClicked || controller.attackClicked || controller.shootClicked || controller.pauseClicked) {
+		if (player.controller.leftClicked || player.controller.rightClicked || player.controller.upClicked || player.controller.downClicked || player.controller.jumpClicked || player.controller.attackClicked || player.controller.shootClicked || player.controller.pauseClicked) {
 			runnee = this.next;
 			this.next.update();
 		}

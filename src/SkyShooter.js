@@ -9,18 +9,11 @@ var shooterEngine = {
 		this.currentWave = [];
 	},
 	update : function() {
-		if (paused) {
-			if (controller.shootClicked && !firstRun)
-				exitStage();
-			if (controller.jumpClicked || controller.pauseClicked)
-				paused = false;
+		if (globalController.pauseClicked) {
+			pause.begin();
 			return;
 		}
-		if (controller.pauseClicked) {
-			paused = true;
-			return;
-		}
-		if (controller.restartClicked) {
+		if (globalController.restartClicked) {
 			reEvalAnym();
 			loadStage(currentStageName, false);
 			return;
@@ -63,26 +56,26 @@ class PlanePlayer extends AnymosPlayer {
 		if (stageTimer%2)
 			used++;
 		var ath = 0;
-		var acc = controller.jump ? BOOST_ACCELERATION : FLYING_ACCELERATION;
+		var acc = this.controller.jump ? BOOST_ACCELERATION : FLYING_ACCELERATION;
 		this.dx *= FLYING_DAMPENING;
 		this.dy *= FLYING_DAMPENING;
-		if (controller.up)
-			if (controller.left)
+		if (this.controller.up)
+			if (this.controller.left)
 				ath = -Math.PI*3/4;
-			else if (controller.right)
+			else if (this.controller.right)
 				ath = -Math.PI*1/4;
 			else
 				ath = -Math.PI*1/2
-		else if (controller.down)
-			if (controller.left)
+		else if (this.controller.down)
+			if (this.controller.left)
 				ath = Math.PI*3/4;
-			else if (controller.right)
+			else if (this.controller.right)
 				ath = Math.PI*1/4;
 			else
 				ath = Math.PI*1/2
-		else if (controller.left)
+		else if (this.controller.left)
 			ath = Math.PI;
-		else if (controller.right)
+		else if (this.controller.right)
 			ath = 0;
 		else
 			acc = 0;
@@ -98,12 +91,12 @@ class PlanePlayer extends AnymosPlayer {
 			this.dy -= FLYING_EDGE_SHUNT;
 		this.x += this.dx;
 		this.y += this.dy;
-		if (controller.jump) {
+		if (this.controller.jump) {
 			
-		} else if (controller.shoot) {
+		} else if (this.controller.shoot) {
 			used += 1;
 			gameObjects.push(new HorizonBeam(this.x+(this.facingRight?1:-1)*this.width/3, this.y-this.height/2, (this.facingRight?1:-1)*40, "Anymos", 15));
-		} else if (controller.attack) {
+		} else if (this.controller.attack) {
 			if (this.pipCD < 0) {
 				used += 2;
 				var tangle = this.angleToLeading(this.nearestEnemy(), 15, 2);
@@ -126,4 +119,5 @@ PlanePlayer.prototype.width = 60;
 PlanePlayer.prototype.height = 34;
 PlanePlayer.prototype.sprites = makeSprites("src/Plane.png", {
 	flying: {x:0, y:0, width:60, height:36},
-}, true);	
+}, true);
+PlanePlayer.prototype.controller = AnymosPlayer.prototype.controller;

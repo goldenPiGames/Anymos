@@ -52,13 +52,12 @@ class GameObject {
 	push(pdx, pdy) {
 		if (pdx != pdx || pdy != pdy)
 			return;
-		var cd = controller.debug//collisionDiagnostics;
 		var interval = this.physicsPrecision / Math.max(Math.abs(pdx), Math.abs(pdy), .01)
 		for (var i = 0; i < 1.0; i += interval) {
 			var intendedx = this.x + pdx * interval;
 			var intendedy = this.y + pdy * interval;
 			switch (getCollidingWall(intendedx, intendedy, this.width, this.height)) {
-				case -1: this.x = intendedx; this.y = intendedy; if(cd) console.log("clear",i); break;
+				case -1: this.x = intendedx; this.y = intendedy;// if(cd) console.log("clear",i); break;
 				case 0: pdy = Math.max(pdy, 0); break;
 				case 1: pdx = Math.min(pdx, 0); break;
 				case 2: pdy = Math.min(pdy, 0); break;
@@ -109,7 +108,6 @@ class GameObject {
 	die() {
 		this.dead = true;
 		this.onDeath();
-		//gameObjects.splice(gameObjects.indexOf(this), 1);
 	}
 	onDeath() {
 		
@@ -123,17 +121,12 @@ class GameObject {
 		else
 			box = this;
 		var hit = null;
-		var all = gameObjects.slice();
-		all.push(player);
-		//console.log(box)
-		for (var i = 0; i < all.length; i++) {
-			var oj = all[i];
-			//console.log(oj.hittable, oj.team != this.team, oj.isTouching(box))
+		allObjects().forEach(oj => {
 			if (oj.hittable && oj.team != this.team && oj.isTouching(box)) {
 				oj.getHit(damage);
 				hit = oj;
 			}
-		}
+		})
 		return hit;
 	}
 	distanceTo(target) {
@@ -142,10 +135,8 @@ class GameObject {
 	nearestEnemy() {
 		var sof = null;
 		var dist = Infinity;
-		var all = gameObjects.slice();
-		all.push(player);
 		var thisser = this;
-		all.forEach(oj => {
+		allObjects().forEach(oj => {
 			if (oj.hittable && oj.team != thisser.team) {
 				var cdist = this.distanceTo(oj);;
 				//console.log(Math.pow(thisser.x-oj.x, 2), Math.pow(thisser.y-oj.y, 2))

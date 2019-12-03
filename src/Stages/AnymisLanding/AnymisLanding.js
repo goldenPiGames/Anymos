@@ -3,7 +3,9 @@ Stages.AnymisLanding = {
 	load : function(doStuff) {
 		playMusic("Breeze 2 - PeriTune");
 		let G = {name:"Ground",solid:true,color:"#492116",grassyTop:"#009734"};
-		let _ = {name:"Walls",solid:false,color:"#87CEEB"};
+		let _ = {name:"Sky",solid:false,color:"#87CEEB"};
+		oobtopcolor = "#87CEEB";
+		oobbottomcolor = "#492116";
 		staticColl =
 		[[_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		 [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],

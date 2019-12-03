@@ -1,4 +1,3 @@
-const BOLIZOS_COLOR = "#C0FF45";
 
 Stages.Lightningrod = {
 	name : "Lightningrod",

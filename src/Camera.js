@@ -45,11 +45,13 @@ function drawStageFore() {
 }
 
 function updateZoom() {
+	if (cameraFocus instanceof MultiFocus)
+		cameraFocus.update();
 	cameraxd = cameraFocus.x;
 	camerayd = cameraFocus.y - (cameraFocus==player?PLAYER_NORMAL_HEIGHT:cameraFocus.height)/2;
-	if (controller.zoomOutClicked)
+	if (globalController.zoomOutClicked)
 		zoomd = Math.max(zoomd-1, minZoom, 1);
-	if (controller.zoomInClicked)
+	if (globalController.zoomInClicked)
 		zoomd = Math.min(zoomd+1, maxZoom);
 	//if (Math.abs(zoomd*8 - Math.round(zoomd*8)) < .01)
 	//	zoomd = Math.round(zoomd * 8) / 8
@@ -145,6 +147,11 @@ function drawSpriteOnStage(sprite, dx, dy, right = true, woff = 1/2, hoff = 1) {
 	}
 }
 
+function fillTextOnStage(text, x, y, height = 18) {
+	ctx.font  = (height * zoom) + "px " + getFont();
+	ctx.fillText(text, stagex(x), stagey(y));
+}
+
 function flipHorizontally(img,x,y,width,height) { //https://stackoverflow.com/a/35973879
 	if (!img || !(img.loaded)) {
 		console.log("Image is undefined or not loaded",x,y);
@@ -156,4 +163,14 @@ function flipHorizontally(img,x,y,width,height) { //https://stackoverflow.com/a/
     ctx.scale(-1,1);
     ctx.drawImage(img,0,0,width,height);
     ctx.setTransform(1,0,0,1,0,0);
+}
+
+class MultiFocus {
+	constructor(list) {
+		this.list = list;
+	}
+	update() {
+		this.x = this.list.reduce((acc, cur) => acc + cur.x, 0) / this.list.length;
+		this.y = this.list.reduce((acc, cur) => acc + cur.y, 0) / this.list.length;
+	}
 }

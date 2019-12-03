@@ -1,3 +1,4 @@
+var backgroundBox;
 var canvas;
 var ctx;
 var fcanvas;
@@ -7,6 +8,7 @@ const MISC_SPRITE_NAMES = ["MainMenuLogo", "Selector", "Paused", "SelectStage", 
 var miscSprites;
 var miscSprites = {};
 var miscSFX = {};
+var emergencyStuff;
 var firstRun = false;
 var forReal = true;
 const SYKLOS_COLOR = "#00A2E8";
@@ -15,8 +17,7 @@ var usingPizz = settings.sfxSystem;
 //var stageBackground;
 
 function begin() {
-	eventCatcherDiv = document.getElementById("EventCatcher");
-    // eventCatcherDiv events go here
+	backgroundBox = document.getElementById("BackgroundBox");
 	
 	canvas = document.getElementById("GameCanvas");
 	ctx = canvas.getContext("2d");
@@ -30,6 +31,7 @@ function begin() {
 //	fctx.mozImageSmoothingEnabled = false;
 	fctx.webkitImageSmoothingEnabled = false;
 	
+	emergencyStuff = document.getElementById("Emergency");
 	initMusic();
 	engine.run();
 	loadGame();
@@ -42,6 +44,10 @@ function begin() {
 	//miscSprites = makeSprites("src/MiscSprites.png")
 	loadDefaultSFX();
 	applySettings();
+	
+	window.parent.postMessage({
+		what : "ready",
+	}, "*");
 	//begin2();
 }
 function begin2() {

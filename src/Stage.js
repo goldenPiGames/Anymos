@@ -18,12 +18,20 @@ function loadStage(stageName, doStuff=true) {
 		return false;
 	runnee = loading;
 	paused = false;
-	controller.jumpClicked = false;
 	currentStageName = stageName;
+	currentStage = Stages[stageName];
 	reEvalAnym();
 	availAnym();
-	player = (Stages[currentStageName].startFlying) ? new PlanePlayer() : new AnymosPlayer();
-	cameraFocus = player;
+	if (currentStage.players > 1) {
+		players[0] = new AnymosPlayer();
+		players[0].controller = controllers[0];
+		players[1] = new AnymosPlayer();
+		players[1].controller = controllers[1];
+		cameraFocus = new MultiFocus(players);
+	} else {
+		player = (currentStage.startFlying) ? new PlanePlayer() : new AnymosPlayer();
+		cameraFocus = player;
+	}
 	used = 0;
 	maxZoom = 6;
 	minZoom = 1;
@@ -38,7 +46,6 @@ function loadStage(stageName, doStuff=true) {
 	edgesSolid = true;
 	resetLoading();
 	loadReturn = ()=>beginStage(doStuff);
-	currentStage = Stages[stageName];
 	stageImages = {
 		mainBack : makeImage("src/Stages/"+(currentStage.reuseBack||currentStageName)+"/MainBack.png"),
 		mainFore : makeImage("src/Stages/"+(currentStage.reuseFore||currentStageName)+"/MainFore.png"),
@@ -51,14 +58,18 @@ function loadStage(stageName, doStuff=true) {
 }
 function beginStage(doStuff) {
 	normalCameraBounds();
-	runnee = gameReady;
-	gameReady.next = gameEngine;
-	//zoomd = zoom; //maybe not
 	updateZoom();
 	snapZoom();
 	stageTimer = 0;
-	if (Stages[currentStageName].startFlying)
-		shooterEngine.begin();	
+	if (currentStage.players > 1) {
+		multiplayerCountdown.begin();
+	} else {
+		runnee = gameReady;
+		if (Stages[currentStageName].startFlying)
+			shooterEngine.begin();
+		else
+			gameReady.next = gameEngine;
+	}
 }
 
 function exitStage() {

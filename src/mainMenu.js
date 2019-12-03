@@ -1,6 +1,5 @@
 function doMainMenu() {
-	if (mainMenu.buttonIndex < 1 && !firstRun)
-		mainMenu.buttonIndex = 1;
+	emergencyStuff.hidden = false;
 	runnee = mainMenu;
 	mainMenu.flowY = 0;
 	mainMenu.flowFirst = true;
@@ -11,17 +10,17 @@ const MAIN_FLOW_HEIGHT = 300;
 const MAIN_FLOW_SPEED = 15;
 var mainMenu = {
 	update : function() {
-		if (controller.jumpClicked) {
+		if (globalController.selectClicked) {
 			this.buttons[this.buttonIndex].func();
 			return;
-		} else if (controller.upClicked && this.buttonIndex > 0)
+		} else if (globalController.menuUpClicked && this.buttonIndex > 0)
 			this.buttonIndex--;
-		else if (controller.downClicked && this.buttonIndex < this.buttons.length-1)
+		else if (globalController.menuDownClicked && this.buttonIndex < this.buttons.length-1)
 			this.buttonIndex++;
 	},
 	draw : function() {
 		ctx.globalAlpha = 1;
-		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		clearCanvases();
 		this.flowY += MAIN_FLOW_SPEED;
 		if (this.flowY > canvas.height+MAIN_FLOW_HEIGHT) {
 			this.flowY = 0;
@@ -52,24 +51,23 @@ var mainMenu = {
 	buttonIndex : 0,
 	buttons : [
 		{
-			text : "New Game",
+			text : "Story Mode",
 			func : function() {
-				if (firstRun) {
+				if (!firstRun) {
+					doLevelSelect(ROOT_STAGE);
+				} else if (Stages.TutorialPrelude.bestDown != undefined) {
+					loadStage(currentStageName);
+				} else {
 					resetSave();
 					firstRun = true;
 					loadStage("TutorialPrelude");
-				} else
-					runnee = newGameConfirm;
+				}
 			}
 		},
 		{
-			text : "Continue",
-			func : function(){
-				if (!firstRun) {
-					doLevelSelect();
-				} else if (Stages.TutorialPrelude.bestDown != undefined) {
-					loadStage(currentStageName);
-				}
+			text : "Multiplayer",
+			func : function() {
+				doMultiplayerControllers();
 			}
 		},
 		{
@@ -79,15 +77,19 @@ var mainMenu = {
 		{
 			text : "Settings",
 			func : function(){doSettings()}
-		}
+		},
+		{
+			text : "Controls",
+			func : function(){doControls()}
+		},
 	]
 }
 
 var newGameConfirm = {
 	update : function() {
-		if (controller.attack)
+		if (globalController.cancelClicked)
 			runnee = mainMenu;
-		else if (controller.up && controller.restart && controller.jump) {
+		else if (globalController.menuUp && globalController.restart && globalController.selectClicked) {
 			resetSave();
 			firstRun = true;
 			loadStage("TutorialMovement", true);

@@ -1,11 +1,4 @@
-const FWEGOS_BASE_SPEED = 3.5;
-const FWEGOS_ATTACK_STARTUP = 30;
-const FWEGOS_ATTACK_TIME = 50;
-const FWEGOS_RUSH_SPEED = 12;
-const FWEGOS_NORMAL_WIDTH = 15;
-const FWEGOS_NORMAL_HEIGHT = 37;
-const FWEGOS_BALL_SIZE = 20;
-const FWEGOS_WAVE_SPEED = 8;
+const BOLIZOS_COLOR = "#C0FF45";
 
 class Bolizos extends Boss {
 	constructor(name, x, y, facingRight, bl, br, bt, bb, manipBlock) {
@@ -233,3 +226,55 @@ Bolizos.prototype.walkSpeed = 5;
 Bolizos.prototype.jumpSpeed = 10;
 Bolizos.prototype.jumpMinDistance = 200;
 Bolizos.prototype.numVessels = 5;
+
+
+class BolizBolt extends GameObject {
+	constructor(x, y, width = 80) {
+		super();
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = this.y;
+		this.timer = 0;
+		this.cornerYs = [];
+		var cy = 0;
+		while (cy < this.height) {
+			cy += Math.random()*30+10;
+			this.cornerYs.push(cy);
+		}
+	}
+	update() {
+		if (this.timer == 0) {
+			playSFX("Thunder_short");
+			this.sendHurtbox(this.damage);
+		} else if (this.timer >= 10) {
+			this.die();
+		}
+		this.timer++;
+	}
+	draw() {
+		ctx.globalAlpha = 1 - this.timer/10.2;
+		ctx.lineWidth = 4 * zoom;
+		ctx.strokeStyle = BOLIZOS_COLOR;
+		ctx.beginPath();
+		ctx.moveTo(stagex(this.x), stagey(this.y));
+		var drawxl = stagex(this.x - this.width/2);
+		var drawxr = stagex(this.x + this.width/2);
+		var i = -1;
+		var drawy = Infinity;
+		while (i < this.cornerYs.length && drawy > 0) {
+			i++;
+			drawy = stagey(this.y - this.cornerYs[i]);
+			ctx.lineTo(i % 2 ? drawxl : drawxr, drawy);
+			
+			//console.log(i % 2 ? drawxl : drawxr, drawy);
+		}
+		ctx.stroke();
+		ctx.closePath();
+		//this.fillRect(BOLIZOS_COLOR);
+		ctx.globalAlpha = 1
+	}
+}
+BolizBolt.prototype.team = Bolizos.prototype.team;
+BolizBolt.prototype.sfxNames = ["Thunder_short"];
+BolizBolt.prototype.damage = 150;

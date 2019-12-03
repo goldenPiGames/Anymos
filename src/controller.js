@@ -1,92 +1,173 @@
-const COMMAND_LIST = ["left", "right", "up", "down", "jump", "attack", "shoot", "special", "interact", "switch", "zoomOut", "zoomIn", "minimap", "trueSight", "pause", "restart", "any"]
-const GAMEPAD_COMMANDS = ["jump", "attack", "shoot", "switch", "interact", "special", "?", "debug", "restart", "pause", "?", "?"]//, "up", "down", "left", "right"];
-var usingGamepad = false;
-var controller = {
-	keyCodeToCommand: function(keyCode) {
-		switch(keyCode) {
-			case 37 : return "left";
-			case 39 : return "right";
-			case 38 : return "up";
-			case 40 : return "down";
-			case 65 : return "jump";
-			case 83 : return "attack";
-			case 68 : return "shoot";
-			case 16 : return "special";
-			case 32 : return "interact";
-			case 81 : return "switch";
-			case 189 : return "zoomOut";
-			case 187 : return "zoomIn";
-			case 80 : return "pause";
-			case 82 : return "restart";
-			case 192 : return "debug"
-			default : return "other";
+var controllers = [];
+
+class Controller {
+	constructor() {
+		
+	}
+	updateAfter() {
+		this.unClick();
+	}
+	unClick() {
+		COMMAND_LIST.forEach(nom =>	this[nom+"Clicked"] = false);
+	}
+	setBinds(newbinds) {
+		if (newbinds)
+			this.binds = newbinds;
+		this.rbinds = [];
+		for (var b in this.binds) {
+			if (!this.rbinds[this.binds[b]])
+				this.rbinds[this.binds[b]] = [b];
+			else
+				this.rbinds[this.binds[b]].push(b);
 		}
-	},
-	doKey : function(name, pressed) {
+	}
+	setCommand(name, pressed) {
 		if (pressed && !this[name])
 			this[name+"Clicked"] = true;
 		this[name] = pressed;
-	},
-	unClick : function() {
-		COMMAND_LIST.forEach(function(nom) {
-			controller[nom+"Clicked"] = false;
-		});
-	},
-	fromGamepad : function() {
-		var gamepad = navigator.getGamepads()[gpindex];
-		//console.log(gamepad)
-		usingGamepad = !!gamepad;
-		if (!gamepad)
-			return;
-		var thisser = this;
-		GAMEPAD_COMMANDS.forEach(function(nom, num) {
-			thisser.doKey(nom, gamepad.buttons[num].pressed);
-		});
-		this.doKey("up", gamepad.buttons[12].pressed || gamepad.axes[1] <= -.7);
-		this.doKey("down", gamepad.buttons[13].pressed || gamepad.axes[1] >= .7);
-		this.doKey("left", gamepad.buttons[14].pressed || gamepad.axes[0] <= -.7);
-		this.doKey("right", gamepad.buttons[15].pressed || gamepad.axes[0] >= .7);
-		this.doKey("zoomIn", gamepad.axes[3] <= -.8);
-		this.doKey("zoomOut", gamepad.axes[3] >= .8);
-		this.doKey("minimap", gamepad.axes[2] <= -.8);
-		//this.doKey("trueSight", gamepad.axes[2] >= .8);
 	}
 }
 
-COMMAND_LIST.forEach(function(nom) {
-	controller[nom] = false;
+class KeyboardController extends Controller {
+	constructor(binds) {
+		super();
+		this.setBinds(binds);
+	}
+	updateBefore() {
+		
+	}
+	keyDown(keycode) {
+		this.setKey(keycode, true);
+	}
+	keyUp(keycode) {
+		this.setKey(keycode, false);
+	}
+	setKey(index, pressed) {
+		let r = this.rbinds[index];
+		if (r) {
+			r.forEach(b => this.setCommand(b, pressed));
+		}
+	}
+	getBindText(command) {
+		return "[" + KEY_NAMES[this.binds[command]] + "]"; 
+	}
+}
+//KeyboardController.prototype.binds = DEFAULT_BINDS_KEYBOARD;
+
+class GamepadController extends Controller {
+	constructor(gpindex, binds, stickbinds, stickbindNames) {
+		super();
+		this.gpindex = gpindex;
+		this.setBinds(binds, stickbinds, stickbindNames);
+	}
+	updateBefore() {
+		var gamepad = getGamepad(this.gpindex);
+		//console.log(gamepad)
+		//usingGamepad = !!gamepad;
+		if (!gamepad)
+			return;
+		COMMAND_LIST.forEach(com => {
+			//console.log(com);
+			this[com+"Last"] = this[com];
+			this[com] = (this.binds[com] >= 0 && gamepad.buttons[this.binds[com]].pressed) || (this.stickbinds[com] && this.stickbinds[com](gamepad));
+			this[com+"Clicked"] = this[com] && !this[com+"Last"];
+		});
+		/*gamepad.buttons.forEach((p, d) => {
+			this.setButton(d, p.pressed)
+		});*/
+	}
+	setBinds(binds, stickbinds, stickbindNames) {
+		super.setBinds(binds);
+		if (stickbinds) {
+			this.stickbinds = stickbinds;
+			this.stickbindNames = stickbindNames;
+		}
+	}
+	getBindText(command) {
+		var butt = GAMEPAD_BUTTON_NAMES[this.binds[command]]; 
+		var stick = this.stickbindNames[this.stickbinds[command]];
+		if (butt && stick)
+			return "(" + butt + ") / (" + stick + ")";
+		else if (stick)
+			return "(" + stick + ")";
+		else
+			return "(" + butt + ")";
+	}
+}
+GamepadController.prototype.stickbinds = {};
+GamepadController.prototype.stickbindNames = {};
+COMMAND_LIST.forEach(com => {
+	if (CONTROLS_INFO[com].defaultStickFunc) {
+		GamepadController.prototype.stickbinds[com] = CONTROLS_INFO[com].defaultStickFunc;
+		GamepadController.prototype.stickbindNames[com] = CONTROLS_INFO[com].defaultStickText;
+	}
 });
+
+function getGamepad(gpindex) {
+	return navigator.getGamepads()[gpindex];
+}
+//GamepadController.prototype.binds = DEFAULT_BINDS_GAMEPAD;
+
+var globalController = {
+	updateBefore : function() {
+		COMMAND_LIST.forEach(comm => {
+			this[comm] = controllers.reduce((acc, cont) => acc || cont[comm], false);
+			this[comm+"Clicked"] = controllers.reduce((acc, cont) => acc || cont[comm+"Clicked"], false);
+		});
+	},
+	updateAfter : Controller.prototype.unClick,
+	getBindText(command) {
+		return controllers[0].getBindText(command);
+	}
+}
+
+function updateControllersBefore() {
+	controllers.forEach(co=>co.updateBefore());
+	globalController.updateBefore();
+}
+
+function updateControllersAfter() {
+	//if (controllers.length <= 0)
+	//	controllers.push(new KeyboardController(controlSettings.keyboard));
+	controllers.forEach(co=>co.updateAfter());
+	globalController.updateAfter();
+}
+
+/*COMMAND_LIST.forEach(function(nom) {
+	controller[nom] = false;
+});*/
+
+var extraKeyListener = null;
 
 document.addEventListener("keydown", function(e) {
 	e.preventDefault();
-	if (!controller[controller.keyCodeToCommand(e.keyCode)])
-		controller[controller.keyCodeToCommand(e.keyCode)+"Clicked"] = true;
-	controller[controller.keyCodeToCommand(e.keyCode)] = true;
-	controller.anyClicked = true;
-	//console.log(controller.keyCodeToCommand(e.keyCode));
+	if (extraKeyListener)
+		extraKeyListener(e);
+	var keh = false;
+	controllers.forEach(co => {
+		if (co instanceof KeyboardController) {
+			co.keyDown(e.keyCode);
+			keh = true;
+		}
+	});
+	if (!keh) {
+		var newcon = new KeyboardController(controlSettings.keyboard);
+		controllers.push(newcon);
+		newcon.keyDown(e.keyCode);
+	}
 });
 
 document.addEventListener("keyup", function(e) {
-	controller[controller.keyCodeToCommand(e.keyCode)] = false;
+	controllers.forEach(co => {
+		if (co instanceof KeyboardController)
+			co.keyUp(e.keyCode);
+	});
 });
 
 var gamepad;
 var gpindex;
 window.addEventListener("gamepadconnected", function(e) {
-	gp = e.gamepad//navigator.getGamepads()[e.gamepad.index];
-	//console.log("Gamepad connected at index %d: %s. %d buttons, %d axes.", gp.index, gp.id, gp.buttons.length, gp.axes.length);
-	if (gp.buttons.length >= 4)
-		gpindex = e.gamepad.index
-		//gamepad = gp;
+	gp = e.gamepad;
+	if (gp.buttons.length >= 4 && !controllers.find(co => co.gpindex == gp.index))
+		controllers.push(new GamepadController(gp.index, controlSettings.gamepad));
 });
-
-var controllerHelp = {
-	update : function() {
-		this.dead = true;
-	},
-	draw : function() {
-		this.dead = false;
-		ctx.drawImage(miscSprites.Gamepad, x, y, canvas.width/2-miscSprites.Gamepad.width/2, canvas.height/2-miscSprites.Gamepad.width/2);
-	}
-}
-//controllerHelp.prototype = Object.create(GameObjectBase);

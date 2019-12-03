@@ -43,6 +43,12 @@
 			#ForeCanvas {
 				z-index : 2;
 			}
+			#Emergency {
+				z-index : 3;
+				position : absolute;
+				left: 0;
+				top: 0;
+			}
 			@font-face {
 				font-family: 'Determination';
 				src: url('src/DTM-Mono.otf');
@@ -58,14 +64,21 @@
 		<script type="text/javascript" src="src/main.js"></script>
 		<script type="text/javascript" src="src/Save.js"></script>
 		<script type="text/javascript" src="src/engine.js"></script>
+		<script type="text/javascript" src="src/pause.js"></script>
+		<script type="text/javascript" src="src/Multiplayer.js"></script>
 		<script type="text/javascript" src="src/mainMenu.js"></script>
+		<script type="text/javascript" src="src/MultiplayerMenu.js"></script>
 		<script type="text/javascript" src="src/jukebox.js"></script>
 		<script type="text/javascript" src="src/SFX/SFX.js"></script>
 		<script type="text/javascript" src="src/levelSelect.js"></script>
 		<script type="text/javascript" src="src/death.js"></script>
 		<script type="text/javascript" src="src/hud.js"></script>
 		<script type="text/javascript" src="src/dialog.js"></script>
+		<script type="text/javascript" src="src/controlInfo.js"></script>
 		<script type="text/javascript" src="src/controller.js"></script>
+		<script type="text/javascript" src="src/controllerMobileShared.js"></script>
+		<script type="text/javascript" src="src/controllerMobileGame.js"></script>
+		<script type="text/javascript" src="src/controlSettings.js"></script>
 		<script type="text/javascript" src="src/GameObjectBase.js"></script>
 		<script type="text/javascript" src="src/Stage.js"></script>
 		<script type="text/javascript" src="src/Camera.js"></script>
@@ -84,7 +97,7 @@
 		<script type="text/javascript" src="src/Enemies/Enemy.js"></script>
 		<script type="text/javascript" src="src/player.js"></script>
 		<script type="text/javascript" src="src/Objects/Beam.js"></script>
-		<script type="text/javascript" src="src/Enemies/SwitchDoor.js"></script>
+		<script type="text/javascript" src="src/Objects/SwitchDoor.js"></script>
 		<script type="text/javascript" src="src/Enemies/Teion.js"></script>
 		<script type="text/javascript" src="src/Enemies/Naluxos.js"></script>
 		<script type="text/javascript" src="src/Enemies/Syklos.js"></script>
@@ -110,6 +123,8 @@
 		<script type="text/javascript" src="src/Enemies/Mkair.js"></script>
 		<script type="text/javascript" src="src/Enemies/Chanos.js"></script>
 		<script type="text/javascript" src="src/Enemies/Fwegos.js"></script>
+		<script type="text/javascript" src="src/Enemies/Bolizos.js"></script>
+		<script type="text/javascript" src="src/Objects/ControlsReminder.js"></script>
 		<script type="text/javascript" src="src/Objects/Darkness.js"></script>
 		<script type="text/javascript" src="src/Objects/ChanosGames.js"></script>
 		<script type="text/javascript" src="src/Enemies/BeamTurret.js"></script>
@@ -173,6 +188,9 @@
 		<script type="text/javascript" src="src/Stages/YstryJungle/YstryJungle.js"></script>
 		<script type="text/javascript" src="src/Stages/IddelMountain/IddelMountain.js"></script>
 		
+		<script type="text/javascript" src="src/Stages/TutorialMultiplayer/TutorialMultiplayer.js"></script>
+		<script type="text/javascript" src="src/Stages/YellowParallel/YellowParallel.js"></script>
+		
 		<script type="text/javascript" src="src/StageAfter.js"></script>
 		
 		<!--<script type="text/javascript" src="src/___.js"></script>-->
@@ -185,6 +203,9 @@
 			<!-- <div id="EventCatcher" style="overflow:scroll; position: absolute; left: -100px; top: -100px; width: 1000px; height: 800px;">
 				<div style="height: 4000px; width: 10px;"></div>
 			</div> -->
+			<div id="Emergency" hidden>
+				<button onclick="resetControls()">Emergency Reset Controls</button>
+			</div>
 		</div>
 		
 		<script>

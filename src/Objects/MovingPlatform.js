@@ -25,9 +25,12 @@ class MovingPlatformSpawner extends GameObject {
 	update() {
 		this.spawnCD --;
 		if (this.spawnCD <= 0 && player.isTouching({x:this.x, y:this.y-3, width:this.width, height:this.height})) {
-			gameObjects.push(new MovingPlatform(this.x, this.y, this.width, this.speed, this.xdests, this.ydests));
+			gameObjects.push(this.getPlatform());
 			this.spawnCD = 30;
 		}
+	}
+	getPlatform() {
+		return new MovingPlatform(this.x, this.y, this.width, this.speed, this.xdests, this.ydests);
 	}
 	draw() {
 		var spr = this.sprites.spawnerSegment;

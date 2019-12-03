@@ -1,7 +1,7 @@
 var specialChanmote = {
 	name : "Chanos's Remote",
-	update : function() {
-		this.active = (controller.special);
+	update : function(holder) {
+		this.active = (holder.controller.special);
 		player.playerControlled = !this.active;
 	},
 	isActive : function() {
@@ -18,7 +18,7 @@ class ChanmotePickup extends SpecialPickup {
 			new DialogLine("Anymos", "Oh, no, I recognize that voice...", "#00FFFF"),
 			new DialogLine("Chanos", "By holding Special, you can control some of the various things in this tower.", CHANOS_COLOR),
 			new DialogLine("Anymos", "But why? This is stupid.", "#00FFFF"),
-			new DialogLine("Chanos", "Come see me at the top of the tower and oyu can say that to my face.", CHANOS_COLOR),
+			new DialogLine("Chanos", "Come see me at the top of the tower and you can say that to my face.", CHANOS_COLOR),
 		];
 	}
 }
@@ -56,13 +56,13 @@ class SlideBlock extends GameObject {
 				this.sendHurtbox(this.collDamage);
 			}
 		} else if (specialChanmote.isActive()) {
-			if (controller.rightClicked)
+			if (player.controller.rightClicked)
 				this.moving = 1;
-			else if (controller.downClicked)
+			else if (player.controller.downClicked)
 				this.moving = 2;
-			else if (controller.leftClicked)
+			else if (player.controller.leftClicked)
 				this.moving = 3;
-			else if (controller.upClicked)
+			else if (player.controller.upClicked)
 				this.moving = 4;
 		}
 		//console.log(specialChanmote.active, this.moving)

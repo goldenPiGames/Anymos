@@ -1,4 +1,5 @@
 function finishStage(next) {
+	stageFinishScreen.prevRunnee = runnee;
 	//console.log(next)
 	var vesses = Stages[currentStageName].vessels;
 	stageFinishScreen.collectedBefore = [];
@@ -49,9 +50,9 @@ function finishStage(next) {
 var stageFinishScreen = {
 	solenoidCt : 0,
 	update : function() {
-		if (controller.restartClicked) {
+		if (globalController.restartClicked) {
 			loadStage(this.from, false);
-		} else if (controller.jumpClicked) {
+		} else if (globalController.jumpClicked) {
 			doLevelSelect();
 		}
 	},
@@ -61,15 +62,16 @@ var stageFinishScreen = {
 			this.solenoidCt = 0;
 			this.solenoid = !this.solenoid;
 		}
-		ctx.globalAlpha = 1;
+		fctx.globalAlpha = 1;
 		clearCanvases();
 		//this.context2D.fillStyle = BG_COLOR;
 		//this.context2D.fillRect(0, 0, 800, 600);
 		updateZoom();
-		drawStageBack();
+		this.prevRunnee.draw();
+		/*drawStageBack();
 		gameObjects.forEach(obj => obj.draw());
 		player.draw();
-		drawStageFore();
+		drawStageFore();*/
 		fctx.textAlign = "center";
 		fctx.strokeStyle = "#FFFFFF";
 		fctx.fillStyle = "#202020C0";

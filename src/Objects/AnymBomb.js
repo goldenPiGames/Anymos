@@ -48,8 +48,8 @@ AnymBomb.prototype.detonated = 0;
 var specialBomb = {
 	name : "Anymos' Delay Bomb",
 	update : function(holder) {
-		if (controller.specialClicked) {
-			var found = gameObjects.find(bup => bup instanceof AnymBomb && !bup.detonated);
+		if (holder.controller.specialClicked) {
+			var found = gameObjects.find(bup => bup instanceof AnymBomb && bup.user == holder && !bup.detonated);
 			if (found) {
 				found.detonate();
 			} else {

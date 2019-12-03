@@ -52,7 +52,7 @@ var specialFlash = {
 	name : "Naluxos' Flash",
 	update : function(holder) {
 		this.active = Math.max(0, this.active - FLASH_REDUCE_RATE);
-		if (controller.specialClicked) {
+		if (holder.controller.specialClicked) {
 			used += 60;
 			this.active = 1;
 		}

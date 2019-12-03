@@ -14,9 +14,9 @@ var dialog = {
 		dialogActive = true;
 	},
 	update : function() {
-		this.skipping = controller.attack && !this.skipBuffer;
-		this.skipBuffer = controller.attack && this.skipBuffer;
-		if (controller.jumpClicked || controller.interactClicked || this.skipping)
+		this.skipping = globalController.cancel && !this.skipBuffer;
+		this.skipBuffer = globalController.cancel && this.skipBuffer;
+		if (globalController.selectClicked || this.skipping)
 			this.index ++;
 		if (typeof this.list[this.index] == "function") {
 			this.list[this.index]();

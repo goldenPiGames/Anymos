@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+		<meta content="utf-8" http-equiv="encoding">
+		<title>Anymos</title>
+		<link rel="shortcut icon" type="image/png" href="favicon.png">
+		<style>
+			body {
+				width : 100%;
+				height : 100%;
+				margin : 0;
+				border : none;
+				padding : 0;
+				background-color : #000000;
+			}
+			#Game {
+				width : 100%;
+				height : 100%;
+				margin : 0;
+				border : none;
+				padding : 0;
+			}
+			#GameBox {
+				width : 100%;
+				margin : 0;
+				border : none;
+				padding : 0;
+				position : absolute;
+				top : 0;
+				left : 0;
+			}
+			#FullBox {
+				width : 100%;
+				height : 100%;
+				margin : 0;
+				border : none;
+				padding : 0;
+			}
+			#Controller {
+				width : 100%;
+				height : 100%;
+			}
+		</style>
+		<script type="text/javascript" src="src/controlInfo.js"></script>
+		<script type="text/javascript" src="src/controllerMobileShared.js"></script>
+		<script type="text/javascript" src="src/controllerMobileOuter.js"></script>
+	</head>
+	<body>
+		<div id="FullBox">
+			<div id="GameBox">
+				<iframe id="Game" title="Game" width="1200" height="900" src="index.html"></iframe>
+			</div>
+			<canvas id="Controller"></canvas>
+		</div>
+		<script>
+			var igame = document.getElementById("Game");
+			var fullBox = document.getElementById("FullBox");
+			var gameBox = document.getElementById("GameBox");
+			var canvas = document.getElementById("Controller");
+			//igame.addEventListener("load", begin);
+			//begin();
+		</script>
+	</body>
+</html>

@@ -46,15 +46,19 @@
 	<body>
 		<div id="Width">
 			Width:
-			<button onclick="setSize(width-1,height)">-</button>
+			<button onclick="removeLeft()">-left</button>
+			<button onclick="addLeft()">+left</button>
 			<span id="WidthText"></span>
-			<button onclick="setSize(width+1,height)">+</button>
+			<button onclick="setSize(width-1,height)">-right</button>
+			<button onclick="setSize(width+1,height)">+right</button>
 		</div>
-		<div id="Width">
+		<div id="Height">
 			Height:
-			<button onclick="setSize(width,height-1)">-</button>
+			<button onclick="removeTop()">-top</button>
+			<button onclick="addTop()">+top</button>
 			<span id="HeightText"></span>
-			<button onclick="setSize(width,height+1)">+</button>
+			<button onclick="setSize(width,height-1)">-bottom</button>
+			<button onclick="setSize(width,height+1)">+bottom</button>
 		</div>
 		<div id="Blocks">
 			<div id="Block0" class="block">
@@ -174,6 +178,30 @@
 				drawAll();
 			}
 			
+			function removeLeft() {
+				for (var i = 0; i < grid.length; i++) {
+					grid[i].shift();
+				}
+				setSize(width-1, height)
+			}
+			
+			function addLeft() {
+				for (var i = 0; i < grid.length; i++) {
+					grid[i].unshift(0);
+				}
+				setSize(width+1, height);
+			}
+			
+			function removeTop() {
+				grid.shift();
+				setSize(width, height-1)
+			}
+			
+			function addTop() {
+				grid.unshift(new Array(width).fill(0));
+				setSize(width, height+1);
+			}
+			
 			function drawBlock(x, y) {
 				ctx.fillStyle = blockColors[grid[y][x]];
 				ctx.fillRect(x*PIXELS_PER_BLOCK, y*PIXELS_PER_BLOCK, PIXELS_PER_BLOCK, PIXELS_PER_BLOCK);
@@ -231,6 +259,9 @@
 					letters = letters.replace(new RegExp(letters[0], "g"), "");
 				}
 				console.log(blockLetters);
+				for (var i = 0; i < blockLetters.length; i++) {
+					blockBar[i].inputLetter.value = blockLetters[i]
+				}
 				numBlockTypes = blockLetters.length;
 				for(var i = 0; i < blockLetters.length; i++) {
 					str = str.replace(new RegExp(blockLetters[i], "g"), i);
@@ -238,6 +269,7 @@
 				console.log(str);
 				grid = JSON.parse(str);
 				setSize(grid[0].length, grid.length);
+				saveStuff();
 			}
 			
 			function loadStuff() {
