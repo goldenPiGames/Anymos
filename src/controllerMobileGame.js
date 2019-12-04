@@ -5,7 +5,7 @@ class ExternalMobileController extends Controller {
 }
 
 window.addEventListener("message", function(e) {
-	console.log(e.data)
+	//console.log(e.data);
 	if (e.data.what == EXTERNAL_MOBILE_CONTROLLER) {
 		var cont = controllers.find(oj => oj instanceof MobileControllerReceiver);
 		if (!cont) {
@@ -21,6 +21,44 @@ window.addEventListener("message", function(e) {
 
 class MobileControllerReceiver extends Controller {
 	constructor() {
+		super();
+	}
+	updateBefore() {
 		
 	}
+	apply(data) {
+		if (data.whathap == "click") {
+			data.commands.forEach(com => {
+				this[com+"Clicked"] = true;
+				this[com] = true;
+			});
+		} else if (data.whathap == "change") {
+			COMMAND_LIST.forEach(com => this[com] = data.commands[com]);
+		}
+	}
+	getBindText(command) {
+		return this.bindTexts[command];
+	}
+}
+MobileControllerReceiver.prototype.bindTexts = {
+	up : "[↑]",
+	down : "[↓]",
+	left : "[←]",
+	right : "[→]",
+	menuUp : "[↑]",
+	menuDown : "[↓]",
+	menuLeft : "[←]",
+	menuRight : "[→]",
+	crouch : "[↓]",
+	zoomIn : "(+)",
+	zoomOut : "(-)",
+	jump : "(A)",
+	select : "(A)",
+	attack : "(B)",
+	cancel : "(B)",
+	shoot : "(C)",
+	interact : "(!)",
+	special : "(S)",
+	pause : "(||)",
+	restart : "(R)",
 }

@@ -3,8 +3,8 @@
 function begin() {
 	//igame.contentWindow.postMessage(EXTERNAL_MOBILE_CONTROLLER, "*");
 	ctx = canvas.getContext("2d");
+	controller = new MobileControllerCanvas(canvas, fullBox);
 	setSize();
-	controller = new MobileControllerCanvas(canvas);
 }
 
 var controller;
