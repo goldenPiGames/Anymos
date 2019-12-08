@@ -4,9 +4,9 @@ var pause = {
 		runnee = this;
 	},
 	update : function() {
-		if (globalController.shootClicked && !firstRun)
+		if (globalController.menu3Clicked && !firstRun)
 			exitStage();
-		if (globalController.jumpClicked || globalController.pauseClicked)
+		if (globalController.selectClicked || globalController.pauseClicked)
 			runnee = this.returnTo;
 	},
 	draw : function() {
@@ -16,8 +16,8 @@ var pause = {
 		fctx.font = "30px monospace";
 		fctx.textAlign = "center";
 		fctx.fillStyle = "#FFFFFF";
-		fctx.fillText("Press Pause [P]/(START) or Jump [A]/(A) to resume", canvas.width/2, canvas.height*3/4-40);
+		fctx.fillText("Press Pause " + globalController.getBindText("pause") + " or Select " + globalController.getBindText("select") + " to resume", canvas.width/2, canvas.height*3/4-40);
 		if (!firstRun)
-			fctx.fillText("Press Shoot [D]/(X) to exit the level", canvas.width/2, canvas.height*3/4);
+			fctx.fillText("Press Menu3 " + globalController.getBindText("menu3") + " to exit the level", canvas.width/2, canvas.height*3/4);
 	}
 }
