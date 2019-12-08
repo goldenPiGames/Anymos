@@ -14,12 +14,14 @@ class MobileControllerCanvas {
 		this.dpad = new MobileDPad();
 		this.buttonA = new MobileButtonCircle(["select", "jump"], "A", "#00FF00");
 		this.buttonB = new MobileButtonCircle(["cancel", "attack"], "B", "#FF0000");
-		this.buttonC = new MobileButtonCircle([/*"menu3", */"shoot"], "C", "#0000FF");
+		this.buttonC = new MobileButtonCircle(["menu3", "shoot"], "C", "#0000FF");
 		this.buttonI = new MobileButtonCircle(["interact"], "!", "#808080");
 		this.buttonS = new MobileButtonCircle(["special"], "S", "#808080");
+		this.buttonZI = new MobileButtonCircle(["zoomIn"], "+", "#808080");
+		this.buttonZO = new MobileButtonCircle(["zoomOut"], "-", "#808080");
 		this.buttonP = new MobileButtonCircle(["pause"], "||", "#808080");
 		this.buttonR = new MobileButtonCircle(["restart"], "R", "#808080");
-		this.buttons = [this.dpad, this.buttonA, this.buttonB, this.buttonC, this.buttonI, this.buttonS, this.buttonP, this.buttonR];
+		this.buttons = [this.dpad, this.buttonA, this.buttonB, this.buttonC, this.buttonI, this.buttonS, this.buttonZI, this.buttonZO, this.buttonP, this.buttonR];
 		//this.setSize();
 	}
 	setSize(width, height) {
@@ -46,8 +48,10 @@ class MobileControllerCanvas {
 		this.buttonS.setLoc(abcRight - 2.1*abcR, abcBottom - 5*abcR, abcR);
 		this.dpad.setLoc(20 + 2*abcR, height - 20 - 2*abcR, 2*abcR);
 		this.buttonI.setLoc(20 + 2*abcR, abcBottom - 5*abcR, abcR);
-		this.buttonR.setLoc(width/2 - abcR, top + abcR/2, abcR/2);
-		this.buttonP.setLoc(width/2 + abcR, top + abcR/2, abcR/2);
+		this.buttonZI.setLoc(20 + 0.5*abcR, top + 5 + 0.5*abcR, abcR/2);
+		this.buttonZO.setLoc(20 + 0.5*abcR, top + 5 + 1.5*abcR, abcR/2);
+		this.buttonR.setLoc(width/2 - 1.0*abcR, top + 5 + abcR/2, abcR/2);
+		this.buttonP.setLoc(width/2 + 1.0*abcR, top + 5 + abcR/2, abcR/2);
 		this.draw();
 	}
 	commandsAt(x, y) {

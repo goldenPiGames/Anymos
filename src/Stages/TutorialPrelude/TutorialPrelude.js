@@ -92,14 +92,14 @@ Stages.TutorialPrelude = {	name : "TutorialPrelude",
 				"I can fire the beam while crouching. It's useful for hitting low targets.",),*/
 			/*new MonologueSpot("TutorialStandShootMono", 1220, 197,
 				"If I fire the beam while standing, it comes out at eye level.",),*/
-			/*new MonologueSpot("TutorialAnymMono", 1620, 297,
+			new MonologueSpot("TutorialAnymMono", 1620, 297,
 				"That should be it for movement and combat. Now, it's about time to talk about... time.",
 				"Well, actually, Anym. Anym is my battery, my sword, and my shield.",
 				"My goal is to complete each stage with the smallest amount of Anym used as possible.",
 				"Now, first off, the main thing that uses up Anym is time. 1 point is drained away every frame, and there are 30 frames per second.",
 				"Because of this, I can also measure my Anym in terms of seconds: 30 points = 1 second.",
 				"The stuff in this room can demonstrate other things that use up Anym.",
-				"Oh, and in this tutorial only, I can press [Shift] or (Right bumper) to reset my Anym used back to zero.",),*/
+				"Oh, and in this tutorial only, I can press [Shift] or (Right bumper) to reset my Anym used back to zero.",),
 			new MonologueSpot("TutorialHazardMono", 1650, 137,
 				"There are sometimes parts of the static terrain called Hazards that damage me over time.",),
 			new MonologueSpot("TutorialSolidHazardMono", 1710, 97,

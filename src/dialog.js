@@ -28,6 +28,8 @@ var dialog = {
 		}
 	},
 	draw : function() {
+		if (globalController.menu3)
+			return false;
 		var currentLine = this.list[this.index];
 		fctx.globalAlpha = 0.8;
 		fctx.textAlign = "left";

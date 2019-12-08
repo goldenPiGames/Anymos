@@ -88,7 +88,7 @@ var levelSelect = {
 		//ctx.strokeText(Stages[currentStageName].displayName, stagex(cameraFocus.x) - ctx.measureText(Stages[currentStageName].displayName).width/2, stagey(cameraFocus.y - LS_CAMYOFF - miscSprites.SelectStage.height/2 - 2));
 		//ctx.fillText(Stages[currentStageName].displayName, stagex(cameraFocus.x) - ctx.measureText(Stages[currentStageName].displayName).width/2, stagey(cameraFocus.y - LS_CAMYOFF - miscSprites.SelectStage.height/2 - 2));
 		
-		if (!globalController.shoot && !dialogActive) {
+		if (!globalController.menu3 && !dialogActive) {
 			var stag = Stages[currentStageName];
 			var infox = stag.selectX <= 0 ? 10 : (canvas.width - 10 - LS_INFO_WIDTH);
 			ctx.fillStyle = "#000000bf";
@@ -228,9 +228,7 @@ var impossibleLevelConfirm = {
 		ctx.font = "40px "+getFont();
 		ctx.fillText("Your Anym is less than par.", canvas.width/2, canvas.height/2 - 55);
 		ctx.fillText("You most likely cannot finish.", canvas.width/2, canvas.height/2 - 5);
-		let conftxt = usingGamepad ? "A: Proceed anyway" : "A: Proceed anyway";
-		ctx.fillText(conftxt, canvas.width/2, canvas.height/2 + 45);
-		let cantxt = usingGamepad ? "B: Cancel" : "S: Cancel";
-		ctx.fillText(cantxt, canvas.width/2, canvas.height/2 + 95);
+		ctx.fillText(globalController.getBindText("select") + ": Proceed anyway", canvas.width/2, canvas.height/2 + 45);
+		ctx.fillText(globalController.getBindText("cancel") + ": Cancel", canvas.width/2, canvas.height/2 + 95);
 	}
 }

@@ -85,9 +85,9 @@ class GamepadController extends Controller {
 	}
 	getBindText(command) {
 		var butt = GAMEPAD_BUTTON_NAMES[this.binds[command]]; 
-		var stick = this.stickbindNames[this.stickbinds[command]];
+		var stick = this.stickbindNames[command];
 		if (butt && stick)
-			return "(" + butt + ") / (" + stick + ")";
+			return "(" + butt + ")/(" + stick + ")";
 		else if (stick)
 			return "(" + stick + ")";
 		else
@@ -117,7 +117,7 @@ var globalController = {
 	},
 	updateAfter : Controller.prototype.unClick,
 	getBindText(command) {
-		return controllers[0].getBindText(command);
+		return controllers.map(con => con.getBindText(command)).join("/");
 	}
 }
 
@@ -164,8 +164,6 @@ document.addEventListener("keyup", function(e) {
 	});
 });
 
-var gamepad;
-var gpindex;
 window.addEventListener("gamepadconnected", function(e) {
 	gp = e.gamepad;
 	if (gp.buttons.length >= 4 && !controllers.find(co => co.gpindex == gp.index))

@@ -18,8 +18,6 @@ class Aapew extends Enemy {
 			this.moving = false;
 			this.cycle = 5;
 		}
-		this.width = 35;
-		this.height = 28;
 	}
 	update() {
 		if (this.moving) {
@@ -40,8 +38,8 @@ class Aapew extends Enemy {
 			}
 			if (this.cycle <= 0) {
 				this.moving = true;
-				this.xd = (this.facingRight ? 50 : (stagewidth() - 250)) + 200*Math.random()
-				this.yd = 50 + (stageheight()-100)*Math.random();
+				this.xd = (this.facingRight ? 50 : (stagewidth() - 250)) + ((player.x + player.y + stageTimer) % 200);
+				this.yd = player.y + (((player.x + stageTimer) % 16) - 8) * 25
 			}
 		}
 	}
@@ -51,8 +49,9 @@ class Aapew extends Enemy {
 }
 Aapew.prototype.speciesName = "Aapew";
 Aapew.prototype.team = "Sqarnos";
-Aapew.prototype.spriteNames = ["Flying"];
-Aapew.prototype.maxhp = 120;
 Aapew.prototype.sprites = makeSprites("src/Enemies/Aapew.png", {
 	flying: {x:0, y:0, width:35, height:28},
 }, false);
+Aapew.prototype.width = 35;
+Aapew.prototype.height = 28;
+Aapew.prototype.maxhp = 120;

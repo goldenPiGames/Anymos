@@ -1,4 +1,4 @@
-const COMMAND_LIST = ["menuLeft", "menuRight", "menuUp", "menuDown", "select", "cancel", "left", "right", "up", "down", "jump", "attack", "shoot", "crouch", "special", "interact", /*"switch", */"zoomOut", "zoomIn", "pause", "restart"];
+const COMMAND_LIST = ["menuLeft", "menuRight", "menuUp", "menuDown", "select", "cancel", "menu3", "left", "right", "up", "down", "jump", "attack", "shoot", "crouch", "special", "interact", /*"switch", */"zoomOut", "zoomIn", "pause", "restart"];
 
 const KEY_NAMES = [0, 1, 2, 3, 4, 5, 6, 7, "Backspace", "Tab", 10, 11, 12, "Enter", 14, 15, "Shift", "Ctrl", "Alt", "Pause", "Caps", 21, 22, 23, 24, 25, 26, "Esc", 28, 29, 30, 31, "Space", "PgUp", "PgDn", "End", "Home", "←", "↑", "→", "↓",
 	41, 42, 43, 44, "Ins", "Del", 47, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 58, 59, 60, 61, 62, 63, 64, "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
@@ -14,38 +14,43 @@ const CONTROLS_INFO = {
 		defaultGamepad : 14,
 		defaultStickFunc : gp => gp.axes[0] <= -.8,
 		defaultStickText : "L←",
-		mutualExclusion : ["menuRight", "menuUp", "menuDown", "select", "cancel", "pause", "restart"],
+		mutualExclusion : ["menuRight", "menuUp", "menuDown", "select", "cancel", "menu3", "pause", "restart"],
 	},
 	menuRight : {
 		defaultKeyboard : 39,
 		defaultGamepad : 15,
 		defaultStickFunc : gp => gp.axes[0] >= .8,
 		defaultStickText : "L→",
-		mutualExclusion : ["menuLeft", "menuUp", "menuDown", "select", "cancel", "pause", "restart"],
+		mutualExclusion : ["menuLeft", "menuUp", "menuDown", "select", "cancel", "menu3", "pause", "restart"],
 	},
 	menuUp : {
 		defaultKeyboard : 38,
 		defaultGamepad : 12,
 		defaultStickFunc : gp => gp.axes[1] <= -.8,
 		defaultStickText : "L↑",
-		mutualExclusion : ["menuLeft", "menuRight", "menuDown", "select", "cancel", "pause", "restart"],
+		mutualExclusion : ["menuLeft", "menuRight", "menuDown", "select", "cancel", "menu3", "pause", "restart"],
 	},
 	menuDown : {
 		defaultKeyboard : 40,
 		defaultGamepad : 13,
 		defaultStickFunc : gp => gp.axes[1] >= .8,
 		defaultStickText : "L↓",
-		mutualExclusion : ["menuLeft", "menuRight", "menuUp", "select", "cancel", "pause", "restart"],
+		mutualExclusion : ["menuLeft", "menuRight", "menuUp", "select", "cancel", "menu3", "pause", "restart"],
 	},
 	select : {
 		defaultKeyboard : 65,
 		defaultGamepad : 0,
-		mutualExclusion : ["menuLeft", "menuRight", "menuUp", "menuDown", "cancel", "pause", "restart"],
+		mutualExclusion : ["menuLeft", "menuRight", "menuUp", "menuDown", "cancel", "menu3", "pause", "restart"],
 	},
 	cancel : {
 		defaultKeyboard : 83,
 		defaultGamepad : 1,
-		mutualExclusion : ["menuLeft", "menuRight", "menuUp", "menuDown", "select", "pause", "restart"],
+		mutualExclusion : ["menuLeft", "menuRight", "menuUp", "menuDown", "select", "menu3", "pause", "restart"],
+	},
+	menu3 : {
+		defaultKeyboard : 68,
+		defaultGamepad : 2,
+		mutualExclusion : ["menuLeft", "menuRight", "menuUp", "menuDown", "select", "cancel", "pause", "restart"],
 	},
 	left : {
 		defaultKeyboard : 37,
