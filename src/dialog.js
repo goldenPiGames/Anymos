@@ -50,7 +50,7 @@ var dialog = {
 		fctx.font = fontSize+"px "+getFont();
 		fctx.fillStyle = currentLine.color;
 		var lines = getLines(fctx, currentLine.text, fcanvas.width - (SIDE_MARGINS * 2));
-		for (i = 0; i < lines.length; i++) { 
+		for (var i = 0; i < lines.length; i++) { 
 			fctx.fillText(lines[i], SIDE_MARGINS, fcanvas.height - DIALOG_HEIGHT + SIDE_MARGINS + 1.2 * fontSize * (i+.75));
 		}
 		fctx.font = "28px "+getFont();
@@ -78,9 +78,11 @@ var DialogLine = function(speaker, text, color = "#FFFFFF", size = 24, style = "
 function getLines(fctx, text, maxWidth) {
 	if (text === undefined)
 		return [""]//["Something was passed undefined text.", "Nice coding there, boyo."];
-	if (Array.isArray(text))
-		return text;
-    var words = text.split(" ");
+	if (typeof text == "function")
+		text = text();
+	//if (Array.isArray(text))
+		//return text;
+    var words = text.replace(/<.+?>/g, evalTag).split(" ");
     var lines = [];
     var currentLine = words[0];
 
@@ -96,4 +98,12 @@ function getLines(fctx, text, maxWidth) {
     }
     lines.push(currentLine);
     return lines;
+}
+
+function evalTag(tag) {
+	var args = tag.substring(1, tag.length-1).split(":");
+	switch (args[0]) {
+		case "control" : return globalController.getBindText(args[1]); break;
+		default : return tag; break;
+	}
 }

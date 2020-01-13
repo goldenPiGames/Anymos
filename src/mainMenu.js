@@ -92,12 +92,13 @@ var newGameConfirm = {
 		else if (globalController.menuUp && globalController.restart && globalController.selectClicked) {
 			resetSave();
 			firstRun = true;
-			loadStage("TutorialMovement", true);
+			loadStage(ROOT_STAGE, true);
 		}
 	},
 	draw : function() {
 		mainMenu.draw();
-		ctx.lineWidth = 4;
+		drawPopup(["Your previous file will be deleted.", globalController.getBindText("menuUp") + " + " + globalController.getBindText("restart") + " + " + globalController.getBindText("select") + ": Confirm.", globalController.getBindText("cancel") + ": Cancel"]);
+		/*ctx.lineWidth = 4;
 		ctx.strokeStyle = "#FFFFFF";
 		ctx.strokeRect(canvas.width/2-400, canvas.height/2-75, 800, 150);
 		ctx.fillStyle = "#000000";
@@ -106,9 +107,30 @@ var newGameConfirm = {
 		ctx.textAlign = "center";
 		ctx.font = "40px "+getFont();
 		ctx.fillText("Your previous file will be deleted.", canvas.width/2, canvas.height/2 - 35);
-		let deltxt = usingGamepad ? "Press Up + Select + A to confirm." : "Press Up + R + A to confirm.";
-		ctx.fillText(deltxt, canvas.width/2, canvas.height/2 + 15);
-		let cantxt = usingGamepad ? "Press B to cancel." : "Press S to cancel.";
-		ctx.fillText(cantxt, canvas.width/2, canvas.height/2 + 65);
+		ctx.fillText(globalController.getBindText("menuUp") + " + " + globalController.getBindText("restart") + " + " + globalController.getBindText("select") + ": Confirm.", canvas.width/2, canvas.height/2 + 15);
+		ctx.fillText(globalController.getBindText("cancel") + ": Cancel", canvas.width/2, canvas.height/2 + 65);*/
 	}
+}
+
+const POPUP_LINE_HEIGHT = 50;
+
+function drawPopup(lines) {
+	var length = lines.length;
+	
+	ctx.lineWidth = 4;
+	ctx.strokeStyle = "#FFFFFF";
+	ctx.strokeRect(canvas.width/2-400, canvas.height/2 - length*POPUP_LINE_HEIGHT/2, 800, length*POPUP_LINE_HEIGHT);
+	ctx.fillStyle = "#000000F0";
+	ctx.fillRect(canvas.width/2-400, canvas.height/2 - length*POPUP_LINE_HEIGHT/2, 800, length*POPUP_LINE_HEIGHT);
+	ctx.fillStyle = "#FF0000";
+	ctx.textAlign = "center";
+	ctx.font = "40px "+getFont();
+	let top = canvas.height/2 - (length-2)*POPUP_LINE_HEIGHT/2 - 10;
+	for (var i = 0; i < length; i++) {
+		ctx.fillText(lines[i], canvas.width/2, top + i*POPUP_LINE_HEIGHT);
+	}
+	/*ctx.fillText("Your Anym is less than par.", canvas.width/2, canvas.height/2 - 55);
+	ctx.fillText("You most likely cannot finish.", canvas.width/2, canvas.height/2 - 5);
+	ctx.fillText(globalController.getBindText("select") + ": Proceed anyway", canvas.width/2, canvas.height/2 + 45);
+	ctx.fillText(globalController.getBindText("cancel") + ": Cancel", canvas.width/2, canvas.height/2 + 95);*/
 }

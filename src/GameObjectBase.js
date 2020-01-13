@@ -73,6 +73,17 @@ class GameObject {
 		}
 		return false;
 	}
+	checkInteracted() {
+		this.touched = null;
+		this.interacted = null;
+		allObjects().forEach(oj => {
+			if (oj.controller && this.isTouching(oj)) {
+				this.touched = oj;
+				if (oj.controller.interactClicked)
+					this.interacted = oj;
+			}
+		});
+	}
 	checkHazards() {
 		var haz = Pmax(
 			hazardOfPixel(this.x-this.width/2, this.y),
@@ -197,6 +208,7 @@ class GameObject {
 GameObject.prototype.physicsPrecision = .08;
 GameObject.prototype.dx = 0;
 GameObject.prototype.dy = 0;
+GameObject.prototype.facingRight = true;
 GameObject.prototype.wasGrounded = true;
 GameObject.prototype.grounded = true;
 

@@ -2,7 +2,7 @@ const MUSIC_LIST = [
 	{name:"Anomalies Abound",               by:"Eric Matyas", site:"https://soundimage.org/drama-2/", siten:"SoundImage.org"},
 	{name:"Beatdown City",                  by:"Darren Curtis", yt:"qL4u3u5WKgU", site:"https://www.darrencurtismusic.com", siten:"DarrenCurtisMusic.com", pat:"darrencurtismusic"},
 	{name:"Blast",                          by:"PeriTune",    site:"https://peritune.com/blast/", siten:"PeriTune.com", sc:"sei_peridot/blast"},
-	{name:"Boat Paint",                     by:"Al Gorgeous", sc:"al-goregous/boat-paint"},
+	{name:"Boat Paint",                     by:"Al GorgeousI", sc:"al-goregous/boat-paint"},
 	{name:"Breeze",                         by:"PeriTune",      yt:"RINkM_o-e4I", site:"https://peritune.com/breeze/", siten:"PeriTune.com", sc:"sei_peridot/breeze"},
 	{name:"Breeze 2",                       by:"PeriTune",      yt:"fVm5ul0y0kk", site:"https://peritune.com/breeze2/", siten:"PeriTune.com", sc:"sei_peridot/breeze2"},
 	{name:"Chamber of Jewels",              by:"Eric Matyas", site:"https://soundimage.org/fantasy-5/", siten:"SoundImage.org"},

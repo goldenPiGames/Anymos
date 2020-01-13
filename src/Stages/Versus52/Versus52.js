@@ -40,9 +40,10 @@ Stages.Versus52 = {
 		gameObjects = [
 			new QueueRumble(300, 220, 560, 200, true, doNothing, 5, shuffled)
 		];
-	}, //fucking awesome idea for a special ability: you have a portable video game device with one of those ice slide puzzles. the avatar in the slide puzzle acts as a platform for Anymos, while Anymos acts as a block for the slide puzzle avatar. You press Special to switch between the two.
+	},
 	vessels : [],
 	previous : "ChanosLobby",
 	//nextDown : "Versus52",
-	toLoad : [CardPip]
+	toLoad : [CardPip],
+	devblock : true,
 }

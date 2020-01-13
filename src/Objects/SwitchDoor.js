@@ -11,14 +11,9 @@ class Switch extends GameObject {
 		switchColors[this.index] = color;
 	}
 	update() {//TODO change so that players broadcast interact instead of each object checking
-		this.touched = null;
-		allObjects().forEach(oj => {
-			if (oj.controller && this.isTouching(oj)) {
-				this.touched = oj;
-				if (oj.controller.interactClicked)
-					switches[this.index] = !switches[this.index];
-			}
-		});
+		this.checkInteracted();
+		if (this.interacted)
+			switches[this.index] = !switches[this.index];
 	}
 	draw() {
 		ctx.fillStyle = switchColors[this.index];
@@ -26,7 +21,6 @@ class Switch extends GameObject {
 		this.drawSprite(switches[this.index] ? "switchOn" : "switchOff");
 		if (this.touched) {
 			ctx.textAlign = "center";
-			//ctx.fillStyle = "#00FFFF";
 			fillTextOnStage(this.touched.controller.getBindText("interact"), this.x, this.y - this.height - 10, 15);
 		}
 	}

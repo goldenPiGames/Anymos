@@ -75,13 +75,18 @@ Stages.InfinityLighthouse = {
 		player.x = 300;
 		player.y = (staticColl.length-1)*20;
 		player.facingRight = true;
-		gameObjects = [new SmoothGravityChanger(.358, .5), new Goalpost("AdlunamPillar", 300, 120, 118), new Vessel("InfinityLighthouseLeft", 40, 838), new Vessel("InfinityLighthouseRight", 540, 600)];
+		gameObjects = [
+			new SmoothGravityChanger(.358, .5),
+			new Goalpost("AdlunamPillar", 300, 120, 118),
+			new Vessel("InfinityLighthouseLeft", 40, 838),
+			new Vessel("InfinityLighthouseRight", 540, 600)
+		];
 	},
 	vessels : ["InfinityLighthouseLeft", "InfinityLighthouseRight"],
 	previous : "IgmaBeach",
 	nextDown : "AdlunamPillar",
 	parDown : 525,
-	toLoad : [/*Flipwip, Teion*/]
+	toLoad : []
 }
 
 class SmoothGravityChanger extends GameObject {

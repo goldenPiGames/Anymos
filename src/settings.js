@@ -66,7 +66,16 @@ const SETTINGS_INFO = {
 			{name:"Pizzicato", description:"Using the Web Audio API and the Pizzicato.js library."},
 		],
 		default:0,
-	}
+	},
+	devmode : {
+		name : "Devmode",
+		description : "Developer mode.",
+		choices : [
+			{name:"Off", description:"Nust like normal."},
+			{name:"On", description:"Unfinished stages and features are accessible."},
+		],
+		default:0,
+	},
 }
 
 var settings;
@@ -78,6 +87,9 @@ else {
 		settings[oj] = SETTINGS_INFO[oj].default;
 	});
 }
+
+if (!settings.devmode)
+	console.log("Hello, technically literate people! If you want to enable devmode, just type \"settings.devmode = true\" (in the game's window, not the pages).");
 
 const SETTINGS_ENTRY_HEIGHT = 50;
 
@@ -145,6 +157,8 @@ var settingsScreen = {
 		ctx.textAlign = "left";
 		ctx.fillText(SETTINGS_INFO[SETTINGS_INFO.list[this.index]].description, 10, canvas.height - 50);
 		ctx.fillText(SETTINGS_INFO[SETTINGS_INFO.list[this.index]].choices[settings[SETTINGS_INFO.list[this.index]]].description, 10, canvas.height - 10);
+		ctx.textAlign = "right";
+		ctx.fillText(globalController.getBindText("cancel") + " : Exit", canvas.width - 30, canvas.height-30);
 	},
 	index : 0
 }

@@ -42,7 +42,9 @@ function doLevelSelect(cursorStart) {
 var levelSelect = {
 	update : function() {
 		if (globalController.selectClicked && isStageAvailable(currentStageName)) {
-			if (Stages[currentStageName].available < Stages[currentStageName].parDown)
+			if (Stages[currentStageName].devblock && !settings.developer)
+				runnee = devblockPopup;
+			else if (Stages[currentStageName].available < Stages[currentStageName].parDown)
 				runnee = impossibleLevelConfirm;
 			else
 				loadStage(currentStageName, true);
@@ -180,7 +182,7 @@ var levelSelect = {
 	},
 	refreshRoot : function(stagn) {
 		Stages[stagn].cumUsed = 0;
-		Stages[stagn].available = anymTotal + this.numVessels * VESSEL_VALUE;
+		Stages[stagn].available = STARTING_ANYM + this.numVessels * VESSEL_VALUE;
 		this.refreshRec(Stages[stagn].nextDown);
 	},
 	refreshRec : function(stagn) {
@@ -218,7 +220,8 @@ var impossibleLevelConfirm = {
 	},
 	draw : function() {
 		levelSelect.draw();
-		ctx.lineWidth = 4;
+		drawPopup(["Your Anym is less than par.", "You most likely cannot finish.", globalController.getBindText("select") + ": Proceed anyway", globalController.getBindText("cancel") + ": Cancel"]);
+		/*ctx.lineWidth = 4;
 		ctx.strokeStyle = "#FFFFFF";
 		ctx.strokeRect(canvas.width/2-400, canvas.height/2-100, 800, 200);
 		ctx.fillStyle = "#000000";
@@ -229,6 +232,17 @@ var impossibleLevelConfirm = {
 		ctx.fillText("Your Anym is less than par.", canvas.width/2, canvas.height/2 - 55);
 		ctx.fillText("You most likely cannot finish.", canvas.width/2, canvas.height/2 - 5);
 		ctx.fillText(globalController.getBindText("select") + ": Proceed anyway", canvas.width/2, canvas.height/2 + 45);
-		ctx.fillText(globalController.getBindText("cancel") + ": Cancel", canvas.width/2, canvas.height/2 + 95);
+		ctx.fillText(globalController.getBindText("cancel") + ": Cancel", canvas.width/2, canvas.height/2 + 95);*/
+	}
+}
+
+var devblockPopup = {
+	update : function() {
+		if (globalController.selectClicked || globalController.cancelClicked)
+			runnee = levelSelect;
+	},
+	draw : function() {
+		levelSelect.draw();
+		drawPopup(["This stage is under construction.", "It is not ready to be played.", globalController.getBindText("select") + "/" + globalController.getBindText("cancel") + ": Return"]);
 	}
 }

@@ -73,9 +73,9 @@ Stages.SkyChase = {
 		playerPlane.facingRight = true;
 	},
 	vessels : [],
-	par : 365,
 	previous : "SkyFleet",
 	//nextDown : "Bulpo",
-	toLoad : [ChansykShuffler, CardPip, Parashoop, "Teion"],
+	toLoad : [ChansykShuffler, CardPip, Parashoop, Teion],
 	startFlying : true,
+	devblock : true,
 }

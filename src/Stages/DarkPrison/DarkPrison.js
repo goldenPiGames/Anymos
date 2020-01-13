@@ -56,7 +56,8 @@ Stages.DarkPrison = {
 	vessels : ["DarkPrisonDrrk1", "DarkPrisonDrrk2", "DarkPrisonDrrk3", "DarkPrisonDrrk4", "DarkPrisonDrrk5"],
 	previous : "DarkCaverns",
 	nextDown : "EndNaluxosSavior",
-	toLoad : [Drrk, Naluxos]
+	toLoad : [Drrk, Naluxos],
+	devblock : true,
 }
 
 Stages.EndNaluxosSavior = {

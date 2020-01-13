@@ -88,5 +88,6 @@ Stages.SkyFleet = {
 	vessels : ["SkyFleetBelowMiddle", "SkyFleetUpperLeft"],
 	previous : "SkyHighClimb",
 	nextDown : "SkyChase",
-	toLoad : [Syklos, ChansykShuffler, CardPip, Parashoop]
+	toLoad : [Syklos, ChansykShuffler, CardPip, Parashoop],
+	devblock : true,
 }

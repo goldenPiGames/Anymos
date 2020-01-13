@@ -66,5 +66,21 @@ hud = {
 				});
 			}
 		}
+		if (this.paragraph) {
+			var fontSize = 28;
+			fctx.textAlign = "left";
+			fctx.font = fontSize+"px "+getFont();
+			var lines = getLines(fctx, this.paragraph, fcanvas.width - SIDE_MARGINS*2);
+			fctx.fillStyle = "#00000080";
+			fctx.fillRect(SIDE_MARGINS, 60, fcanvas.width - SIDE_MARGINS*2, 1.2 * fontSize * lines.length);
+			fctx.fillStyle = "#FFFFFF";
+			for (var i = 0; i < lines.length; i++) { 
+				fctx.fillText(lines[i], SIDE_MARGINS, 60 + 1.2 * fontSize * (i+.75));
+			}
+		}
+		this.paragraph = null;
+	},
+	setParagraph : function(text) {
+		this.paragraph = text;
 	}
 }
